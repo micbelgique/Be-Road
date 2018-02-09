@@ -70,6 +70,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Login canceled.
+        /// </summary>
+        public static string Error_log_in_cancel {
+            get {
+                return ResourceManager.GetString("Error_log_in_cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Login failed.
+        /// </summary>
+        public static string Error_log_in_failed {
+            get {
+                return ResourceManager.GetString("Error_log_in_failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error_title {
+            get {
+                return ResourceManager.GetString("Error_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -93,6 +120,15 @@ namespace Resources {
         public static string Log_in_page_title {
             get {
                 return ResourceManager.GetString("Log_in_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log out.
+        /// </summary>
+        public static string Log_out {
+            get {
+                return ResourceManager.GetString("Log_out", resourceCulture);
             }
         }
         

@@ -9,12 +9,17 @@ namespace Web.Controllers
 {
     public class PublicServicesController : Controller
     {
-        // GET: PublicServices
         public ActionResult Index()
         {
             Session["connected"] = true;
             EidCard eid = (EidCard)Session["eid"];
             return View("Index", eid);
+        }
+
+        public ActionResult LogOut()
+        {
+            ViewBag.Extra = Resources.Global.Log_out;
+            return View("Index");
         }
     }
 }

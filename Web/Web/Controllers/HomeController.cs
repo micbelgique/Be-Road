@@ -102,20 +102,14 @@ namespace Web.Controllers
                         Session["eid"] = eid;
                         return RedirectToAction("Index", "PublicServices");
                     case AuthenticationStatus.Canceled:
-                        ViewBag.Extra = "Log in cancel";
+                        ViewBag.Extra = Resources.Global.Error_log_in_cancel;
                         break;
                     case AuthenticationStatus.Failed:
-                        ViewBag.Extra = response.Exception.Message;
+                        ViewBag.Extra = Resources.Global.Error_log_in_failed;
                         break;
                 }
-                return View("index");
+                return View("Error");
             }
-        }
-
-        public ActionResult LogOut()
-        {
-            ViewBag.Extra = "Log out";
-            return View("index");
         }
     }
 }

@@ -120,6 +120,15 @@
   <data name="Connection" xml:space="preserve">
     <value>Connexion</value>
   </data>
+  <data name="Error_log_in_cancel" xml:space="preserve">
+    <value>Connexion annulée</value>
+  </data>
+  <data name="Error_log_in_failed" xml:space="preserve">
+    <value>Echec de la connexion</value>
+  </data>
+  <data name="Error_title" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
   </data>
@@ -128,6 +137,9 @@
   </data>
   <data name="Log_in_page_title" xml:space="preserve">
     <value>Connectez-vous avec votre e-ID</value>
+  </data>
+  <data name="Log_out" xml:space="preserve">
+    <value>Déconnexion</value>
   </data>
   <data name="Welcome_message" xml:space="preserve">
     <value>Bienvenue</value>
