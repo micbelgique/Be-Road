@@ -1,0 +1,7 @@
+﻿@model Web.Models.EidCard
+
+@{
+    ViewBag.Title = Resources.Global.Home;
+}
+
+<h2>@Resources.Global.Welcome_message @Html.DisplayFor(model => model.LastName) @Html.DisplayFor(model => model.MiddleName) @Html.DisplayFor(model => model.FirstName) !</h2>
