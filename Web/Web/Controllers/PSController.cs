@@ -27,7 +27,7 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult Select(string id)
         {
-            return RedirectToAction("Index", "PSData", new { id = id });
+            return RedirectToAction("Index", "PSData", new { id });
         }
     }
 }

@@ -16,7 +16,7 @@
             @Html.Raw("</div><div class='row'>")
         }
         <div class="d-inline-block public-service col-sm-4">
-            <h3>@Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title" })</h3>
+            <h3 class="text-center">@Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title" })</h3>
             <dl class="dl-horizontal">
                 <dt>@Html.DisplayNameFor(model => ps.Description)</dt>
                 <dd>@Html.DisplayFor(model => ps.Description)</dd>
