@@ -25,8 +25,9 @@ namespace Web.Dal
 
         public async Task<PublicServiceData> GetDataOfAsync(PublicService ps, EidCard eid)
         {
+            if (!Services.ContainsKey(ps.DalMethod))
+                return null;
             var service = Services[ps.DalMethod];
-            if(service == null) return null;
             return await service.GetDataOfAsync(ps, eid);
         }
     }

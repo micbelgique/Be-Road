@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -20,16 +21,16 @@ namespace Web.Dal.Services
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage Res = await client.GetAsync($"/BE/{eid.AddressPostal}");
-                var response = "";
+                MockPSDZippopotam zippo = null;
                 if (Res.IsSuccessStatusCode)
                 {
                     //Storing the response details recieved from web api   
-                    response = Res.Content.ReadAsStringAsync().Result;
+                    var response = Res.Content.ReadAsStringAsync().Result;
                     //Deserializing the response recieved from web api and storing into the Employee list  
-                    //EmpInfo = JsonConvert.DeserializeObject<List<Employee>>(EmpResponse);
+                    zippo = JsonConvert.DeserializeObject<MockPSDZippopotam>(response);
                 }
                 //returning the employee list to view  
-                return new MockPSDZippopotam() { Content = response };
+                return zippo;
             }
         }
     }

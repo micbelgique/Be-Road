@@ -7,7 +7,7 @@ using Web.Models;
 
 namespace Web.Dal
 {
-    public class PSDatabaseInitializer : DropCreateDatabaseAlways<PSContext>
+    public class PSDatabaseInitializer : DropCreateDatabaseIfModelChanges<PSContext>
     {
         protected override void Seed(PSContext context)
         {
@@ -22,14 +22,14 @@ namespace Web.Dal
             {
                 Name = "FreeGeoip",
                 Description = "Get the info about your IP address",
-                Url = "http://freegeoip.net",
+                Url = "http://freegeoip.net/json",
                 DalMethod = "Geoip",
             });
             context.PublicServices.Add(new PublicService
             {
                 Name = "Prenom masculins",
                 Description = "Check how many times your name is used",
-                Url = "https://bruxellesdata.opendatasoft.com/api/records/1.0/search/?dataset=prenoms-masculins-20150",
+                Url = "https://bruxellesdata.opendatasoft.com/api/records/1.0/search/",
                 DalMethod = "Firstnames",
             });
             context.PublicServices.Add(new PublicService

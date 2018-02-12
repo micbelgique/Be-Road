@@ -35,8 +35,47 @@
         <dd>
             @Html.DisplayFor(model => model.CountryAbbr)
         </dd>
-
     </dl>
+    <h5>Places</h5>
+    @foreach (var place in Model.Places)
+    {
+    <dl class="dl-horizontal p-3" style="border: solid 1px black;">
+        <dt>
+            @Html.DisplayNameFor(model => place.PlaceName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => place.PlaceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => place.Latitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => place.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => place.Longitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => place.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => place.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => place.State)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => place.StateAbbr)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => place.StateAbbr)
+        </dd>
+    </dl>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

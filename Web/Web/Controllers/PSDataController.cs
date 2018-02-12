@@ -16,7 +16,7 @@ namespace Web.Controllers
         private PSDataService service = new PSDataService();
 
         [AuthorizationFilter]
-        public async Task<ActionResult> Index(int id)
+        public async Task<ActionResult> Index(int? id)
         {
             var ps = context.PublicServices.Where(model => model.ID == id).FirstOrDefault();
             EidCard eid = (EidCard)Session["eid"];

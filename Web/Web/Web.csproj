@@ -275,7 +275,7 @@
     <Compile Include="Models\PublicServiceData\MockPSDItunes.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDZippopotam.cs" />
     <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
-    <Compile Include="Models\PublicServiceData\Place.cs" />
+    <Compile Include="Models\PublicServiceData\MockPSDPlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
