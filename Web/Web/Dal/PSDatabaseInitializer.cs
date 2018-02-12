@@ -22,7 +22,7 @@ namespace Web.Dal
             {
                 Name = "FreeGeoip",
                 Description = "Get the info about your IP address",
-                Url = "http://freegeoip.net",
+                Url = "http://freegeoip.net/json",
                 DalMethod = "geoip",
             });
             context.PublicServices.Add(new PublicService
@@ -36,7 +36,7 @@ namespace Web.Dal
             {
                 Name = "Prenom masculins",
                 Description = "Check how many times your name is used",
-                Url = "https://bruxellesdata.opendatasoft.com/api/records/1.0/search/?dataset=prenoms-masculins-20150",
+                Url = "https://bruxellesdata.opendatasoft.com/api/records/1.0/search/",
                 DalMethod = "firstnames",
             });
             context.PublicServices.Add(new PublicService
