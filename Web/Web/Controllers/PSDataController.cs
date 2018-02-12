@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Web.App_Start;
 using Web.Dal;
 using Web.Models;
 
@@ -14,6 +15,7 @@ namespace Web.Controllers
         private PSContext context = new PSContext();
         private PSDataService service = new PSDataService();
 
+        [AuthorizationFilter]
         public async Task<ActionResult> Index(int id)
         {
             var ps = context.PublicServices.Where(model => model.ID == id).FirstOrDefault();

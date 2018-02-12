@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Web.Dal;
+using Web.App_Start;
 
 namespace Web
 {
@@ -21,6 +22,7 @@ namespace Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer(new PSDatabaseInitializer());
+            GlobalFilters.Filters.Add(new AuthorizationFilter());
         }
 
         protected void Session_Start()
