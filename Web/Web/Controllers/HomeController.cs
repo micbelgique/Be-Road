@@ -100,7 +100,7 @@ namespace Web.Controllers
                                 Convert.ToInt32(fetchResponse.Attributes["http://openid.net/schema/birthDate/birthday"].Values[0]))
                         };
                         Session["eid"] = eid;
-                        return RedirectToAction("Index", "PublicServices");
+                        return RedirectToAction("Index", "PS");
                     case AuthenticationStatus.Canceled:
                         ViewBag.Extra = Resources.Global.Error_log_in_cancel;
                         break;

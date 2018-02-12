@@ -7,7 +7,7 @@ using Web.Models;
 
 namespace Web.Controllers
 {
-    public class PublicServicesController : Controller
+    public class PSController : Controller
     {
         public ActionResult Index()
         {
@@ -16,10 +16,10 @@ namespace Web.Controllers
             return View("Index", eid);
         }
 
-        public ActionResult LogOut()
+        [HttpGet]
+        public ActionResult Select(string _id)
         {
-            ViewBag.Extra = Resources.Global.Log_out;
-            return View("Index");
+            return RedirectToAction("Index", "PSData", new { id = _id });
         }
     }
 }

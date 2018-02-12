@@ -29,12 +29,12 @@ a, a:active {
     text-decoration: none;
 }
 
-.color-company-white:hover {
-    color: #a1a1a1;
-    text-decoration: none;
-}
+    .color-company-white:hover {
+        color: #a1a1a1;
+        text-decoration: none;
+    }
 
-#nl{
+#nl {
     margin-left: 10px;
     margin-right: 100px;
 }
@@ -44,5 +44,23 @@ a, a:active {
 }
 
 #app-title {
+    margin-left: 100px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.ps-title, .ps-title:active, .ps-title:visited {
+    text-decoration: none;
+    color: #555555;
+}
+
+.ps-title:hover {
+    text-decoration: none;
+    color: #818181;
+}
+
+.ps-li{
     margin-left: 100px;
 }

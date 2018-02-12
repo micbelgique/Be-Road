@@ -141,6 +141,12 @@
   <data name="Log_out" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="PSNext" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="PSPrevious" xml:space="preserve">
+    <value>Précédent</value>
+  </data>
   <data name="Welcome_message" xml:space="preserve">
     <value>Bienvenue</value>
   </data>

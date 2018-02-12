@@ -141,6 +141,12 @@
   <data name="Log_out" xml:space="preserve">
     <value>Outloggen</value>
   </data>
+  <data name="PSNext" xml:space="preserve">
+    <value>Volgende</value>
+  </data>
+  <data name="PSPrevious" xml:space="preserve">
+    <value>Vorige</value>
+  </data>
   <data name="Welcome_message" xml:space="preserve">
     <value>Welkom</value>
   </data>
