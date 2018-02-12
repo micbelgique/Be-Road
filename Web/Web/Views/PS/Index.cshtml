@@ -5,3 +5,12 @@
 }
 
 <h2>@Resources.Global.Welcome_message @Html.DisplayFor(model => model.LastName) @Html.DisplayFor(model => model.MiddleName) @Html.DisplayFor(model => model.FirstName) !</h2>
+
+<ul>
+    @{
+        for (int i = 1; i <= 5; i++)
+        {
+            <li class="d-inline-block ps-li"><h3>@Html.ActionLink("Titre " + i, "Select", "PS", new { _id = i }, new { @class = "ps-title" })</h3></li>
+        }
+    }
+</ul>
