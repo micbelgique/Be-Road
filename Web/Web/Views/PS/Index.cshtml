@@ -1,16 +1,34 @@
-﻿@model Web.Models.EidCard
+﻿@model List<Web.Models.PublicService>
 
 @{
     ViewBag.Title = Resources.Global.Home;
 }
 
-<h2>@Resources.Global.Welcome_message @Html.DisplayFor(model => model.LastName) @Html.DisplayFor(model => model.MiddleName) @Html.DisplayFor(model => model.FirstName) !</h2>
+<h2>@Resources.Global.Welcome_message @ViewBag.Name !</h2>
 
-<ul>
-    @{
-        for (int i = 1; i <= 5; i++)
+<div class="container">
+    <div class="row">
+    @foreach (var ps in Model)
+    {
+        if (Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 > 0 && 
+            Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 == 0)
         {
-            <li class="d-inline-block ps-li"><h3>@Html.ActionLink("Titre " + i, "Select", "PS", new { _id = i }, new { @class = "ps-title" })</h3></li>
+            @Html.Raw("</div><div class='row'>")
         }
+        <div class="d-inline-block public-service col-sm-4">
+            <h3>@Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title" })</h3>
+            <dl class="dl-horizontal">
+                <dt>@Html.DisplayNameFor(model => ps.Description)</dt>
+                <dd>@Html.DisplayFor(model => ps.Description)</dd>
+
+                <p>Technical Info</p>
+                <dt>@Html.DisplayNameFor(model => ps.DalMethod)</dt>
+                <dd>@Html.DisplayFor(model => ps.DalMethod)</dd>
+
+                <dt>@Html.DisplayNameFor(model => ps.Url)</dt>
+                <dd>@Html.DisplayFor(model => ps.Url)</dd>
+            </dl>
+        </div>
     }
-</ul>
+    </div>
+</div>

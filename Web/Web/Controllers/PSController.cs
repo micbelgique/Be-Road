@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Web.Dal;
 using Web.App_Start;
 using Web.Models;
 
@@ -6,18 +7,25 @@ namespace Web.Controllers
 {
     public class PSController : Controller
     {
+        private PSContext context = new PSContext();
+
         [AuthorizationFilter]
         public ActionResult Index()
         {
             EidCard eid = (EidCard)Session["eid"];
-            return View("Index", eid);
+            if (eid != null)
+                ViewBag.Name = $"{eid.FirstName} {eid.MiddleName} {eid.LastName}";
+            else
+                ViewBag.Name = "Incognito";
+            //return View("Index", eid);
+            return View("Index", context.PublicServices.ToList());
         }
 
         [AuthorizationFilter]
         [HttpGet]
-        public ActionResult Select(string _id)
+        public ActionResult Select(string id)
         {
-            return RedirectToAction("Index", "PSData", new { id = _id });
+            return RedirectToAction("Index", "PSData", new { id = id });
         }
     }
 }
