@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,14 +22,13 @@ namespace Web.Dal.Services
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage Res = await client.GetAsync("");
                 var response = "";
+                MockPSDGeoip geoip = null;
                 if (Res.IsSuccessStatusCode)
                 {
-                    //Storing the response details recieved from web api   
                     response = Res.Content.ReadAsStringAsync().Result;
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    //EmpInfo = JsonConvert.DeserializeObject<List<Employee>>(EmpResponse);
+                    geoip = JsonConvert.DeserializeObject<MockPSDGeoip>(response);
                 }
-                return new MockPSDGeoip() { Content = response };
+                return geoip;
             }
         }
     }

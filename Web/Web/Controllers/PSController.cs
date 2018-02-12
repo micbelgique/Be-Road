@@ -10,17 +10,9 @@ namespace Web.Controllers
     {
         private PSContext context = new PSContext();
 
-        //[AuthorizationFilter]
+        [AuthorizationFilter]
         public ActionResult Index()
         {
-            //Temporary code
-            Session["eid"] = new EidCard()
-            {
-                FirstName = "Michael",
-                LastName = "VM",
-                AddressPostal = "1080"
-            };
-
             EidCard eid = (EidCard)Session["eid"];
             if (eid != null)
                 ViewBag.Name = $"{eid.FirstName} {eid.MiddleName} {eid.LastName}";
@@ -29,7 +21,7 @@ namespace Web.Controllers
             return View("Index", context.PublicServices.ToList());
         }
 
-        //[AuthorizationFilter]
+        [AuthorizationFilter]
         [HttpGet]
         public ActionResult Select(string id)
         {
