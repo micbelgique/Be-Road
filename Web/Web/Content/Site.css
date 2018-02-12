@@ -29,14 +29,14 @@ a, a:active {
     text-decoration: none;
 }
 
-    .color-company-white:hover {
-        color: #a1a1a1;
-        text-decoration: none;
-    }
+.color-company-white:hover {
+    color: #a1a1a1;
+    text-decoration: none;
+}
 
 #nl {
     margin-left: 10px;
-    margin-right: 100px;
+    margin-right: 25px;
 }
 
 #fr {
@@ -63,4 +63,10 @@ ul {
 
 .public-service:hover {
     background-color: azure;
+}
+
+#logout {
+    margin-left: 10px;
+    margin-right: 50px;
+    color: #d8d8d8;
 }
