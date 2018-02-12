@@ -7,9 +7,12 @@ namespace Web.Models.PublicServiceData
 {
     public class MockPSDFirstNames : PublicServiceData
     {
+        public List<MockPSDRecord> Records { get; set; }
+    }
+
+    public class MockPSDRecord
+    {
         public string SearchedName { get; set; }
         public int Count { get; set; }
-        public string TimeZone { get; set; }
-        public string SortingMethod { get; set; }
     }
 }

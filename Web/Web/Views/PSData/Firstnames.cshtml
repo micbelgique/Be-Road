@@ -3,48 +3,24 @@
 <div>
     <h4>MockPSDFirstNames</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
+    @foreach (var record in Model.Records)
+    {
+        <dl class="dl-horizontal p-3">
+            <dt>
+                @Html.DisplayNameFor(model => record.Count)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => record.Count)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SearchedName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SearchedName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Count)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Count)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.TimeZone)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TimeZone)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SortingMethod)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SortingMethod)
-        </dd>
-
-    </dl>
+            <dt>
+                @Html.DisplayNameFor(model => record.SearchedName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => record.SearchedName)
+            </dd>
+        </dl>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

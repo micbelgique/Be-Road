@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -20,15 +21,13 @@ namespace Web.Dal.Services
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage Res = await client.GetAsync($"?term={eid.FirstName}&limit=10");
-                var response = "";
+                MockPSDItunes itunes = null;
                 if (Res.IsSuccessStatusCode)
                 {
-                    //Storing the response details recieved from web api   
-                    response = Res.Content.ReadAsStringAsync().Result;
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    //EmpInfo = JsonConvert.DeserializeObject<List<Employee>>(EmpResponse);
+                    var response = Res.Content.ReadAsStringAsync().Result;
+                    itunes = JsonConvert.DeserializeObject<MockPSDItunes>(response);
                 }
-                return new MockPSDItunes() { Content = response };
+                return itunes;
             }
         }
     }

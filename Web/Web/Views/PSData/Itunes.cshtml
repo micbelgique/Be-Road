@@ -3,216 +3,213 @@
 <div>
     <h4>MockPSDItunes</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <p> @Html.DisplayFor(model => Model.ResultCount)</p>
+    @foreach (var result in Model.Results)
+    {
+    <dl class="dl-horizontal p-2" style="border: 1px solid red;">
+        
         <dt>
-            @Html.DisplayNameFor(model => model.Content)
+            @Html.DisplayNameFor(model => result.WrapperType)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Content)
+            @Html.DisplayFor(model => result.WrapperType)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.WrapperType)
+            @Html.DisplayNameFor(model => result.Kind)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.WrapperType)
+            @Html.DisplayFor(model => result.Kind)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Kind)
+            @Html.DisplayNameFor(model => result.Artist)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Kind)
+            @Html.DisplayFor(model => result.Artist)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Artist)
+            @Html.DisplayNameFor(model => result.Collection)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Artist)
+            @Html.DisplayFor(model => result.Collection)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Collection)
+            @Html.DisplayNameFor(model => result.Track)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Collection)
+            @Html.DisplayFor(model => result.Track)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Track)
+            @Html.DisplayNameFor(model => result.CollectionCensored)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Track)
+            @Html.DisplayFor(model => result.CollectionCensored)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CollectionCensored)
+            @Html.DisplayNameFor(model => result.TrackCensored)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CollectionCensored)
+            @Html.DisplayFor(model => result.TrackCensored)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrackCensored)
+            @Html.DisplayNameFor(model=> result.ArtistViewURL)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrackCensored)
+            @Html.DisplayFor(model=> result.ArtistViewURL)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ArtistViewURL)
+            @Html.DisplayNameFor(model=> result.CollectionViewURL)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ArtistViewURL)
+            @Html.DisplayFor(model=> result.CollectionViewURL)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CollectionViewURL)
+            @Html.DisplayNameFor(model=> result.TrackViewURL)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CollectionViewURL)
+            @Html.DisplayFor(model=> result.TrackViewURL)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrackViewURL)
+            @Html.DisplayNameFor(model=> result.Preview)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrackViewURL)
+            @Html.DisplayFor(model=> result.Preview)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Preview)
+            @Html.DisplayNameFor(model=> result.ArtworkURL60)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Preview)
+            @Html.DisplayFor(model=> result.ArtworkURL60)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ArtworkURL60)
+            @Html.DisplayNameFor(model=> result.ArtworkURL100)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ArtworkURL60)
+            @Html.DisplayFor(model=> result.ArtworkURL100)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.ArtworkURL100)
+            @Html.DisplayNameFor(model=> result.CollectionPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ArtworkURL100)
+            @Html.DisplayFor(model=> result.CollectionPrice)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CollectionPrice)
+            @Html.DisplayNameFor(model=> result.TrackPrice)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CollectionPrice)
+            @Html.DisplayFor(model=> result.TrackPrice)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrackPrice)
+            @Html.DisplayNameFor(model=> result.CollectionExplicitness)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrackPrice)
+            @Html.DisplayFor(model=> result.CollectionExplicitness)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.CollectionExplicitness)
+            @Html.DisplayNameFor(model=> result.TrackExplicitness)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.CollectionExplicitness)
+            @Html.DisplayFor(model=> result.TrackExplicitness)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrackExplicitness)
+            @Html.DisplayNameFor(model=> result.DiscCount)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrackExplicitness)
+            @Html.DisplayFor(model=> result.DiscCount)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DiscCount)
+            @Html.DisplayNameFor(model=> result.DiscNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DiscCount)
+            @Html.DisplayFor(model=> result.DiscNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DiscNumber)
+            @Html.DisplayNameFor(model=> result.TrackCount)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DiscNumber)
+            @Html.DisplayFor(model=> result.TrackCount)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrackCount)
+            @Html.DisplayNameFor(model=> result.TrackNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrackCount)
+            @Html.DisplayFor(model=> result.TrackNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrackNumber)
+            @Html.DisplayNameFor(model=> result.TrackTimeMillis)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrackNumber)
+            @Html.DisplayFor(model=> result.TrackTimeMillis)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TrackTimeMillis)
+            @Html.DisplayNameFor(model=> result.Country)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TrackTimeMillis)
+            @Html.DisplayFor(model=> result.Country)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Country)
+            @Html.DisplayNameFor(model=> result.Currency)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Country)
+            @Html.DisplayFor(model=> result.Currency)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Currency)
+            @Html.DisplayNameFor(model=> result.PrimaryGenreName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Currency)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PrimaryGenreName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PrimaryGenreName)
+            @Html.DisplayFor(model=> result.PrimaryGenreName)
         </dd>
 
     </dl>
+    }
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |

@@ -7,6 +7,12 @@ namespace Web.Models.PublicServiceData
 {
     public class MockPSDItunes : PublicServiceData
     {
+        public int ResultCount { get; set; }
+        public MockPSDResult[] Results { get; set; }
+    }
+
+    public class MockPSDResult
+    {
         public string WrapperType { get; set; }
         public string Kind { get; set; }
         public string Artist { get; set; }
@@ -32,5 +38,6 @@ namespace Web.Models.PublicServiceData
         public string Country { get; set; }
         public string Currency { get; set; }
         public string PrimaryGenreName { get; set; }
+
     }
 }

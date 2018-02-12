@@ -21,17 +21,22 @@ namespace Web.Dal.Services
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 HttpResponseMessage Res = await client.GetAsync($"?dataset=prenoms-masculins-20150&refine.prenom={eid.FirstName}");
-                var response = "";
+                MockPSDFirstNames names = null;
                 if (Res.IsSuccessStatusCode)
                 {
-                    //Storing the response details recieved from web api   
                     var json = JObject.Parse(Res.Content.ReadAsStringAsync().Result);
-                    response = json["records"].ToString();                    
-                    //Deserializing the response recieved from web api and storing into the Employee list  
-                    //EmpInfo = JsonConvert.DeserializeObject<List<Employee>>(EmpResponse);
+                    names = new MockPSDFirstNames() { Records = new List<MockPSDRecord>() };
+                    foreach(var obj in json["records"])
+                    {
+                        var fields = obj["fields"];
+                        names.Records.Add(new MockPSDRecord()
+                        {
+                            Count = Convert.ToInt32(fields["nombre"].ToString()),
+                            SearchedName = fields["prenom"].ToString()
+                        });
+                    }
                 }
-                //returning the employee list to view  
-                return new MockPSDFirstNames() { Content = response };
+                return names;
             }
         }
     }
