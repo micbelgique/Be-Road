@@ -16,11 +16,10 @@ namespace Web.Dal
         {
             Services = new Dictionary<string, IService>
             {
-                { "zippo", new MockZippopotamService() },
-                { "geoip", new MockGeoipService() },
-                { "itunes", new MockItunesService() },
-                { "communal", new MockCommunalService() },
-                { "firstnames", new MockFirstNamesService() }
+                { "Zippo", new MockZippopotamService() },
+                { "Geoip", new MockGeoipService() },
+                { "Itunes", new MockItunesService() },
+                { "Firstnames", new MockFirstNamesService() }
             };
         }
 

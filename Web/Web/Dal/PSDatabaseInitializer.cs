@@ -16,7 +16,7 @@ namespace Web.Dal
                 Name = "Zippopotam",
                 Description = "Check the zip code",
                 Url = "http://api.zippopotam.us",
-                DalMethod = "zippo",
+                DalMethod = "Zippo",
             });
             context.PublicServices.Add(new PublicService
             {
@@ -27,24 +27,17 @@ namespace Web.Dal
             });
             context.PublicServices.Add(new PublicService
             {
-                Name = "Conseil communal",
-                Description = "Info about the \"VIP's\"",
-                Url = "https://opendata.brussels.be/api/records/1.0/search/?dataset=conseil-communal",
-                DalMethod = "communal",
-            });
-            context.PublicServices.Add(new PublicService
-            {
                 Name = "Prenom masculins",
                 Description = "Check how many times your name is used",
                 Url = "https://bruxellesdata.opendatasoft.com/api/records/1.0/search/",
-                DalMethod = "firstnames",
+                DalMethod = "Firstnames",
             });
             context.PublicServices.Add(new PublicService
             {
                 Name = "Itunes",
                 Description = "Which star has your name ?",
                 Url = "https://itunes.apple.com/search",
-                DalMethod = "itunes",
+                DalMethod = "Itunes",
             });
         }
     }

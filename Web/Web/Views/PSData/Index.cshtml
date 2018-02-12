@@ -1,7 +1,9 @@
 ﻿
 @{
-    ViewBag.Title = "Titre " + ViewBag.id;
+    ViewBag.Title = Resources.Global.PSDTitle;
 }
 
-<h2>Titre @ViewBag.id</h2>
+<h2>@Resources.Global.PSDTitle</h2>
+
+@Html.Partial((string)ViewBag.PS.DalMethod)
 

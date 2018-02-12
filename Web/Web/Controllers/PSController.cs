@@ -18,7 +18,6 @@ namespace Web.Controllers
                 ViewBag.Name = $"{eid.FirstName} {eid.MiddleName} {eid.LastName}";
             else
                 ViewBag.Name = "Incognito";
-            //return View("Index", eid);
             return View("Index", context.PublicServices.ToList());
         }
 
