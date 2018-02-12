@@ -246,7 +246,6 @@
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDatabaseInitializer.cs" />
     <Compile Include="Dal\PSDataService.cs" />
-    <Compile Include="Dal\Services\MockCommunalService.cs" />
     <Compile Include="Dal\Services\MockFirstNamesService.cs" />
     <Compile Include="Dal\Services\MockItunesService.cs" />
     <Compile Include="Dal\Services\MockZippopotamService.cs" />
@@ -270,19 +269,13 @@
       <DependentUpon>Global.nl-BE.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\EidCard.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDCommunal.cs" />
+    <Compile Include="Models\PublicService.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDFirstNames.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDGeoip.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDItunes.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDZippopotam.cs" />
     <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
-    <Compile Include="Models\Place.cs" />
-    <Compile Include="Models\PSDFreegoip.cs" />
-    <Compile Include="Models\PSDITunes.cs" />
-    <Compile Include="Models\PSDPrenomsMasculins.cs" />
-    <Compile Include="Models\PSDZippopotam.cs" />
-    <Compile Include="Models\PublicService.cs" />
-    <Compile Include="Models\PublicServiceData.cs" />
+    <Compile Include="Models\PublicServiceData\Place.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -371,8 +364,10 @@
     <Content Include="Views\PS\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\PSData\Index.cshtml" />
-    <Content Include="Views\PSData\Psd.cshtml" />
     <Content Include="Views\PSData\Zippo.cshtml" />
+    <Content Include="Views\PSData\Itunes.cshtml" />
+    <Content Include="Views\PSData\Geoip.cshtml" />
+    <Content Include="Views\PSData\Firstnames.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

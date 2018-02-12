@@ -1,0 +1,108 @@
+﻿@model Web.Models.PublicServiceData.MockPSDGeoip
+
+<div>
+    <h4>MockPSDGeoip</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ip)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ip)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CounrtyCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CounrtyCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegionCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegionCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RegionName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RegionName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TmeZone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TmeZone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MetroCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MetroCode)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

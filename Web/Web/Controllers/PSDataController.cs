@@ -21,11 +21,11 @@ namespace Web.Controllers
             var ps = context.PublicServices.Where(model => model.ID == id).FirstOrDefault();
             EidCard eid = (EidCard)Session["eid"];
             if (ps == null || eid == null) 
-                return View("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             ViewBag.PS = ps;
             var psd = await service.GetDataOfAsync(ps, eid);
-            return View("Psd", psd);
+            return View("Index", psd);
         }
     }
 }
