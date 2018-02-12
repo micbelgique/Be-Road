@@ -230,7 +230,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PSDataController.cs" />
     <Compile Include="Controllers\PSController.cs" />
-    <Compile Include="Controllers\PublicServicesController.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDatabaseInitializer.cs" />
     <Compile Include="Global.asax.cs">
