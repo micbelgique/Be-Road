@@ -10,6 +10,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Web.Dal;
 using Web.App_Start;
+using Web.Models;
 
 namespace Web
 {
