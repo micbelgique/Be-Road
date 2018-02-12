@@ -9,6 +9,7 @@ using System.Security.Principal;
 using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using Web.App_Start;
 using Web.Models;
 
 namespace Web.Controllers
@@ -115,6 +116,13 @@ namespace Web.Controllers
                 }
                 return View("Error");
             }
+        }
+
+        [AuthorizationFilter]
+        public ActionResult LogOut()
+        {
+            Session["connected"] = false;
+            return View("Index");
         }
     }
 }
