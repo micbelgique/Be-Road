@@ -141,6 +141,9 @@
   <data name="Log_out" xml:space="preserve">
     <value>Outloggen</value>
   </data>
+  <data name="PSDTitle" xml:space="preserve">
+    <value>Openbare diensten data</value>
+  </data>
   <data name="PSNext" xml:space="preserve">
     <value>Volgende</value>
   </data>

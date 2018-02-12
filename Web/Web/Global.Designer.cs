@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Public service data.
+        /// </summary>
+        public static string PSDTitle {
+            get {
+                return ResourceManager.GetString("PSDTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next.
         /// </summary>
         public static string PSNext {

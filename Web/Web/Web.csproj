@@ -252,7 +252,13 @@
       <DependentUpon>Global.nl-BE.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\EidCard.cs" />
+    <Compile Include="Models\Place.cs" />
+    <Compile Include="Models\PSDFreegoip.cs" />
+    <Compile Include="Models\PSDITunes.cs" />
+    <Compile Include="Models\PSDPrenomsMasculins.cs" />
+    <Compile Include="Models\PSDZippopotam.cs" />
     <Compile Include="Models\PublicService.cs" />
+    <Compile Include="Models\PublicServiceData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +347,7 @@
     <Content Include="Views\PS\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\PSData\Index.cshtml" />
+    <Content Include="Views\PSData\Zippo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

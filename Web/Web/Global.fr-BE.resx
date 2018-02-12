@@ -141,6 +141,9 @@
   <data name="Log_out" xml:space="preserve">
     <value>Déconnexion</value>
   </data>
+  <data name="PSDTitle" xml:space="preserve">
+    <value>Données du service public</value>
+  </data>
   <data name="PSNext" xml:space="preserve">
     <value>Suivant</value>
   </data>
