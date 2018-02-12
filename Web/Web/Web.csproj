@@ -130,13 +130,24 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -231,8 +242,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PSDataController.cs" />
     <Compile Include="Controllers\PSController.cs" />
+    <Compile Include="Dal\Services\IService.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDatabaseInitializer.cs" />
+    <Compile Include="Dal\PSDataService.cs" />
+    <Compile Include="Dal\Services\MockCommunalService.cs" />
+    <Compile Include="Dal\Services\MockFirstNamesService.cs" />
+    <Compile Include="Dal\Services\MockItunesService.cs" />
+    <Compile Include="Dal\Services\MockZippopotamService.cs" />
+    <Compile Include="Dal\Services\MockGeoipService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -252,6 +270,12 @@
       <DependentUpon>Global.nl-BE.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\EidCard.cs" />
+    <Compile Include="Models\PublicServiceData\MockPSDCommunal.cs" />
+    <Compile Include="Models\PublicServiceData\MockPSDFirstNames.cs" />
+    <Compile Include="Models\PublicServiceData\MockPSDGeoip.cs" />
+    <Compile Include="Models\PublicServiceData\MockPSDItunes.cs" />
+    <Compile Include="Models\PublicServiceData\MockPSDZippopotam.cs" />
+    <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
     <Compile Include="Models\Place.cs" />
     <Compile Include="Models\PSDFreegoip.cs" />
     <Compile Include="Models\PSDITunes.cs" />
@@ -347,6 +371,7 @@
     <Content Include="Views\PS\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\PSData\Index.cshtml" />
+    <Content Include="Views\PSData\Psd.cshtml" />
     <Content Include="Views\PSData\Zippo.cshtml" />
   </ItemGroup>
   <ItemGroup>
