@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Principal;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
 using Web.Models;
@@ -13,6 +15,7 @@ namespace Web.Controllers
 {
     public class HomeController : Controller
     {
+        [AllowAnonymous]
         public ActionResult Index()
         {
             if (Session["connected"] == null)
@@ -20,6 +23,7 @@ namespace Web.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult LogIn()
         {
             OpenIdRelyingParty openid = new OpenIdRelyingParty();
@@ -100,6 +104,7 @@ namespace Web.Controllers
                                 Convert.ToInt32(fetchResponse.Attributes["http://openid.net/schema/birthDate/birthday"].Values[0]))
                         };
                         Session["eid"] = eid;
+                        Session["connected"] = true;
                         return RedirectToAction("Index", "PS");
                     case AuthenticationStatus.Canceled:
                         ViewBag.Extra = Resources.Global.Error_log_in_cancel;
