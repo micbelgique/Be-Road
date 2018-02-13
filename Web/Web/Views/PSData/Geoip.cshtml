@@ -1,17 +1,12 @@
 ﻿@model Web.Models.PublicServiceData.MockPSDGeoip
 
 <div>
-    <h4>MockPSDGeoip</h4>
+    @{
+        ViewBag.PSDTitle = "GeoIP";
+    }
+    <h4>@ViewBag.PSDTitle</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Content)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Content)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.Ip)
         </dt>
@@ -102,7 +97,3 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

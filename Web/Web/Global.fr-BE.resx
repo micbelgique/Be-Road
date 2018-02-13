@@ -120,6 +120,9 @@
   <data name="Connection" xml:space="preserve">
     <value>Connexion</value>
   </data>
+  <data name="Details_btn" xml:space="preserve">
+    <value>Détails</value>
+  </data>
   <data name="Error_log_in_cancel" xml:space="preserve">
     <value>Connexion annulée</value>
   </data>
@@ -140,6 +143,18 @@
   </data>
   <data name="Log_out" xml:space="preserve">
     <value>Déconnexion</value>
+  </data>
+  <data name="PSDDataContact" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="PSDDataDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PSDDataDetails" xml:space="preserve">
+    <value>Donnée</value>
+  </data>
+  <data name="PSDDataMail" xml:space="preserve">
+    <value>Envoyer e-mail</value>
   </data>
   <data name="PSDTitle" xml:space="preserve">
     <value>Données du service public</value>

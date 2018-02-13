@@ -1,7 +1,10 @@
 ﻿@model Web.Models.PublicServiceData.MockPSDItunes
 
 <div>
-    <h4>MockPSDItunes</h4>
+    @{
+        ViewBag.PSDTitle = "Itunes";
+    }
+    <h4>@ViewBag.PSDTitle</h4>
     <hr />
     <p> @Html.DisplayFor(model => Model.ResultCount)</p>
     @foreach (var result in Model.Results)
@@ -211,7 +214,3 @@
     </dl>
     }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

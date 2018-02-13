@@ -7,7 +7,7 @@ using Web.Models;
 
 namespace Web.Dal
 {
-    public class PSDatabaseInitializer : DropCreateDatabaseIfModelChanges<PSContext>
+    public class PSDatabaseInitializer : DropCreateDatabaseAlways<PSContext>
     {
         protected override void Seed(PSContext context)
         {
