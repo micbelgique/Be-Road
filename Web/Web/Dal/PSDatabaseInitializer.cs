@@ -7,7 +7,7 @@ using Web.Models;
 
 namespace Web.Dal
 {
-    public class PSDatabaseInitializer : DropCreateDatabaseIfModelChanges<PSContext>
+    public class PSDatabaseInitializer : DropCreateDatabaseAlways<PSContext>
     {
         protected override void Seed(PSContext context)
         {
@@ -38,6 +38,13 @@ namespace Web.Dal
                 Description = "Which star has your name ?",
                 Url = "https://itunes.apple.com/search",
                 DalMethod = "Itunes",
+            });
+            context.PublicServices.Add(new PublicService
+            {
+                Name = "Azure files",
+                Description = "It's hosted on the cloud",
+                Url = "UserBrussels.txt",
+                DalMethod = "Azure",
             });
         }
     }

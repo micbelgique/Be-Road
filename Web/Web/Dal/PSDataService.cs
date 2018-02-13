@@ -19,7 +19,8 @@ namespace Web.Dal
                 { "Zippo", new MockZippopotamService() },
                 { "Geoip", new MockGeoipService() },
                 { "Itunes", new MockItunesService() },
-                { "Firstnames", new MockFirstNamesService() }
+                { "Firstnames", new MockFirstNamesService() },
+                { "Azure", new MockAzureService() }
             };
         }
 
