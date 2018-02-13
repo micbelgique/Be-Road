@@ -70,6 +70,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Details_btn {
+            get {
+                return ResourceManager.GetString("Details_btn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login canceled.
         /// </summary>
         public static string Error_log_in_cancel {
@@ -129,6 +138,42 @@ namespace Resources {
         public static string Log_out {
             get {
                 return ResourceManager.GetString("Log_out", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        public static string PSDDataContact {
+            get {
+                return ResourceManager.GetString("PSDDataContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string PSDDataDescription {
+            get {
+                return ResourceManager.GetString("PSDDataDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Piece of data.
+        /// </summary>
+        public static string PSDDataDetails {
+            get {
+                return ResourceManager.GetString("PSDDataDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send mail.
+        /// </summary>
+        public static string PSDDataMail {
+            get {
+                return ResourceManager.GetString("PSDDataMail", resourceCulture);
             }
         }
         

@@ -1,7 +1,10 @@
 ﻿@model Web.Models.PublicServiceData.MockPSDFirstNames
 
 <div>
-    <h4>MockPSDFirstNames</h4>
+    @{
+        ViewBag.PSDTitle = "FirstNames";
+    }
+    <h4>@ViewBag.PSDTitle</h4>
     <hr />
     @foreach (var record in Model.Records)
     {
@@ -22,7 +25,3 @@
         </dl>
     }
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
