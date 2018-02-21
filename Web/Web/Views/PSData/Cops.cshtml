@@ -16,7 +16,6 @@
                 <span class="fa fa-search" aria-hidden="true"></span>
             </button>
             @Html.DisplayFor(model => model.Owner.Name)
-            @Html.DisplayFor(model => model.Owner.AccessInfos.Count)
         </dd>
 
 
@@ -30,7 +29,6 @@
             </button>
 
             @Html.DisplayFor(model => model.Brand.Name)
-            @Html.DisplayFor(model => model.Brand.AccessInfos.Count)
         </dd>
 
         <dt>@Html.DisplayNameFor(model => model.NumberPlate)</dt>
@@ -43,7 +41,8 @@
             </button>
 
             @Html.DisplayFor(model => model.NumberPlate.Name)
-            @Html.DisplayFor(model => model.NumberPlate.AccessInfos.Count)
         </dd>
     </dl>
 </div>
+
+@Html.Partial("AccessInfo")

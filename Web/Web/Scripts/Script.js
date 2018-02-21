@@ -20,11 +20,20 @@
         });
     });
 
-    $('#myModal').on('shown.bs.modal', function () {
-        console.log("Hello world !");
-    })
+   
 });
 
 function displayAccessInfoPopup(accessInfo) {
     console.log(accessInfo);
+    var modal = $('#accessInfoModal');
+    modal.modal();
+    modal.find('.modal-title').text(accessInfo.Name);
+    var access = "";
+    $.each(accessInfo.AccessInfos, function (i, v) {
+        access += "<p>";
+        access += v.Name + " accessed this data at " + v.Date + " for " + v.Reason;
+        access += "</p>";
+    });
+    modal.find('.modal-body').text("");
+    modal.find('.modal-body').append(access);
 }
