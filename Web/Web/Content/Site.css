@@ -1,4 +1,7 @@
-﻿
+﻿header {
+    height: 50px;
+}
+
 header > ul > li {
     border-left: 1px solid black;
 }
@@ -13,18 +16,17 @@ body {
 }
 
 .body-content {
-    padding: 20px;
     background: radial-gradient(ellipse at bottom, #FFFFFF, #50C2D0, #50C2D0);
-    height: 90%;
+    min-height: 90%;
 }
 
 footer {
-    height: 10%;
+    min-height: 10%;
 }
 
 #home-page {
     margin: 0 auto;
-    margin-top: 100px;
+    /*padding-top: 100px;*/
     width: 660px;
 }
 

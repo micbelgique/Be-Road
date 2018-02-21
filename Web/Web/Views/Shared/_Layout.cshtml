@@ -14,7 +14,7 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
-    <header class="navbar navbar-toggleable-md bg-faded fixed-top pt-3 pb-0">
+    <header class="navbar navbar-toggleable-md bg-faded fixed-top pt-2 pb-0">
         @{
             if ((bool)Session["connected"])
             {
@@ -38,12 +38,12 @@
             <li class="@(lang == "nl-BE" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang" id="nl">NL</a></li>
             @if ((bool)Session["connected"])
             {
-                <li class="nav-item">@Html.ActionLink(Resources.Global.Log_out, "LogOut", "Home", new { area = "" }, new { @class = "color-company-black" }) <i id="logout" class="fas fa-sign-out-alt"></i></li>
+                <li class="nav-item mu-2 p-2">@Html.ActionLink(Resources.Global.Log_out, "LogOut", "Home", new { area = "" }, new { @class = "color-company-black" }) <i id="logout" class="fas fa-sign-out-alt"></i></li>
             }
         </ul>
     </header>
 
-    <div class="container-fluid body-content">
+    <div class="body-content">
         @RenderBody()
     </div>
 
