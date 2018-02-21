@@ -1,5 +1,11 @@
 ﻿@{
     ViewBag.Title = Resources.Global.Connection;
 }
-<h2>@Resources.Global.Log_in_page_title</h2>
-@Html.ActionLink(Resources.Global.Log_in, "LogIn", "Home")
+<section id="home-page">
+    <h1 class="text-center font-weight-bold">@Resources.Global.Log_in_page_title</h1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices augue metus, at tempus sem rhoncus porta. Praesent eu neque semper, viverra purus vitae, posuere quam. Sed vel tristique eros. Nulla facilisi.</p>
+    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam a imperdiet eros. </p>
+     @using(Html.BeginForm("LogIn", "Home")) {
+        <input type="submit" class="btn" value="@Resources.Global.Log_in" id="eid-connect"/>
+     } 
+</section>

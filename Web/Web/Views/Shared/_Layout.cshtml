@@ -14,41 +14,42 @@
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-toggleable-md bg-company-balck fixed-top">
+    <header class="navbar navbar-toggleable-md bg-faded fixed-top pt-3 pb-0">
         @{
             if ((bool)Session["connected"])
             {
-                @Html.ActionLink("TestPrivacyPassport", "Index", "PS", new { area = "" }, new { @class = "navbar-brand color-company-white", id = "app-title" })
+                @Html.ActionLink("Privacy Passport", "Index", "PS", new { area = "" }, new { @class = "navbar-brand color-company-black", id = "app-title" })
             }
             else
             {
-                @Html.ActionLink("TestPrivacyPassport", "Index", "Home", new { area = "" }, new { @class = "navbar-brand color-company-white", id = "app-title" })
+                @Html.ActionLink("Privacy Passport", "Index", "Home", new { area = "" }, new { @class = "navbar-brand color-company-black", id = "app-title" })
             }
         }
         @{
+            string lang = Request.Cookies["Language"]?.Value;
             if (ViewBag.PS != null)
             {
                 <div class="text-muted"> @ViewBag.PS.DalMethod</div>
             }
         }
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item active"><a href="#" class="color-company-white lang">EN</a></li>
-            <li class="nav-item"><a href="#" class="color-company-white lang" id="fr">FR</a></li>
-            <li class="nav-item"><a href="#" class="color-company-white lang" id="nl">NL</a></li>
+            <li class="@(lang == "en-US" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang">EN</a></li>
+            <li class="@(lang == "fr-BE" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang" id="fr">FR</a></li>
+            <li class="@(lang == "nl-BE" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang" id="nl">NL</a></li>
             @if ((bool)Session["connected"])
             {
-                <li class="nav-item">@Html.ActionLink(Resources.Global.Log_out, "LogOut", "Home", new { area = "" }, new { @class = "color-company-white" }) <i id="logout" class="fas fa-sign-out-alt"></i></li>
+                <li class="nav-item">@Html.ActionLink(Resources.Global.Log_out, "LogOut", "Home", new { area = "" }, new { @class = "color-company-black" }) <i id="logout" class="fas fa-sign-out-alt"></i></li>
             }
         </ul>
+    </header>
+
+    <div class="container-fluid body-content">
+        @RenderBody()
     </div>
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - TestPrivacyPassport</p>
-        </footer>
-    </div>
+    <footer class="bg-faded d-flex align-items-center pl-3">
+        <p class="color-company-black">&copy; @DateTime.Now.Year - TestPrivacyPassport</p>
+    </footer>
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>

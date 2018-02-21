@@ -1,13 +1,42 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿
+header > ul > li {
+    border-left: 1px solid black;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+li.active {
+    border-top: 2px solid black;
 }
+
+body {
+    padding-top: 50px;
+    height: 100vh;
+}
+
+.body-content {
+    padding: 20px;
+    background: radial-gradient(ellipse at bottom, #FFFFFF, #50C2D0, #50C2D0);
+    height: 90%;
+}
+
+footer {
+    height: 10%;
+}
+
+#home-page {
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 660px;
+}
+
+#home-page > h1 {
+    color: white;
+}
+
+#eid-connect {
+    color: white;
+    background-color: rgb(52, 153, 165);
+}
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -24,23 +53,14 @@ a, a:active {
     background-color: #303030;
 }
 
-.color-company-white {
-    color: #d8d8d8;
+.color-company-black {
+    color: #555555;
     text-decoration: none;
 }
 
-.color-company-white:hover {
-    color: #a1a1a1;
+.color-company-black:hover {
+    color: #000000;
     text-decoration: none;
-}
-
-#nl {
-    margin-left: 10px;
-    margin-right: 25px;
-}
-
-#fr {
-    margin-left: 10px;
 }
 
 #app-title {
