@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{BCE317CF-DF15-48B8-A914-35C4282E23B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopsService", "CopsService\CopsService.csproj", "{BEAE5D92-50F7-48B9-B85F-70EC5AA93C5A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{BCE317CF-DF15-48B8-A914-35C4282E23B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCE317CF-DF15-48B8-A914-35C4282E23B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCE317CF-DF15-48B8-A914-35C4282E23B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEAE5D92-50F7-48B9-B85F-70EC5AA93C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEAE5D92-50F7-48B9-B85F-70EC5AA93C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEAE5D92-50F7-48B9-B85F-70EC5AA93C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEAE5D92-50F7-48B9-B85F-70EC5AA93C5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
