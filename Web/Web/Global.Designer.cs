@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check my EID info.
+        /// </summary>
+        public static string Check_eid {
+            get {
+                return ResourceManager.GetString("Check_eid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Connection.
         /// </summary>
         public static string Connection {

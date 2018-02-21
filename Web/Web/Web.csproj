@@ -386,6 +386,7 @@
     <Content Include="Views\PSData\Azure.cshtml" />
     <Content Include="Views\PSData\Cops.cshtml" />
     <Content Include="Views\PSData\AccessInfo.cshtml" />
+    <Content Include="Views\Eid\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

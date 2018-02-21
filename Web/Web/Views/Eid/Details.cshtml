@@ -1,0 +1,178 @@
+﻿@model Web.Models.EidCard
+<div class="modal fade" id="eidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">@Model.FirstName @Model.LastName</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <img id="picture" src="data:image/png;base64,@Model.Photo" alt="picture">
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MiddleName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MiddleName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Gender)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Gender)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ChipNumber)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ChipNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DocumentType)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.DocumentType)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NobleCondition)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NobleCondition)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CardDeliveryMunicipality)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CardDeliveryMunicipality)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AddressStreet)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AddressStreet)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AddressCity)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AddressCity)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AddressPostal)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AddressPostal)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Age)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Age)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BirthDay)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.BirthDay)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ValidityBegin)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ValidityBegin)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ValidityEnd)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.ValidityEnd)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.POB)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.POB)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CardNumber)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CardNumber)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Nationality)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.Nationality)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.RNN)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.RNN)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CertificateAuth)
+                    </dt>
+
+                    <dd>
+                        <p>To long to be displayed</p>
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>

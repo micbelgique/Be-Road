@@ -14,6 +14,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             EidCard eid = (EidCard)Session["eid"];
+            ViewBag.Eid = eid;
             if (eid != null)
                 ViewBag.Name = $"{eid.FirstName} {eid.MiddleName} {eid.LastName}";
             else

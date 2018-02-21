@@ -20,7 +20,12 @@
         });
     });
 
-   
+    $('article').click(function () {
+        var url = $(this).attr('data-action');
+
+        if (url !== undefined)
+            window.location.href = url;
+    });
 });
 
 function displayAccessInfoPopup(accessInfo) {

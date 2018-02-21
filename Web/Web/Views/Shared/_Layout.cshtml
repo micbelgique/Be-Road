@@ -16,7 +16,7 @@
 <body>
     <header class="navbar navbar-toggleable-md bg-faded fixed-top pt-2 pb-0">
         @{
-            if ((bool)Session["connected"])
+            if (Session["connected"] != null && (bool)Session["connected"])
             {
                 @Html.ActionLink("Privacy Passport", "Index", "PS", new { area = "" }, new { @class = "navbar-brand color-company-black", id = "app-title" })
             }
@@ -36,7 +36,7 @@
             <li class="@(lang == "en-US" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang">EN</a></li>
             <li class="@(lang == "fr-BE" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang" id="fr">FR</a></li>
             <li class="@(lang == "nl-BE" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang" id="nl">NL</a></li>
-            @if ((bool)Session["connected"])
+            @if (Session["connected"] != null && (bool)Session["connected"])
             {
                 <li class="nav-item mu-2 p-2">@Html.ActionLink(Resources.Global.Log_out, "LogOut", "Home", new { area = "" }, new { @class = "color-company-black" }) <i id="logout" class="fas fa-sign-out-alt"></i></li>
             }

@@ -1,13 +1,14 @@
 ﻿header {
     height: 50px;
+    border-bottom: 1px solid lightgray;
 }
 
 header > ul > li {
-    border-left: 1px solid black;
+    border-left: 1px solid lightgray;
 }
 
 li.active {
-    border-top: 2px solid black;
+    border-top: 2px solid lightgray;
 }
 
 body {
@@ -24,6 +25,7 @@ footer {
     min-height: 10%;
 }
 
+/* Home page */
 #home-page {
     margin: 0 auto;
     /*padding-top: 100px;*/
@@ -37,6 +39,38 @@ footer {
 #eid-connect {
     color: white;
     background-color: rgb(52, 153, 165);
+}
+
+/* PS sections */
+
+.ps-title, .ps-title:active, .ps-title:visited {
+    text-decoration: none;
+    color: black;
+}
+
+.ps-title:hover {
+    text-decoration: none;
+    color: #818181;
+}
+
+.public-service {
+    border: 1px solid lightgray;
+    width: 250px;
+    height: 100px;
+}
+
+.public-service:hover {
+    box-shadow: 10px 10px 5px grey;
+    cursor: pointer;
+}
+
+#ps-identity {
+    width: 450px;
+}
+
+#ps-sections {
+    /*TEMPORARY */
+    height: 90vh;
 }
 
 
@@ -73,19 +107,6 @@ ul {
     list-style-type: none;
 }
 
-.ps-title, .ps-title:active, .ps-title:visited {
-    text-decoration: none;
-    color: #555555;
-}
-
-.ps-title:hover {
-    text-decoration: none;
-    color: #818181;
-}
-
-.public-service:hover {
-    background-color: azure;
-}
 
 #logout {
     margin-left: 10px;

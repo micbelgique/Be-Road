@@ -2,38 +2,35 @@
 
 @{
     ViewBag.Title = Resources.Global.Home;
+    var eid = ViewBag.Eid as Web.Models.EidCard;
 }
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-4">
-            <h2>@Resources.Global.Welcome_message @ViewBag.Name !</h2>
-        </div>
-        <div class="col-sm-8">
-            <div class="row">
-            @foreach (var ps in Model)
+<div class="d-flex justify-content-between align-items-stretch">
+    <section id="ps-identity" class="p-2">
+        <h2 class="text-center">@Resources.Global.Welcome_message !</h2>
+        <p>@ViewBag.Name</p>
+        @if(eid != null)
+        {
+            @Html.Partial("../Eid/Details", eid)
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eidModal">
+                @Resources.Global.Check_eid
+            </button>
+
+        }
+    </section>
+    <section id="ps-sections" class="bg-faded d-flex flex-wrap ">
+       
+        @foreach (var ps in Model)
+        {
+            if (Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 > 0 &&
+                Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 == 0)
             {
-                if (Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 > 0 &&
-                    Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 == 0)
-                {
-                    @Html.Raw("</div><div class='row'>")
-                }
-                <div class="d-inline-block public-service col-sm-4">
-                    <h3 class="text-center">@Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title" })</h3>
-                    <dl class="dl-horizontal">
-                        <dt>@Html.DisplayNameFor(model => ps.Description)</dt>
-                        <dd>@Html.DisplayFor(model => ps.Description)</dd>
-
-                        <p>Technical Info</p>
-                        <dt>@Html.DisplayNameFor(model => ps.DalMethod)</dt>
-                        <dd>@Html.DisplayFor(model => ps.DalMethod)</dd>
-
-                        <dt>@Html.DisplayNameFor(model => ps.Url)</dt>
-                        <dd>@Html.DisplayFor(model => ps.Url)</dd>
-                    </dl>
-                </div>
+                @Html.Raw("")
             }
-            </div>
-        </div>
-    </div>
+            <article class="public-service  m-4 p-2" data-action="@Url.Action("Select", "PS", new { id = ps.ID })">
+                <h5 class="font-weight-bold">@Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title" })</h5>
+                <p>@Html.DisplayFor(model => ps.Description)</p>
+            </article>
+        }
+    </section>
 </div>
