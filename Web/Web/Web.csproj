@@ -251,6 +251,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PSDataController.cs" />
     <Compile Include="Controllers\PSController.cs" />
+    <Compile Include="Dal\Services\CopsService.cs" />
     <Compile Include="Dal\Services\IService.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDatabaseInitializer.cs" />
@@ -280,6 +281,9 @@
     </Compile>
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\PublicService.cs" />
+    <Compile Include="Models\PublicServiceData\PSDAccessInfo.cs" />
+    <Compile Include="Models\PublicServiceData\PSDCar.cs" />
+    <Compile Include="Models\PublicServiceData\PSDData.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDAzure.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDFirstNames.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDGeoip.cs" />
@@ -380,6 +384,7 @@
     <Content Include="Views\PSData\Geoip.cshtml" />
     <Content Include="Views\PSData\Firstnames.cshtml" />
     <Content Include="Views\PSData\Azure.cshtml" />
+    <Content Include="Views\PSData\Cops.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

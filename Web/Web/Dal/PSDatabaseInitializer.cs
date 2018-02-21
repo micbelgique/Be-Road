@@ -13,6 +13,13 @@ namespace Web.Dal
         {
             context.PublicServices.Add(new PublicService
             {
+                Name = "Cops Data",
+                Description = "Check who's cops has read your data",
+                Url = "cops.json",
+                DalMethod = "Cops",
+            });
+            context.PublicServices.Add(new PublicService
+            {
                 Name = "Zippopotam",
                 Description = "Check the zip code",
                 Url = "http://api.zippopotam.us",

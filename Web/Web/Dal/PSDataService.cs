@@ -16,6 +16,7 @@ namespace Web.Dal
         {
             Services = new Dictionary<string, IService>
             {
+                { "Cops", new CopsService() },
                 { "Zippo", new MockZippopotamService() },
                 { "Geoip", new MockGeoipService() },
                 { "Itunes", new MockItunesService() },
