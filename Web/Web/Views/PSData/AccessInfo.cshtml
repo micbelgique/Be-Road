@@ -1,0 +1,32 @@
+﻿@model Web.Models.PublicServiceData.PSDData
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                </div>
+                <dl class="row">
+                    <dt class="col-sm-3">@Resources.Global.PSDDataDetails</dt>
+                    <dd class="col-sm-9">Detail of this data</dd>
+
+                    <dt class="col-sm-3">@Resources.Global.PSDDataDescription</dt>
+                    <dd class="col-sm-9">Reason for this access</dd>
+
+                    <dt class="col-sm-3">@Resources.Global.PSDDataContact</dt>
+                    <dd class="col-sm-9">
+                        <p><a href="@ViewBag.Mail" target="_top">@Resources.Global.PSDDataMail</a></p>
+                        <p>0476/15.76.89</p>
+                    </dd>
+                </dl>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>

@@ -11,7 +11,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    <script src="~/Scripts/Script.js" type="text/javascript"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 <body>
@@ -27,9 +26,9 @@
             }
         }
         @{
-            if(ViewBag.PS != null)
+            if (ViewBag.PS != null)
             {
-                 <div class="text-muted"> @ViewBag.PS.DalMethod</div>
+                <div class="text-muted"> @ViewBag.PS.DalMethod</div>
             }
         }
         <ul class="navbar-nav ml-auto">
@@ -53,5 +52,7 @@
 
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/Script.js" type="text/javascript"></script>
+
 </body>
 </html>

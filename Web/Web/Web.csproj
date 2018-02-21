@@ -385,6 +385,7 @@
     <Content Include="Views\PSData\Firstnames.cshtml" />
     <Content Include="Views\PSData\Azure.cshtml" />
     <Content Include="Views\PSData\Cops.cshtml" />
+    <Content Include="Views\PSData\AccessInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

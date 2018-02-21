@@ -19,8 +19,12 @@
             location.reload();
         });
     });
+
+    $('#myModal').on('shown.bs.modal', function () {
+        console.log("Hello world !");
+    })
 });
 
-$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').focus()
-})
+function displayAccessInfoPopup(accessInfo) {
+    console.log(accessInfo);
+}

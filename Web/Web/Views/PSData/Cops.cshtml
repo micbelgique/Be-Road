@@ -9,60 +9,41 @@
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Owner)</dt>
         <dd>
+            <button type="button" class="btn btn-primary btn-sm" 
+                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Owner))"
+                    @{if (Model.Owner.AccessInfos.Count == 0) { @: disabled="disabled"
+                    } }>
+                <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
             @Html.DisplayFor(model => model.Owner.Name)
-            <div>
-                <h5>Access infos</h5>
-                @foreach (var item in Model.Owner.AccessInfos)
-                {
-                    <dl>
-                        <dt>@Html.DisplayNameFor(model => item.Name)</dt>
-                        <dd>@Html.DisplayFor(model => item.Name)</dd>
-                        <dt>@Html.DisplayNameFor(model => item.Reason)</dt>
-                        <dd>@Html.DisplayFor(model => item.Reason)</dd>
-                        <dt>@Html.DisplayNameFor(model => item.Date)</dt>
-                        <dd>@Html.DisplayFor(model => item.Date)</dd>
-                    </dl>
-                }
-            </div>
+            @Html.DisplayFor(model => model.Owner.AccessInfos.Count)
         </dd>
 
 
         <dt>@Html.DisplayNameFor(model => model.Brand)</dt>
         <dd>
+            <button type="button" class="btn btn-primary btn-sm"
+                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Brand))"
+                    @{if (Model.Brand.AccessInfos.Count == 0) { @: disabled="disabled"
+                    } }>
+                <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
+
             @Html.DisplayFor(model => model.Brand.Name)
-            <div>
-                <h5>Access infos</h5>
-                @foreach (var item in Model.Brand.AccessInfos)
-                {
-                    <dl>
-                        <dt>@Html.DisplayNameFor(model => item.Name)</dt>
-                        <dd>@Html.DisplayFor(model => item.Name)</dd>
-                        <dt>@Html.DisplayNameFor(model => item.Reason)</dt>
-                        <dd>@Html.DisplayFor(model => item.Reason)</dd>
-                        <dt>@Html.DisplayNameFor(model => item.Date)</dt>
-                        <dd>@Html.DisplayFor(model => item.Date)</dd>
-                    </dl>
-                }
-            </div>
+            @Html.DisplayFor(model => model.Brand.AccessInfos.Count)
         </dd>
 
         <dt>@Html.DisplayNameFor(model => model.NumberPlate)</dt>
         <dd>
+            <button type="button" class="btn btn-primary btn-sm" 
+                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.NumberPlate))"
+                    @{if (Model.NumberPlate.AccessInfos.Count == 0) { @: disabled="disabled"
+                    } }>
+                <span class="fa fa-search" aria-hidden="true"></span>
+            </button>
+
             @Html.DisplayFor(model => model.NumberPlate.Name)
-            <div>
-                <h5>Access infos</h5>
-                @foreach (var item in Model.NumberPlate.AccessInfos)
-                {
-                    <dl>
-                        <dt>@Html.DisplayNameFor(model => item.Name)</dt>
-                        <dd>@Html.DisplayFor(model => item.Name)</dd>
-                        <dt>@Html.DisplayNameFor(model => item.Reason)</dt>
-                        <dd>@Html.DisplayFor(model => item.Reason)</dd>
-                        <dt>@Html.DisplayNameFor(model => item.Date)</dt>
-                        <dd>@Html.DisplayFor(model => item.Date)</dd>
-                    </dl>
-                }
-            </div>
+            @Html.DisplayFor(model => model.NumberPlate.AccessInfos.Count)
         </dd>
     </dl>
 </div>
