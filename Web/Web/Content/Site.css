@@ -60,19 +60,28 @@ footer {
 }
 
 .public-service:hover {
-    box-shadow: 10px 10px 5px grey;
+    box-shadow: 3px 3px 3px grey;
     cursor: pointer;
 }
 
 #ps-identity {
-    width: 450px;
+    height: 90vh;
+    width: 10%;
+    background-color: #29b6f6;
 }
 
 #ps-sections {
-    /*TEMPORARY */
     height: 90vh;
+    width: 90%;
 }
 
+#closer{
+    width: 2px;
+    height: 2px;
+    display: none;
+    float: right;
+    margin-right: 10px;
+}
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -112,4 +121,25 @@ ul {
     margin-left: 10px;
     margin-right: 50px;
     color: #d8d8d8;
+}
+
+.collapsible-header {
+    font-family: "Roboto", sans serif;
+    font-weight: 400;
+}
+
+.collapsible-body {
+    font-family: "Roboto", sans serif;
+    font-weight: 300;
+    background-color: #fff;
+    text-align: center;
+}
+
+.collapsible{
+    display: none;
+}
+
+#chkid {
+    vertical-align: middle;
+    display: inline-block;
 }

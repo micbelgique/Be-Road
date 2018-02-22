@@ -117,8 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddressCity" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="AddressPostal" xml:space="preserve">
+    <value>Code postal</value>
+  </data>
+  <data name="AddressStreet" xml:space="preserve">
+    <value>Rue</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="BirthDay" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="CardDeliveryMunicipality" xml:space="preserve">
+    <value>Municipalité de livraison de la carte</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Numéro de carte</value>
+  </data>
   <data name="Check_eid" xml:space="preserve">
-    <value>Consulter les données de mon EID</value>
+    <value>Informations</value>
   </data>
   <data name="Connection" xml:space="preserve">
     <value>Connexion</value>
@@ -135,8 +156,17 @@
   <data name="Error_title" xml:space="preserve">
     <value>Erreur</value>
   </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Sexe</value>
+  </data>
   <data name="Home" xml:space="preserve">
     <value>Accueil</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Nom</value>
   </data>
   <data name="Log_in" xml:space="preserve">
     <value>Se connecter</value>
@@ -146,6 +176,15 @@
   </data>
   <data name="Log_out" xml:space="preserve">
     <value>Déconnexion</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Deuxième prénom</value>
+  </data>
+  <data name="Nationality" xml:space="preserve">
+    <value>Nationalité</value>
+  </data>
+  <data name="No_middleName" xml:space="preserve">
+    <value>Pas de deuxième prénom</value>
   </data>
   <data name="PSDDataContact" xml:space="preserve">
     <value>Contact</value>

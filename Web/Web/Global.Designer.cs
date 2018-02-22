@@ -61,7 +61,70 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check my EID info.
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string AddressCity {
+            get {
+                return ResourceManager.GetString("AddressCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Postal code.
+        /// </summary>
+        public static string AddressPostal {
+            get {
+                return ResourceManager.GetString("AddressPostal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street.
+        /// </summary>
+        public static string AddressStreet {
+            get {
+                return ResourceManager.GetString("AddressStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Age.
+        /// </summary>
+        public static string Age {
+            get {
+                return ResourceManager.GetString("Age", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birth Day.
+        /// </summary>
+        public static string BirthDay {
+            get {
+                return ResourceManager.GetString("BirthDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Card Delivery Municipality.
+        /// </summary>
+        public static string CardDeliveryMunicipality {
+            get {
+                return ResourceManager.GetString("CardDeliveryMunicipality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Card number.
+        /// </summary>
+        public static string CardNumber {
+            get {
+                return ResourceManager.GetString("CardNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
         /// </summary>
         public static string Check_eid {
             get {
@@ -115,11 +178,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string FirstName {
+            get {
+                return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender.
+        /// </summary>
+        public static string Gender {
+            get {
+                return ResourceManager.GetString("Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
             get {
                 return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string LastName {
+            get {
+                return ResourceManager.GetString("LastName", resourceCulture);
             }
         }
         
@@ -147,6 +237,33 @@ namespace Resources {
         public static string Log_out {
             get {
                 return ResourceManager.GetString("Log_out", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle name.
+        /// </summary>
+        public static string MiddleName {
+            get {
+                return ResourceManager.GetString("MiddleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nationality.
+        /// </summary>
+        public static string Nationality {
+            get {
+                return ResourceManager.GetString("Nationality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No middle name.
+        /// </summary>
+        public static string No_middleName {
+            get {
+                return ResourceManager.GetString("No_middleName", resourceCulture);
             }
         }
         

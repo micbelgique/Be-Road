@@ -42,3 +42,56 @@ function displayAccessInfoPopup(accessInfo) {
     modal.find('.modal-body').text("");
     modal.find('.modal-body').append(access);
 }
+
+$(document).ready(function () {
+    $('.collapsible').collapsible();
+});
+
+clicked = false;
+
+$("#ps-identity").click(
+    function (event) {
+        if ($(event.target).is('section')) {
+            if (!clicked) {
+                $(this).animate({ width: '+=180px' }, 350);
+                $('#ps-sections').animate({ width: '-=180px' }, 350);
+                $('#collap').css('display', 'block');
+                $('#closer').css('display', 'inline-block');
+                $('#collap').fadeTo(350, 1);
+                clicked = true;
+            }
+        }
+    });
+
+$("#closer").click(
+    function (event) {
+        if (clicked) {
+            $('#ps-identity').animate({ width: '-=180px' }, 350);
+            $('#ps-sections').animate({ width: '+=180px' }, 350);
+            $('#collap').fadeTo(200, 0, function () {
+                $('#collap').css('display', 'none');
+            });
+            $(this).css('display', 'none');
+            clicked = false;
+        }
+    });
+
+$("#ps-identity").hover(
+    function (event) {
+        if ($(event.target).is('section')) {
+            $(this).css("background-color", "#4fc3f7");
+            if (!clicked) {
+                $(this).animate({ width: '+=20px' }, 100);
+                $('#ps-sections').animate({ width: '-=20px' }, 100);
+            }
+        }
+    },
+    function (event) {
+        if ($(event.target).is('section')) {
+            $(this).css("background-color", "#29b6f6");
+            if (!clicked) {
+                $(this).animate({ width: '-=20px' }, 100);
+                $('#ps-sections').animate({ width: '+=20px' }, 100);
+            }
+        }
+    });

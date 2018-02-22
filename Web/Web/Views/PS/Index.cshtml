@@ -7,15 +7,13 @@
 
 <div class="d-flex justify-content-between align-items-stretch">
     <section id="ps-identity" class="p-2">
-        <h2 class="text-center">@Resources.Global.Welcome_message !</h2>
-        <p>@ViewBag.Name</p>
-        @if(eid != null)
+        <h4 id="chkid">@Resources.Global.Check_eid</h4>
+        <a href="#" id="closer">
+            <img class="fas fa-times" alt="Close" width="2" height="2" />
+        </a>
+        @if (eid != null)
         {
             @Html.Partial("../Eid/Details", eid)
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eidModal">
-                @Resources.Global.Check_eid
-            </button>
-
         }
     </section>
     <section id="ps-sections" class="bg-faded d-flex flex-wrap ">
