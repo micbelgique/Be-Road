@@ -300,7 +300,13 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\img\azure.png" />
     <Content Include="Content\img\CarouselBG.png" />
+    <Content Include="Content\img\firstnames.png" />
+    <Content Include="Content\img\freegoip.png" />
+    <Content Include="Content\img\itunes.png" />
+    <Content Include="Content\img\police.jpg" />
+    <Content Include="Content\img\zippopotam.png" />
     <Content Include="Content\materialize\css\materialize.css" />
     <Content Include="Content\materialize\css\materialize.min.css" />
     <Content Include="Content\materialize\font\material-design-icons\LICENSE.txt" />

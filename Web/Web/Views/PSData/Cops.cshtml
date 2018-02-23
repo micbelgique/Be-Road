@@ -5,10 +5,18 @@
 
 <div class="m-5">
     <hr />
+    <ul class="collection with-header">
+        <li class="collection-header"><h4></h4></li>
+        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+    </ul>
+
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Owner)</dt>
         <dd>
-            <button type="button" class="btn btn-primary btn-sm" 
+            <button type="button" class="btn btn-primary btn-sm"
                     onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Owner))"
                     @{if (Model.Owner.AccessInfos.Count == 0) { @: disabled="disabled"
                     } }>
@@ -32,7 +40,7 @@
 
         <dt>@Html.DisplayNameFor(model => model.NumberPlate)</dt>
         <dd>
-            <button type="button" class="btn btn-primary btn-sm" 
+            <button type="button" class="btn btn-primary btn-sm"
                     onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.NumberPlate))"
                     @{if (Model.NumberPlate.AccessInfos.Count == 0) { @: disabled="disabled"
                     } }>

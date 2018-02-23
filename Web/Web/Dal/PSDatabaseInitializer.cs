@@ -17,6 +17,7 @@ namespace Web.Dal
                 Description = "Check who's cops has read your data",
                 Url = "cops.json",
                 DalMethod = "Cops",
+                ImageURI = "/Content/img/police.jpg"
             });
             context.PublicServices.Add(new PublicService
             {
@@ -24,6 +25,7 @@ namespace Web.Dal
                 Description = "Check the zip code",
                 Url = "http://api.zippopotam.us",
                 DalMethod = "Zippo",
+                ImageURI = "/Content/img/zippopotam.png"
             });
             context.PublicServices.Add(new PublicService
             {
@@ -31,6 +33,7 @@ namespace Web.Dal
                 Description = "Get the info about your IP address",
                 Url = "http://freegeoip.net/json",
                 DalMethod = "Geoip",
+                ImageURI = "/Content/img/freegoip.png"
             });
             context.PublicServices.Add(new PublicService
             {
@@ -38,6 +41,7 @@ namespace Web.Dal
                 Description = "Check how many times your name is used",
                 Url = "https://bruxellesdata.opendatasoft.com/api/records/1.0/search/",
                 DalMethod = "Firstnames",
+                ImageURI = "/Content/img/firstnames.png"
             });
             context.PublicServices.Add(new PublicService
             {
@@ -45,6 +49,7 @@ namespace Web.Dal
                 Description = "Which star has your name ?",
                 Url = "https://itunes.apple.com/search",
                 DalMethod = "Itunes",
+                ImageURI = "/Content/img/itunes.png"
             });
             context.PublicServices.Add(new PublicService
             {
@@ -52,6 +57,7 @@ namespace Web.Dal
                 Description = "It's hosted on the cloud",
                 Url = "UserBrussels.txt",
                 DalMethod = "Azure",
+                ImageURI = "/Content/img/azure.png"
             });
         }
     }
