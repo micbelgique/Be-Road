@@ -1,5 +1,10 @@
 ﻿@model Web.Models.EidCard
 
+<h4 id="chkid" class="text-center">@Resources.Global.Check_eid</h4>
+<a href="#" id="closer">
+    <img class="fas fa-times" alt="Close" width="2" height="2" />
+</a>
+<br /><br />
 <ul id="collap" class="collapsible" data-collapsible="accordion">
     <li>
         <div class="collapsible-header">@Resources.Global.FirstName</div>
@@ -52,7 +57,7 @@
     </li>
     <li>
         <div class="collapsible-header">@Resources.Global.BirthDay</div>
-        <div class="collapsible-body"><span>@Html.DisplayFor(model => model.BirthDay)</span></div>
+        <div class="collapsible-body"><span>@Model.BirthDay.ToShortDateString()</span></div>
     </li>
     <li>
         <div class="collapsible-header">@Resources.Global.Nationality</div>

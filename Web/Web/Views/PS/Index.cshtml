@@ -3,13 +3,13 @@
 @{
     ViewBag.Title = Resources.Global.Home;
     var eid = ViewBag.Eid as Web.Models.EidCard;
+    int i = 1;
 }
 
 <div class="d-flex justify-content-between align-items-stretch">
     <section id="ps-identity" class="p-2">
-        <h4 id="chkid">@Resources.Global.Check_eid</h4>
-        <a href="#" id="closer">
-            <img class="fas fa-times" alt="Close" width="2" height="2" />
+        <a href="#" id="opener">
+            <img class="fas fa-arrow-right" atl="Open" width="3" height="3" />
         </a>
         @if (eid != null)
         {
@@ -17,18 +17,30 @@
         }
     </section>
     <section id="ps-sections" class="bg-faded d-flex flex-wrap ">
-       
-        @foreach (var ps in Model)
-        {
-            if (Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 > 0 &&
-                Model.ToList().FindIndex(p => p.ID == ps.ID) % 3 == 0)
-            {
-                @Html.Raw("")
-            }
-            <article class="public-service  m-4 p-2" data-action="@Url.Action("Select", "PS", new { id = ps.ID })">
-                <h5 class="font-weight-bold">@Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title" })</h5>
-                <p>@Html.DisplayFor(model => ps.Description)</p>
-            </article>
-        }
+        <div class="container">
+            <div class="row">
+                @foreach (var ps in Model)
+                {
+                    if (i % 4 == 0)
+                    {
+                        @Html.Raw("</div><div class='row'>")
+                    }
+                    <div class="col s16 m3" data-action="@Url.Action("Select", "PS", new { id = ps.ID })">
+                        <div class="card blue-grey darken-1 small public-service">
+                            <div class="card-image">
+                                <img src="@ps.ImageURI" width="220" height="150" />
+                            </div>
+                            <div class="card-content white-text">
+                                <p>@Html.DisplayFor(model => ps.Description)</p>
+                            </div>
+                            <div class="card-action">
+                                @Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title" })
+                            </div>
+                        </div>
+                    </div>
+                    i++;
+                }
+            </div>
+        </div>
     </section>
 </div>

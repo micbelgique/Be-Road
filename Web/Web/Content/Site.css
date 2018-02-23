@@ -55,8 +55,7 @@ footer {
 
 .public-service {
     border: 1px solid lightgray;
-    width: 250px;
-    height: 100px;
+    width: 220px;
 }
 
 .public-service:hover {
@@ -66,22 +65,33 @@ footer {
 
 #ps-identity {
     height: 90vh;
-    width: 10%;
+    width: 3%;
     background-color: #29b6f6;
 }
 
 #ps-sections {
     height: 90vh;
-    width: 90%;
+    width: 97%;
+}
+
+#chkid {
+    vertical-align: middle;
+    display: none;
+    width: 100%;
+}
+
+#opener {
+    float: right;
+    margin-right: 10px;
 }
 
 #closer{
-    width: 2px;
-    height: 2px;
     display: none;
     float: right;
     margin-right: 10px;
 }
+
+
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -139,7 +149,3 @@ ul {
     display: none;
 }
 
-#chkid {
-    vertical-align: middle;
-    display: inline-block;
-}
