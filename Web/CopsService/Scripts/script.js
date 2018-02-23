@@ -38,7 +38,7 @@ function displayMICDetails(micId, data) {
 }
 
 //Info
-function displayAccessInfoPopup(data) {
+function displayAccessInfoPopup(dataName, data) {
     var modal = $('#accessInfoModal');
     modal.modal();
     modal.find('.modal-title').text("Acces info for " + data.Name);
@@ -53,6 +53,7 @@ function displayAccessInfoPopup(data) {
             $.post('/MIC/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
                 function (returnedData) {
                     console.log(returnedData);
+                    $('#trainee span.' + dataName).text(":" + data.Name);
                 });
             modal.find('#reason').val("");
             modal.modal('toggle');
