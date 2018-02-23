@@ -1,19 +1,19 @@
-﻿using CopsService.Models;
+﻿using PublicService.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace CopsService.Dal
+namespace PublicService.Dal
 {
-    public class CopsDbInitializer : DropCreateDatabaseIfModelChanges<CopsContext>
+    public class PSDbInitializer : DropCreateDatabaseAlways<PSContext>
     {
         private Random rand = new Random();
         private string[] names = { "Arlen", "Artie", "Gray", "Guard", "Ladden", "Mace", "Mark", "Seno", "Jana", "Kim", "Lydia" };
         private string[] reasons = { "Speeding", "Alcohol test", "Crazy driving", "Fun", "Abuse of power" };
 
-        protected override void Seed(CopsContext context)
+        protected override void Seed(PSContext context)
         {
             context.Cars.Add(GenerateNewCar("Michaël", "Fiat", "1-KGG-695"));
             context.Cars.Add(GenerateNewCar("Wilson", "Nissan", "1-EBD-684"));

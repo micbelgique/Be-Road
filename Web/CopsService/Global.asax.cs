@@ -1,4 +1,4 @@
-﻿using CopsService.Dal;
+﻿using PublicService.Dal;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,7 +8,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace CopsService
+namespace PublicService
 {
     public class MvcApplication : System.Web.HttpApplication
     {
@@ -18,7 +18,7 @@ namespace CopsService
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer(new CopsDbInitializer());
+            Database.SetInitializer(new PSDbInitializer());
         }
     }
 }

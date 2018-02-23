@@ -6,18 +6,18 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using CopsService.Dal;
-using CopsService.Models;
+using PublicService.Dal;
+using PublicService.Models;
 using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
 
-namespace CopsService.Controllers
+namespace PublicService.Controllers
 {
     public class CarsController : Controller
     {
-        private CopsContext db = new CopsContext();
+        private PSContext db = new PSContext();
 
         // GET: Cars
         public ActionResult Index()

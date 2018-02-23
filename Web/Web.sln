@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web", "Web\Web.csproj", "{BCE317CF-DF15-48B8-A914-35C4282E23B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopsService", "CopsService\CopsService.csproj", "{BEAE5D92-50F7-48B9-B85F-70EC5AA93C5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicService", "CopsService\PublicService.csproj", "{BEAE5D92-50F7-48B9-B85F-70EC5AA93C5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,15 +1,14 @@
-﻿using CopsService.Dal;
+﻿using PublicService.Dal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CopsService.Controllers
+namespace PublicService.Controllers
 {
     public class HomeController : Controller
     {
-        private CopsContext db = new CopsContext();
         public ActionResult Index()
         {
 

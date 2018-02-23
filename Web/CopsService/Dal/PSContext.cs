@@ -1,15 +1,15 @@
-﻿using CopsService.Models;
+﻿using PublicService.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace CopsService.Dal
+namespace PublicService.Dal
 {
-    public class CopsContext : DbContext
+    public class PSContext : DbContext
     {
-        public CopsContext() : base("CopsContext")
+        public PSContext() : base("PSContext")
         {
 
         }
