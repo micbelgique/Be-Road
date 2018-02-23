@@ -83,37 +83,6 @@ namespace PublicService.Controllers
             return View(car);
         }
 
-        // GET: Cars/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Car car = db.Cars.Find(id);
-            if (car == null)
-            {
-                return HttpNotFound();
-            }
-            return View(car);
-        }
-
-        // POST: Cars/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id")] Car car)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(car).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(car);
-        }
-
         // GET: Cars/Delete/5
         public ActionResult Delete(int? id)
         {

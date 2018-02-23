@@ -1,0 +1,49 @@
+﻿@model PublicService.Models.MicTrainee
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container-fluid" id="trainee">
+    <div class="row">
+        <div class="col-md-4" id="hidden-data">
+            <h2 class="text-center">Details of @Model.FirstName.Name</h2>
+            <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.LastName))">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.LastName)
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Age))">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.Age)
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Nationality))">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.Nationality)
+            </div>
+            <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Locality))">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.Locality)
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h2 class="text-center">Hidden info...</h2>
+            <p>Please click left to see this information</p>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("AccessInfo")
