@@ -26,9 +26,9 @@ namespace PublicService.Dal
             context.Cars.Add(GenerateNewCar("Ludoo", "Peugot", "1-SON-562"));
 
 
-            context.MicTrainees.Add(GenerateNewTrainee("Komsomolets", "Rosy", "Gumb", "Kazakhstan", "25"));
-            context.MicTrainees.Add(GenerateNewTrainee("Yanggu", "Vito", "Mossop", "South Korea", "22"));
-            context.MicTrainees.Add(GenerateNewTrainee("Foso", "Callie", "Glaze", "Ghana", "18"));
+            context.MicTrainees.Add(GenerateNewTrainee("VM", "Michaël", "Gumb", "Kazakhstan", "25"));
+            context.MicTrainees.Add(GenerateNewTrainee("W", "Wilson", "Mossop", "South Korea", "22"));
+            context.MicTrainees.Add(GenerateNewTrainee("P", "Pierre", "Glaze", "Ghana", "18"));
             context.MicTrainees.Add(GenerateNewTrainee("Gostagayevskaya", "Kyla", "Turfin", "Russia", "30"));
             context.MicTrainees.Add(GenerateNewTrainee("Tabon", "Eula", "Jenney", "Philippines", "31"));
             context.MicTrainees.Add(GenerateNewTrainee("Bamusso", "Lyn", "Navarro", "Cameroon", "46"));

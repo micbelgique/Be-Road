@@ -256,6 +256,7 @@
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDatabaseInitializer.cs" />
     <Compile Include="Dal\PSDataService.cs" />
+    <Compile Include="Dal\Services\MicService.cs" />
     <Compile Include="Dal\Services\MockAzureService.cs" />
     <Compile Include="Dal\Services\MockFirstNamesService.cs" />
     <Compile Include="Dal\Services\MockItunesService.cs" />
@@ -289,6 +290,7 @@
     <Compile Include="Models\PublicServiceData\MockPSDGeoip.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDItunes.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDZippopotam.cs" />
+    <Compile Include="Models\PublicServiceData\PSDMic.cs" />
     <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDPlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -305,6 +307,7 @@
     <Content Include="Content\img\firstnames.png" />
     <Content Include="Content\img\freegoip.png" />
     <Content Include="Content\img\itunes.png" />
+    <Content Include="Content\img\mic.jpg" />
     <Content Include="Content\img\police.jpg" />
     <Content Include="Content\img\zippopotam.png" />
     <Content Include="Content\materialize\css\materialize.css" />
@@ -443,6 +446,7 @@
     <Content Include="Views\PSData\Cops.cshtml" />
     <Content Include="Views\PSData\AccessInfo.cshtml" />
     <Content Include="Views\Eid\Details.cshtml" />
+    <Content Include="Views\PSData\Mic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

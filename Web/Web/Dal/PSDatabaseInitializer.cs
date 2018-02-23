@@ -13,6 +13,14 @@ namespace Web.Dal
         {
             context.PublicServices.Add(new PublicService
             {
+                Name = "MIC Data",
+                Description = "Who's reading your profile at the MIC ?",
+                Url = "mic.json",
+                DalMethod = "Mic",
+                ImageURI = "/Content/img/mic.jpg"
+            });
+            context.PublicServices.Add(new PublicService
+            {
                 Name = "Cops Data",
                 Description = "Check who's cops has read your data",
                 Url = "cops.json",
