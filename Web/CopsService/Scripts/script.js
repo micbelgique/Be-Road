@@ -49,13 +49,13 @@ function displayAccessInfoPopup(data) {
             const dataId = data.Id;
             const name = modal.find('#name').val();
             const reason = modal.find('#reason').val();
-            modal.find('#name').val("");
-            modal.find('#reason').val("");
-            modal.modal('toggle');
-            $.post('MIC/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
+            console.log({ dataId: dataId, name: name, reason: reason, ip: ip });
+            $.post('/MIC/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
                 function (returnedData) {
                     console.log(returnedData);
                 });
+            modal.find('#reason').val("");
+            modal.modal('toggle');
         });
         evt.preventDefault();
         modal.find('form').unbind('submit');

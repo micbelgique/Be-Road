@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-                @using (Html.BeginForm("Details", "MIC", FormMethod.Get))
+                @using (Html.BeginForm("Details", "MIC", FormMethod.Post))
                 {
                     <div class="modal-body form-group">
                         <input type="hidden" name="ip" id="ip" value="" required />

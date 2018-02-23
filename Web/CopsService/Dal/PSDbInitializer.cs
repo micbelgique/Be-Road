@@ -7,7 +7,7 @@ using System.Web;
 
 namespace PublicService.Dal
 {
-    public class PSDbInitializer : DropCreateDatabaseAlways<PSContext>
+    public class PSDbInitializer : DropCreateDatabaseIfModelChanges<PSContext>
     {
         private Random rand = new Random();
         private string[] names = { "Arlen", "Artie", "Gray", "Guard", "Ladden", "Mace", "Mark", "Seno", "Jana", "Kim", "Lydia" };

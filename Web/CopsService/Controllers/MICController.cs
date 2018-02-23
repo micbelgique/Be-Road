@@ -23,7 +23,7 @@ namespace PublicService.Controllers
         public ActionResult AddAccessInfo(int? dataId, string name, string reason, string ip)
         {
             var data = db.Datas.Find(dataId);
-            if(data == null)
+            if(data == null || String.IsNullOrWhiteSpace(name) || String.IsNullOrWhiteSpace(reason))
             {
                 return HttpNotFound();
             }
@@ -38,6 +38,7 @@ namespace PublicService.Controllers
             return Content("Successfully saved");
         }
 
+        [HttpPost]
         public ActionResult Details(int? id, int? dataId, string name, string reason, string ip)
         {
             AddAccessInfo(dataId, name, reason, ip);
