@@ -106,6 +106,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Brand.
+        /// </summary>
+        public static string Brand {
+            get {
+                return ResourceManager.GetString("Brand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Card Delivery Municipality.
         /// </summary>
         public static string CardDeliveryMunicipality {
@@ -138,6 +147,15 @@ namespace Resources {
         public static string Connection {
             get {
                 return ResourceManager.GetString("Connection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information about you.
+        /// </summary>
+        public static string Cops_title {
+            get {
+                return ResourceManager.GetString("Cops_title", resourceCulture);
             }
         }
         
@@ -264,6 +282,24 @@ namespace Resources {
         public static string No_middleName {
             get {
                 return ResourceManager.GetString("No_middleName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owner.
+        /// </summary>
+        public static string Ower {
+            get {
+                return ResourceManager.GetString("Ower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plate number.
+        /// </summary>
+        public static string PlateNumber {
+            get {
+                return ResourceManager.GetString("PlateNumber", resourceCulture);
             }
         }
         

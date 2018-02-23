@@ -132,6 +132,9 @@
   <data name="BirthDay" xml:space="preserve">
     <value>Date de naissance</value>
   </data>
+  <data name="Brand" xml:space="preserve">
+    <value>Marque</value>
+  </data>
   <data name="CardDeliveryMunicipality" xml:space="preserve">
     <value>Municipalité de livraison de la carte</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Connection" xml:space="preserve">
     <value>Connexion</value>
+  </data>
+  <data name="Cops_title" xml:space="preserve">
+    <value>Informations vous concernant</value>
   </data>
   <data name="Details_btn" xml:space="preserve">
     <value>Détails</value>
@@ -185,6 +191,12 @@
   </data>
   <data name="No_middleName" xml:space="preserve">
     <value>Pas de deuxième prénom</value>
+  </data>
+  <data name="Ower" xml:space="preserve">
+    <value>Propriétaire</value>
+  </data>
+  <data name="PlateNumber" xml:space="preserve">
+    <value>Numéro de plaque</value>
   </data>
   <data name="PSDDataContact" xml:space="preserve">
     <value>Contact</value>
