@@ -1,4 +1,4 @@
-﻿@model CopsService.Models.Car
+﻿@model PublicService.Models.Car
 
 @{
     ViewBag.Title = "Delete";
@@ -12,6 +12,10 @@
     <h4>Car</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>@Html.DisplayNameFor(model => model.Owner)</dt>
+        <dd>
+            @Html.DisplayFor(model => model.Owner.Name)
+            </dd>
     </dl>
 
     @using (Html.BeginForm()) {

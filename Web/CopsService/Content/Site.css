@@ -22,3 +22,24 @@ select,
 textarea {
     max-width: 280px;
 }
+
+ul {
+    list-style-type: none;
+}
+
+#trainees li {
+    margin-top: 1em;
+}
+
+#trainees .btn {
+    margin-right: 1em;
+}
+
+
+#trainee div {
+    margin-top: 1em;
+}
+
+#trainee .btn {
+    margin-right: 1em;
+}

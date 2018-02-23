@@ -3,7 +3,15 @@
 }
 
 <div class="jumbotron">
-    <h1>Cops Service</h1>
-    <p class="lead">This a service where you can put cops info on Azure, so that we Privacy Passport can read this information</p>
-    @Html.ActionLink("Put the cars info on azure !", "Azure", "Cars")
+    <h1 class="display-3">Welcome to the public service portal </h1>
+    <p class="lead">Here you can access all the data that you want, but you need to provide some information if you want to view this data !</p>
+    <p class="lead">All this information will be stored in the blockchain forever, so be carrefull if you try to access some data...</p>
 </div>
+
+<section id="home">
+    <h3 id="title">I know who you are...</h3>
+    <div id="identity"style="display: none;">
+        <p id="ip"></p>
+        <p id="date"></p>
+    </div>
+</section>

@@ -1,11 +1,15 @@
-﻿@model IEnumerable<CopsService.Models.Car>
+﻿@model IEnumerable<PublicService.Models.Car>
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="jumbotron">
+    <h1>Cars Service</h1>
+    <p class="lead">This a service where you can put cars info on Azure, so that we Privacy Passport can read this information</p>
+    @Html.ActionLink("Put the cars info on azure !", "Azure", "Cars")
+</div>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -16,17 +20,17 @@
         <th>Actions</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayName(item.Owner.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayName(item.Owner.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
