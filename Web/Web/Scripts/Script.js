@@ -29,7 +29,6 @@
 });
 
 function displayAccessInfoPopup(accessInfo) {
-    console.log(accessInfo);
     var modal = $('#accessInfoModal');
     modal.modal();
     modal.find('.modal-title').text(accessInfo.Name);
@@ -41,6 +40,7 @@ function displayAccessInfoPopup(accessInfo) {
     });
     modal.find('.modal-body').text("");
     modal.find('.modal-body').append(access);
+    $('#accessInfoModal').modal('open');
 }
 
 $(document).ready(function () {

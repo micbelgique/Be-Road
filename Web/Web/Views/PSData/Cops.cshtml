@@ -5,51 +5,12 @@
 
 <div class="m-5">
     <hr />
-    <ul class="collection with-header">
-        <li class="collection-header"><h4></h4></li>
-        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
-        <li class="collection-item"><div>Alvin<a href="#!" class="secondary-content"><i class="material-icons">send</i></a></div></li>
+    <ul class="collection with-header ml-auto mr-auto detailCollect">
+        <li class="collection-header"><h4>@Resources.Global.Cops_title</h4></li>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Owner))"><li class="collection-item"><div><strong>@Resources.Global.Ower :</strong> @Html.DisplayFor(model => model.Owner.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Brand))"><li class="collection-item"><div><strong>@Resources.Global.Brand :</strong> @Html.DisplayFor(model => model.Brand.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.NumberPlate))"><li class="collection-item"><div><strong>@Resources.Global.PlateNumber :</strong> @Html.DisplayFor(model => model.NumberPlate.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
     </ul>
-
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.Owner)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Owner))"
-                    @{if (Model.Owner.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-            @Html.DisplayFor(model => model.Owner.Name)
-        </dd>
-
-
-        <dt>@Html.DisplayNameFor(model => model.Brand)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Brand))"
-                    @{if (Model.Brand.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-
-            @Html.DisplayFor(model => model.Brand.Name)
-        </dd>
-
-        <dt>@Html.DisplayNameFor(model => model.NumberPlate)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.NumberPlate))"
-                    @{if (Model.NumberPlate.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-
-            @Html.DisplayFor(model => model.NumberPlate.Name)
-        </dd>
-    </dl>
 </div>
 
 @Html.Partial("AccessInfo")

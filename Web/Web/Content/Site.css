@@ -3,6 +3,15 @@
     border-bottom: 1px solid lightgray;
 }
 
+.nolink, .nolink:hover, .nolink:active, .nolink:visited, .nolink:enabled {
+    text-decoration: none;
+    color: black;
+}
+
+.collection-item:hover{
+    background-color: #f5f5f5;
+}
+
 header > ul > li {
     border-left: 1px solid lightgray;
 }
@@ -149,3 +158,14 @@ ul {
     display: none;
 }
 
+.detailCollect{
+    width: 50%;
+}
+
+#accessInfoModal{
+    height: 50%;
+}
+
+.modal-content{
+    height: 100%;
+}
