@@ -222,4 +222,10 @@
   <data name="Welcome_message" xml:space="preserve">
     <value>Bienvenue</value>
   </data>
+  <data name="MIC_title" xml:space="preserve">
+    <value>Données du MIC</value>
+  </data>
+  <data name="Locality" xml:space="preserve">
+    <value>Localité</value>
+  </data>
 </root>

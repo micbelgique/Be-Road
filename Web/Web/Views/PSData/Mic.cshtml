@@ -64,4 +64,16 @@
     </dl>
 </div>
 
+<div class="m-5">
+    <hr />
+    <ul class="collection with-header ml-auto mr-auto detailCollect">
+        <li class="collection-header"><h4>@Resources.Global.Cops_title</h4></li>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.FirstName))"><li class="collection-item"><div><strong>@Resources.Global.FirstName :</strong> @Html.DisplayFor(model => model.FirstName.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.LastName))"><li class="collection-item"><div><strong>@Resources.Global.LastName :</strong> @Html.DisplayFor(model => model.LastName.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Age))"><li class="collection-item"><div><strong>@Resources.Global.Age :</strong> @Html.DisplayFor(model => model.Age.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Locality))"><li class="collection-item"><div><strong>@Resources.Global.Locality :</strong> @Html.DisplayFor(model => model.Locality.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
+        <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Nationality))"><li class="collection-item"><div><strong>@Resources.Global.Nationality :</strong> @Html.DisplayFor(model => model.Nationality.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
+    </ul>
+</div>
+
 @Html.Partial("AccessInfo")
