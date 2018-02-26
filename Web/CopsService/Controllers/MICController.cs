@@ -12,6 +12,7 @@ using System.Web.Mvc;
 
 namespace PublicService.Controllers
 {
+    [Authorize]
     public class MICController : Controller
     {
         private PSContext db = new PSContext();
