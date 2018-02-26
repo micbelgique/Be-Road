@@ -223,11 +223,38 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to accessed this piece of data on.
+        /// </summary>
+        public static string JSAccessed {
+            get {
+                return ResourceManager.GetString("JSAccessed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to for.
+        /// </summary>
+        public static string JSFor {
+            get {
+                return ResourceManager.GetString("JSFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         public static string LastName {
             get {
                 return ResourceManager.GetString("LastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locality.
+        /// </summary>
+        public static string Locality {
+            get {
+                return ResourceManager.GetString("Locality", resourceCulture);
             }
         }
         
@@ -255,6 +282,15 @@ namespace Resources {
         public static string Log_out {
             get {
                 return ResourceManager.GetString("Log_out", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MIC Data.
+        /// </summary>
+        public static string MIC_title {
+            get {
+                return ResourceManager.GetString("MIC_title", resourceCulture);
             }
         }
         

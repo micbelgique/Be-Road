@@ -28,16 +28,27 @@
     });
 });
 
+function formatDate(date) {
+    var newDate = new Date(date);
+    var day = newDate.getDate();
+    var month = newDate.getMonth();
+    var year = newDate.getFullYear();
+
+    return day + '/' + month + '/' + year;
+}
+
+
 function displayAccessInfoPopup(accessInfo) {
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('.modal-title').text(accessInfo.Name);
-    var access = "";
+    modal.find('#exampleModalLabel').text(accessInfo.Name);
+    var access = "<ul>";
     $.each(accessInfo.AccessInfos, function (i, v) {
-        access += "<p>";
-        access += v.Name + " accessed this data at " + v.Date + " for " + v.Reason;
-        access += "</p>";
+        access += "<li>";
+        access += "<strong>" + v.Name + "</strong> " + Resources.Accessed + " <strong>" + formatDate(v.Date) + "</strong> " + Resources.For + " <strong>" + v.Reason + "</strong>";
+        access += "</li>";
     });
+    access += "</ul>"
     modal.find('.modal-body').text("");
     modal.find('.modal-body').append(access);
     $('#accessInfoModal').modal('open');
@@ -91,19 +102,11 @@ $(document).ready(function () {
         function (event) {
             if ($(event.target).is('section')) {
                 $(this).css("background-color", "#4fc3f7");
-                if (!clicked) {
-                    $(this).animate({ width: '+=20px' }, 100);
-                    $('#ps-sections').animate({ width: '-=20px' }, 100);
-                }
             }
         },
         function (event) {
             if ($(event.target).is('section')) {
                 $(this).css("background-color", "#29b6f6");
-                if (!clicked) {
-                    $(this).animate({ width: '-=20px' }, 100);
-                    $('#ps-sections').animate({ width: '+=20px' }, 100);
-                }
             }
         });
 });

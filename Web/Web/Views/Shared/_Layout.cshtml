@@ -6,56 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>TestPrivacyPassport</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/materialize/materialize.js"></script>
     <script src="~/Scripts/Script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
 <body>
-    <header class="navbar navbar-toggleable-md bg-faded fixed-top pt-2 pb-0">
-        @{
-            if (Session["connected"] != null && (bool)Session["connected"])
-            {
-                @Html.ActionLink("Privacy Passport", "Index", "PS", new { area = "" }, new { @class = "navbar-brand color-company-black", id = "app-title" })
+    <div id="bg-handle">
+        <header id="navtop">
+            <nav>
+                <div class="nav-wrapper grey lighten-5">
+                    @{
+                    if (Session["connected"] != null && (bool)Session["connected"])
+                    {
+                        @Html.ActionLink("Privacy Passport", "Index", "PS", new { area = "" }, new { @class = "brand-logo left blue-grey-text text-darken-1", id = "app-title" })
+                }
+                else
+                {
+                    @Html.ActionLink("Privacy Passport", "Index", "Home", new { area = "" }, new { @class = "brand-logo left blue-grey-text text-darken-1", id = "app -title" })
             }
-            else
-            {
-                @Html.ActionLink("Privacy Passport", "Index", "Home", new { area = "" }, new { @class = "navbar-brand color-company-black", id = "app-title" })
-            }
-        }
-        @{
             string lang = Request.Cookies["Language"]?.Value;
-            if (ViewBag.PS != null)
-            {
-                <div class="text-muted"> @ViewBag.PS.DalMethod</div>
-            }
-        }
-        <ul class="navbar-nav ml-auto">
-            <li class="@(lang == "en-US" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang">EN</a></li>
-            <li class="@(lang == "fr-BE" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang" id="fr">FR</a></li>
-            <li class="@(lang == "nl-BE" ? "active" : "") nav-item mu-2 p-2"><a href="#" class="color-company-black lang" id="nl">NL</a></li>
-            @if (Session["connected"] != null && (bool)Session["connected"])
-            {
-                <li class="nav-item mu-2 p-2">@Html.ActionLink(Resources.Global.Log_out, "LogOut", "Home", new { area = "" }, new { @class = "color-company-black" }) <i id="logout" class="fas fa-sign-out-alt"></i></li>
-            }
-        </ul>
-    </header>
-
-    <div class="body-content">
-        @RenderBody()
+                    }
+                    <ul id="nav-mobile" class="right">
+                        <li class="@(lang == "en-US" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang">EN</a></li>
+                        <li class="@(lang == "fr-BE" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang" id="fr">FR</a></li>
+                        <li class="@(lang == "nl-BE" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang" id="nl">NL</a></li>
+                        @if (Session["connected"] != null && (bool)Session["connected"])
+                    {
+                        <li><a class="color-company-black" href="@Url.Action("LogOut", "Home")">@Resources.Global.Log_out <span id="logout" class="fas fa-sign-out-alt"></span></a></li>
+                }
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="body-content">
+            @RenderBody()
+        </div>
     </div>
-
-    <footer class="bg-faded d-flex align-items-center pl-3">
+    <footer>
         <p class="color-company-black">&copy; @DateTime.Now.Year - TestPrivacyPassport</p>
     </footer>
-
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-
 </body>
 </html>

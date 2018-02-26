@@ -222,4 +222,16 @@
   <data name="Welcome_message" xml:space="preserve">
     <value>Welkom</value>
   </data>
+  <data name="MIC_title" xml:space="preserve">
+    <value>MIC Data</value>
+  </data>
+  <data name="Locality" xml:space="preserve">
+    <value>Plaats</value>
+  </data>
+  <data name="JSAccessed" xml:space="preserve">
+    <value>heeft deze data gebruikt op</value>
+  </data>
+  <data name="JSFor" xml:space="preserve">
+    <value>voor</value>
+  </data>
 </root>

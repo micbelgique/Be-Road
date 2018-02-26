@@ -1,5 +1,8 @@
-﻿header {
-    height: 50px;
+﻿html {
+    font-family: "Roboto", sans serif;
+}
+
+header {
     border-bottom: 1px solid lightgray;
 }
 
@@ -21,17 +24,12 @@ li.active {
 }
 
 body {
-    padding-top: 50px;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
 }
 
-.body-content {
+#bg-handle {
     background: radial-gradient(ellipse at bottom, #FFFFFF, #50C2D0, #50C2D0);
-    min-height: 90%;
-}
-
-footer {
-    min-height: 10%;
 }
 
 /* Home page */
@@ -39,6 +37,8 @@ footer {
     margin: 0 auto;
     /*padding-top: 100px;*/
     width: 660px;
+    height: 100%;
+    min-height: 80vh;
 }
 
 #home-page > h1 {
@@ -73,14 +73,26 @@ footer {
 }
 
 #ps-identity {
-    height: 90vh;
+    min-height: 90vh;
     width: 3%;
     background-color: #29b6f6;
 }
 
 #ps-sections {
-    height: 90vh;
+    min-height: 90vh;
     width: 97%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#ps-container {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#homecontent {
+    width: 100%;
+    display: flex;
 }
 
 #chkid {
@@ -127,28 +139,22 @@ a, a:active {
     text-decoration: none;
 }
 
-#app-title {
-    margin-left: 100px;
-}
-
 ul {
     list-style-type: none;
 }
 
 
 #logout {
-    margin-left: 10px;
-    margin-right: 50px;
-    color: #d8d8d8;
+    margin-left: 5px;
+    color: #555555;
+    vertical-align: middle;
 }
 
 .collapsible-header {
-    font-family: "Roboto", sans serif;
     font-weight: 400;
 }
 
 .collapsible-body {
-    font-family: "Roboto", sans serif;
     font-weight: 300;
     background-color: #fff;
     text-align: center;
@@ -158,14 +164,35 @@ ul {
     display: none;
 }
 
-.detailCollect{
-    width: 50%;
-}
-
 #accessInfoModal{
     height: 50%;
 }
 
 .modal-content{
     height: 100%;
+}
+
+#bodycontent {
+    margin-top: 1%;
+}
+
+/* Details */
+.detailCollect {
+    width: 50%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.details-content{
+    min-height: 100vh;
+    height: 100%;
+}
+
+#exampleModalLabel{
+    display: inline-block;
+}
+
+#modal-close {
+    display: inline-block;
+    float: right;
 }
