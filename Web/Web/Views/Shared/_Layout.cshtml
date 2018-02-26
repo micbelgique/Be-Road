@@ -13,42 +13,40 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="~/Scripts/materialize/materialize.js"></script>
     <script src="~/Scripts/Script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
 <body>
-    <header id="navtop">
-        <nav>
-            <div class="nav-wrapper grey lighten-5">
-                @{
+    <div id="bg-handle">
+        <header id="navtop">
+            <nav>
+                <div class="nav-wrapper grey lighten-5">
+                    @{
                     if (Session["connected"] != null && (bool)Session["connected"])
                     {
                         @Html.ActionLink("Privacy Passport", "Index", "PS", new { area = "" }, new { @class = "brand-logo left blue-grey-text text-darken-1", id = "app-title" })
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Privacy Passport", "Index", "Home", new { area = "" }, new { @class = "brand-logo left blue-grey-text text-darken-1", id = "app -title" })
-                   }
                 }
-                @{
-                            string lang = Request.Cookies["Language"]?.Value;
-                            if (ViewBag.PS != null)
-                            {
-                        <div class="text-muted"> @ViewBag.PS.DalMethod</div>
+                else
+                {
+                    @Html.ActionLink("Privacy Passport", "Index", "Home", new { area = "" }, new { @class = "brand-logo left blue-grey-text text-darken-1", id = "app -title" })
+            }
+            string lang = Request.Cookies["Language"]?.Value;
                     }
-                }
-                <ul id="nav-mobile" class="right">
-                    <li class="@(lang == "en-US" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang">EN</a></li>
-                    <li class="@(lang == "fr-BE" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang" id="fr">FR</a></li>
-                    <li class="@(lang == "nl-BE" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang" id="nl">NL</a></li>
-                    @if (Session["connected"] != null && (bool)Session["connected"])
+                    <ul id="nav-mobile" class="right">
+                        <li class="@(lang == "en-US" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang">EN</a></li>
+                        <li class="@(lang == "fr-BE" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang" id="fr">FR</a></li>
+                        <li class="@(lang == "nl-BE" ? "active" : "")"><a href="#" class="blue-grey-text text-darken-1 lang" id="nl">NL</a></li>
+                        @if (Session["connected"] != null && (bool)Session["connected"])
                     {
-                        <li class="nav-item mu-2 p-2">@Html.ActionLink(Resources.Global.Log_out, "LogOut", "Home", new { area = "" }, new { @class = "color-company-black" }) <i id="logout" class="fas fa-sign-out-alt"></i></li>
-                    }
-                </ul>
-            </div>
-        </nav>
-    </header>
-    <div class="body-content">
-        @RenderBody()
+                        <li><a class="color-company-black" href="@Url.Action("LogOut", "Home")">@Resources.Global.Log_out <span id="logout" class="fas fa-sign-out-alt"></span></a></li>
+                }
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <div class="body-content">
+            @RenderBody()
+        </div>
     </div>
     <footer>
         <p class="color-company-black">&copy; @DateTime.Now.Year - TestPrivacyPassport</p>

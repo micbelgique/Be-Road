@@ -1,5 +1,8 @@
-﻿header {
-    height: 50px;
+﻿html {
+    font-family: "Roboto", sans serif;
+}
+
+header {
     border-bottom: 1px solid lightgray;
 }
 
@@ -21,9 +24,11 @@ li.active {
 }
 
 body {
-    padding-top: 50px;
     min-height: 100vh;
     height: 100%;
+}
+
+#bg-handle {
     background: radial-gradient(ellipse at bottom, #FFFFFF, #50C2D0, #50C2D0);
 }
 
@@ -134,28 +139,22 @@ a, a:active {
     text-decoration: none;
 }
 
-#app-title {
-    margin-left: 100px;
-}
-
 ul {
     list-style-type: none;
 }
 
 
 #logout {
-    margin-left: 10px;
-    margin-right: 50px;
-    color: #d8d8d8;
+    margin-left: 5px;
+    color: #555555;
+    vertical-align: middle;
 }
 
 .collapsible-header {
-    font-family: "Roboto", sans serif;
     font-weight: 400;
 }
 
 .collapsible-body {
-    font-family: "Roboto", sans serif;
     font-weight: 300;
     background-color: #fff;
     text-align: center;
@@ -163,10 +162,6 @@ ul {
 
 .collapsible{
     display: none;
-}
-
-.detailCollect{
-    width: 50%;
 }
 
 #accessInfoModal{
@@ -177,10 +172,27 @@ ul {
     height: 100%;
 }
 
-#navtop{
-    margin-top: -50px;
+#bodycontent {
+    margin-top: 1%;
 }
 
-#bodycontent{
-    margin-top: 1%;
+/* Details */
+.detailCollect {
+    width: 50%;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.details-content{
+    min-height: 100vh;
+    height: 100%;
+}
+
+#exampleModalLabel{
+    display: inline-block;
+}
+
+#modal-close {
+    display: inline-block;
+    float: right;
 }

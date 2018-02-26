@@ -1,72 +1,14 @@
 ﻿@model Web.Models.PublicServiceData.PSDMic
 @{
-    ViewBag.Title = "Mic Data";
+    ViewBag.Title = Resources.Global.MIC_title;
 }
 
-<div class="m-5">
-    <hr />
-
-    <dl class="dl-horizontal">
-        <dt>@Html.DisplayNameFor(model => model.FirstName)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.FirstName))"
-                    @{if (Model.FirstName.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-            @Html.DisplayFor(model => model.FirstName.Name)
-        </dd>
-
-        <dt>@Html.DisplayNameFor(model => model.LastName)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.LastName))"
-                    @{if (Model.LastName.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-            @Html.DisplayFor(model => model.LastName.Name)
-        </dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Age)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Age))"
-                    @{if (Model.Age.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-            @Html.DisplayFor(model => model.Age.Name)
-        </dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Locality)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Locality))"
-                    @{if (Model.Locality.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-            @Html.DisplayFor(model => model.Locality.Name)
-        </dd>
-
-        <dt>@Html.DisplayNameFor(model => model.Nationality)</dt>
-        <dd>
-            <button type="button" class="btn btn-primary btn-sm"
-                    onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.Nationality))"
-                    @{if (Model.Nationality.AccessInfos.Count == 0) { @: disabled="disabled"
-                    } }>
-                <span class="fa fa-search" aria-hidden="true"></span>
-            </button>
-            @Html.DisplayFor(model => model.Nationality.Name)
-        </dd>
-    </dl>
-</div>
-
-<div class="m-5">
-    <hr />
-    <ul class="collection with-header ml-auto mr-auto detailCollect">
+<div class="m5 details-content">
+    @if (ViewBag.PS != null)
+    {
+        <h2 class="grey-text text-darken-3"> @ViewBag.PS.DalMethod</h2>
+    }
+    <ul class="collection with-header detailCollect">
         <li class="collection-header"><h4>@Resources.Global.Cops_title</h4></li>
         <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.FirstName))"><li class="collection-item"><div><strong>@Resources.Global.FirstName :</strong> @Html.DisplayFor(model => model.FirstName.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>
         <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.LastName))"><li class="collection-item"><div><strong>@Resources.Global.LastName :</strong> @Html.DisplayFor(model => model.LastName.Name)<i class="fas fa-arrow-alt-circle-right secondary-content"></i></div></li></a>

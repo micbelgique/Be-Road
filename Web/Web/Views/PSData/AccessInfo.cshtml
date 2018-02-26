@@ -1,8 +1,10 @@
-﻿<div id="accessInfoModal" class="modal">
+﻿@Html.Partial("ResourcesIncluding");
+
+<div id="accessInfoModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <h5 id="exampleModalLabel">Accès à la donnée</h5>
+            <button id="modal-close" type="button" class="modal-close btn-flat" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>

@@ -223,6 +223,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to accessed this piece of data on.
+        /// </summary>
+        public static string JSAccessed {
+            get {
+                return ResourceManager.GetString("JSAccessed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to for.
+        /// </summary>
+        public static string JSFor {
+            get {
+                return ResourceManager.GetString("JSFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last name.
         /// </summary>
         public static string LastName {

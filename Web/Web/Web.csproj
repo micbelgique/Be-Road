@@ -427,6 +427,7 @@
     <Content Include="Views\PSData\AccessInfo.cshtml" />
     <Content Include="Views\Eid\Details.cshtml" />
     <Content Include="Views\PSData\Mic.cshtml" />
+    <Content Include="Views\PSData\ResourcesIncluding.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

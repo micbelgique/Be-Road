@@ -228,4 +228,10 @@
   <data name="Locality" xml:space="preserve">
     <value>Localité</value>
   </data>
+  <data name="JSAccessed" xml:space="preserve">
+    <value>a accédé à cette donnée le</value>
+  </data>
+  <data name="JSFor" xml:space="preserve">
+    <value>pour</value>
+  </data>
 </root>
