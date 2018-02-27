@@ -268,6 +268,7 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MICController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -334,6 +335,8 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Service\AccessInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
