@@ -15,6 +15,7 @@ using Newtonsoft.Json;
 
 namespace PublicService.Controllers
 {
+    [Authorize]
     public class CarsController : Controller
     {
         private PSContext db = new PSContext();

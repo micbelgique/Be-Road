@@ -105,7 +105,6 @@ namespace PublicService.Controllers
             if (response == null)
             {
                 IAuthenticationRequest request = openid.CreateRequest("https://www.e-contract.be/eid-idp/endpoints/openid/ident");
-                Debug.WriteLine("Sending to EID");
 
                 // attribute query
                 FetchRequest fetchRequest = new FetchRequest();
@@ -158,7 +157,6 @@ namespace PublicService.Controllers
                 {
                     case AuthenticationStatus.Authenticated:
                         FetchResponse fetchResponse = response.GetExtension<FetchResponse>();
-                        Debug.WriteLine(fetchResponse.Attributes["http://axschema.org/eid/photo"].Values[0]);
                         EidCard eid = new EidCard
                         {
                             ChipNumber = fetchResponse.Attributes["http://axschema.org/eid/chip-number"].Values[0],
@@ -190,7 +188,8 @@ namespace PublicService.Controllers
                         };
                         //Save the eid in the session
                         Session["eid"] = eid;
-                        return View();
+                        ViewBag.FirstTry = true;
+                        return View(model);
                     case AuthenticationStatus.Canceled:
                         ViewBag.Extra = "Log in cancel";
                         break;
@@ -235,7 +234,6 @@ namespace PublicService.Controllers
         public async Task<ActionResult> Manage()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            Debug.WriteLine(User.Identity.GetUserId());
             return View(user);
         }
 
