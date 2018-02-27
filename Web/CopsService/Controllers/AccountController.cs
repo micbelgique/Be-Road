@@ -77,7 +77,7 @@ namespace PublicService.Controllers
             {
                 return View(model);
             }
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.Username, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -106,11 +106,11 @@ namespace PublicService.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return await Login(new LoginViewModel() { Email = model.Email, Password = model.Password }, "/Account/Manage");
+                    return await Login(new LoginViewModel() { Username = model.Username, Password = model.Password }, "/Account/Manage");
                 }
                 AddErrors(result);
             }

@@ -12,7 +12,7 @@ using Microsoft.AspNet.Identity;
 
 namespace PublicService.Dal
 {
-    public class PSDbInitializer : DropCreateDatabaseIfModelChanges<PSContext>
+    public class PSDbInitializer : DropCreateDatabaseAlways<PSContext>
     {
         private Random rand = new Random();
         private string[] names = { "Arlen", "Artie", "Gray", "Guard", "Ladden", "Mace", "Mark", "Seno", "Jana", "Kim", "Lydia" };
@@ -24,11 +24,32 @@ namespace PublicService.Dal
             InitializeTrainee(context);
             InitializeIdentityForEF(context);
         }
-        public static void InitializeIdentityForEF(PSContext db)
+        private void InitializeIdentityForEF(PSContext db)
+        {
+            InitializeIdentityAdmin(db);
+            InitializeIdentityUsers(db);
+        }
+
+        private void InitializeIdentityUsers(PSContext db)
         {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-            const string name = "admin@example.com";
+
+            /*var user = userManager.FindByName(name);
+            if (user == null)
+            {
+                user = new ApplicationUser { UserName = name, Email = name };
+                var result = userManager.Create(user, password);
+                result = userManager.SetLockoutEnabled(user.Id, false);
+            }*/
+        }
+    
+
+        private void InitializeIdentityAdmin(PSContext db)
+        {
+            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            const string name = "admin";
             const string password = "Admin@123456";
             const string roleName = "Admin";
 
@@ -43,7 +64,7 @@ namespace PublicService.Dal
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = name, Email = name };
+                user = new ApplicationUser { UserName = name };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
