@@ -27,20 +27,19 @@ ul {
     list-style-type: none;
 }
 
-#trainees li {
+#users li {
     margin-top: 1em;
 }
 
-#trainees .btn {
+#users .btn {
     margin-right: 1em;
 }
 
-
-#trainee div {
+#user div {
     margin-top: 1em;
 }
 
-#trainee .btn {
+#user .btn {
     margin-right: 1em;
 }
 

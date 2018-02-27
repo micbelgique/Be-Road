@@ -9,6 +9,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using CsvHelper;
+using System.IO;
 
 namespace PublicService.Dal
 {
@@ -21,7 +23,6 @@ namespace PublicService.Dal
         protected override void Seed(PSContext context)
         {
             InitializeCars(context);
-            InitializeTrainee(context);
             InitializeIdentityForEF(context);
         }
         private void InitializeIdentityForEF(PSContext db)
@@ -34,14 +35,48 @@ namespace PublicService.Dal
         {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-
-            /*var user = userManager.FindByName(name);
-            if (user == null)
+            using (StreamReader reader = File.OpenText(HttpContext.Current.Server.MapPath("~/Dal/stagiaires.csv")))
             {
-                user = new ApplicationUser { UserName = name, Email = name };
-                var result = userManager.Create(user, password);
-                result = userManager.SetLockoutEnabled(user.Id, false);
-            }*/
+                var csv = new CsvReader(reader);
+                csv.Configuration.Delimiter = ";";
+                csv.Configuration.MissingFieldFound = null;
+                csv.Read();
+                csv.ReadHeader();
+                while (csv.Read())
+                {
+                    var fn = csv.GetField("Prenom").Replace(' ', '.');
+                    var ln = csv.GetField("Nom").Replace(' ', '.');
+                    var school = csv.GetField("Ecole");
+                    var stage = csv.GetField("Ville de stage");
+                    var mail = csv.GetField("Email MIC");
+                    var loc = csv.GetField("Ville domicile");
+                    var url = csv.GetField("URL photo");
+                    var info = csv.GetField("Extra Info");
+
+                    var userName = $"{fn}.{ln}-{stage}";
+                    var password = "Admin@123456";
+
+                    var user = userManager.FindByName(userName);
+                    if (user == null)
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = userName,
+                            FirstName = new Data { Value = fn },
+                            LastName = new Data { Value = ln },
+                            //Age removed
+                            Locality = new Data { Value = loc },
+                            //Nationality empty
+                            PhotoUrl = new Data { Value = url },
+                            ExtraInfo = new Data { Value = info }
+                            //Mail not yet implemented
+                            //School stage
+                        };
+                        var result = userManager.Create(user, password);
+                        result = userManager.SetLockoutEnabled(user.Id, false);
+                    }
+                }
+            }
         }
     
 
@@ -61,6 +96,7 @@ namespace PublicService.Dal
                 var roleresult = roleManager.Create(role);
             }
 
+            //Create the admin
             var user = userManager.FindByName(name);
             if (user == null)
             {
@@ -76,40 +112,6 @@ namespace PublicService.Dal
                 var result = userManager.AddToRole(user.Id, role.Name);
             }
         }
-
-
-        private void InitializeTrainee(PSContext context)
-        {
-            context.MicTrainees.Add(GenerateNewTrainee("VM", "Michaël", "Gumb", "Kazakhstan", "25"));
-            context.MicTrainees.Add(GenerateNewTrainee("W", "Wilson", "Mossop", "South Korea", "22"));
-            context.MicTrainees.Add(GenerateNewTrainee("P", "Pierre", "Glaze", "Ghana", "18"));
-            context.MicTrainees.Add(GenerateNewTrainee("Gostagayevskaya", "Kyla", "Turfin", "Russia", "30"));
-            context.MicTrainees.Add(GenerateNewTrainee("Tabon", "Eula", "Jenney", "Philippines", "31"));
-            context.MicTrainees.Add(GenerateNewTrainee("Bamusso", "Lyn", "Navarro", "Cameroon", "46"));
-            context.MicTrainees.Add(GenerateNewTrainee("Roi Et", "Byrann", "Antal", "Thailand", "13"));
-            context.MicTrainees.Add(GenerateNewTrainee("Ortigueira", "Rossie", "Marcussen", "Brazil", "16"));
-            context.MicTrainees.Add(GenerateNewTrainee("Sakākā", "Lila", "Cartlidge", "Saudi Arabia", "56"));
-            context.MicTrainees.Add(GenerateNewTrainee("Ikey", "Frances", "Maneylaws", "Russia", "35"));
-            context.MicTrainees.Add(GenerateNewTrainee("Trojanów", "Carmen", "Shay", "Poland", "57"));
-            context.MicTrainees.Add(GenerateNewTrainee("Muyinga", "Virgie", "Monkton", "Burundi", "35"));
-            context.MicTrainees.Add(GenerateNewTrainee("Longquan", "Amandi", "Rieger", "China", "68"));
-            context.MicTrainees.Add(GenerateNewTrainee("Belyye Stolby", "Chan", "Roston", "Russia", "5"));
-            context.MicTrainees.Add(GenerateNewTrainee("Brasília", "Glen", "Reignould", "Brazil", "54"));
-            context.MicTrainees.Add(GenerateNewTrainee("Fagersta", "Carrissa", "Dibnah", "Sweden", "43"));
-        }
-
-        private MicTrainee GenerateNewTrainee(string ln, string fn, string loc,  string nat, string age)
-        {
-            return new MicTrainee()
-            {
-                Age = new Data() { Value = age },
-                FirstName = new Data() { Value = fn },
-                LastName = new Data() { Value = ln },
-                Locality = new Data() { Value = loc },
-                Nationality = new Data() { Value = nat }
-            };
-        }
-
 
         private void InitializeCars(PSContext context)
         {

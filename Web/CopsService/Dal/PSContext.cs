@@ -32,7 +32,6 @@ namespace PublicService.Dal
         }
 
         public DbSet<Car> Cars { get; set; }
-        public DbSet<MicTrainee> MicTrainees { get; set; }
         public DbSet<Data> Datas { get; set; }
     }
 

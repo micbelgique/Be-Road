@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PublicService.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="jumbotron">
+    <h1>Users</h1>
+    <p class="lead">This a service where you can see information about users</p>
+    @Html.ActionLink("Upload the users information to privacy passport", "UploadToAzure", "Service")
+</div>
+
+<section id="users">
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="askUserDetails('@item.Id', @Newtonsoft.Json.JsonConvert.SerializeObject(item.FirstName))">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayFor(model => item.FirstName.Value)
+            </li>
+        }
+    </ul>
+</section>
+
+@Html.Partial("AccessInfo")

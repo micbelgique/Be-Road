@@ -24,13 +24,11 @@ if (document.getElementById('home') != null) {
     }, false);
 }
 
-
-//Info
-function displayMICDetails(micId, data) {
+function askUserDetails(userId, data) {
     var modal = $('#accessInfoModal');
     modal.modal();
     modal.find('.modal-title').text("Acces info for " + data.Value);
-    modal.find('#id').attr("value", micId);
+    modal.find('#id').attr("value", userId);
     modal.find('#dataId').attr("value", data.Id);
     getPrivateIP(function cb(ip) {
         modal.find('#ip').attr("value", ip);
@@ -38,22 +36,19 @@ function displayMICDetails(micId, data) {
 }
 
 //Info
-function displayAccessInfoPopup(dataName, data) {
+function displayAccessInfoPopup(dataName, dataId) {
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('.modal-title').text("Acces info for " + data.Value);
 
     modal.find('form').submit(function (evt) {
         getPrivateIP(function cb(ip) {
             //int? dataId, string name, string reason, string ip
-            const dataId = data.Id;
-            const name = modal.find('#name').val();
             const reason = modal.find('#reason').val();
-            console.log({ dataId: dataId, name: name, reason: reason, ip: ip });
-            $.post('/MIC/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
-                function (returnedData) {
-                    console.log(returnedData);
-                    $('#trainee span.' + dataName).text(":" + data.Value);
+            $.post('/Service/AddAccessInfo', { dataId: dataId, reason: reason, ip: ip },
+                function (json) {
+                    var data = JSON.parse(json);
+                    console.log(data);
+                    $('#user span.' + dataName).text(":" + data.Value);
                 });
             modal.find('#reason').val("");
             modal.modal('toggle');

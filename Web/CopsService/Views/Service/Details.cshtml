@@ -1,0 +1,87 @@
+﻿@model PublicService.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid" id="user">
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center">Details of @Model.FirstName.Value</h2>
+            @if(Model.LastName != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('LastName', '@Model.LastName.Id')">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.LastName)
+                <span class="LastName"></span>
+            </div>
+            }
+            
+            @if(Model.Age != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('Age', '@Model.Age.Id')">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.Age)
+                <span class="Age"></span>
+            </div>
+            }
+            
+            @if(Model.Nationality != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('Nationality', '@Model.Nationality.Id')">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.Nationality)
+                <span class="Nationality"></span>
+            </div>
+            }
+            
+            @if(Model.Locality != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('Locality', '@Model.Locality.Id')">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.Locality)
+                <span class="Locality"></span>
+            </div>
+            }
+
+            @if(Model.PhotoUrl != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('PhotoUrl', '@Model.PhotoUrl.Id')">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.PhotoUrl)
+                <span class="PhotoUrl"></span>
+            </div>
+            }
+
+            @if(Model.ExtraInfo != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('ExtraInfo', '@Model.ExtraInfo.Id')">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.ExtraInfo)
+                <span class="ExtraInfo"></span>
+            </div>
+            }
+        </div>
+    </div>
+</div>
+
+@Html.Partial("AccessInfo")

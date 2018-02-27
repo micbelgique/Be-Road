@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.7.0.1\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="DotNetOpenAuth.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <HintPath>..\packages\DotNetOpenAuth.Core.4.3.4.13329\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
     </Reference>
@@ -264,7 +267,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MICController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -294,6 +297,7 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Dal\stagiaires.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -323,14 +327,13 @@
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
     <Content Include="Views\Cars\Azure.cshtml" />
-    <Content Include="Views\MIC\Index.cshtml" />
-    <Content Include="Views\MIC\AccessInfo.cshtml" />
-    <Content Include="Views\MIC\Details.cshtml" />
-    <Content Include="Views\MIC\Azure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Service\AccessInfo.cshtml" />
+    <Content Include="Views\Service\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
