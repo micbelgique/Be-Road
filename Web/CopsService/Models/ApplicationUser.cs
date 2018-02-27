@@ -16,6 +16,8 @@ namespace PublicService.Models
         public virtual Data Age { get; set; }
         public virtual Data Locality { get; set; }
         public virtual Data Nationality { get; set; }
+        public virtual Data PhotoUrl { get; set; }
+        public virtual Data ExtraInfo { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
