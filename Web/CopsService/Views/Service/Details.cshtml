@@ -56,6 +56,30 @@
                 <span class="Locality"></span>
             </div>
             }
+
+            @if(Model.PhotoUrl != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('PhotoUrl', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.PhotoUrl))">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.PhotoUrl)
+                <span class="PhotoUrl"></span>
+            </div>
+            }
+
+            @if(Model.ExtraInfo != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('ExtraInfo', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.ExtraInfo))">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.ExtraInfo)
+                <span class="ExtraInfo"></span>
+            </div>
+            }
         </div>
     </div>
 </div>
