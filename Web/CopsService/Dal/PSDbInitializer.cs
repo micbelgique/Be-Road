@@ -9,6 +9,8 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.Identity;
+using CsvHelper;
+using System.IO;
 
 namespace PublicService.Dal
 {
@@ -34,14 +36,48 @@ namespace PublicService.Dal
         {
             var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-
-            /*var user = userManager.FindByName(name);
-            if (user == null)
+            using (StreamReader reader = File.OpenText(HttpContext.Current.Server.MapPath("~/Dal/stagiaires.csv")))
             {
-                user = new ApplicationUser { UserName = name, Email = name };
-                var result = userManager.Create(user, password);
-                result = userManager.SetLockoutEnabled(user.Id, false);
-            }*/
+                var csv = new CsvReader(reader);
+                csv.Configuration.Delimiter = ";";
+                csv.Configuration.MissingFieldFound = null;
+                csv.Read();
+                csv.ReadHeader();
+                while (csv.Read())
+                {
+                    var fn = csv.GetField("Prenom").Replace(' ', '.');
+                    var ln = csv.GetField("Nom").Replace(' ', '.');
+                    var school = csv.GetField("Ecole");
+                    var stage = csv.GetField("Ville de stage");
+                    var mail = csv.GetField("Email MIC");
+                    var loc = csv.GetField("Ville domicile");
+                    var url = csv.GetField("URL photo");
+                    var info = csv.GetField("Extra Info");
+
+                    var userName = $"{fn}.{ln}-{stage}";
+                    var password = "Admin@123456";
+
+                    var user = userManager.FindByName(userName);
+                    if (user == null)
+                    {
+                        user = new ApplicationUser
+                        {
+                            UserName = userName,
+                            FirstName = new Data { Value = fn },
+                            LastName = new Data { Value = ln },
+                            //Age removed
+                            Locality = new Data { Value = loc },
+                            //Nationality empty
+                            PhotoUrl = new Data { Value = url },
+                            ExtraInfo = new Data { Value = info }
+                            //Mail not yet implemented
+                            //School stage
+                        };
+                        var result = userManager.Create(user, password);
+                        result = userManager.SetLockoutEnabled(user.Id, false);
+                    }
+                }
+            }
         }
     
 
@@ -61,6 +97,7 @@ namespace PublicService.Dal
                 var roleresult = roleManager.Create(role);
             }
 
+            //Create the admin
             var user = userManager.FindByName(name);
             if (user == null)
             {
