@@ -13,11 +13,12 @@ namespace PublicService.Models
     {
         public virtual Data FirstName { get; set; }
         public virtual Data LastName { get; set; }
-        public virtual Data Age { get; set; }
+        public virtual Data BirthDate { get; set; }
         public virtual Data Locality { get; set; }
         public virtual Data Nationality { get; set; }
         public virtual Data PhotoUrl { get; set; }
         public virtual Data ExtraInfo { get; set; }
+        public virtual Data EmailAddress { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -43,3 +43,12 @@ ul {
 #trainee .btn {
     margin-right: 1em;
 }
+
+#ManageContainer{
+    width: 100%
+}
+
+.ManageForm{
+    margin-left: auto;
+    margin-right: auto;
+}

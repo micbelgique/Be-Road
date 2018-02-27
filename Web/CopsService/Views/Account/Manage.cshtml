@@ -1,10 +1,66 @@
-﻿@model PublicService.Models.ApplicationUser
+﻿@model PublicService.Models.ManageViewModel
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Manage";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    DateTime birthDay = DateTime.Parse(Model.BirthDate);
+    int age = DateTime.Now.Year - birthDay.Year;
+    age = DateTime.Now.Month > birthDay.Month || (DateTime.Now.Month == birthDay.Month && DateTime.Now.Day >= birthDay.Day) ? age : age - 1;
 }
 
-<h2>Manage</h2>
-<h5>@User.Identity.GetUserName()</h5>
-<p>@Model.FirstName.Value</p>
+<h2 class="text-center">Manage your account</h2>
+<div id="ManageContainer" class="container">
+    @using (Html.BeginForm("ApplyChanges", "Account", FormMethod.Post, new { @class = "ManageForm" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="form-group col-md-4 col-md-offset-2">
+                @Html.LabelFor(model => model.FirstName)
+                <input type="text" class="form-control" name="FirstName" id="FirstName" value="@Model.FirstName" disabled="disabled" />
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.LastName)
+                <input type="text" class="form-control" name="LastName" id="LastName" value="@Model.LastName" disabled="disabled" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-sm-1 col-md-offset-2">
+                @Html.LabelFor(model => model.BirthDate)
+                <input type="text" class="form-control" name="Age" id="Age" value="@age " disabled="disabled" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8 col-md-offset-2">
+                @Html.LabelFor(model => model.EmailAddress)
+                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", placeholder = "Example : example@domain.xyz" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-4 col-md-offset-2">
+                @Html.LabelFor(model => model.Locality)
+                @Html.TextBoxFor(model => model.Locality, new { @class = "form-control", placeholder = "Example : New York" })
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Nationality)
+                @Html.TextBoxFor(model => model.Locality, new { @class = "form-control", placeholder = "Example : Uzbek" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8 col-md-offset-2">
+                @Html.LabelFor(model => model.PhotoUrl)
+                @Html.TextBoxFor(model => model.PhotoUrl, new { @class = "form-control", placeholder = "Example : www.imagehoster.xzy/my-photo" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8 col-md-offset-2">
+                @Html.LabelFor(model => model.ExtraInfo)
+                @Html.TextBoxFor(model => model.ExtraInfo, new { @class = "form-control", placeholder = "Example : I like blue" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-8 col-md-offset-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    }
+</div>
