@@ -36,31 +36,16 @@ function askUserDetails(userId, data) {
 }
 
 //Info
-function displayMICDetails(micId, data) {
-    var modal = $('#accessInfoModal');
-    modal.modal();
-    modal.find('.modal-title').text("Acces info for " + data.Value);
-    modal.find('#id').attr("value", micId);
-    modal.find('#dataId').attr("value", data.Id);
-    getPrivateIP(function cb(ip) {
-        modal.find('#ip').attr("value", ip);
-    });
-}
-
-//Info
 function displayAccessInfoPopup(dataName, data) {
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('.modal-title').text("Acces info for " + data.Value);
 
     modal.find('form').submit(function (evt) {
         getPrivateIP(function cb(ip) {
             //int? dataId, string name, string reason, string ip
             const dataId = data.Id;
-            const name = modal.find('#name').val();
             const reason = modal.find('#reason').val();
-            console.log({ dataId: dataId, name: name, reason: reason, ip: ip });
-            $.post('/Service/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
+            $.post('/Service/AddAccessInfo', { dataId: dataId, reason: reason, ip: ip },
                 function (returnedData) {
                     console.log(returnedData);
                     $('#user span.' + dataName).text(":" + data.Value);

@@ -9,7 +9,9 @@
     <div class="row">
         <div class="col-md-6">
             <h2 class="text-center">Details of @Model.FirstName.Value</h2>
-            <div>
+            @if(Model.LastName != null)
+            {
+                <div>
                 <button type="button" class="btn btn-primary btn-sm"
                         onclick="displayAccessInfoPopup('LastName', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.LastName))">
                     <span class="fa fa-search" aria-hidden="true"></span>
@@ -17,7 +19,11 @@
                 @Html.DisplayNameFor(model => Model.LastName)
                 <span class="LastName"></span>
             </div>
-            <div>
+            }
+            
+            @if(Model.Age != null)
+            {
+                <div>
                 <button type="button" class="btn btn-primary btn-sm"
                         onclick="displayAccessInfoPopup('Age', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.Age))">
                     <span class="fa fa-search" aria-hidden="true"></span>
@@ -25,7 +31,11 @@
                 @Html.DisplayNameFor(model => Model.Age)
                 <span class="Age"></span>
             </div>
-            <div>
+            }
+            
+            @if(Model.Nationality != null)
+            {
+                <div>
                 <button type="button" class="btn btn-primary btn-sm"
                         onclick="displayAccessInfoPopup('Nationality', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.Nationality))">
                     <span class="fa fa-search" aria-hidden="true"></span>
@@ -33,7 +43,11 @@
                 @Html.DisplayNameFor(model => Model.Nationality)
                 <span class="Nationality"></span>
             </div>
-            <div>
+            }
+            
+            @if(Model.Locality != null)
+            {
+                <div>
                 <button type="button" class="btn btn-primary btn-sm"
                         onclick="displayAccessInfoPopup('Locality', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.Locality))">
                     <span class="fa fa-search" aria-hidden="true"></span>
@@ -41,6 +55,7 @@
                 @Html.DisplayNameFor(model => Model.Locality)
                 <span class="Locality"></span>
             </div>
+            }
         </div>
     </div>
 </div>

@@ -66,8 +66,15 @@ namespace PublicService.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            ViewBag.FirstAndLastNames = GetFirstAndLastName();
             var users = db.Users.ToList();
             return View(users);
+        }
+
+        [HttpPost]
+        public ActionResult Index(String name)
+        {
+            throw new NotImplementedException("Search users by name is not yet implemented");
         }
 
         [Authorize(Roles = "Admin")]
@@ -89,24 +96,19 @@ namespace PublicService.Controllers
             }
             ViewBag.copsdata = json;*/
             return View();
-            return View();
         }
 
-        [HttpPost]
-        public ActionResult Index(String name)
-        {
-            throw new NotImplementedException("Search users by name is not yet implemented");
-        }
 
         [HttpPost]
-        public ActionResult AddAccessInfo(int? dataId, string name, string reason, string ip)
+        public ActionResult AddAccessInfo(int? dataId, string reason, string ip)
         {
             var data = db.Datas.Find(dataId);
-            if (data == null || String.IsNullOrWhiteSpace(name) || String.IsNullOrWhiteSpace(reason))
+            if (data == null || String.IsNullOrWhiteSpace(reason))
             {
                 return HttpNotFound();
             }
 
+            var name = GetFirstAndLastName();
             data.AccessInfos.Add(new Models.AccessInfo()
             {
                 Date = DateTime.Now,
@@ -118,9 +120,9 @@ namespace PublicService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Details(string id, int? dataId, string name, string reason, string ip)
+        public async Task<ActionResult> Details(string id, int? dataId, string reason, string ip)
         {
-            AddAccessInfo(dataId, name, reason, ip);
+            AddAccessInfo(dataId, reason, ip);
 
             if (id == null)
             {
@@ -132,7 +134,14 @@ namespace PublicService.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.FirstAndLastNames = GetFirstAndLastName();
             return View(user);
+        }
+
+        public String GetFirstAndLastName()
+        {
+            var connectedUser = UserManager.FindById(User.Identity.GetUserId());
+            return connectedUser.FirstName.Value + " " + connectedUser.LastName.Value;
         }
     }
 }
