@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNet.Identity.Owin;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using PublicService.Dal;
 using PublicService.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +16,7 @@ namespace PublicService.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        #region Properties
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
@@ -37,6 +41,15 @@ namespace PublicService.Controllers
             private set { _signInManager = value; }
         }
 
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+        #endregion
+
         public AccountController()
         {
 
@@ -60,29 +73,63 @@ namespace PublicService.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            //return RedirectToLocal(returnUrl);
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            returnUrl = "";
-            // This doen't count login failures towards lockout only two factor authentication
-            // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
                     return RedirectToLocal(returnUrl);
-                case SignInStatus.LockedOut:
-                    return View("Lockout");
-                case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
                 case SignInStatus.Failure:
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
         }
+
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -91,6 +138,15 @@ namespace PublicService.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+        private void AddErrors(IdentityResult result)
+        {
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError("", error);
+            }
+        }
+        #endregion
     }
 
 }
