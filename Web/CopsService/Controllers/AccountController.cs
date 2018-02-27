@@ -110,13 +110,18 @@ namespace PublicService.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Home");
+                    return await Login(new LoginViewModel() { Email = model.Email, Password = model.Password }, "/Account/Manage");
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+        [HttpGet]
+        public ActionResult Manage()
+        {
+            return View();
         }
 
         //

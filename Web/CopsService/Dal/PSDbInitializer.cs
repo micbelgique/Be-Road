@@ -75,17 +75,6 @@ namespace PublicService.Dal
             context.MicTrainees.Add(GenerateNewTrainee("Belyye Stolby", "Chan", "Roston", "Russia", "5"));
             context.MicTrainees.Add(GenerateNewTrainee("Brasília", "Glen", "Reignould", "Brazil", "54"));
             context.MicTrainees.Add(GenerateNewTrainee("Fagersta", "Carrissa", "Dibnah", "Sweden", "43"));
-            context.MicTrainees.Add(GenerateNewTrainee("Greytown", "Gwendolin", "Dikles", "South Africa", "57"));
-            context.MicTrainees.Add(GenerateNewTrainee("Mairiporã", "Kasper", "Fleg", "Brazil", "24"));
-            context.MicTrainees.Add(GenerateNewTrainee("Castanheira de Pêra", "Zebadiah", "Di Roberto", "Portugal", "64"));
-            context.MicTrainees.Add(GenerateNewTrainee("San Roque", "Tommy", "Oppery", "Philippines", "34"));
-            context.MicTrainees.Add(GenerateNewTrainee("Socorro", "Traver", "Milland", "Brazil", "54"));
-            context.MicTrainees.Add(GenerateNewTrainee("Goyty", "Sapphire", "Dunbobbin", "Russia", "54"));
-            context.MicTrainees.Add(GenerateNewTrainee("Qaşr al Farāfirah", "Jaquith", "Andrieu", "Egypt", "34"));
-            context.MicTrainees.Add(GenerateNewTrainee("Skövde", "Dougy", "Petrashov", "Sweden", "75"));
-            context.MicTrainees.Add(GenerateNewTrainee("António Enes", "Noe", "Sapson", "Mozambique", "24"));
-            context.MicTrainees.Add(GenerateNewTrainee("Puck", "Ettie", "Figgess", "Poland", "87"));
-            context.MicTrainees.Add(GenerateNewTrainee("Ngadri", "Danielle", "Pinor", "Indonesia", "35"));
         }
 
         private MicTrainee GenerateNewTrainee(string ln, string fn, string loc,  string nat, string age)
@@ -110,8 +99,6 @@ namespace PublicService.Dal
             context.Cars.Add(GenerateNewCar("Fred", "Mercedes", "1-ZAR-755"));
             context.Cars.Add(GenerateNewCar("Thomas", "BMW", "1-PER-124"));
             context.Cars.Add(GenerateNewCar("Martine", "Audi", "1-DFV-862"));
-            context.Cars.Add(GenerateNewCar("Timo", "Dacia", "1-DSF-356"));
-            context.Cars.Add(GenerateNewCar("Ludoo", "Peugot", "1-SON-562"));
         }
 
         private Car GenerateNewCar(string owner, string brand, string numberPlate)

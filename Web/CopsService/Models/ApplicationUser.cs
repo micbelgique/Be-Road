@@ -9,14 +9,17 @@ using System.Web;
 
 namespace PublicService.Models
 {
-    //Add more profile data here
     public class ApplicationUser : IdentityUser
     {
+        public virtual Data FirstName { get; set; }
+        public virtual Data LastName { get; set; }
+        public virtual Data Age { get; set; }
+        public virtual Data Locality { get; set; }
+        public virtual Data Nationality { get; set; }
+
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
             return userIdentity;
         }
     }

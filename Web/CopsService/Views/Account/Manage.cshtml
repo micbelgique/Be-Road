@@ -1,0 +1,9 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Manage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Manage</h2>
+<h5>@User.Identity.GetUserName()</h5>
+<p>Manage your account here...</p>
