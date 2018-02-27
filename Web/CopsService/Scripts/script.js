@@ -36,18 +36,18 @@ function askUserDetails(userId, data) {
 }
 
 //Info
-function displayAccessInfoPopup(dataName, data) {
+function displayAccessInfoPopup(dataName, dataId) {
     var modal = $('#accessInfoModal');
     modal.modal();
 
     modal.find('form').submit(function (evt) {
         getPrivateIP(function cb(ip) {
             //int? dataId, string name, string reason, string ip
-            const dataId = data.Id;
             const reason = modal.find('#reason').val();
             $.post('/Service/AddAccessInfo', { dataId: dataId, reason: reason, ip: ip },
-                function (returnedData) {
-                    console.log(returnedData);
+                function (json) {
+                    var data = JSON.parse(json);
+                    console.log(data);
                     $('#user span.' + dataName).text(":" + data.Value);
                 });
             modal.find('#reason').val("");

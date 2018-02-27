@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using Newtonsoft.Json;
 using PublicService.Dal;
 using System;
 using System.Collections.Generic;
@@ -116,7 +117,7 @@ namespace PublicService.Controllers
                 Reason = reason
             });
             db.SaveChanges();
-            return Content("Successfully saved");
+            return Content(JsonConvert.SerializeObject(data));
         }
 
         [HttpPost]

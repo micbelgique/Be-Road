@@ -13,7 +13,7 @@
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('LastName', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.LastName))">
+                        onclick="displayAccessInfoPopup('LastName', '@Model.LastName.Id')">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
                 @Html.DisplayNameFor(model => Model.LastName)
@@ -25,7 +25,7 @@
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('Age', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.Age))">
+                        onclick="displayAccessInfoPopup('Age', '@Model.Age.Id')">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
                 @Html.DisplayNameFor(model => Model.Age)
@@ -37,7 +37,7 @@
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('Nationality', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.Nationality))">
+                        onclick="displayAccessInfoPopup('Nationality', '@Model.Nationality.Id')">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
                 @Html.DisplayNameFor(model => Model.Nationality)
@@ -49,7 +49,7 @@
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('Locality', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.Locality))">
+                        onclick="displayAccessInfoPopup('Locality', '@Model.Locality.Id')">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
                 @Html.DisplayNameFor(model => Model.Locality)
@@ -61,7 +61,7 @@
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('PhotoUrl', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.PhotoUrl))">
+                        onclick="displayAccessInfoPopup('PhotoUrl', '@Model.PhotoUrl.Id')">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
                 @Html.DisplayNameFor(model => Model.PhotoUrl)
@@ -73,7 +73,7 @@
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('ExtraInfo', @Newtonsoft.Json.JsonConvert.SerializeObject(Model.ExtraInfo))">
+                        onclick="displayAccessInfoPopup('ExtraInfo', '@Model.ExtraInfo.Id')">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
                 @Html.DisplayNameFor(model => Model.ExtraInfo)
