@@ -13,7 +13,7 @@
     <dl class="dl-horizontal">
         <dt>@Html.DisplayNameFor(model => model.Owner)</dt>
         <dd>
-            @Html.DisplayFor(model => model.Owner.Name)
+            @Html.DisplayFor(model => model.Owner.Value)
             <div>
                 <h5>Access infos</h5>
                 @foreach (var item in Model.Owner.AccessInfos)
@@ -33,7 +33,7 @@
 
         <dt>@Html.DisplayNameFor(model => model.Brand)</dt>
         <dd>
-            @Html.DisplayFor(model => model.Brand.Name)
+            @Html.DisplayFor(model => model.Brand.Value)
             <div>
                 <h5>Access infos</h5>
                 @foreach (var item in Model.Brand.AccessInfos)
@@ -52,7 +52,7 @@
 
         <dt>@Html.DisplayNameFor(model => model.NumberPlate)</dt>
         <dd>
-            @Html.DisplayFor(model => model.NumberPlate.Name)
+            @Html.DisplayFor(model => model.NumberPlate.Value)
             <div>
                 <h5>Access infos</h5>
                 @foreach (var item in Model.NumberPlate.AccessInfos)

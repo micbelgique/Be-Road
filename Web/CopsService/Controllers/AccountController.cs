@@ -213,8 +213,8 @@ namespace PublicService.Controllers
                     var user = new ApplicationUser
                     {
                         UserName = model.Username,
-                        FirstName = new Data() { Name = eid.FirstName },
-                        LastName = new Data() { Name = eid.LastName }
+                        FirstName = new Data() { Value = eid.FirstName },
+                        LastName = new Data() { Value = eid.LastName }
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);

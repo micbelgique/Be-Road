@@ -29,7 +29,7 @@ if (document.getElementById('home') != null) {
 function displayMICDetails(micId, data) {
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('.modal-title').text("Acces info for " + data.Name);
+    modal.find('.modal-title').text("Acces info for " + data.Value);
     modal.find('#id').attr("value", micId);
     modal.find('#dataId').attr("value", data.Id);
     getPrivateIP(function cb(ip) {
@@ -41,7 +41,7 @@ function displayMICDetails(micId, data) {
 function displayAccessInfoPopup(dataName, data) {
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('.modal-title').text("Acces info for " + data.Name);
+    modal.find('.modal-title').text("Acces info for " + data.Value);
 
     modal.find('form').submit(function (evt) {
         getPrivateIP(function cb(ip) {
@@ -53,7 +53,7 @@ function displayAccessInfoPopup(dataName, data) {
             $.post('/MIC/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
                 function (returnedData) {
                     console.log(returnedData);
-                    $('#trainee span.' + dataName).text(":" + data.Name);
+                    $('#trainee span.' + dataName).text(":" + data.Value);
                 });
             modal.find('#reason').val("");
             modal.modal('toggle');

@@ -20,7 +20,7 @@
                     onclick="displayMICDetails(@item.Id, @Newtonsoft.Json.JsonConvert.SerializeObject(item.FirstName))">
                 <span class="fa fa-search" aria-hidden="true"></span>
             </button>
-            @Html.DisplayFor(model => item.FirstName.Name)
+            @Html.DisplayFor(model => item.FirstName.Value)
         </li>
         }
     </ul>

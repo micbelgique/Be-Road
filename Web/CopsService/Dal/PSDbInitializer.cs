@@ -102,11 +102,11 @@ namespace PublicService.Dal
         {
             return new MicTrainee()
             {
-                Age = new Data() { Name = age },
-                FirstName = new Data() { Name = fn },
-                LastName = new Data() { Name = ln },
-                Locality = new Data() { Name = loc },
-                Nationality = new Data() { Name = nat }
+                Age = new Data() { Value = age },
+                FirstName = new Data() { Value = fn },
+                LastName = new Data() { Value = ln },
+                Locality = new Data() { Value = loc },
+                Nationality = new Data() { Value = nat }
             };
         }
 
@@ -128,16 +128,16 @@ namespace PublicService.Dal
             {
                 Owner = new Data()
                 {
-                    Name = owner,
+                    Value = owner,
                     AccessInfos = GenerateRandomAccessInfo(20)
                 },
                 Brand = new Data() {
-                    Name = brand,
+                    Value = brand,
                     AccessInfos = GenerateRandomAccessInfo(50)
                 },
                 NumberPlate = new Data()
                 {
-                    Name = numberPlate,
+                    Value = numberPlate,
                     AccessInfos = GenerateRandomAccessInfo(80)
                 }
             };
