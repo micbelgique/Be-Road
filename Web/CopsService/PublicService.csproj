@@ -267,7 +267,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\MICController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDbInitializer.cs" />
@@ -280,7 +279,6 @@
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
-    <Compile Include="Models\MicTrainee.cs" />
     <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -327,16 +325,13 @@
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
     <Content Include="Views\Cars\Azure.cshtml" />
-    <Content Include="Views\MIC\Index.cshtml" />
-    <Content Include="Views\MIC\AccessInfo.cshtml" />
-    <Content Include="Views\MIC\Details.cshtml" />
-    <Content Include="Views\MIC\Azure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Manage.cshtml" />
     <Content Include="Views\Service\Index.cshtml" />
     <Content Include="Views\Service\AccessInfo.cshtml" />
+    <Content Include="Views\Service\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

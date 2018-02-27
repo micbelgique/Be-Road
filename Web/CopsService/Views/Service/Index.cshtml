@@ -16,7 +16,8 @@
         @foreach (var item in Model)
         {
             <li>
-                <button type="button" class="btn btn-primary btn-sm">
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="askUserDetails('@item.Id', @Newtonsoft.Json.JsonConvert.SerializeObject(item.FirstName))">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
                 @Html.DisplayFor(model => item.FirstName.Value)

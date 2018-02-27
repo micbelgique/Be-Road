@@ -23,7 +23,6 @@ namespace PublicService.Dal
         protected override void Seed(PSContext context)
         {
             InitializeCars(context);
-            InitializeTrainee(context);
             InitializeIdentityForEF(context);
         }
         private void InitializeIdentityForEF(PSContext db)
@@ -113,40 +112,6 @@ namespace PublicService.Dal
                 var result = userManager.AddToRole(user.Id, role.Name);
             }
         }
-
-
-        private void InitializeTrainee(PSContext context)
-        {
-            context.MicTrainees.Add(GenerateNewTrainee("VM", "Michaël", "Gumb", "Kazakhstan", "25"));
-            context.MicTrainees.Add(GenerateNewTrainee("W", "Wilson", "Mossop", "South Korea", "22"));
-            context.MicTrainees.Add(GenerateNewTrainee("P", "Pierre", "Glaze", "Ghana", "18"));
-            context.MicTrainees.Add(GenerateNewTrainee("Gostagayevskaya", "Kyla", "Turfin", "Russia", "30"));
-            context.MicTrainees.Add(GenerateNewTrainee("Tabon", "Eula", "Jenney", "Philippines", "31"));
-            context.MicTrainees.Add(GenerateNewTrainee("Bamusso", "Lyn", "Navarro", "Cameroon", "46"));
-            context.MicTrainees.Add(GenerateNewTrainee("Roi Et", "Byrann", "Antal", "Thailand", "13"));
-            context.MicTrainees.Add(GenerateNewTrainee("Ortigueira", "Rossie", "Marcussen", "Brazil", "16"));
-            context.MicTrainees.Add(GenerateNewTrainee("Sakākā", "Lila", "Cartlidge", "Saudi Arabia", "56"));
-            context.MicTrainees.Add(GenerateNewTrainee("Ikey", "Frances", "Maneylaws", "Russia", "35"));
-            context.MicTrainees.Add(GenerateNewTrainee("Trojanów", "Carmen", "Shay", "Poland", "57"));
-            context.MicTrainees.Add(GenerateNewTrainee("Muyinga", "Virgie", "Monkton", "Burundi", "35"));
-            context.MicTrainees.Add(GenerateNewTrainee("Longquan", "Amandi", "Rieger", "China", "68"));
-            context.MicTrainees.Add(GenerateNewTrainee("Belyye Stolby", "Chan", "Roston", "Russia", "5"));
-            context.MicTrainees.Add(GenerateNewTrainee("Brasília", "Glen", "Reignould", "Brazil", "54"));
-            context.MicTrainees.Add(GenerateNewTrainee("Fagersta", "Carrissa", "Dibnah", "Sweden", "43"));
-        }
-
-        private MicTrainee GenerateNewTrainee(string ln, string fn, string loc,  string nat, string age)
-        {
-            return new MicTrainee()
-            {
-                Age = new Data() { Value = age },
-                FirstName = new Data() { Value = fn },
-                LastName = new Data() { Value = ln },
-                Locality = new Data() { Value = loc },
-                Nationality = new Data() { Value = nat }
-            };
-        }
-
 
         private void InitializeCars(PSContext context)
         {

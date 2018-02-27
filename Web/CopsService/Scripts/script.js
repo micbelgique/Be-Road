@@ -24,6 +24,16 @@ if (document.getElementById('home') != null) {
     }, false);
 }
 
+function askUserDetails(userId, data) {
+    var modal = $('#accessInfoModal');
+    modal.modal();
+    modal.find('.modal-title').text("Acces info for " + data.Value);
+    modal.find('#id').attr("value", userId);
+    modal.find('#dataId').attr("value", data.Id);
+    getPrivateIP(function cb(ip) {
+        modal.find('#ip').attr("value", ip);
+    });
+}
 
 //Info
 function displayMICDetails(micId, data) {
@@ -50,10 +60,10 @@ function displayAccessInfoPopup(dataName, data) {
             const name = modal.find('#name').val();
             const reason = modal.find('#reason').val();
             console.log({ dataId: dataId, name: name, reason: reason, ip: ip });
-            $.post('/MIC/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
+            $.post('/Service/AddAccessInfo', { dataId: dataId, name: name, reason: reason, ip: ip },
                 function (returnedData) {
                     console.log(returnedData);
-                    $('#trainee span.' + dataName).text(":" + data.Value);
+                    $('#user span.' + dataName).text(":" + data.Value);
                 });
             modal.find('#reason').val("");
             modal.modal('toggle');
