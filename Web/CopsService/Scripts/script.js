@@ -58,7 +58,7 @@ function displayAccessInfoPopup(dataName, dataId) {
     });
 }
 
-//Age calculation
+// Age calculation
 $(document).ready(function () {
     $('#BirthDateD').keyup(
         function (event) {
@@ -87,3 +87,12 @@ function refreshDate() {
         $('#Age').val(today.getMonth() > Number(mm) || (today.getMonth() == Number(mm) && today.getDay() >= Number(dd)) ? age : age - 1);
     }
 }
+
+// Account deleting (close)
+$(document).ready(function () {
+    $('#cancelBtn').click(
+        function (event) {
+            $("#deletingModal").modal("hide");
+        }
+    );
+});

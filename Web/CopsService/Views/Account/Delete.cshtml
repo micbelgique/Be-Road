@@ -1,0 +1,24 @@
+﻿<div class="modal fade" id="deletingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">You're about to delete your account !</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm("Delete", "Account", FormMethod.Post))
+            {
+                <div class="modal-body form-group">
+                    <div class="lead">Are you sure you want to delete your account ?</div>
+                    <p>If you delete your account, you will lose all your data. You will not be able to recover it. Nonetheless, you still can create another account after deleting this one.</p>
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" id="validBtn" name="validBtn" class="btn btn-danger" value="Yes, do it !" />
+                    <input type="button" id="cancelBtn" name="cancelBtn" class="btn btn-default" value="No, take me back !'" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

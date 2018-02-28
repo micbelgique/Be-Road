@@ -88,3 +88,7 @@ ul {
 .userItem{
     width: 300px;
 }
+
+#deleteBtn, #manageBtn {
+    width: 200px;
+}

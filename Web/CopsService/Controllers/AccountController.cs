@@ -269,6 +269,17 @@ namespace PublicService.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            await UserManager.DeleteAsync(user);
+            db.SaveChanges();
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]

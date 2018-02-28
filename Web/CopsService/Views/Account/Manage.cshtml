@@ -71,8 +71,16 @@
         </div>
         <div class="row">
             <div class="form-group col-md-8 col-md-offset-2">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="manageBtn" class="btn btn-primary">Submit</button>
             </div>
         </div>
     }
+    <div class="row">
+        <div class="form-group col-md-8 col-md-offset-2">
+            <h4>Delete your account</h4>
+            <button type="button" class="btn btn-danger" id="deleteBtn" data-toggle="modal" data-target="#deletingModal"><strong>Delete</strong></button>
+        </div>
+    </div>
 </div>
+
+@Html.Partial("Delete")
