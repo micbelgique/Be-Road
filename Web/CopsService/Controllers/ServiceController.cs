@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Azure;
 using Microsoft.Owin.Security;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
 using PublicService.Dal;
 using PublicService.Models;
@@ -78,28 +81,6 @@ namespace PublicService.Controllers
         {
             throw new NotImplementedException("Search users by name is not yet implemented");
         }
-
-        [Authorize(Roles = "Admin")]
-        public ActionResult UploadToAzure()
-        {
-            /*var json = JsonConvert.SerializeObject(db.MicTrainees.ToList());
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
-            CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
-            CloudFileShare share = fileClient.GetShareReference("files");
-            if (share.Exists())
-            {
-                CloudFileDirectory rootDir = share.GetRootDirectoryReference();
-
-                if (rootDir.Exists())
-                {
-                    CloudFile file = rootDir.GetFileReference("mic.json");
-                    file.UploadTextAsync(json);
-                }
-            }
-            ViewBag.copsdata = json;*/
-            return View();
-        }
-
 
         [HttpPost]
         public ActionResult AddAccessInfo(int? dataId, string reason, string ip)

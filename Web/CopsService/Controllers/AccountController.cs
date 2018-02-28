@@ -23,6 +23,7 @@ namespace PublicService.Controllers
         #region Properties
         private ApplicationUserManager _userManager;
         private PSContext db = new PSContext();
+        AzureUpload au = new AzureUpload();
         public ApplicationUserManager UserManager
         {
             get
@@ -276,6 +277,7 @@ namespace PublicService.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             await UserManager.DeleteAsync(user);
             db.SaveChanges();
+            au.UploadToAzure(db);
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
