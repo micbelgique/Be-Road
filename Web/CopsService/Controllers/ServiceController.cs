@@ -3,7 +3,9 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Newtonsoft.Json;
 using PublicService.Dal;
+using PublicService.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -68,8 +70,7 @@ namespace PublicService.Controllers
         public ActionResult Index()
         {
             ViewBag.FirstAndLastNames = GetFirstAndLastName();
-            var users = db.Users.ToList();
-            return View(users);
+            return View();
         }
 
         [HttpPost]
@@ -137,6 +138,40 @@ namespace PublicService.Controllers
             }
             ViewBag.FirstAndLastNames = GetFirstAndLastName();
             return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult Search(string searchString)
+        {
+            var strings = searchString.Split(' ');
+            var foundUsers = new List<ApplicationUser>();
+            List<ApplicationUser> all;
+            if (strings.Length > 1)
+            {
+                var firstName = strings[0];
+                string concat = "";
+                for (int i = 1; i < strings.Length; i++)
+                    concat += "." + strings[i];
+
+                all = db.Users.Where(u => u.FirstName.Value == firstName || u.LastName.Value == concat).ToList();
+
+                foreach (ApplicationUser user in all)
+                {
+                    foundUsers.Add(user);
+                }
+            }
+            else
+            {
+                var name = strings[0];
+                all = db.Users.Where(u => u.FirstName.Value == name || u.LastName.Value == name).ToList();
+
+                foreach (ApplicationUser user in all)
+                {
+                    foundUsers.Add(user);
+                }
+            }
+            ViewBag.FirstAndLastNames = GetFirstAndLastName();
+            return View("Index", foundUsers);
         }
 
         public String GetFirstAndLastName()

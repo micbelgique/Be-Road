@@ -12,17 +12,41 @@
 </div>
 
 <section id="users">
+    @using (Html.BeginForm("Search", "Service", FormMethod.Post, new { @class = "SearchForm" }))
+    {
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Search for a user</h2>
+                    <div id="custom-search-input">
+                        <div class="input-group col-md-12">
+                            <input type="text" id="searchString" name="searchString" class="form-control input-lg" placeholder="Example : Thomas D'Hollander'" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info btn-lg" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
     <ul>
-        @foreach (var item in Model)
+    @if (Model != null) {
+        foreach (var item in Model)
         {
+            if (item.FirstName != null || item.LastName != null)
+            {
             <li>
-                <button type="button" class="btn btn-primary btn-sm"
+                <button type="button" class="btn btn-default btn-sm userItem"
                         onclick="askUserDetails('@item.Id', @Newtonsoft.Json.JsonConvert.SerializeObject(item.FirstName))">
-                    <span class="fa fa-search" aria-hidden="true"></span>
+                    <span class="lead">@(item?.FirstName?.Value?.Replace(".", "")) @(item?.LastName?.Value?.Replace(".", " "))</span>
                 </button>
-                @Html.DisplayFor(model => item.FirstName.Value)
             </li>
+            }
         }
+    }
     </ul>
 </section>
 
