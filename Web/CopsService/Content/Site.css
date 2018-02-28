@@ -92,3 +92,7 @@ ul {
 #deleteBtn, #manageBtn {
     width: 200px;
 }
+
+#CSOlink {
+    color: #3c6db0;
+}

@@ -14,6 +14,12 @@ namespace PublicService.Controllers
         {
             return View();
         }
+
+        [AllowAnonymous]
+        public ActionResult AboutGDPR()
+        {
+            return View("AboutGDPR");
+        }
         
     }
 }

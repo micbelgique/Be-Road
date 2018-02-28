@@ -334,6 +334,7 @@
     <Content Include="Views\Service\AccessInfo.cshtml" />
     <Content Include="Views\Service\Details.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Home\AboutGDPR.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
