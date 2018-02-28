@@ -57,3 +57,33 @@ function displayAccessInfoPopup(dataName, dataId) {
         modal.find('form').unbind('submit');
     });
 }
+
+//Age calculation
+$(document).ready(function () {
+    $('#BirthDateD').keyup(
+        function (event) {
+            refreshDate()
+        }
+    );
+    $('#BirthDateM').keyup(
+        function (event) {
+            refreshDate()
+        }
+    );
+    $('#BirthDateY').keyup(
+        function (event) {
+            refreshDate()
+        }
+    );
+});
+
+function refreshDate() {
+    var dd = $('#BirthDateD').val();
+    var mm = $('#BirthDateM').val();
+    var yyyy = $('#BirthDateY').val();
+    if (dd.length == 2 && mm.length == 2 && yyyy.length == 4) {
+        var today = new Date();
+        var age = today.getFullYear() - Number(yyyy);
+        $('#Age').val(today.getMonth() > Number(mm) || (today.getMonth() == Number(mm) && today.getDay() >= Number(dd)) ? age : age - 1);
+    }
+}

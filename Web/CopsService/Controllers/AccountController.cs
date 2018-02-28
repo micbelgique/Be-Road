@@ -215,8 +215,7 @@ namespace PublicService.Controllers
                     {
                         UserName = model.Username,
                         FirstName = new Data() { Value = eid.FirstName },
-                        LastName = new Data() { Value = eid.LastName },
-                        BirthDate = new Data() { Value = eid.BirthDay.ToShortDateString() }
+                        LastName = new Data() { Value = eid.LastName }
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);
@@ -236,35 +235,37 @@ namespace PublicService.Controllers
         public async Task<ActionResult> Manage()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            var userVM = new ManageViewModel();
-            userVM.FirstName = user.FirstName?.Value;
-            userVM.LastName = user.LastName?.Value;
-            userVM.BirthDate = user.BirthDate?.Value;
-            userVM.EmailAddress = user.EmailAddress?.Value;
-            userVM.Locality = user.Locality?.Value;
-            userVM.Nationality = user.Nationality?.Value;
-            userVM.PhotoUrl = user.PhotoUrl?.Value;
-            userVM.ExtraInfo = user.ExtraInfo?.Value;
+            string day = user.BirthDate?.Value?.ToString()?.Substring(0, 2);
+            string month = user.BirthDate?.Value?.ToString()?.Substring(3, 2);
+            string year = user.BirthDate?.Value?.ToString()?.Substring(6, 4);
+            var userVM = new ManageViewModel
+            {
+                FirstName = user.FirstName?.Value,
+                LastName = user.LastName?.Value,
+                BirthDateD = day,
+                BirthDateM = month,
+                BirthDateY = year,
+                EmailAddress = user.EmailAddress?.Value,
+                Locality = user.Locality?.Value,
+                Nationality = user.Nationality?.Value,
+                PhotoUrl = user.PhotoUrl?.Value,
+                ExtraInfo = user.ExtraInfo?.Value
+            };
             return View(userVM);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ApplyChanges(ManageViewModel postUser)
+        public async Task<ActionResult> ApplyChanges(ManageViewModel postUser)
         {
-            var user = UserManager.FindById(User.Identity.GetUserId());
-            postUser.FirstName = user.FirstName.Value;
-            postUser.LastName = user.LastName.Value;
-            ApplicationUser updatedUser = new ApplicationUser();
-            updatedUser.FirstName = new Data() { Value = user.FirstName.Value };
-            updatedUser.LastName = new Data() { Value = user.LastName.Value };
-            updatedUser.BirthDate = new Data() { Value = postUser.BirthDate };
-            updatedUser.EmailAddress = new Data() { Value = postUser.EmailAddress };
-            updatedUser.Locality = new Data() { Value = postUser.Locality };
-            updatedUser.Nationality = new Data() { Value = postUser.Nationality };
-            updatedUser.PhotoUrl = new Data() { Value = postUser.PhotoUrl };
-            updatedUser.ExtraInfo = new Data() { Value = postUser.ExtraInfo };
-            UserManager.Update(updatedUser);
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+            user.BirthDate = new Data() { Value = postUser.BirthDateD + "/" + postUser.BirthDateM + "/" + postUser.BirthDateY };
+            user.EmailAddress = new Data() { Value = postUser.EmailAddress };
+            user.Locality = new Data() { Value = postUser.Locality };
+            user.Nationality = new Data() { Value = postUser.Nationality };
+            user.PhotoUrl = new Data() { Value = postUser.PhotoUrl };
+            user.ExtraInfo = new Data() { Value = postUser.ExtraInfo };
+            await UserManager.UpdateAsync(user);
             db.SaveChanges();
             return RedirectToAction("Index", "Home");
         }

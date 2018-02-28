@@ -3,9 +3,6 @@
 @{
     ViewBag.Title = "Manage";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    DateTime birthDay = DateTime.Parse(Model.BirthDate);
-    int age = DateTime.Now.Year - birthDay.Year;
-    age = DateTime.Now.Month > birthDay.Month || (DateTime.Now.Month == birthDay.Month && DateTime.Now.Day >= birthDay.Day) ? age : age - 1;
 }
 
 <h2 class="text-center">Manage your account</h2>
@@ -25,8 +22,23 @@
         </div>
         <div class="row">
             <div class="form-group col-sm-1 col-md-offset-2">
-                @Html.LabelFor(model => model.BirthDate)
-                <input type="text" class="form-control" name="Age" id="Age" value="@age " disabled="disabled" />
+                @Html.LabelFor(model => model.BirthDateD)
+                <input type="text" class="form-control" name="BirthDateD" id="BirthDateD" value="@(Model?.BirthDateD)" placeholder="01" />
+                @Html.ValidationMessageFor(model => model.BirthDateD, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-1">
+                @Html.LabelFor(model => model.BirthDateM)
+                <input type="text" class="form-control" name="BirthDateM" id="BirthDateM" value="@(Model?.BirthDateM)" placeholder="01" />
+                @Html.ValidationMessageFor(model => model.BirthDateM, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-1">
+                @Html.LabelFor(model => model.BirthDateY)
+                <input type="text" class="form-control" name="BirthDateY" id="BirthDateY" value="@(Model?.BirthDateY)" placeholder="2000" />
+                @Html.ValidationMessageFor(model => model.BirthDateY, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-sm-1">
+                <label>Age</label>
+                <input type="text" class="form-control" name="Age" id="Age" value="" placeholder="01" />
             </div>
         </div>
         <div class="row">

@@ -14,8 +14,15 @@ namespace PublicService.Models
         [Display(Name = "Last name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Age")]
-        public string BirthDate { get; set; }
+        [Display(Name = "Day")]
+        [StringLength(2, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+        public string BirthDateD { get; set; }
+
+        [Display(Name = "Month")]
+        public string BirthDateM { get; set; }
+
+        [Display(Name = "Year")]
+        public string BirthDateY { get; set; }
 
         [Display(Name = "Email address")]
         public string EmailAddress { get; set; }
