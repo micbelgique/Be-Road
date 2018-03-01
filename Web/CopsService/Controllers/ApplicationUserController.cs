@@ -15,7 +15,7 @@ using System.Web.Http.Description;
 
 namespace PublicService.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class ApplicationUserController : ApiController
     {
         private PSContext db = new PSContext();
