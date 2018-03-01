@@ -44,8 +44,8 @@ namespace PublicService.Dal
                 csv.ReadHeader();
                 while (csv.Read())
                 {
-                    var fn = csv.GetField("Prenom").Replace(' ', '.');
-                    var ln = csv.GetField("Nom").Replace(' ', '.');
+                    var fn = csv.GetField("Prenom");
+                    var ln = csv.GetField("Nom");
                     var school = csv.GetField("Ecole");
                     var stage = csv.GetField("Ville de stage");
                     var mail = csv.GetField("Email MIC");
@@ -53,7 +53,7 @@ namespace PublicService.Dal
                     var url = csv.GetField("URL photo");
                     var info = csv.GetField("Extra Info");
 
-                    var userName = $"{fn}.{ln}-{stage}";
+                    var userName = $"{fn.Replace(' ', '.')}.{ln.Replace(' ', '.')}-{stage}";
                     var password = "Admin@123456";
 
                     var user = userManager.FindByName(userName);
@@ -64,13 +64,12 @@ namespace PublicService.Dal
                             UserName = userName,
                             FirstName = new Data { Value = fn },
                             LastName = new Data { Value = ln },
-                            //Age removed
                             Locality = new Data { Value = loc },
-                            //Nationality empty
+                            //Nationality is empty
+                            //School stage isn't in the model
                             PhotoUrl = new Data { Value = url },
-                            ExtraInfo = new Data { Value = info }
-                            //Mail not yet implemented
-                            //School stage
+                            ExtraInfo = new Data { Value = info },
+                            EmailAddress = new Data { Value = mail }                            
                         };
                         var result = userManager.Create(user, password);
                         result = userManager.SetLockoutEnabled(user.Id, false);

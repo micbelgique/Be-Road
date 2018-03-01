@@ -275,7 +275,7 @@
     </Compile>
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Models\AzureUpload.cs" />
+    <Compile Include="Dal\AzureUpload.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\EidCard.cs" />

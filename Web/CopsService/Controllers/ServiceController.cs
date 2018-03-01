@@ -162,7 +162,7 @@ namespace PublicService.Controllers
         public String GetFirstAndLastName()
         {
             var connectedUser = UserManager.FindById(User.Identity.GetUserId());
-            return connectedUser.FirstName.Value + " " + connectedUser.LastName.Value;
+            return connectedUser.FirstName?.Value + " " + connectedUser.LastName?.Value;
         }
 
         [Authorize(Roles = "Admin")]
