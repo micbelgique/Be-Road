@@ -21,6 +21,11 @@ namespace PublicService.Controllers
         private AzureUpload azureUpload = new AzureUpload();
 
         // GET: api/ApplicationUser
+        /// <summary>
+        /// Reading all users from pscontext
+        /// Converting the users to dtos
+        /// </summary>
+        /// <returns>Returning the dto's</returns>
         public IQueryable<ApplicationUserDto> GetUsers()
         {
             var users = db.Users;
@@ -39,6 +44,10 @@ namespace PublicService.Controllers
         }
 
         // PUT: api/ApplicationUser
+        /// <summary>
+        /// Uploading all users to Azure
+        /// </summary>
+        /// <returns>Status code</returns>
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutUploadToAzure()
         {

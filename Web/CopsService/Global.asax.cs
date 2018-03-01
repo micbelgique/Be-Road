@@ -1,5 +1,4 @@
 ﻿using PublicService.Dal;
-using Swagger.Net.Application;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
