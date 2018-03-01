@@ -8,20 +8,9 @@
 <div class="container-fluid" id="user">
     <div class="row">
         <div class="col-md-6">
-            <h2 class="text-center">Details of @Model.FirstName.Value</h2>
-            @if(Model.LastName != null)
-            {
-                <div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('LastName', '@Model.LastName.Id')">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-                @Html.DisplayNameFor(model => Model.LastName)
-                <span class="LastName"></span>
-            </div>
-            }
+            <h2 class="text-center">Details of @Model.FirstName.Value @Model.LastName.Value</h2>
             
-            @if(Model.BirthDate != null)
+            @if(Model.BirthDate != null && !String.IsNullOrEmpty(Model.BirthDate.Value))
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -33,7 +22,7 @@
             </div>
             }
             
-            @if(Model.Nationality != null)
+            @if(Model.Nationality != null && !String.IsNullOrEmpty(Model.Nationality.Value))
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -45,7 +34,7 @@
             </div>
             }
             
-            @if(Model.Locality != null)
+            @if(Model.Locality != null && !String.IsNullOrEmpty(Model.Locality.Value))
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -57,7 +46,7 @@
             </div>
             }
 
-            @if(Model.PhotoUrl != null)
+            @if(Model.PhotoUrl != null && !String.IsNullOrEmpty(Model.PhotoUrl.Value))
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -69,7 +58,7 @@
             </div>
             }
 
-            @if(Model.ExtraInfo != null)
+            @if(Model.ExtraInfo != null && !String.IsNullOrEmpty(Model.ExtraInfo.Value))
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -81,7 +70,7 @@
             </div>
             }
 
-            @if(Model.EmailAddress != null)
+            @if(Model.EmailAddress != null && !String.IsNullOrEmpty(Model.EmailAddress.Value))
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"

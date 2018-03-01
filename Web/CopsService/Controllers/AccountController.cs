@@ -223,7 +223,7 @@ namespace PublicService.Controllers
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
-                        au.UploadToAzure(db);
+                        await au.UploadToAzureAsync(db);
                         return await Login(new LoginViewModel() { Username = model.Username, Password = model.Password }, "/Account/Manage");
                     }
                     AddErrors(result);
@@ -270,7 +270,7 @@ namespace PublicService.Controllers
             user.ExtraInfo = new Data() { Value = postUser.ExtraInfo };
             await UserManager.UpdateAsync(user);
             db.SaveChanges();
-            au.UploadToAzure(db);
+            await au.UploadToAzureAsync(db);
             return RedirectToAction("Index", "Home");
         }
 
@@ -280,7 +280,7 @@ namespace PublicService.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             await UserManager.DeleteAsync(user);
             db.SaveChanges();
-            au.UploadToAzure(db);
+            await au.UploadToAzureAsync(db);
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }

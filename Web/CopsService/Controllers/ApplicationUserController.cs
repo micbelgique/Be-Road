@@ -1,20 +1,27 @@
-﻿using Microsoft.Azure;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.File;
-using Newtonsoft.Json;
-using PublicService.Dal;
+﻿using PublicService.Dal;
+using PublicService.Models;
 using PublicService.Models.Dto;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
+using System.Web.Http;
+using System.Web.Http.Description;
 
-namespace PublicService.Dal
+namespace PublicService.Controllers
 {
-    public class AzureUpload
+    public class ApplicationUserController : ApiController
     {
-        public async Task UploadToAzureAsync(PSContext db)
+        private PSContext db = new PSContext();
+        private AzureUpload azureUpload = new AzureUpload();
+
+        // GET: api/ApplicationUser
+        public IQueryable<ApplicationUserDto> GetUsers()
         {
             var users = db.Users;
             var dtos = users.Select(user => new ApplicationUserDto()
@@ -28,20 +35,15 @@ namespace PublicService.Dal
                 ExtraInfo = new DataDto() { Value = user.ExtraInfo.Value, AccessInfos = user.ExtraInfo.AccessInfos },
                 EmailAddress = new DataDto() { Value = user.EmailAddress.Value, AccessInfos = user.EmailAddress.AccessInfos }
             });
-            var json = JsonConvert.SerializeObject(dtos.ToList());
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
-            CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
-            CloudFileShare share = fileClient.GetShareReference("files");
-            if (share.Exists())
-            {
-                CloudFileDirectory rootDir = share.GetRootDirectoryReference();
+            return dtos;
+        }
 
-                if (rootDir.Exists())
-                {
-                    CloudFile file = rootDir.GetFileReference("users.json");
-                    await file.UploadTextAsync(json);
-                }
-            }
+        // PUT: api/ApplicationUser
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutUploadToAzure()
+        {
+            await azureUpload.UploadToAzureAsync(db);
+            return StatusCode(HttpStatusCode.OK);
         }
     }
 }

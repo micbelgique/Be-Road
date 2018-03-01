@@ -166,9 +166,9 @@ namespace PublicService.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        public ActionResult AutoUploadToAzure()
+        public async Task<ActionResult> UploadToAzure()
         {
-            au.UploadToAzure(db);
+            await au.UploadToAzureAsync(db);
             return RedirectToAction("LogOut", "Account");
         }
     }
