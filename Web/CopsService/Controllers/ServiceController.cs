@@ -24,6 +24,7 @@ namespace PublicService.Controllers
 
         #region Properties
         private PSContext db = new PSContext();
+        private AzureUpload au = new AzureUpload();
 
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
@@ -132,9 +133,12 @@ namespace PublicService.Controllers
                 var firstName = strings[0];
                 string concat = "";
                 for (int i = 1; i < strings.Length; i++)
-                    concat += "." + strings[i];
+                {
+                    if(i != strings.Length-1)
+                        concat += strings[i] + " ";
+                }
 
-                all = db.Users.Where(u => u.FirstName.Value == firstName || u.LastName.Value == concat).ToList();
+                all = db.Users.Where(u => u.FirstName.Value.ToLower() == firstName.ToLower() || u.LastName.Value.ToLower() == concat.ToLower()).ToList();
 
                 foreach (ApplicationUser user in all)
                 {
@@ -159,6 +163,13 @@ namespace PublicService.Controllers
         {
             var connectedUser = UserManager.FindById(User.Identity.GetUserId());
             return connectedUser.FirstName?.Value + " " + connectedUser.LastName?.Value;
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult AutoUploadToAzure()
+        {
+            au.UploadToAzure(db);
+            return RedirectToAction("LogOut", "Account");
         }
     }
 }
