@@ -290,6 +290,7 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Dto\ApplicationUserDto.cs" />
+    <Compile Include="Models\Dto\DataDto.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />

@@ -7,13 +7,13 @@ namespace PublicService.Models.Dto
 {
     public class ApplicationUserDto
     {
-        public Data FirstName { get; set; }
-        public Data LastName { get; set; }
-        public Data BirthDate { get; set; }
-        public Data Locality { get; set; }
-        public Data Nationality { get; set; }
-        public Data PhotoUrl { get; set; }
-        public Data ExtraInfo { get; set; }
-        public Data EmailAddress { get; set; }
+        public DataDto FirstName { get; set; }
+        public DataDto LastName { get; set; }
+        public DataDto BirthDate { get; set; }
+        public DataDto Locality { get; set; }
+        public DataDto Nationality { get; set; }
+        public DataDto PhotoUrl { get; set; }
+        public DataDto ExtraInfo { get; set; }
+        public DataDto EmailAddress { get; set; }
     }
 }

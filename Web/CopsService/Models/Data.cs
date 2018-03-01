@@ -9,6 +9,6 @@ namespace PublicService.Models
     {
         public int Id { get; set; }
         public string Value { get; set; }
-        public List<AccessInfo> AccessInfos { get; set; }
+        public virtual List<AccessInfo> AccessInfos { get; set; }
     }
 }
