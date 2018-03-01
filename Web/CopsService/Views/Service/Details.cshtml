@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-6">
             <h2 class="text-center">Details of @Model.FirstName.Value</h2>
-            @if(Model.LastName != null)
+            @if(Model.LastName != null && Model.LastName.Value != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -21,7 +21,7 @@
             </div>
             }
             
-            @if(Model.BirthDate != null)
+            @if(Model.BirthDate != null && Model.BirthDate.Value != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -33,7 +33,7 @@
             </div>
             }
             
-            @if(Model.Nationality != null)
+            @if(Model.Nationality != null && Model.Nationality.Value != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -45,7 +45,7 @@
             </div>
             }
             
-            @if(Model.Locality != null)
+            @if(Model.Locality != null && Model.Locality.Value != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -57,7 +57,7 @@
             </div>
             }
 
-            @if(Model.PhotoUrl != null)
+            @if(Model.PhotoUrl != null && Model.PhotoUrl.Value != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -69,7 +69,7 @@
             </div>
             }
 
-            @if(Model.ExtraInfo != null)
+            @if(Model.ExtraInfo != null && Model.ExtraInfo.Value != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
@@ -81,7 +81,7 @@
             </div>
             }
 
-            @if(Model.EmailAddress != null)
+            @if(Model.EmailAddress != null && Model.EmailAddress.Value != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
