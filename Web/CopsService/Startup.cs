@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using Hangfire;
+using Owin;
 
 namespace PublicService
 {
@@ -7,6 +8,7 @@ namespace PublicService
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            app.UseHangfireServer();
         }
     }
 }
