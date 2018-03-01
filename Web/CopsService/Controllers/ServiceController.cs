@@ -6,6 +6,7 @@ using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
 using PublicService.Dal;
+using PublicService.Managers;
 using PublicService.Models;
 using System;
 using System.Collections;

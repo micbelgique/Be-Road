@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PublicService.Dal;
+using PublicService.Managers;
 using PublicService.Models;
 using System;
 using System.Collections.Generic;

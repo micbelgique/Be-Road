@@ -284,6 +284,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Managers\ApplicationRoleManager.cs" />
+    <Compile Include="Managers\ApplicationUserManager.cs" />
+    <Compile Include="Managers\ApplicationSignInManager.cs" />
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Dal\AzureUpload.cs" />
@@ -353,6 +356,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
+    <Folder Include="Providers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

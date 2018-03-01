@@ -11,6 +11,7 @@ using System.Web;
 using Microsoft.AspNet.Identity;
 using CsvHelper;
 using System.IO;
+using PublicService.Managers;
 
 namespace PublicService.Dal
 {
