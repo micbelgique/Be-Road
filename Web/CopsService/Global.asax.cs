@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Http;
+using PublicService.Providers;
 
 namespace PublicService
 {
@@ -21,6 +22,7 @@ namespace PublicService
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            CustomJwtFormat.GenerateClientCredentials("Privacy Passport V1");
         }
     }
 }
