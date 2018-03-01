@@ -38,7 +38,6 @@ namespace PublicService.Controllers
             return dtos;
         }
 
-
         // PUT: api/ApplicationUser
         [ResponseType(typeof(void))]
         public async Task<IHttpActionResult> PutUploadToAzure()
