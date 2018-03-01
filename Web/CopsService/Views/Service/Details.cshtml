@@ -21,14 +21,14 @@
             </div>
             }
             
-            @if(Model.Age != null)
+            @if(Model.BirthDate != null)
             {
                 <div>
                 <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('Age', '@Model.Age.Id')">
+                        onclick="displayAccessInfoPopup('Age', '@Model.BirthDate.Id')">
                     <span class="fa fa-search" aria-hidden="true"></span>
                 </button>
-                @Html.DisplayNameFor(model => Model.Age)
+                @Html.DisplayNameFor(model => Model.BirthDate)
                 <span class="Age"></span>
             </div>
             }
@@ -78,6 +78,18 @@
                 </button>
                 @Html.DisplayNameFor(model => Model.ExtraInfo)
                 <span class="ExtraInfo"></span>
+            </div>
+            }
+
+            @if(Model.EmailAddress != null)
+            {
+                <div>
+                <button type="button" class="btn btn-primary btn-sm"
+                        onclick="displayAccessInfoPopup('EmailAddress', '@Model.EmailAddress.Id')">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+                @Html.DisplayNameFor(model => Model.EmailAddress)
+                <span class="EmailAddress"></span>
             </div>
             }
         </div>
