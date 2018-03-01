@@ -23,7 +23,8 @@ namespace PublicService.Controllers
         #region Properties
         private ApplicationUserManager _userManager;
         private PSContext db = new PSContext();
-        AzureUpload au = new AzureUpload();
+        private AzureUpload au = new AzureUpload();
+
         public ApplicationUserManager UserManager
         {
             get
