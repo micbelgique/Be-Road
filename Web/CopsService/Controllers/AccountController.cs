@@ -278,7 +278,7 @@ namespace PublicService.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             await UserManager.DeleteAsync(user);
             db.SaveChanges();
-            au.UploadToAzure(db);
+            await au.UploadToAzureAsync(db);
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }

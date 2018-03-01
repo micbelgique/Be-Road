@@ -6,13 +6,14 @@ using PublicService.Dal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 namespace PublicService.Dal
 {
     public class AzureUpload
     {
-        public void UploadToAzure(PSContext db)
+        public async Task UploadToAzureAsync(PSContext db)
         {
             var json = JsonConvert.SerializeObject(db.Users.ToList());
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
@@ -25,7 +26,7 @@ namespace PublicService.Dal
                 if (rootDir.Exists())
                 {
                     CloudFile file = rootDir.GetFileReference("users.json");
-                    file.UploadTextAsync(json);
+                    await file.UploadTextAsync(json);
                 }
             }
         }
