@@ -320,6 +320,15 @@
     <Compile Include="Managers\ApplicationRoleManager.cs" />
     <Compile Include="Managers\ApplicationUserManager.cs" />
     <Compile Include="Managers\ApplicationSignInManager.cs" />
+    <Compile Include="Migrations\201803021012556_InitialCreate.cs" />
+    <Compile Include="Migrations\201803021012556_InitialCreate.Designer.cs">
+      <DependentUpon>201803021012556_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803021316110_ApplicationUsers.cs" />
+    <Compile Include="Migrations\201803021316110_ApplicationUsers.Designer.cs">
+      <DependentUpon>201803021316110_ApplicationUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Dal\AzureUpload.cs" />
@@ -348,7 +357,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dal\stagiaires.csv" />
+    <Content Include="App_Data\stagiaires.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -391,7 +402,6 @@
     <Content Include="Views\Home\AboutGDPR.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +416,14 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803021012556_InitialCreate.resx">
+      <DependentUpon>201803021012556_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803021316110_ApplicationUsers.resx">
+      <DependentUpon>201803021316110_ApplicationUsers.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

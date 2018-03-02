@@ -1,32 +1,40 @@
-ï»¿using Microsoft.AspNet.Identity.EntityFramework;
-using PublicService.Models;
-using System;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.Owin;
-using Microsoft.Owin.Security;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Identity;
-using CsvHelper;
-using System.IO;
-using PublicService.Managers;
-
-namespace PublicService.Dal
+namespace PublicService.Migrations
 {
-    public class PSDbInitializer : DropCreateDatabaseIfModelChanges<PSContext>
+    using CsvHelper;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity.Owin;
+    using Newtonsoft.Json;
+    using PublicService.Dal;
+    using PublicService.Managers;
+    using PublicService.Models;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Data.Entity.Migrations;
+    using System.IO;
+    using System.Linq;
+    using System.Web;
+    using System.Web.Hosting;
+
+    internal sealed class Configuration : DbMigrationsConfiguration<PSContext>
     {
         private Random rand = new Random();
         private string[] names = { "Arlen", "Artie", "Gray", "Guard", "Ladden", "Mace", "Mark", "Seno", "Jana", "Kim", "Lydia" };
         private string[] reasons = { "Speeding", "Alcohol test", "Crazy driving", "Fun", "Abuse of power" };
 
+        public Configuration()
+        {
+            AutomaticMigrationsEnabled = false;
+            ContextKey = "PublicService.Dal.PSContext";
+        }
+
         protected override void Seed(PSContext context)
         {
-            //Don't Seed this but use Migration
-            //InitializeCars(context);
-            //InitializeIdentityForEF(context);
+            InitializeCars(context);
+            InitializeIdentityForEF(context);
         }
+
         private void InitializeIdentityForEF(PSContext db)
         {
             InitializeIdentityAdmin(db);
@@ -35,9 +43,24 @@ namespace PublicService.Dal
 
         private void InitializeIdentityUsers(PSContext db)
         {
-            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
-            using (StreamReader reader = File.OpenText(HttpContext.Current.Server.MapPath("~/Dal/stagiaires.csv")))
+            var userStore = new UserStore<ApplicationUser>(db);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
+            {
+                AllowOnlyAlphanumericUserNames = false
+            };
+            // Configure validation logic for passwords
+            userManager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = true,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true,
+            };
+
+            string homeFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", @"App_Data\stagiaires.csv");
+            using (StreamReader reader = File.OpenText(homeFile))
             {
                 var csv = new CsvReader(reader);
                 csv.Configuration.Delimiter = ";";
@@ -55,7 +78,7 @@ namespace PublicService.Dal
                     var url = csv.GetField("URL photo");
                     var info = csv.GetField("Extra Info");
 
-                    var userName = $"{fn.Replace(' ', '.')}.{ln.Replace(' ', '.')}-{stage}";
+                    var userName = $"{fn.Replace(' ', '.')}.{ln.Replace(' ', '.')}@{stage}";
                     var password = "Admin@123456";
 
                     var user = userManager.FindByName(userName);
@@ -63,6 +86,8 @@ namespace PublicService.Dal
                     {
                         user = new ApplicationUser
                         {
+                            //Set an ID, else we create duplicate data
+                            //Id = userName,
                             UserName = userName,
                             FirstName = new Data { Value = fn },
                             LastName = new Data { Value = ln },
@@ -71,20 +96,37 @@ namespace PublicService.Dal
                             //School stage isn't in the model
                             PhotoUrl = new Data { Value = url },
                             ExtraInfo = new Data { Value = info },
-                            EmailAddress = new Data { Value = mail }                            
+                            EmailAddress = new Data { Value = mail }
                         };
+
+                        //throw new Exception(user.UserName);
                         var result = userManager.Create(user, password);
                         result = userManager.SetLockoutEnabled(user.Id, false);
                     }
                 }
             }
         }
-    
 
         private void InitializeIdentityAdmin(PSContext db)
         {
-            var userManager = HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>();
-            var roleManager = HttpContext.Current.GetOwinContext().Get<ApplicationRoleManager>();
+            var userStore = new UserStore<ApplicationUser>(db);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
+            {
+                AllowOnlyAlphanumericUserNames = false
+            };
+            // Configure validation logic for passwords
+            userManager.PasswordValidator = new PasswordValidator
+            {
+                RequiredLength = 6,
+                RequireNonLetterOrDigit = true,
+                RequireDigit = true,
+                RequireLowercase = true,
+                RequireUppercase = true,
+            };
+            var roleStore = new RoleStore<IdentityRole>(db);
+            var roleManager = new ApplicationRoleManager(roleStore);
+
             const string name = "admin";
             const string password = "Admin@123456";
             const string roleName = "Admin";
@@ -101,7 +143,7 @@ namespace PublicService.Dal
             var user = userManager.FindByName(name);
             if (user == null)
             {
-                user = new ApplicationUser { UserName = name, Id = "016182f7-f57b-4fd1-8138-228a66f384a5" };
+                user = new ApplicationUser { UserName = name };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
@@ -116,25 +158,27 @@ namespace PublicService.Dal
 
         private void InitializeCars(PSContext context)
         {
-            context.Cars.Add(GenerateNewCar("MichaÃ«l", "Fiat", "1-KGG-695"));
-            context.Cars.Add(GenerateNewCar("Wilson", "Nissan", "1-EBD-684"));
-            context.Cars.Add(GenerateNewCar("Pierre", "Porche", "1-OZA-014"));
-            context.Cars.Add(GenerateNewCar("Raph", "CitroÃ«n", "1-VNK-646"));
-            context.Cars.Add(GenerateNewCar("Fred", "Mercedes", "1-ZAR-755"));
-            context.Cars.Add(GenerateNewCar("Thomas", "BMW", "1-PER-124"));
-            context.Cars.Add(GenerateNewCar("Martine", "Audi", "1-DFV-862"));
+            context.Cars.AddOrUpdate(GenerateNewCar(1, "Michaël", "Fiat", "1-KGG-695"));
+            context.Cars.AddOrUpdate(GenerateNewCar(2, "Wilson", "Nissan", "1-EBD-684"));
+            context.Cars.AddOrUpdate(GenerateNewCar(3, "Pierre", "Porche", "1-OZA-014"));
+            context.Cars.AddOrUpdate(GenerateNewCar(4, "Raph", "Citroën", "1-VNK-646"));
+            context.Cars.AddOrUpdate(GenerateNewCar(5, "Fred", "Mercedes", "1-ZAR-755"));
+            context.Cars.AddOrUpdate(GenerateNewCar(6, "Thomas", "BMW", "1-PER-124"));
+            context.Cars.AddOrUpdate(GenerateNewCar(7, "Martine", "Audi", "1-DFV-862"));
         }
 
-        private Car GenerateNewCar(string owner, string brand, string numberPlate)
+        private Car GenerateNewCar(int id, string owner, string brand, string numberPlate)
         {
             return new Car()
-            {
+            {  
+                Id = id,
                 Owner = new Data()
                 {
                     Value = owner,
                     AccessInfos = GenerateRandomAccessInfo(20)
                 },
-                Brand = new Data() {
+                Brand = new Data()
+                {
                     Value = brand,
                     AccessInfos = GenerateRandomAccessInfo(50)
                 },
@@ -149,14 +193,15 @@ namespace PublicService.Dal
         private List<AccessInfo> GenerateRandomAccessInfo(int probability)
         {
             var infos = new List<AccessInfo>();
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (rand.Next(100) < probability)
                 {
-                    infos.Add(new AccessInfo() {
+                    infos.Add(new AccessInfo()
+                    {
                         Name = names[rand.Next(names.Length)],
                         Date = new DateTime(rand.Next(2000, 2018), rand.Next(1, 12), rand.Next(1, 28)),
-                        Reason =  reasons[rand.Next(reasons.Length)]
+                        Reason = reasons[rand.Next(reasons.Length)]
                     });
                 }
             }
