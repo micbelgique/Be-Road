@@ -18,9 +18,6 @@ namespace PublicService
 {
     public class MvcApplication : System.Web.HttpApplication
     {
-        private AzureUpload au = new AzureUpload();
-        private PSContext db = new PSContext();
-
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -28,11 +25,6 @@ namespace PublicService
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
-            JobStorage.Current = new SqlServerStorage("PSContext");
-            BackgroundJob.Schedule(
-                () => au.UploadToAzureAsync(db),
-                TimeSpan.FromDays(7));
             CustomJwtFormat.GenerateClientCredentials("Privacy Passport V1");
         }
     }
