@@ -30,7 +30,7 @@ namespace Web.Dal.Services
                     {
                         var json = await file.DownloadTextAsync();
                         var lst = JsonConvert.DeserializeObject<List<PSDMic>>(json);
-                        mic = lst.Where(model => model.FirstName.Name.Equals(eid.FirstName)).FirstOrDefault();
+                        mic = lst.Where(model => model.FirstName.Value.Equals(eid.FirstName)).FirstOrDefault();
                     }
                 }
             }

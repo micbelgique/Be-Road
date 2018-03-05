@@ -2,8 +2,10 @@
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -19,7 +21,7 @@ namespace Web.Dal.Services
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
             CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
             CloudFileShare share = fileClient.GetShareReference("files");
-            PSDUser users = new PSDUser();
+            PSDUser user = new PSDUser();
             if (share.Exists())
             {
                 CloudFileDirectory rootDir = share.GetRootDirectoryReference();
@@ -28,14 +30,22 @@ namespace Web.Dal.Services
                     CloudFile file = rootDir.GetFileReference(ps.Url);
                     if (file.Exists())
                     {
-                        var json = await file.DownloadTextAsync();
-                        users.Content = json;
-                        //var lst = JsonConvert.DeserializeObject<List<PSDMic>>(json);
-                        //mic = lst.Where(model => model.FirstName.Name.Equals(eid.FirstName)).FirstOrDefault();
+                        var jsonTxt = await file.DownloadTextAsync();
+                        var jArray = JArray.Parse(jsonTxt);
+                        var child = jArray.FirstOrDefault(
+                            o => String.Compare(o["FirstName"]["Value"].ToString().Trim(), eid.FirstName, CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace) == 0 &&
+                            String.Compare(o["LastName"]["Value"].ToString().Trim(), eid.LastName, CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace) == 0);
+                        user.Datas = new Dictionary<string, PSDData>();
+                        foreach (JProperty x in child)
+                        {
+                            var name = x.Name;
+                            var value = x.Value.ToObject<PSDData>();
+                            user.Datas.Add(name, value);
+                        }
                     }
                 }
             }
-            return users;
+            return user;
         }
     }
 }

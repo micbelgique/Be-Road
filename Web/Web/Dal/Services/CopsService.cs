@@ -31,7 +31,7 @@ namespace Web.Dal.Services
                     {
                         var json = await file.DownloadTextAsync();
                         var lst = JsonConvert.DeserializeObject<List<PSDCar>>(json);
-                        azure = lst.Where(car => car.Owner.Name.Equals(eid.FirstName)).FirstOrDefault();
+                        azure = lst.Where(car => car.Owner.Value.Equals(eid.FirstName)).FirstOrDefault();
                     }
                 }
             }
