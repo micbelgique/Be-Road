@@ -234,4 +234,7 @@
   <data name="JSFor" xml:space="preserve">
     <value>voor</value>
   </data>
+  <data name="PSD_Users_Title" xml:space="preserve">
+    <value>Gebruikers van de openbare diensten</value>
+  </data>
 </root>

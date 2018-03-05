@@ -170,7 +170,7 @@ namespace PublicService.Controllers
         public async Task<ActionResult> UploadToAzure()
         {
             await au.UploadToAzureAsync(db);
-            return RedirectToAction("LogOut", "Account");
+            return View();
         }
     }
 }

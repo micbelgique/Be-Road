@@ -400,6 +400,7 @@
     <Content Include="Views\Service\Details.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Home\AboutGDPR.cshtml" />
+    <Content Include="Views\Service\UploadToAzure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />

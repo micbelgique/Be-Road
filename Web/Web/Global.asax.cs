@@ -22,7 +22,6 @@ namespace Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            Database.SetInitializer(new PSDatabaseInitializer());
             GlobalFilters.Filters.Add(new AuthorizationFilter());
         }
 

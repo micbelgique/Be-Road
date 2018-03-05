@@ -272,7 +272,6 @@
     <Compile Include="Dal\Services\CopsService.cs" />
     <Compile Include="Dal\Services\IService.cs" />
     <Compile Include="Dal\PSContext.cs" />
-    <Compile Include="Dal\PSDatabaseInitializer.cs" />
     <Compile Include="Dal\PSDataService.cs" />
     <Compile Include="Dal\Services\MicService.cs" />
     <Compile Include="Dal\Services\MockAzureService.cs" />
@@ -280,6 +279,7 @@
     <Compile Include="Dal\Services\MockItunesService.cs" />
     <Compile Include="Dal\Services\MockZippopotamService.cs" />
     <Compile Include="Dal\Services\MockGeoipService.cs" />
+    <Compile Include="Dal\Services\PSService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -298,6 +298,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.nl-BE.resx</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803050757163_InitialCreate.cs" />
+    <Compile Include="Migrations\201803050757163_InitialCreate.Designer.cs">
+      <DependentUpon>201803050757163_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803050816565_InitialCreate1.cs" />
+    <Compile Include="Migrations\201803050816565_InitialCreate1.Designer.cs">
+      <DependentUpon>201803050816565_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\PublicService.cs" />
     <Compile Include="Models\PublicServiceData\PSDAccessInfo.cs" />
@@ -309,6 +318,7 @@
     <Compile Include="Models\PublicServiceData\MockPSDItunes.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDZippopotam.cs" />
     <Compile Include="Models\PublicServiceData\PSDMic.cs" />
+    <Compile Include="Models\PublicServiceData\PSDUser.cs" />
     <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
     <Compile Include="Models\PublicServiceData\MockPSDPlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -321,6 +331,7 @@
     <Content Include="Content\img\itunes.png" />
     <Content Include="Content\img\mic.jpg" />
     <Content Include="Content\img\police.jpg" />
+    <Content Include="Content\img\ps.jpg" />
     <Content Include="Content\img\zippopotam.png" />
     <Content Include="Content\materialize\css\materialize.css" />
     <Content Include="Content\materialize\css\materialize.min.css" />
@@ -446,6 +457,7 @@
     <Content Include="Views\Eid\Details.cshtml" />
     <Content Include="Views\PSData\Mic.cshtml" />
     <Content Include="Views\PSData\ResourcesIncluding.cshtml" />
+    <Content Include="Views\PSData\PublicService.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -474,6 +486,12 @@
       <CustomToolNamespace>Resources</CustomToolNamespace>
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Global.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803050757163_InitialCreate.resx">
+      <DependentUpon>201803050757163_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803050816565_InitialCreate1.resx">
+      <DependentUpon>201803050816565_InitialCreate1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

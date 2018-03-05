@@ -340,6 +340,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users of public service.
+        /// </summary>
+        public static string PSD_Users_Title {
+            get {
+                return ResourceManager.GetString("PSD_Users_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact.
         /// </summary>
         public static string PSDDataContact {
