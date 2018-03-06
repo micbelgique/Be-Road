@@ -11,7 +11,6 @@ namespace Web.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "Web.Dal.PSContext";
         }
 
         protected override void Seed(Web.Dal.PSContext context)
