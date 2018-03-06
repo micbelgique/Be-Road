@@ -211,7 +211,7 @@
     <value>Send mail</value>
   </data>
   <data name="PSDTitle" xml:space="preserve">
-    <value>Public service data</value>
+    <value>Public Service data</value>
   </data>
   <data name="PSNext" xml:space="preserve">
     <value>Next</value>
@@ -235,6 +235,9 @@
     <value>for</value>
   </data>
   <data name="PSD_Users_Title" xml:space="preserve">
-    <value>Users of public service</value>
+    <value>Your data in Public Service</value>
+  </data>
+  <data name="PSD_Name" xml:space="preserve">
+    <value>Public Service</value>
   </data>
 </root>

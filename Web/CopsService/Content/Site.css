@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -95,4 +96,16 @@ ul {
 
 #CSOlink {
     color: #3c6db0;
+}
+
+.txt-color-black {
+    color: #ffffff !important;
+}
+
+.txt-color-black:hover {
+    color: #d0d0d0 !important;
+}
+
+.inline-flx{
+    display: inline-flex;
 }

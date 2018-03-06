@@ -211,7 +211,7 @@
     <value>Stuur e-mail</value>
   </data>
   <data name="PSDTitle" xml:space="preserve">
-    <value>Openbare diensten data</value>
+    <value>Openbare Dienst data</value>
   </data>
   <data name="PSNext" xml:space="preserve">
     <value>Volgende</value>
@@ -235,6 +235,9 @@
     <value>voor</value>
   </data>
   <data name="PSD_Users_Title" xml:space="preserve">
-    <value>Gebruikers van de openbare diensten</value>
+    <value>U data in de Openbare Dienst</value>
+  </data>
+  <data name="PSD_Name" xml:space="preserve">
+    <value>Openbare Dienst</value>
   </data>
 </root>

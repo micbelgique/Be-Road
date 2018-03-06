@@ -27,7 +27,7 @@ if (document.getElementById('home') != null) {
 function askUserDetails(userId, data) {
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('.modal-title').text("Acces info for " + data.Value);
+    modal.find('.modal-title').text("Access data of " + data.Value);
     modal.find('#id').attr("value", userId);
     modal.find('#dataId').attr("value", data.Id);
     getPrivateIP(function cb(ip) {
@@ -59,20 +59,24 @@ function displayAccessInfoPopup(dataName, dataId) {
 }
 
 // Age calculation
+$(window).load(function () {
+    refreshDate();
+});
+
 $(document).ready(function () {
     $('#BirthDateD').keyup(
         function (event) {
-            refreshDate()
+            refreshDate();
         }
     );
     $('#BirthDateM').keyup(
         function (event) {
-            refreshDate()
+            refreshDate();
         }
     );
     $('#BirthDateY').keyup(
         function (event) {
-            refreshDate()
+            refreshDate();
         }
     );
 });

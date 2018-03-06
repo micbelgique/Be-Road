@@ -239,9 +239,15 @@ namespace PublicService.Controllers
         public async Task<ActionResult> Manage()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            string day = user.BirthDate?.Value?.ToString()?.Substring(0, 2);
-            string month = user.BirthDate?.Value?.ToString()?.Substring(3, 2);
-            string year = user.BirthDate?.Value?.ToString()?.Substring(6, 4);
+            string day = "";
+            string month = "";
+            string year = "";
+            if (user.BirthDate?.Value?.ToString() != "")
+            {
+                day = user.BirthDate?.Value?.ToString()?.Substring(0, 2);
+                month = user.BirthDate?.Value?.ToString()?.Substring(3, 2);
+                year = user.BirthDate?.Value?.ToString()?.Substring(6, 4);
+            }
             var userVM = new ManageViewModel
             {
                 FirstName = user.FirstName?.Value,
@@ -263,7 +269,10 @@ namespace PublicService.Controllers
         public async Task<ActionResult> ApplyChanges(ManageViewModel postUser)
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            user.BirthDate = new Data() { Value = postUser.BirthDateD + "/" + postUser.BirthDateM + "/" + postUser.BirthDateY };
+            if (postUser.BirthDateD != null && postUser.BirthDateM != null && postUser.BirthDateY != null)
+                user.BirthDate = new Data() { Value = postUser.BirthDateD + "/" + postUser.BirthDateM + "/" + postUser.BirthDateY };
+            else
+                user.BirthDate = new Data() { Value = null };
             user.EmailAddress = new Data() { Value = postUser.EmailAddress };
             user.Locality = new Data() { Value = postUser.Locality };
             user.Nationality = new Data() { Value = postUser.Nationality };
