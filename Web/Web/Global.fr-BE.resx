@@ -240,4 +240,7 @@
   <data name="PSD_Name" xml:space="preserve">
     <value>Servicce Public</value>
   </data>
+  <data name="Accessed_Empty" xml:space="preserve">
+    <value>Personne n'a accédé à cette donnée</value>
+  </data>
 </root>

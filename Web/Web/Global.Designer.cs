@@ -61,6 +61,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nobody accessed this data.
+        /// </summary>
+        public static string Accessed_Empty {
+            get {
+                return ResourceManager.GetString("Accessed_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string AddressCity {

@@ -26,39 +26,9 @@
         if (url !== undefined)
             window.location.href = url;
     });
-});
 
-function formatDate(date) {
-    var newDate = new Date(date);
-    var day = newDate.getDate();
-    var month = newDate.getMonth();
-    var year = newDate.getFullYear();
-
-    return day + '/' + month + '/' + year;
-}
-
-
-function displayAccessInfoPopup(accessInfo) {
-    var modal = $('#accessInfoModal');
-    modal.modal();
-    modal.find('#exampleModalLabel').text(accessInfo.Value);
-    var access = "<ul>";
-    $.each(accessInfo.AccessInfos, function (i, v) {
-        access += "<li>";
-        access += "<strong>" + v.Name + "</strong> " + Resources.Accessed + " <strong>" + formatDate(v.Date) + "</strong> " + Resources.For + " <strong>" + v.Reason + "</strong>";
-        access += "</li>";
-    });
-    access += "</ul>"
-    modal.find('.modal-body').text("");
-    modal.find('.modal-body').append(access);
-    $('#accessInfoModal').modal('open');
-}
-
-$(document).ready(function () {
     $('.collapsible').collapsible();
-
     clicked = false;
-
     $("#ps-identity").click(
         function (event) {
             if ($(event.target).is('section')) {
@@ -110,3 +80,30 @@ $(document).ready(function () {
             }
         });
 });
+
+function formatDate(date) {
+    var newDate = new Date(date);
+    var day = newDate.getDate();
+    var month = newDate.getMonth();
+    var year = newDate.getFullYear();
+
+    return day + '/' + month + '/' + year;
+}
+
+function displayAccessInfoPopup(accessInfo) {
+    var modal = $('#accessInfoModal');
+    modal.modal();
+    modal.find('#exampleModalLabel').text(accessInfo.Value);
+    var access = "<ul>";
+    if (accessInfo.AccessInfos.length == 0)
+        access += "<li>" + Resources.Accessed_Empty + "</li>";
+    $.each(accessInfo.AccessInfos, function (i, v) {
+        access += "<li>";
+        access += "<strong>" + v.Name + "</strong> " + Resources.Accessed + " <strong>" + formatDate(v.Date) + "</strong> " + Resources.For + " <strong>" + v.Reason + "</strong>";
+        access += "</li>";
+    });
+    access += "</ul>"
+    modal.find('.modal-body').text("");
+    modal.find('.modal-body').append(access);
+    $('#accessInfoModal').modal('open');
+}

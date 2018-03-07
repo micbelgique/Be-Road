@@ -240,4 +240,7 @@
   <data name="PSD_Name" xml:space="preserve">
     <value>Openbare Dienst</value>
   </data>
+  <data name="Accessed_Empty" xml:space="preserve">
+    <value>Niemand heeft die data gelezen</value>
+  </data>
 </root>
