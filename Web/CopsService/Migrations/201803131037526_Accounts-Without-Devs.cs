@@ -7,10 +7,12 @@ namespace PublicService.Migrations
     {
         public override void Up()
         {
+            AddColumn("dbo.AspNetUsers", "NRID", c => c.String());
         }
         
         public override void Down()
         {
+            DropColumn("dbo.AspNetUsers", "NRID");
         }
     }
 }

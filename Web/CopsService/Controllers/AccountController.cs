@@ -216,6 +216,7 @@ namespace PublicService.Controllers
 
                     var user = new ApplicationUser
                     {
+                        NRID = eid.RNN,
                         UserName = model.Username,
                         FirstName = new Data() { Value = eid.FirstName },
                         LastName = new Data() { Value = eid.LastName }

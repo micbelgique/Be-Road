@@ -12,6 +12,7 @@ namespace PublicService.Models
 {
     public class ApplicationUser : IdentityUser
     {
+        public string NRID { get; set; }
         public virtual Data FirstName { get; set; }
         public virtual Data LastName { get; set; }
         public virtual Data BirthDate { get; set; }
