@@ -328,6 +328,10 @@
     <Compile Include="Migrations\201803021316110_ApplicationUsers.Designer.cs">
       <DependentUpon>201803021316110_ApplicationUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803131028169_Accounts-Without-Devs.cs" />
+    <Compile Include="Migrations\201803131028169_Accounts-Without-Devs.Designer.cs">
+      <DependentUpon>201803131028169_Accounts-Without-Devs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -424,6 +428,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803021316110_ApplicationUsers.resx">
       <DependentUpon>201803021316110_ApplicationUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131028169_Accounts-Without-Devs.resx">
+      <DependentUpon>201803131028169_Accounts-Without-Devs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

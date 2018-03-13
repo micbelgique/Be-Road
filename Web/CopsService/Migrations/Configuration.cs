@@ -39,6 +39,21 @@ namespace PublicService.Migrations
         {
             InitializeIdentityAdmin(db);
             InitializeIdentityUsers(db);
+            DeleteDevs(db);
+        }
+
+        private void DeleteDevs(PSContext context)
+        {
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+            var mic = userManager.FindByName("Michael..Van.Meerbeek@Mons");
+            var wil = userManager.FindByName("Wilson.Weets@Mons");
+
+            if (mic != null && wil != null)
+            {
+                userManager.Delete(mic);
+                userManager.Delete(wil);
+            }
         }
 
         private void InitializeIdentityUsers(PSContext db)
