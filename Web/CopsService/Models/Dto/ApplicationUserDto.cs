@@ -7,6 +7,7 @@ namespace PublicService.Models.Dto
 {
     public class ApplicationUserDto
     {
+        public string NRID { get; set; }
         public DataDto FirstName { get; set; }
         public DataDto LastName { get; set; }
         public DataDto BirthDate { get; set; }

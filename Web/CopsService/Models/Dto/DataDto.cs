@@ -7,6 +7,7 @@ namespace PublicService.Models.Dto
 {
     public class DataDto
     {
+        public int Id { get; set; }
         public string Value { get; set; }
         public List<AccessInfo> AccessInfos { get; set; }
     }
