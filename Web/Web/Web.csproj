@@ -298,13 +298,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.nl-BE.resx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803050757163_InitialCreate.cs" />
-    <Compile Include="Migrations\201803050757163_InitialCreate.Designer.cs">
-      <DependentUpon>201803050757163_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201803061136242_InitialCreate.cs" />
+    <Compile Include="Migrations\201803061136242_InitialCreate.Designer.cs">
+      <DependentUpon>201803061136242_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803050816565_InitialCreate1.cs" />
-    <Compile Include="Migrations\201803050816565_InitialCreate1.Designer.cs">
-      <DependentUpon>201803050816565_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\201803061140227_AddImageURI.cs" />
+    <Compile Include="Migrations\201803061140227_AddImageURI.Designer.cs">
+      <DependentUpon>201803061140227_AddImageURI.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EidCard.cs" />
@@ -396,6 +396,7 @@
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.woff" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.eot" />
+    <None Include="Properties\PublishProfiles\Privacy-Passport - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
@@ -487,11 +488,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Global.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803050757163_InitialCreate.resx">
-      <DependentUpon>201803050757163_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803061136242_InitialCreate.resx">
+      <DependentUpon>201803061136242_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803050816565_InitialCreate1.resx">
-      <DependentUpon>201803050816565_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803061140227_AddImageURI.resx">
+      <DependentUpon>201803061140227_AddImageURI.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

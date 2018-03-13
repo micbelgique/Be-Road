@@ -53,7 +53,7 @@ namespace Web
             string current = Request.Cookies.Get("Language").Value;
             string culture = null;
 
-            if (before.Equals(current))
+            if (before.Equals(current ?? ""))
                 culture = before;
             else
                 culture = current;
