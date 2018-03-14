@@ -343,6 +343,14 @@
     <Compile Include="Migrations\201803131037526_Accounts-Without-Devs.Designer.cs">
       <DependentUpon>201803131037526_Accounts-Without-Devs.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803140935168_Admin-Data.cs" />
+    <Compile Include="Migrations\201803140935168_Admin-Data.Designer.cs">
+      <DependentUpon>201803140935168_Admin-Data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803140941353_Delete-Exsisting-Users.cs" />
+    <Compile Include="Migrations\201803140941353_Delete-Exsisting-Users.Designer.cs">
+      <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
@@ -443,6 +451,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803131037526_Accounts-Without-Devs.resx">
       <DependentUpon>201803131037526_Accounts-Without-Devs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803140935168_Admin-Data.resx">
+      <DependentUpon>201803140935168_Admin-Data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803140941353_Delete-Exsisting-Users.resx">
+      <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

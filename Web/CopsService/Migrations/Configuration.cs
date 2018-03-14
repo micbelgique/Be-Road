@@ -97,6 +97,12 @@ namespace PublicService.Migrations
                     var password = "Admin@123456";
 
                     var user = userManager.FindByName(userName);
+                    //Delete the current user because we maybe want to update them
+                    if (user != null)
+                    {
+                        userManager.Delete(user);
+                        user = null;
+                    }
                     if (user == null)
                     {
                         user = new ApplicationUser
@@ -156,9 +162,19 @@ namespace PublicService.Migrations
 
             //Create the admin
             var user = userManager.FindByName(name);
+            //Delete the current admin because we want to update him
+            if (user != null)
+            {
+                userManager.Delete(user);
+                user = null;
+            }
             if (user == null)
             {
-                user = new ApplicationUser { UserName = name };
+                user = new ApplicationUser {
+                    UserName = name,
+                    FirstName = new Data { Value = "Administrator" },
+                    LastName = new Data { Value = "Kernel" },
+                };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
             }
