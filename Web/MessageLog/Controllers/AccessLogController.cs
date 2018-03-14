@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using MessageLog.Dal;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
+using MessageLog.Utils;
 
 namespace MessageLog.Controllers
 {
@@ -45,7 +46,7 @@ namespace MessageLog.Controllers
                     return new AccessInfo()
                     {
                         Id = dto.Id,
-                        Hash = "SomeAmazingHash",
+                        Hash = HashUtils.Instance.HashAccessLogDto(dto),
                         TransactionAddress = "DoPlzBlockchain"
                     };
                 }).ToList();
