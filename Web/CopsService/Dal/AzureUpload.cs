@@ -7,6 +7,8 @@ using PublicService.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 
@@ -41,7 +43,22 @@ namespace PublicService.Dal
                 {
                     CloudFile file = rootDir.GetFileReference("users.json");
                     await file.UploadTextAsync(json);
+                    //Do we need to check the response ?
+                    await SendToAPIAsync(dtos.ToList());
                 }
+            }
+        }
+
+        public async Task<HttpResponseMessage> SendToAPIAsync(List<ApplicationUserDto> list)
+        {
+            using (var client = new HttpClient())
+            {
+                //It's hardcoded for the moment
+                //This will be changed when the X-Road Security Server exist
+                client.BaseAddress = new Uri("http://localhost:51376/");
+                client.DefaultRequestHeaders.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                return await client.PostAsJsonAsync("api/AccessLog", list);
             }
         }
     }
