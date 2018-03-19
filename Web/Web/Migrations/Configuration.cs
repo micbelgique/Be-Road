@@ -26,15 +26,6 @@ namespace Web.Migrations
             });
             context.PublicServices.AddOrUpdate(new PublicService
             {
-                ID = 2,
-                Name = "MIC Data",
-                Description = "Who's reading your profile at the MIC ?",
-                Url = "mic.json",
-                DalMethod = "Mic",
-                ImageURI = "/Content/img/mic.jpg"
-            });
-            context.PublicServices.AddOrUpdate(new PublicService
-            {
                 ID = 3,
                 Name = "Cops Data",
                 Description = "Check who's cops has read your data",
@@ -78,7 +69,9 @@ namespace Web.Migrations
                 DalMethod = "Itunes",
                 ImageURI = "/Content/img/itunes.png"
             });
-            context.PublicServices.AddOrUpdate(new PublicService
+
+            //Remove
+            context.PublicServices.Remove(new PublicService
             {
                 ID = 8,
                 Name = "Azure files",
@@ -86,6 +79,15 @@ namespace Web.Migrations
                 Url = "UserBrussels.txt",
                 DalMethod = "Azure",
                 ImageURI = "/Content/img/azure.png"
+            });
+            context.PublicServices.Remove(new PublicService
+            {
+                ID = 2,
+                Name = "MIC Data",
+                Description = "Who's reading your profile at the MIC ?",
+                Url = "mic.json",
+                DalMethod = "Mic",
+                ImageURI = "/Content/img/mic.jpg"
             });
         }
     }

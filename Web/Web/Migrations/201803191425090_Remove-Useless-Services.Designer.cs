@@ -7,13 +7,13 @@ namespace Web.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddImageURI : IMigrationMetadata
+    public sealed partial class RemoveUselessServices : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddImageURI));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(RemoveUselessServices));
         
         string IMigrationMetadata.Id
         {
-            get { return "201803061140227_AddImageURI"; }
+            get { return "201803191425090_Remove-Useless-Services"; }
         }
         
         string IMigrationMetadata.Source
