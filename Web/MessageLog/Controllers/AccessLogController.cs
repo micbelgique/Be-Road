@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using MessageLog.Dal;
@@ -21,7 +22,7 @@ namespace MessageLog.Controllers
 
         // POST: api/AccessLog
         [ResponseType(typeof(void))]
-        public IHttpActionResult PostAccessInfo(List<ApplicationUserDto> appUserList)
+        public async Task<IHttpActionResult> PostAccessInfo(List<ApplicationUserDto> appUserList)
         {
             if (!ModelState.IsValid)
             {
@@ -70,8 +71,8 @@ namespace MessageLog.Controllers
                     accessInfoList.Remove(logToRemove);
                 });
 
-            // Log in blockchain
-
+            var client = MultichainUtils.Instance.GetClient();
+            var bcParams = await client.Utility.GetBlockChainParamsAsync();
             db.AccessLogs.AddRange(accessInfoList);
             db.SaveChanges();
 
