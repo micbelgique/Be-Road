@@ -19,7 +19,7 @@ namespace Web.Dal.Services
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
             CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
-            CloudFileShare share = fileClient.GetShareReference("files");
+            CloudFileShare share = fileClient.GetShareReference("dataexchange");
             PSDCar azure = null;
             if (share.Exists())
             {

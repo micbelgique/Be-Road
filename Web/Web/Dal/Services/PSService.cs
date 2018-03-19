@@ -20,7 +20,7 @@ namespace Web.Dal.Services
         {
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
             CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
-            CloudFileShare share = fileClient.GetShareReference("files");
+            CloudFileShare share = fileClient.GetShareReference("dataexchange");
             PSDUser user = new PSDUser();
             if (share.Exists())
             {

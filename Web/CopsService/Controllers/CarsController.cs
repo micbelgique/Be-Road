@@ -31,7 +31,7 @@ namespace PublicService.Controllers
             var json = JsonConvert.SerializeObject(db.Cars.ToList());
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
             CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
-            CloudFileShare share = fileClient.GetShareReference("files");
+            CloudFileShare share = fileClient.GetShareReference("dataexchange");
             if (share.Exists())
             {
                 CloudFileDirectory rootDir = share.GetRootDirectoryReference();
