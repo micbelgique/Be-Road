@@ -302,9 +302,9 @@
     <Compile Include="Migrations\201803061136242_InitialCreate.Designer.cs">
       <DependentUpon>201803061136242_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803191425090_Remove-Useless-Services.cs" />
-    <Compile Include="Migrations\201803191425090_Remove-Useless-Services.Designer.cs">
-      <DependentUpon>201803191425090_Remove-Useless-Services.cs</DependentUpon>
+    <Compile Include="Migrations\201803191430194_Remove-Useless-Services.cs" />
+    <Compile Include="Migrations\201803191430194_Remove-Useless-Services.Designer.cs">
+      <DependentUpon>201803191430194_Remove-Useless-Services.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EidCard.cs" />
@@ -491,8 +491,8 @@
     <EmbeddedResource Include="Migrations\201803061136242_InitialCreate.resx">
       <DependentUpon>201803061136242_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803191425090_Remove-Useless-Services.resx">
-      <DependentUpon>201803191425090_Remove-Useless-Services.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803191430194_Remove-Useless-Services.resx">
+      <DependentUpon>201803191430194_Remove-Useless-Services.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

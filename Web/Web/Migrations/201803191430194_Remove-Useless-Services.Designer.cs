@@ -13,7 +13,7 @@ namespace Web.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803191425090_Remove-Useless-Services"; }
+            get { return "201803191430194_Remove-Useless-Services"; }
         }
         
         string IMigrationMetadata.Source

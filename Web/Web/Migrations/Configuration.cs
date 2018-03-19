@@ -71,24 +71,12 @@ namespace Web.Migrations
             });
 
             //Remove
-            context.PublicServices.Remove(new PublicService
-            {
-                ID = 8,
-                Name = "Azure files",
-                Description = "It's hosted on the cloud",
-                Url = "UserBrussels.txt",
-                DalMethod = "Azure",
-                ImageURI = "/Content/img/azure.png"
-            });
-            context.PublicServices.Remove(new PublicService
-            {
-                ID = 2,
-                Name = "MIC Data",
-                Description = "Who's reading your profile at the MIC ?",
-                Url = "mic.json",
-                DalMethod = "Mic",
-                ImageURI = "/Content/img/mic.jpg"
-            });
+            var ps = context.PublicServices.FirstOrDefault(p => p.ID == 8);
+            if(ps != null)
+                context.PublicServices.Remove(ps);
+            ps = context.PublicServices.FirstOrDefault(p => p.ID == 2);
+            if (ps != null)
+                context.PublicServices.Remove(ps);
         }
     }
 }
