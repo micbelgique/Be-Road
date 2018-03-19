@@ -37,26 +37,34 @@ namespace MessageLog.Utils
         }
         #endregion
 
-        public string HashAccessLogDto(AccessInfoDto access)
+        public string HashAccessLogDtoToString(AccessInfoDto access)
         {
-            var hash = "SomePrefixBeforeHashSecure++";
+            var result = HashAccessLogDto(access);
+            StringBuilder sb = new StringBuilder();
+            foreach(var r in result)
+            {
+                sb.Append(r.ToString("x2"));
+            }
+            return sb.ToString();
+        }
+
+        public byte[] HashAccessLogDto(AccessInfoDto access)
+        {
+            var hash = Encoding.UTF8.GetBytes("SomePrefixBeforeHashSecure++");
             using (var sha = new SHA512Managed())
             {
-                hash = Hash(sha, hash + access.Id.ToString());
-                hash = Hash(sha, hash + access.Name);
-                hash = Hash(sha, hash + access.Reason);
-                hash = Hash(sha, hash + access.Date.ToString());
+                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Id.ToString())).ToArray());
+                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Name)).ToArray());
+                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Reason)).ToArray());
+                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Date.ToString())).ToArray());
             }
             return hash;
         }
 
-        string Hash(SHA512 sha, string value)
+        byte[] Hash(SHA512 sha, byte[] value)
         {
-            var result = sha.ComputeHash(Encoding.UTF8.GetBytes(value));
-            StringBuilder sBuilder = new StringBuilder();
-            for (int i = 0; i < result.Length; i++)
-                sBuilder.Append(result[i].ToString("x2"));
-            return sBuilder.ToString();
+            var result = sha.ComputeHash(value);
+            return result;
         }
     }
 }

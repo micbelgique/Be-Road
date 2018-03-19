@@ -46,7 +46,7 @@ namespace MessageLog.Controllers
                     return new AccessInfo()
                     {
                         Id = dto.Id,
-                        Hash = HashUtils.Instance.HashAccessLogDto(dto),
+                        Hash = HashUtils.Instance.HashAccessLogDtoToString(dto),
                         TransactionAddress = "DoPlzBlockchain"
                     };
                 }).ToList();
