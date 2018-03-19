@@ -6,9 +6,11 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using LucidOcean.MultiChain.Util;
 using MessageLog.Dal;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
@@ -47,8 +49,7 @@ namespace MessageLog.Controllers
                     return new AccessInfo()
                     {
                         Id = dto.Id,
-                        Hash = HashUtils.Instance.HashAccessLogDtoToString(dto),
-                        TransactionAddress = "DoPlzBlockchain"
+                        Hash = HashUtils.Instance.HashAccessLogDtoToString(dto)
                     };
                 }).ToList();
 
@@ -62,17 +63,25 @@ namespace MessageLog.Controllers
             existingLogs.ForEach(remainingLog =>
                 {
                     var logToRemove = accessInfoList.SingleOrDefault(log => log.Id == remainingLog.Id);
+                    // DB check
                     if (!logToRemove.Hash.Equals(remainingLog.Hash))
                     {
                         // Intergity problem
-                        System.Diagnostics.Debug.WriteLine("Integrity problem on log " + logToRemove.Id);
+                        System.Diagnostics.Debug.WriteLine("DB integrity problem on log " + logToRemove.Id);
                     }
+                    // TODO : BC check
 
                     accessInfoList.Remove(logToRemove);
                 });
 
             var client = MultichainUtils.Instance.GetClient();
-            var bcParams = await client.Utility.GetBlockChainParamsAsync();
+
+            foreach(var log in accessInfoList)
+            {
+                var tx = await client.Stream.PublishAsync("accesslogs", "Dev-Demo-2", Utility.HexToByteArray(log.Hash));
+                log.TransactionAddress = tx.Result;
+            }
+
             db.AccessLogs.AddRange(accessInfoList);
             db.SaveChanges();
 
