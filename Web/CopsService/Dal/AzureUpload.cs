@@ -55,7 +55,7 @@ namespace PublicService.Dal
             {
                 //It's hardcoded for the moment
                 //This will be changed when the X-Road Security Server exist
-                client.BaseAddress = new Uri("http://localhost:51376/");
+                client.BaseAddress = new Uri(System.Configuration.ConfigurationManager.AppSettings["ApiUrl"]);
                 client.DefaultRequestHeaders.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 return await client.PostAsJsonAsync("api/AccessLog", list);

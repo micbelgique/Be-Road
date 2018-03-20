@@ -383,6 +383,7 @@
     <Content Include="App_Data\stagiaires.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\Public-Service - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Public-Service - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -425,6 +426,9 @@
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Home\AboutGDPR.cshtml" />
     <Content Include="Views\Service\UploadToAzure.cshtml" />
+    <None Include="Web.Public-Service - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
