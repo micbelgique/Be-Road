@@ -35,9 +35,9 @@ namespace Web.Dal.Services
                         var child = jArray.FirstOrDefault(
                             o => String.Compare(o["FirstName"]["Value"].ToString().Trim(), eid.FirstName, CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace) == 0 &&
                             String.Compare(o["LastName"]["Value"].ToString().Trim(), eid.LastName, CultureInfo.CurrentCulture, CompareOptions.IgnoreNonSpace) == 0);
-                        user.NRID = child.Value<string>("NRID");
+                        user.NRID = child?.Value<string>("NRID");
                         user.Datas = new Dictionary<string, PSDData>();
-                        foreach (JProperty x in child)
+                        foreach (JProperty x in child ?? Enumerable.Empty<JToken>())
                         {
                             var name = x.Name;
                             if (name.Equals("NRID"))

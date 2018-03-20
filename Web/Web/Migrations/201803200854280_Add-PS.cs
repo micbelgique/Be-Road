@@ -3,7 +3,7 @@ namespace Web.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class RemoveUselessServices : DbMigration
+    public partial class AddPS : DbMigration
     {
         public override void Up()
         {

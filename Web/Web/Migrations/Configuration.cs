@@ -72,7 +72,7 @@ namespace Web.Migrations
 
             //Remove
             var ps = context.PublicServices.FirstOrDefault(p => p.ID == 8);
-            if(ps != null)
+            if (ps != null)
                 context.PublicServices.Remove(ps);
             ps = context.PublicServices.FirstOrDefault(p => p.ID == 2);
             if (ps != null)
