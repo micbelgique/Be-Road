@@ -140,11 +140,14 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
-    <None Include="Properties\PublishProfiles\Message-Logs - FTP.pubxml" />
-    <None Include="Properties\PublishProfiles\Message-Logs - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\message-logs - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\message-logs - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Web.message-logs - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
