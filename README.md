@@ -21,8 +21,9 @@ The blockchain genesis is stored on a VM on Azure.
 # Getting Started
 ## Summary
 1.	Clone the code
-2.	Packages included
-3.	Latest releases
+2.  Blockchain implementation
+3.	Packages included
+4.	Latest releases
 
 ### Clone the code
 To get the websites and the central part on your machine, you just have to clone the project in your git.
@@ -43,6 +44,32 @@ You will have to change the connection strings in the Web.config files in the 3 
     <add name="{ContextName}" connectionString="Server=tcp:{ServerName},1433;Initial Catalog={DatabaseName};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient"/>
 </connectionStrings>
 ```
+
+### Blockchain implementation
+The blockchain is a prototype too.
+In the final project, that will be done later by more advanced developers, it will certainly be created from scratch.
+
+Currently, we used Multichain to create our private blockchain.
+For advanced knowledge on how to create your own blockchain with multichain, check their [website](https://www.multichain.com/).
+
+To implement a multichain blockchain in the project, we used a NuGet package called LucidOcean.Multichain ([GitHub](https://github.com/LucidOcean/multichain)) that gathers a set of class to call the RPC API of your blockchain, and so controlling it from the outside.
+
+Then you just have to change the data in the MessageLog\Web.Config file : 
+
+```xml
+<appSettings>
+    <add key="Hostname" value="{IP address}" />
+    <add key="Port" value="{port}" />
+    <add key="Username" value="{rpc username (usually multichainrpc)}" />
+    <add key="Password" value="{rpc password}" />
+    <add key="ChainName" value="{blockchain name}" />
+    <add key="BurnAddress" value="{burn address}" />
+    <add key="RootNodeAddress" value="{any wallet address on your genesis}" />
+</appSettings>
+```
+
+If you have problems understanding these, check [multichain documentation](https://www.multichain.com/developers/).
+We have set these in all the Web.config files in order to have access to a developement and a staging blockchains.
 
 ### Packages included
 We used different packages in these projects.
