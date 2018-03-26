@@ -48,11 +48,13 @@
   <ItemGroup>
     <Compile Include="BeContractException.cs" />
     <Compile Include="Converters\BeContractInputConverter.cs" />
+    <Compile Include="Converters\BeContractOutputConverter.cs" />
     <Compile Include="Logic\Generators.cs" />
     <Compile Include="Logic\Validators.cs" />
     <Compile Include="Models\BeContract.cs" />
     <Compile Include="Models\BeContractCall.cs" />
     <Compile Include="Models\Input.cs" />
+    <Compile Include="Models\Output.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,4 +1,5 @@
-﻿using Contracts.Models;
+﻿using Contracts.Converters;
+using Contracts.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
@@ -28,6 +29,15 @@ namespace Contracts.Logic
             {
                 throw new BeContractException(ex.Message);
             }
+        }
+
+        public string SerializeBeContract(BeContract contract)
+        {
+            return JsonConvert.SerializeObject(contract, Formatting.Indented, new BeContractInputConverter(), new BeContractOutputConverter());
+        }
+        public BeContract DeserializeBeContract(string json)
+        {
+            return JsonConvert.DeserializeObject<BeContract>(json, new BeContractInputConverter(), new BeContractOutputConverter());
         }
     }
 }
