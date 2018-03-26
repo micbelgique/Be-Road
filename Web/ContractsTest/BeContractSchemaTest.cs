@@ -48,13 +48,13 @@ namespace ContractsTest
         #endregion
 
         [TestMethod]
-        public void ValidateBeContractWorking()
+        public void TestValidateBeContractWorking()
         {
             Assert.IsTrue(Validators.ValidateBeContract(CreateGoodContract()));
         }
 
         [TestMethod]
-        public void ValidateBeContractWithoutId()
+        public void TestValidateBeContractWithoutIdFail()
         {
             try
             {
@@ -79,7 +79,7 @@ namespace ContractsTest
         }
 
         [TestMethod]
-        public void ValidateBeContractWithoutInputKey()
+        public void TestValidateBeContractWithoutInputKeyFail()
         {
             try
             {
@@ -104,7 +104,7 @@ namespace ContractsTest
         }
 
         [TestMethod]
-        public void ValidateBeContractWithoutInputType()
+        public void TestValidateBeContractWithoutInputTypeFail()
         {
             try
             {

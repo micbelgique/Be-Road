@@ -1,4 +1,5 @@
 ﻿using Contracts.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Schema;
 using Newtonsoft.Json.Schema.Generation;
 using System;
@@ -15,6 +16,18 @@ namespace Contracts.Logic
         {
             JSchemaGenerator generator = new JSchemaGenerator();
             return generator.Generate(typeof(BeContract));
+        }
+
+        public BeContractCall GenerateBeContractCall(string json)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<BeContractCall>(json);
+            }
+            catch(JsonSerializationException ex)
+            {
+                throw new BeContractException(ex.Message);
+            }
         }
     }
 }
