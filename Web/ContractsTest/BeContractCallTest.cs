@@ -88,5 +88,74 @@ namespace ContractsTest
                 Assert.Fail("Contract should not be valid without an Id");
             } catch(BeContractException) {}
         }
+
+        [TestMethod]
+        public void TestValidateBeContractCallWithBadIdFail()
+        {
+            var contract = CreateGoodContract();
+            var call = GetBeContractCall();
+            call.Id = "GetDogowner";
+            try
+            {
+                Validators.ValidateBeContractCall(contract, call);
+                Assert.Fail("Contract's do not have the same ID, must throw an exception");
+            }
+            catch (BeContractException ex)
+            {
+                Assert.AreEqual("Contract's do not have the same ID", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void TestValidateBeContractCallWithBadTypesFail()
+        {
+            var contract = CreateGoodContract();
+            var call = GetBeContractCall();
+            call.Inputs["Age"] = "54";
+            try
+            {
+                Validators.ValidateBeContractCall(contract, call);
+                Assert.Fail("Contract's do not have the input types, must throw an exception");
+            }
+            catch (BeContractException ex)
+            {
+                Assert.AreEqual($"The contract expects {contract.Inputs[1].Type.Name} but {call.Inputs["Age"].GetType().Name} was found", ex.Message);
+            }
+        }
+        
+        [TestMethod]
+        public void TestValidateBeContractCallWithEmptyInputRequiredFail()
+        {
+            var contract = CreateGoodContract();
+            var call = GetBeContractCall();
+            call.Inputs.Remove("DogID");
+            try
+            {
+                Validators.ValidateBeContractCall(contract, call);
+                Assert.Fail("An required empty input, must throw an exception");
+            }
+            catch (BeContractException ex)
+            {
+                Assert.AreEqual($"No key was found for DogID and it is required", ex.Message);
+            }
+        }
+        
+        [TestMethod]
+        public void TestValidateBeContractCallWithEmptyInputNptRequiredWorking()
+        {
+            var contract = CreateGoodContract();
+            var call = GetBeContractCall();
+            call.Inputs.Remove("Age");
+            Validators.ValidateBeContractCall(contract, call);
+        }
+
+        [TestMethod]
+        public void TestValidateBeContractCallWithAllWorking()
+        {
+            var contract = CreateGoodContract();
+            var call = GetBeContractCall();
+            Validators.ValidateBeContractCall(contract, call);
+        }
+
     }
 }
