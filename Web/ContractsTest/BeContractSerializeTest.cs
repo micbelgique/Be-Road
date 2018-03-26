@@ -14,7 +14,7 @@ namespace ContractsTest
 
         public BeContractSerializeTest()
         {
-            Validators = new Validators();
+            //Validators = new Validators();
         }
 
         public BeContract CreateGoodContract()
@@ -73,8 +73,9 @@ namespace ContractsTest
         [TestMethod]
         public void TestSerializeBeContract()
         {
-            var json = Validators.Generators.SerializeBeContract(CreateGoodContract());
-            Assert.AreEqual(GetContractString(), json);
+            var json = new Generators().SerializeBeContract(CreateGoodContract());
+            Assert.AreEqual(GetContractString().Replace("\"", "'").Replace(" ", "").Replace("\t", "").Replace("\n", "").Replace("\r", ""), 
+                json.Replace(" ", "").Replace("\"", "'").Replace("\n", "").Replace("\r", "").Replace("\t", ""));
         }
     }
 }
