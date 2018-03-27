@@ -96,14 +96,6 @@ namespace ContractsTest
 		            'Required': false,
 		            'Description': 'Age of the dog'
                 }],
-                'Outputs': [
-                {
-                    'Contract': 'GetDogOwner',
-                    'Type': 'String',
-                    'Description': 'The ID of the owner of the dog',
-                    'Key': 'OwnerID'
-                }
-                ],
                 'Query': [
                     {
                         'Id': 'GetCitizenIDfromDogID',
@@ -117,8 +109,17 @@ namespace ContractsTest
 		                        'Description': 'The ID of the Dog'
                             }
                         ],
-                        'Query': null
+                        'Query': null,
+                        'Outputs':null
                     }
+                ],
+                'Outputs': [
+                {
+                    'Contract': 'GetDogOwner',
+                    'Type': 'String',
+                    'Description': 'The ID of the owner of the dog',
+                    'Key': 'OwnerID'
+                }
                 ]
             }";
         }
