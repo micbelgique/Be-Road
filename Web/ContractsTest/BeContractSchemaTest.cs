@@ -221,5 +221,48 @@ namespace ContractsTest
             catch (BeContractException) { }
         }
 
+
+        [TestMethod]
+        public async Task TestValidateBeContractWithoutOutputTypeFail()
+        {
+            try
+            {
+                var contract = CreateGoodContract();
+                contract.Outputs[0].Type = null;
+
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an output type");
+            }
+            catch (BeContractException) { }
+        }
+
+        [TestMethod]
+        public async Task TestValidateBeContractWithoutOutputContractFail()
+        {
+            try
+            {
+                var contract = CreateGoodContract();
+                contract.Outputs[0].Contract = null;
+
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an output contract");
+            }
+            catch (BeContractException) { }
+        }
+
+        [TestMethod]
+        public async Task TestValidateBeContractWithoutOutputKeyFail()
+        {
+            try
+            {
+                var contract = CreateGoodContract();
+                contract.Outputs[0].Key = null;
+
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an output Key");
+            }
+            catch (BeContractException) { }
+        }
+
     }
 }

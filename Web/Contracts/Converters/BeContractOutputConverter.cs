@@ -37,9 +37,9 @@ namespace Contracts.Converters
             var output = value as Output;
             var jObject = new JObject();
             jObject.AddFirst(new JProperty("Key", output.Key));
-            jObject.AddFirst(new JProperty("Description", output.Description));
-            jObject.AddFirst(new JProperty("Type", output.Type.Name));
-            jObject.AddFirst(new JProperty("Contract", output.Contract.Id));
+            jObject.AddFirst(new JProperty("Description", output?.Description));
+            jObject.AddFirst(new JProperty("Type", output.Type?.Name));
+            jObject.AddFirst(new JProperty("Contract", output.Contract?.Id));
             jObject.WriteTo(writer, converters);
         }
     }
