@@ -16,5 +16,6 @@ namespace Contracts.Models
         public List<Input> Inputs { get; set; }
         //Query
         //Ouputs
+        public List<Output> Outputs { get; set; }
     }
 }

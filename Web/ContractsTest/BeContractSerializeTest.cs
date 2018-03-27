@@ -19,7 +19,7 @@ namespace ContractsTest
 
         public BeContract CreateGoodContract()
         {
-            return new BeContract()
+            var GetDogOwnerContract = new BeContract()
             {
                 Id = "GetDogOwner",
                 Description = "This contract is used to get the dog owner",
@@ -42,6 +42,18 @@ namespace ContractsTest
                     },
                 }
             };
+
+            GetDogOwnerContract.Outputs = new List<Output>()
+            {
+                new Output()
+                {
+                    Contract = GetDogOwnerContract,
+                    Key = "OwnerID",
+                    Description = "The ID of the owner of the dog",
+                    Type = typeof(string)
+                }
+            };
+            return GetDogOwnerContract;
         }
 
         public string GetContractString()
@@ -63,6 +75,13 @@ namespace ContractsTest
 		            'Key': 'Age',
 		            'Required': false,
 		            'Description': 'Age of the dog'
+                }],
+                'Outputs': [
+                {
+                    'Contract': 'GetDogOwner',
+                    'Type': 'String',
+                    'Description': 'The ID of the owner of the dog',
+                    'Key': 'OwnerID'
                 }
                 ]
             }";
@@ -76,6 +95,30 @@ namespace ContractsTest
             var json = new Generators().SerializeBeContract(CreateGoodContract());
             Assert.AreEqual(GetContractString().Replace("\"", "'").Replace(" ", "").Replace("\t", "").Replace("\n", "").Replace("\r", ""), 
                 json.Replace(" ", "").Replace("\"", "'").Replace("\n", "").Replace("\r", "").Replace("\t", ""));
+        }
+
+        [TestMethod]
+        public void TestDeserializeBeContract()
+        {
+            var contractByJson = new Generators().DeserializeBeContract(GetContractString());
+            var contract = CreateGoodContract();
+            Assert.AreEqual(contract.Description, contractByJson.Description);
+            Assert.AreEqual(contract.Id, contractByJson.Id);
+            Assert.AreEqual(contract.Version, contractByJson.Version);
+            for(int i = 0; i < contract.Inputs.Count; i++)
+            {
+                Assert.AreEqual(contract.Inputs[i].Description, contractByJson.Inputs[i].Description);
+                Assert.AreEqual(contract.Inputs[i].Key, contractByJson.Inputs[i].Key);
+                Assert.AreEqual(contract.Inputs[i].Required, contractByJson.Inputs[i].Required);
+                Assert.AreEqual(contract.Inputs[i].Type, contractByJson.Inputs[i].Type);
+            }
+            for (int i = 0; i < contract.Outputs.Count; i++)
+            {
+                Assert.AreEqual(contract.Outputs[i].Description, contractByJson.Outputs[i].Description);
+                Assert.AreEqual(contract.Outputs[i].Key, contractByJson.Outputs[i].Key);
+                Assert.AreEqual(contract.Outputs[i].Contract.Id, contractByJson.Outputs[i].Contract.Id);
+                Assert.AreEqual(contract.Outputs[i].Type, contractByJson.Outputs[i].Type);
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ContractsTest
 
         public BeContract CreateGoodContract()
         {
-            return new BeContract()
+            var GetDogOwnerContract = new BeContract()
             {
                 Id = "GetDogOwner",
                 Description = "This contract is used to get the dog owner",
@@ -41,8 +41,20 @@ namespace ContractsTest
                         Required = false,
                         Type = typeof(int)
                     },
+                } 
+            };
+
+            GetDogOwnerContract.Outputs = new List<Output>()
+            {
+                new Output()
+                {
+                    Contract = GetDogOwnerContract,
+                    Key = "OwnerID",
+                    Description = "The ID of the owner of the dog",
+                    Type = typeof(string)
                 }
             };
+            return GetDogOwnerContract;
         }
 
         #endregion
@@ -50,7 +62,8 @@ namespace ContractsTest
         [TestMethod]
         public void TestValidateBeContractWorking()
         {
-            Assert.IsTrue(Validators.ValidateBeContract(CreateGoodContract()));
+            Assert.Fail("JSchema library must change");
+            //Assert.IsTrue(Validators.ValidateBeContract(CreateGoodContract()));
         }
 
         [TestMethod]

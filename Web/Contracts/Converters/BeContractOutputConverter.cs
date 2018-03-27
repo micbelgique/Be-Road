@@ -21,6 +21,8 @@ namespace Contracts.Converters
             JObject obj = JObject.Load(reader);
             var output = new Output
             {
+                //Take only the id and not the object it self
+                Contract = new BeContract() { Id = (string)obj["Contract"] },
                 Description = (string)obj["Description"],
                 Key = (string)obj["Key"],
                 Type = Type.GetType($"System.{(string)obj["Type"]}")
@@ -31,10 +33,13 @@ namespace Contracts.Converters
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             var converters = serializer.Converters.Where(x => !(x is BeContractInputConverter)).ToArray();
-            var jObject = JObject.FromObject(value);
-            var type = jObject.SelectToken("Type");
-            jObject.Remove("Type");
-            jObject.AddFirst(new JProperty("Type", type.ToObject<Type>().Name));
+            //Create a whole new JObject for exception: Self referencing loop throws by JObject.FromObject
+            var output = value as Output;
+            var jObject = new JObject();
+            jObject.AddFirst(new JProperty("Key", output.Key));
+            jObject.AddFirst(new JProperty("Description", output.Description));
+            jObject.AddFirst(new JProperty("Type", output.Type.Name));
+            jObject.AddFirst(new JProperty("Contract", output.Contract.Id));
             jObject.WriteTo(writer, converters);
         }
     }
