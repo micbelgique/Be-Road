@@ -1,4 +1,6 @@
-﻿using Contracts.Models;
+﻿using Contracts.Dal;
+using Contracts.Dal.Mock;
+using Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,50 +17,54 @@ namespace Contracts.Logic
         {
             Validators = new Validators();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="contract">
-        /// The contract is temporary for testing purpose, 
-        /// later we will get the contract with the contractId that's inside the call
-        /// </param>
-        /// <param name="call"></param>
-        public void CallTest(BeContract contract, BeContractCall call)
+        
+        public void Call(BeContract contract, BeContractCall call)
         {
             //TODO: 
-            //  -Get the contract from the DB instead of passing by arguments
             //  -Check if the contract exist
             //  -Validate the contract ?
             //  -Check if the caller has the permission to use the contract
+            if (contract == null)
+                throw new BeContractException("Contract is null");
+            if (call == null)
+                throw new BeContractException("Contract call is null");
+
             Validators.ValidateBeContractCall(contract, call);
-
-           /* contract.Query.ForEach(q => 
-            {
-                var callInQuery = new BeContractCall()
-                {
-                    Id = q.Id,
-                    Inputs = new Dictionary<string, dynamic>()
-                };
-
-                contract.Inputs.ForEach(input =>
-                {
-                    if (call.Inputs.TryGetValue(input.Key, out dynamic value))
-                    {
-                        callInQuery.Inputs.Add(input.Key, value);
-                    }
-                });
-            });*/
-
             Console.WriteLine($"Calling contract {contract.Id}");
-            contract.Inputs.ForEach(input =>
-            {
-                if (call.Inputs.TryGetValue(input.Key, out dynamic value))
-                {
-                    Console.WriteLine($"{value} was given as argument for {input.Key}");   
-                }
-            });
-            Console.WriteLine("End calling contract");
+            
+            if (call.Id.Equals("GetOwnerIdByDogId"))
+                VeterinaryMock.GetOwnerId(call);
+            else if (call.Id.Equals("GetMathemathicFunction"))
+                MathematicsMock.GetSumFunction(call);
+            else if (call.Id.Equals("GetAddressByOwnerId"))
+                AddressMock.GetAddressByOwnerId(call);
+            else if (call.Id.Equals("GetAddressByDogId"))
+                Console.WriteLine("Queries not yet supported");
+            else 
+                Console.WriteLine($"No service found for {call.Id}");
+
+            /* contract.Query.ForEach(q => 
+             {
+                 var callInQuery = new BeContractCall()
+                 {
+                     Id = q.Id,
+                     Inputs = new Dictionary<string, dynamic>()
+                 };
+
+                 contract.Inputs.ForEach(input =>
+                 {
+                     if (call.Inputs.TryGetValue(input.Key, out dynamic value))
+                     {
+                         callInQuery.Inputs.Add(input.Key, value);
+                     }
+                 });
+             });*/
+        }
+
+        public void Call(BeContractCall call)
+        {
+            var contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
+            Call(contract, call);
         }
     }
 }

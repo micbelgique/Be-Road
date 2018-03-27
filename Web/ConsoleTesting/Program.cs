@@ -10,83 +10,38 @@ namespace ConsoleTesting
 {
     class Program
     {
-        public BeContractCall GetBeContractCallString()
+
+        static BeContractCall CreateContractCall(string id, params string[] parameters)
         {
-            return new BeContractCall()
+            var call = new BeContractCall()
             {
-                Id = "GetDogOwner",
+                Id = id,
                 Inputs = new Dictionary<string, dynamic>()
-                {
-                    { "DogID", "EG-673KL" },
-                    { "Age", 54}
-                }
             };
+            parameters.ToList().ForEach(param =>
+            {
+                var split = param.Split(':');
+                if(split.Length == 2)
+                {
+                    if(int.TryParse(split[1], out int n))
+                        call.Inputs.Add(split[0], n);
+                    else
+                        call.Inputs.Add(split[0], split[1]);
+                }
+            });
+            return call;
         }
 
-        public BeContract CreateGoodContract()
-        {
-            var GetDogOwnerContract = new BeContract()
-            {
-                Id = "GetDogOwner",
-                Description = "This contract is used to get the dog owner",
-                Version = "V001",
-                Inputs = new List<Input>()
-                {
-                    new Input()
-                    {
-                        Key = "DogID",
-                        Description = "The ID of the Dog",
-                        Required = true,
-                        Type = typeof(string)
-                    },
-                    new Input()
-                    {
-                        Key = "Age",
-                        Description = "Age of the dog",
-                        Required = false,
-                        Type = typeof(int)
-                    },
-                },
-                //Query
-                Query = new List<BeContract>(){
-                    new BeContract()
-                    {
-                        Id = "GetCitizenIDfromDogID",
-                        Description = "This contract is used to get the dog owner ID",
-                        Version = "V001",
-                        Inputs = new List<Input>()
-                        {
-                            new Input()
-                            {
-                                Key = "DogID",
-                                Description = "The ID of the Dog",
-                                Required = true,
-                                Type = typeof(string)
-                            }
-                        }
-                    }
-                    //db.Contracts.FindById("GetCitizenIDfromDogID")
-                }
-            };
-
-            GetDogOwnerContract.Outputs = new List<Output>()
-            {
-                new Output()
-                {
-                    Contract = GetDogOwnerContract,
-                    Key = "OwnerID",
-                    Description = "The ID of the owner of the dog",
-                    Type = typeof(string)
-                }
-            };
-            return GetDogOwnerContract;
-        }
 
         static void Main(string[] args)
         {
             var manager = new ContractManager();
-            var program = new Program();
-            manager.CallTest(program.CreateGoodContract(), program.GetBeContractCallString());
+            manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
+            manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));
+            manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:"));
+            manager.Call(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !"));
+            manager.Call(CreateContractCall("GetAddressByDogId", "DogID:Dogy-1234"));
+            manager.Call(CreateContractCall("GetMathemathicFunction", "A:5", "B:19"));
             Console.Read();
         }
     }
