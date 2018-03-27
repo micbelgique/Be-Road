@@ -34,7 +34,7 @@ namespace Contracts.Logic
                 foreach(var e in errors.ToList())
                     str += e.ToString();
 
-                if (errors != null) {
+                if (errors.Count > 0) {
                     throw new BeContractException(errors.ToString()) {BeContract = contract };
                 }
                 else

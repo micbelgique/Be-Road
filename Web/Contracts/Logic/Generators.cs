@@ -13,9 +13,116 @@ namespace Contracts.Logic
 {
     public class Generators
     {
+        const string beContractSchema = @"{
+          '$schema': 'http://json-schema.org/draft-04/schema#',
+          'title': 'BeContract',
+          'type': 'object',
+          'additionalProperties': false,
+          'required': [
+            'Id'
+          ],
+          'properties': {
+            'Id': {
+              'type': 'string'
+            },
+            'Description': {
+              'type': [
+                'null',
+                'string'
+              ]
+            },
+            'Version': {
+              'type': [
+                'null',
+                'string'
+              ]
+            },
+            'Inputs': {
+              'type': [
+                'array',
+                'null'
+              ],
+              'items': {
+                '$ref': '#/definitions/Input'
+              }
+            },
+            'Query': {
+              'type': [
+                'array',
+                'null'
+              ],
+              'items': {
+                '$ref': '#'
+              }
+            },
+            'Outputs': {
+              'type': [
+                'array',
+                'null'
+              ],
+              'items': {
+                '$ref': '#/definitions/Output'
+              }
+            }
+          },
+          'definitions': {
+            'Input': {
+              'type': 'object',
+              'additionalProperties': false,
+              'required': [
+                'Key',
+                'Type'
+              ],
+              'properties': {
+                'Key': {
+                  'type': 'string'
+                },
+                'Type': {
+                  'type': 'string'
+                },
+                'Required': {
+                  'type': 'boolean'
+                },
+                'Description': {
+                  'type': [
+                    'null',
+                    'string'
+                  ]
+                }
+              }
+            },
+            'Output': {
+              'type': 'object',
+              'additionalProperties': false,
+              'required': [
+                'Contract',
+                'Key',
+                'Type'
+              ],
+              'properties': {
+                'Contract': {
+                  'type': 'string'
+                },
+                'Key': {
+                  'type': 'string'
+                },
+                'Type': {
+                  'type': 'string'
+                },
+                'Description': {
+                  'type': [
+                    'null',
+                    'string'
+                  ]
+                }
+              }
+            }
+          }
+        }";
+
         public async Task<JsonSchema4> GenerateSchema()
         {
-            var schema = await JsonSchema4.FromTypeAsync<BeContract>();
+            var schema = await JsonSchema4.FromJsonAsync(beContractSchema);
             return schema;
         }
 
