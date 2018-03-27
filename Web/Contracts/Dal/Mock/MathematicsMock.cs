@@ -9,11 +9,19 @@ namespace Contracts.Dal.Mock
 {
     class MathematicsMock
     {
-        public static void GetSumFunction(BeContractCall call)
+        public static BeContractReturn GetSumFunction(BeContractCall call)
         {
             var a = Convert.ToInt32(call.Inputs["A"]);
             var b = Convert.ToInt32(call.Inputs["B"]);
-            Console.WriteLine($"The sum of a + b is {a+b}");
+            return new BeContractReturn()
+            {
+                Id = "GetMathemathicFunction",
+                Outputs = new Dictionary<string, dynamic>()
+                {
+                    { "Total", a + b },
+                    { "Formula", "Total = A + B"}
+                }
+            };
         }
     }
 }

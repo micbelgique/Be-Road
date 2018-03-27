@@ -9,15 +9,27 @@ namespace Contracts.Dal.Mock
 {
     class VeterinaryMock
     {
-        public static void GetOwnerId(BeContractCall call)
+        public static BeContractReturn ReturnAnswer(string ownerId)
+        {
+            return new BeContractReturn()
+            {
+                Id = "GetOwnerIdByDogId",
+                Outputs = new Dictionary<string, dynamic>()
+                {
+                    { "OwnerID", ownerId}
+                }
+            };
+        }
+
+        public static BeContractReturn GetOwnerId(BeContractCall call)
         {
             switch(call.Inputs["DogID"])
             {
-                case "D-123": Console.WriteLine("Wilson !"); break;
-                case "D-122": Console.WriteLine("Mika !"); break;
-                case "D-124": Console.WriteLine("Flo"); break;
-                case "D-126": Console.WriteLine("Pierre"); break;
-                default : Console.WriteLine("Incognito"); break;
+                case "D-123": return ReturnAnswer("Wilson !");
+                case "D-122": return ReturnAnswer("Mika !");
+                case "D-124": return ReturnAnswer("Flo !");
+                case "D-126": return ReturnAnswer("Pierre !");
+                default : return ReturnAnswer("Incognito !");
             }
         }
     }

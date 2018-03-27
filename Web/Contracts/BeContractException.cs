@@ -11,6 +11,7 @@ namespace Contracts
     {
         public BeContract BeContract { get; set; }
         public BeContractCall BeContractCall { get; set; }
+        public BeContractReturn BeContractReturn { get; set; }
 
         public BeContractException(string msg) : base(msg) { }
     }

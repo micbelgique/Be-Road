@@ -83,7 +83,7 @@ namespace Contracts.Dal.Mock
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
-                    Key = "Street number",
+                    Key = "StreetNumber",
                     Description = "Street number",
                     Type = typeof(int)
                 },
@@ -180,7 +180,7 @@ namespace Contracts.Dal.Mock
                     Contract = GetMathemathicContract,
                     Key = "Total",
                     Description = "This is the sum of a + b",
-                    Type = typeof(string)
+                    Type = typeof(int)
                 },
                 new Output()
                 {

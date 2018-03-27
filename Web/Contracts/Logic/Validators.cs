@@ -92,7 +92,52 @@ namespace Contracts.Logic
                     };
                 }
             });
-            //Test outputs ?
+        }
+
+        public void ValidateBeContractReturn(BeContract contract, BeContractReturn ret)
+        {
+            if (!contract.Id.Equals(ret.Id))
+            {
+                throw new BeContractException("Contract's do not have the same ID")
+                {
+                    BeContract = contract,
+                    BeContractReturn = ret
+                };
+            }
+
+            //Test outputs
+            contract.Outputs.ForEach(output =>
+            {
+                if (ret.Outputs.TryGetValue(output.Key, out dynamic value))
+                {
+                    //Check if the dynamic is a int64
+                    if (value.GetType() == typeof(Int64))
+                    {
+                        value = (int)value;
+                        ret.Outputs[output.Key] = value;
+                    }
+
+
+                    //Check the types
+                    if (value.GetType() != output.Type)
+                    {
+                        throw new BeContractException($"The contract expects {output.Type.Name} but {value.GetType().Name} was found")
+                        {
+                            BeContract = contract,
+                            BeContractReturn = ret
+                        };
+                    }
+                }
+                else
+                {
+                    //Key isn't find 
+                    throw new BeContractException($"No key was found for {output.Key}")
+                    {
+                        BeContract = contract,
+                        BeContractReturn = ret
+                    };
+                }
+            });
         }
     }
 }

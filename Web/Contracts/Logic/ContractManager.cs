@@ -18,7 +18,7 @@ namespace Contracts.Logic
             Validators = new Validators();
         }
         
-        public void Call(BeContract contract, BeContractCall call)
+        public BeContractReturn Call(BeContract contract, BeContractCall call)
         {
             //TODO: 
             //  -Check if the contract exist
@@ -31,17 +31,22 @@ namespace Contracts.Logic
 
             Validators.ValidateBeContractCall(contract, call);
             Console.WriteLine($"Calling contract {contract.Id}");
-            
+
+            BeContractReturn returns = null;
             if (call.Id.Equals("GetOwnerIdByDogId"))
-                VeterinaryMock.GetOwnerId(call);
+                returns =VeterinaryMock.GetOwnerId(call);
             else if (call.Id.Equals("GetMathemathicFunction"))
-                MathematicsMock.GetSumFunction(call);
+                returns = MathematicsMock.GetSumFunction(call);
             else if (call.Id.Equals("GetAddressByOwnerId"))
-                AddressMock.GetAddressByOwnerId(call);
+                returns = AddressMock.GetAddressByOwnerId(call);
             else if (call.Id.Equals("GetAddressByDogId"))
                 Console.WriteLine("Queries not yet supported");
             else 
                 Console.WriteLine($"No service found for {call.Id}");
+            
+            if(returns != null)
+                Validators.ValidateBeContractReturn(contract, returns);
+            return returns;
 
             /* contract.Query.ForEach(q => 
              {
@@ -64,7 +69,15 @@ namespace Contracts.Logic
         public void Call(BeContractCall call)
         {
             var contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
-            Call(contract, call);
+            var returns = Call(contract, call);
+            if (returns != null)
+            {
+                Console.WriteLine($"Output for {returns.Id}");
+                returns.Outputs.ToList().ForEach(output =>
+                {
+                    Console.WriteLine($"-{output.Key} = {output.Value}");
+                });
+            }
         }
     }
 }
