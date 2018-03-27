@@ -78,8 +78,6 @@ namespace Contracts.Logic
                     };
                 }
             });
-            
-            //Test queries ?
             //Test outputs ?
         }
     }

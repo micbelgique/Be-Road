@@ -40,6 +40,26 @@ namespace ContractsTest
                         Required = false,
                         Type = typeof(int)
                     },
+                },
+                //Query
+                Query = new List<BeContract>(){
+                    new BeContract()
+                    {
+                        Id = "GetCitizenIDfromDogID",
+                        Description = "This contract is used to get the dog owner ID",
+                        Version = "V001",
+                        Inputs = new List<Input>()
+                        {
+                            new Input()
+                            {
+                                Key = "DogID",
+                                Description = "The ID of the Dog",
+                                Required = true,
+                                Type = typeof(string)
+                            }
+                        }
+                    }
+                    //db.Contracts.FindById("GetCitizenIDfromDogID")
                 }
             };
         }
@@ -64,6 +84,22 @@ namespace ContractsTest
 		            'Required': false,
 		            'Description': 'Age of the dog'
                 }
+                ],
+                'Query': [
+                    {
+                        'Id': 'GetCitizenIDfromDogID',
+                        'Description': 'This contract is used to get the dog owner ID',
+                        'Version': 'V001',
+                        'Inputs': [
+                            {
+		                        'Type': 'String',
+		                        'Key': 'DogID',
+		                        'Required': true,
+		                        'Description': 'The ID of the Dog'
+                            }
+                        ],
+                        'Query': null
+                    }
                 ]
             }";
         }
