@@ -1,8 +1,8 @@
 ﻿using Contracts.Converters;
 using Contracts.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
+using NJsonSchema;
+using NJsonSchema.Generation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +13,10 @@ namespace Contracts.Logic
 {
     public class Generators
     {
-        public JSchema GenerateSchema()
+        public async Task<JsonSchema4> GenerateSchema()
         {
-            JSchemaGenerator generator = new JSchemaGenerator();
-            return generator.Generate(typeof(BeContract));
+            var schema = await JsonSchema4.FromTypeAsync<BeContract>();
+            return schema;
         }
 
         public BeContractCall GenerateBeContractCall(string json)

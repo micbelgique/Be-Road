@@ -1,7 +1,8 @@
 ﻿using Contracts.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Schema;
+using NJsonSchema;
+using NJsonSchema.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,20 +14,33 @@ namespace Contracts.Logic
     public class Validators
     {
         public Generators Generators { get; set; }
-        public JSchema Schema { get; set; }
+        public JsonSchema4 Schema { get; set; }
 
         public Validators()
         {
             Generators = new Generators();
-            Schema = Generators.GenerateSchema();
         }
 
-        public Boolean ValidateBeContract(BeContract contract)
+        public async Task<Boolean> ValidateBeContract(BeContract contract)
         {
             try
             {
-                var jObj = JObject.FromObject(contract);
-                return jObj.IsValid(Schema);
+                if(Schema == null)
+                    Schema = await Generators.GenerateSchema();
+
+                var json = Generators.SerializeBeContract(contract);
+                var errors = Schema.Validate(json);
+                var str = "";
+                foreach(var e in errors.ToList())
+                    str += e.ToString();
+
+                if (errors != null) {
+                    throw new BeContractException(errors.ToString()) {BeContract = contract };
+                }
+                else
+                {
+                    return true;
+                }
             }
             catch (JsonSerializationException ex)
             {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Contracts;
 using Contracts.Logic;
 using Contracts.Models;
@@ -80,18 +81,17 @@ namespace ContractsTest
         #endregion
 
         [TestMethod]
-        public void TestValidateBeContractWorking()
+        public async Task TestValidateBeContractWorking()
         {
-            Assert.Fail("JSchema library must change");
-            //Assert.IsTrue(Validators.ValidateBeContract(CreateGoodContract()));
+            Assert.IsTrue(await Validators.ValidateBeContract(CreateGoodContract()));
         }
 
         [TestMethod]
-        public void TestValidateBeContractWithoutIdFail()
+        public async Task TestValidateBeContractWithoutIdFail()
         {
             try
             {
-                Validators.ValidateBeContract(new BeContract()
+                await Validators.ValidateBeContract(new BeContract()
                 {
                     Description = "This contract is used to get the dog owner",
                     Version = "V001",
@@ -132,11 +132,11 @@ namespace ContractsTest
         }
 
         [TestMethod]
-        public void TestValidateBeContractWithoutInputKeyFail()
+        public async Task TestValidateBeContractWithoutInputKeyFail()
         {
             try
             {
-                Validators.ValidateBeContract(new BeContract()
+                await Validators.ValidateBeContract(new BeContract()
                 {
                     Id = "GetOwnerIdByDogId",
                     Description = "This contract is used to get the dog owner",
@@ -177,11 +177,11 @@ namespace ContractsTest
         }
 
         [TestMethod]
-        public void TestValidateBeContractWithoutInputTypeFail()
+        public async Task TestValidateBeContractWithoutInputTypeFail()
         {
             try
             {
-                Validators.ValidateBeContract(new BeContract()
+                await Validators.ValidateBeContract(new BeContract()
                 {
                     Id = "GetOwnerIdByDogId",
                     Description = "This contract is used to get the dog owner",
