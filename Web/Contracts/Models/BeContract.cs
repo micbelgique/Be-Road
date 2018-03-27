@@ -17,5 +17,6 @@ namespace Contracts.Models
         //Query
         public List<BeContract> Query { get; set; }
         //Ouputs
+        public List<Output> Outputs { get; set; }
     }
 }

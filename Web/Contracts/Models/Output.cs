@@ -10,6 +10,8 @@ namespace Contracts.Models
     public class Output
     {
         [JsonProperty(Required = Required.Always)]
+        public BeContract Contract { get; set; }
+        [JsonProperty(Required = Required.Always)]
         public string Key { get; set; }
         [JsonProperty(Required = Required.Always)]
         public Type Type { get; set; }
