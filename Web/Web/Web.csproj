@@ -324,6 +324,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="BeRoadSchema.png" />
     <Content Include="Content\img\azure.png" />
     <Content Include="Content\img\CarouselBG.png" />
     <Content Include="Content\img\firstnames.png" />

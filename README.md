@@ -14,16 +14,24 @@ This project is a prototype that will be used to show the usability of this syst
 It currently contains : 
 * the Privacy Passport portal
 * a mocked public service
-* the central system connected to the blockchain
+* the central system connected to the blockchain (Be-road)
+
+The following chart represents the infrastructure of Be-Road.
+
+![Be Road Schema](Web/Web/BeRoadSchema.png "Be-Road Chart")
 
 The blockchain genesis is stored on a VM on Azure.
 
+The public services are able to communicate through Be-Road using contracts.
+Find more about them in [the 3rd section below](#how-to-create-and-use-contracts).
+
 # Getting Started
 ## Summary
-1.	Clone the code
-2.  Blockchain implementation
-3.	Packages included
-4.	Latest releases
+1.	[Clone the code](#clone-the-code)
+2.  [Blockchain implementation](#blockchain-implementation)
+3.  [How to create and use contracts](#how-to-create-and-use-contracts)
+3.	[Packages included](#packages-included)
+4.	[Latest releases](#latest-releases)
 
 ### Clone the code
 To get the websites and the central part on your machine, you just have to clone the project in your git.
@@ -70,6 +78,63 @@ Then you just have to change the data in the MessageLog\Web.Config file :
 
 If you have problems understanding these, check [multichain documentation](https://www.multichain.com/developers/).
 We have set these in all the Web.config files in order to have access to a developement and a staging blockchains.
+
+### How to create and use contracts
+Contracts are JSON bits of code serialized and deserialized in C#.
+They have inputs, outputs, and a body made of queries.
+
+They work like functions that can call other contracts.
+Their inputs are parameters that the target needs to retreive the date.
+The outputs are the information that was asked.
+The querries are not always necessary.
+You will use these those when you miss data that are stored in other services.
+They call other contracts passing inouts to them.
+
+The contracts are created in Be-Road with recommandations asked to services.
+
+#### Example
+##### Without queries
+
+```json
+{
+    "Id": "GetOwnerIdByDogId",
+    "Description": "This contract is used to get the dog owner id",
+    "Version": "V001",
+    "Inputs": [
+        {
+            "Type": "String",
+            "Key": "DogID",
+            "Required": true,
+            "Description": "The ID of the Dog"
+        }
+    ],
+    "Queries": [],
+    "Outputs": [
+        {
+            "Contract": "GetOwnerIdByDogId",
+            "Type": "String",
+            "Description": "The ID of the owner of the dog",
+            "Key": "OwnerIDOfTheDog"
+        }
+    ]
+}
+```
+
+```csharp
+
+```
+
+##### With queries
+
+```json
+{
+    
+}
+```
+
+```csharp
+
+```
 
 ### Packages included
 We used different packages in these projects.
@@ -174,7 +239,19 @@ Here is a list of them and their utility in each project :
 
 ### Last releases
 
-#### 0.2.0 - 3rd March 2018
+#### 0.3.0 - 20th March 2018
+##### All
+* Different working enviroments : Devlopement, Staging
+* User account : Added NISS
+
+##### Message Log
+* Rest API : To call the Message Log
+* Database : To log the accesses
+* Route : To add the data
+* Hash : To hide the data
+* Blockchain : To log the accesses
+
+#### 0.2.0 - 7th March 2018
 ##### Public Service
 * Register page : e-ID account creation
 * Login page : username and password
@@ -187,7 +264,7 @@ Here is a list of them and their utility in each project :
 * Rest API : To make the data open
 * Swagger : API documentation
 
-#### 0.1.0 - 3rd March 2018
+#### 0.1.0 - 19th February 2018
 ##### Privacy Passport
 * Login page : e-ID connection
 * Home page : Public services data sources
