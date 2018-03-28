@@ -16,7 +16,7 @@ namespace Contracts.Dal.Mock
                 Id = "GetOwnerIdByDogId",
                 Outputs = new Dictionary<string, dynamic>()
                 {
-                    { "OwnerID", ownerId}
+                    { "OwnerIDOfTheDog", ownerId}
                 }
             };
         }

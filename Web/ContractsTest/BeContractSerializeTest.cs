@@ -42,7 +42,7 @@ namespace ContractsTest
                     },
                 },
                 //Query
-                Query = new List<BeContract>(){
+                Queries = new List<BeContract>(){
                     new BeContract()
                     {
                         Id = "GetCitizenIDfromDogID",

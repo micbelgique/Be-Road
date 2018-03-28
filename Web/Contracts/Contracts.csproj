@@ -65,7 +65,9 @@
     <Compile Include="Models\BeContractCall.cs" />
     <Compile Include="Models\BeContractReturn.cs" />
     <Compile Include="Models\Input.cs" />
+    <Compile Include="Models\Mapping.cs" />
     <Compile Include="Models\Output.cs" />
+    <Compile Include="Models\Query.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -44,7 +44,7 @@ namespace Contracts.Dal.Mock
                 new Output()
                 {
                     Contract = GetDogOwnerContract,
-                    Key = "OwnerID",
+                    Key = "OwnerIDOfTheDog",
                     Description = "The ID of the owner of the dog",
                     Type = typeof(string)
                 }
@@ -100,6 +100,9 @@ namespace Contracts.Dal.Mock
 
         public static BeContract GetAddressByDogId()
         {
+            var GetAddressByOwnerContract = GetAddressByOwnerId();
+            var GetOwnerIdByDogContract = GetOwnerIdByDogId();
+
             var GetAddressByDogContract = new BeContract()
             {
                 Id = "GetAddressByDogId",
@@ -109,7 +112,7 @@ namespace Contracts.Dal.Mock
                 {
                     new Input()
                     {
-                        Key = "DogID",
+                        Key = "MyDogID",
                         Description = "The ID of the Dog",
                         Required = true,
                         Type = typeof(string)
@@ -117,8 +120,35 @@ namespace Contracts.Dal.Mock
                 },
             };
 
-            var GetAddressByOwnerContract = GetAddressByOwnerId();
-            //Query here ?
+            GetAddressByDogContract.Queries = new List<Query>()
+            {
+                new Query()
+                {
+                    Contract = GetOwnerIdByDogContract,
+                    Mappings = new List<Mapping>()
+                    {
+                        new Mapping()
+                        {
+                            InputKey = "DogID",
+                            Contract = GetAddressByDogContract,
+                            ContractKey = "MyDogID"
+                        }
+                    }
+                },
+                new Query()
+                {
+                    Contract = GetAddressByOwnerContract,
+                    Mappings = new List<Mapping>()
+                    {
+                        new Mapping()
+                        {
+                            InputKey = "OwnerID",
+                            Contract = GetOwnerIdByDogContract,
+                            ContractKey = "OwnerIDOfTheDog"
+                        }
+                    }
+                }
+            };
 
             GetAddressByDogContract.Outputs = new List<Output>()
             {
@@ -132,7 +162,7 @@ namespace Contracts.Dal.Mock
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
-                    Key = "Street number",
+                    Key = "StreetNumber",
                     Description = "Street number",
                     Type = typeof(int)
                 },
@@ -144,6 +174,7 @@ namespace Contracts.Dal.Mock
                     Type = typeof(string)
                 }
             };
+
             return GetAddressByDogContract;
         }
 

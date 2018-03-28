@@ -40,7 +40,7 @@ namespace ConsoleTesting
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:"));
             manager.Call(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !"));
-            manager.Call(CreateContractCall("GetAddressByDogId", "DogID:Dogy-1234"));
+            manager.Call(CreateContractCall("GetAddressByDogId", "MyDogID:D-123"));
             manager.Call(CreateContractCall("GetMathemathicFunction", "A:5", "B:19"));
             Console.Read();
         }
