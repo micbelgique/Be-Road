@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -14,114 +15,39 @@ namespace ContractsTest
 
         public BeContractSerializeTest()
         {
-            //Validators = new Validators();
+            Validators = new Validators();
         }
 
         public BeContract CreateGoodContract()
         {
-            var GetDogOwnerContract = new BeContract()
-            {
-                Id = "GetDogOwner",
-                Description = "This contract is used to get the dog owner",
-                Version = "V001",
-                Inputs = new List<Input>()
-                {
-                    new Input()
-                    {
-                        Key = "DogID",
-                        Description = "The ID of the Dog",
-                        Required = true,
-                        Type = typeof(string)
-                    },
-                    new Input()
-                    {
-                        Key = "Age",
-                        Description = "Age of the dog",
-                        Required = false,
-                        Type = typeof(int)
-                    },
-                },
-                //Query
-                /*Queries = new List<BeContract>(){
-                    new BeContract()
-                    {
-                        Id = "GetCitizenIDfromDogID",
-                        Description = "This contract is used to get the dog owner ID",
-                        Version = "V001",
-                        Inputs = new List<Input>()
-                        {
-                            new Input()
-                            {
-                                Key = "DogID",
-                                Description = "The ID of the Dog",
-                                Required = true,
-                                Type = typeof(string)
-                            }
-                        }
-                    }
-                    //db.Contracts.FindById("GetCitizenIDfromDogID")
-                }*/
-            };
-
-            GetDogOwnerContract.Outputs = new List<Output>()
-            {
-                new Output()
-                {
-                    Contract = GetDogOwnerContract,
-                    Key = "OwnerID",
-                    Description = "The ID of the owner of the dog",
-                    Type = typeof(string)
-                }
-            };
-            return GetDogOwnerContract;
+            return BeContractsMock.GetOwnerIdByDogId();
         }
 
         public string GetContractString()
         {
             return @"
-            {
-                'Id': 'GetDogOwner',
-                'Description': 'This contract is used to get the dog owner',
-                'Version': 'V001',
-                'Inputs': [
                 {
-		            'Type': 'String',
-		            'Key': 'DogID',
-		            'Required': true,
-		            'Description': 'The ID of the Dog'
-                },
-                {
-		            'Type': 'Int32',
-		            'Key': 'Age',
-		            'Required': false,
-		            'Description': 'Age of the dog'
-                }],
-                'Query': [
+                  'Id': 'GetOwnerIdByDogId',
+                  'Description': 'This contract is used to get the dog owner id',
+                  'Version': 'V001',
+                  'Inputs': [
                     {
-                        'Id': 'GetCitizenIDfromDogID',
-                        'Description': 'This contract is used to get the dog owner ID',
-                        'Version': 'V001',
-                        'Inputs': [
-                            {
-		                        'Type': 'String',
-		                        'Key': 'DogID',
-		                        'Required': true,
-		                        'Description': 'The ID of the Dog'
-                            }
-                        ],
-                        'Query': null,
-                        'Outputs':null
+                      'Type': 'String',
+                      'Key': 'DogID',
+                      'Required': true,
+                      'Description': 'The ID of the Dog'
                     }
-                ],
-                'Outputs': [
-                {
-                    'Contract': 'GetDogOwner',
-                    'Type': 'String',
-                    'Description': 'The ID of the owner of the dog',
-                    'Key': 'OwnerID'
-                }
-                ]
-            }";
+                  ],
+                  'Queries': [],
+                  'Outputs': [
+                    {
+                      'Contract': 'GetOwnerIdByDogId',
+                      'Type': 'String',
+                      'Description': 'The ID of the owner of the dog',
+                      'Key': 'OwnerIDOfTheDog'
+                    }
+                  ]
+                }";
         }
 
         #endregion
@@ -130,8 +56,9 @@ namespace ContractsTest
         public void TestSerializeBeContract()
         {
             var json = new Generators().SerializeBeContract(CreateGoodContract());
-            Assert.AreEqual(GetContractString().Replace("\"", "'").Replace(" ", "").Replace("\t", "").Replace("\n", "").Replace("\r", ""), 
-                json.Replace(" ", "").Replace("\"", "'").Replace("\n", "").Replace("\r", "").Replace("\t", ""));
+            var expected = Regex.Replace(GetContractString(), @"\s+", "").Replace("'", "\"");
+            var actual = Regex.Replace(json, @"\s+", "");
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
