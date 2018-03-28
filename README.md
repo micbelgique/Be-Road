@@ -95,6 +95,7 @@ The contracts are created in Be-Road with recommandations asked to services.
 #### Example
 ##### Without queries
 
+JSON :
 ```json
 {
     "Id": "GetOwnerIdByDogId",
@@ -119,9 +120,39 @@ The contracts are created in Be-Road with recommandations asked to services.
     ]
 }
 ```
-
+C# :
 ```csharp
-
+    public static BeContract GetOwnerIdByDogId()
+    {
+        var GetDogOwnerContract = new BeContract()
+        {
+            Id = "GetOwnerIdByDogId",
+            Description = "This contract is used to get the dog owner id",
+            Version = "V001",
+            Inputs = new List<Input>()
+            {
+                new Input()
+                {
+                    Key = "DogID",
+                    Description = "The ID of the Dog",
+                    Required = true,
+                    Type = typeof(string)
+                }
+            },
+        };
+        GetDogOwnerContract.Queries = new List<Query>();
+        GetDogOwnerContract.Outputs = new List<Output>()
+        {
+            new Output()
+            {
+                Contract = GetDogOwnerContract,
+                Key = "OwnerIDOfTheDog",
+                Description = "The ID of the owner of the dog",
+                Type = typeof(string)
+            }
+        };
+        return GetDogOwnerContract;
+    }
 ```
 
 ##### With queries
@@ -135,6 +166,8 @@ The contracts are created in Be-Road with recommandations asked to services.
 ```csharp
 
 ```
+
+Contracts are added in a database so that they can be used either directly or via queries.
 
 ### Packages included
 We used different packages in these projects.
@@ -220,7 +253,7 @@ Here is a list of them and their utility in each project :
     <td>Provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.</td>
   </tr>
   <tr>
-    <td rowspan="7">MessageLog</td>
+    <td rowspan="3">MessageLog</td>
     <td>LucidOcean.Multichain</td>
     <td>0.0.0.10</td>
     <td>This library attempts to wrap the JSON-RPC calls provided by MultiChain. Where applicable, some initial design for ease of use and separation of calls has been made.</td>
@@ -234,6 +267,17 @@ Here is a list of them and their utility in each project :
     <td>EntityFramework</td>
     <td>6.2.0</td>
     <td>Another Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, interpreters, compilers, and translators from grammatical descriptions containing actions in a variety of target languages.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Contracts</td>
+    <td>Newtonsoft.Json</td>
+    <td>10.0.2</td>
+    <td>Json.NET is a popular high-performance JSON framework for .NET.</td>
+  </tr>
+  <tr>
+    <td>NJsonSchema</td>
+    <td>9.10.41</td>
+    <td>JSON Schema reader, generator and validator for .NET</td>
   </tr>
 </table>
 
