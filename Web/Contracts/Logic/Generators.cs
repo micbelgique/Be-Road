@@ -179,6 +179,18 @@ namespace Contracts.Logic
             }
         }
 
+        public BeContractReturn GenerateBeContractReturn(string json)
+        {
+            try
+            {
+                return JsonConvert.DeserializeObject<BeContractReturn>(json);
+            }
+            catch (JsonSerializationException ex)
+            {
+                throw new BeContractException(ex.Message);
+            }
+        }
+
         public string SerializeBeContract(BeContract contract)
         {
             return JsonConvert.SerializeObject(contract, Formatting.Indented, new BeContractInputConverter());
