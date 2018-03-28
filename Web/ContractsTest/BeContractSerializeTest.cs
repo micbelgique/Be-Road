@@ -42,7 +42,7 @@ namespace ContractsTest
                     },
                 },
                 //Query
-                Queries = new List<BeContract>(){
+                /*Queries = new List<BeContract>(){
                     new BeContract()
                     {
                         Id = "GetCitizenIDfromDogID",
@@ -60,7 +60,7 @@ namespace ContractsTest
                         }
                     }
                     //db.Contracts.FindById("GetCitizenIDfromDogID")
-                }
+                }*/
             };
 
             GetDogOwnerContract.Outputs = new List<Output>()

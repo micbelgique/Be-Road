@@ -20,58 +20,15 @@ namespace ContractsTest
 
         public BeContract CreateGoodContract()
         {
-            return new BeContract()
-            {
-                Id = "GetDogOwner",
-                Description = "This contract is used to get the dog owner",
-                Version = "V001",
-                Inputs = new List<Input>()
-                {
-                    new Input()
-                    {
-                        Key = "DogID",
-                        Description = "The ID of the Dog",
-                        Required = true,
-                        Type = typeof(string)
-                    },
-                    new Input()
-                    {
-                        Key = "Age",
-                        Description = "Age of the dog",
-                        Required = false,
-                        Type = typeof(int)
-                    }
-                },
-                //Query
-                Queries = new List<BeContract>(){
-                    new BeContract()
-                    {
-                        Id = "GetCitizenIDfromDogID",
-                        Description = "This contract is used to get the dog owner ID",
-                        Version = "V001",
-                        Inputs = new List<Input>()
-                        {
-                            new Input()
-                            {
-                                Key = "DogID",
-                                Description = "The ID of the Dog",
-                                Required = true,
-                                Type = typeof(string)
-                            }
-                        }
-                    }
-                    //db.Contracts.FindById("GetCitizenIDfromDogID")
-                }
-            };
+            return BeContractsMock.GetOwnerIdByDogId();
         }
 
         public string GetBeContractCallString()
         {
             return @"{
-            'Id': 'GetDogOwner',
+            'Id': 'GetOwnerIdByDogId',
 	        'Inputs': {
-                    'DogID': 'EG-673KL',
-                    'Age': 54
+                    'DogID': 'EG-673KL'
                 }
             }";
         }

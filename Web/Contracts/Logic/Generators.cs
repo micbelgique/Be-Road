@@ -46,13 +46,13 @@ namespace Contracts.Logic
                 '$ref': '#/definitions/Input'
               }
             },
-            'Query': {
+            'Queries': {
               'type': [
                 'array',
                 'null'
               ],
               'items': {
-                '$ref': '#'
+                '$ref': '#/definitions/Query'
               }
             },
             'Outputs': {
@@ -84,6 +84,59 @@ namespace Contracts.Logic
                   'type': 'boolean'
                 },
                 'Description': {
+                  'type': [
+                    'null',
+                    'string'
+                  ]
+                }
+              }
+            },
+            'Query': {
+              'type': 'object',
+              'additionalProperties': false,
+              'properties': {
+                'Contract': {
+                  'oneOf': [
+                    {
+                      'type': 'null'
+                    },
+                    {
+                      '$ref': '#'
+                    }
+                  ]
+                },
+                'Mappings': {
+                  'type': [
+                    'array',
+                    'null'
+                  ],
+                  'items': {
+                    '$ref': '#/definitions/Mapping'
+                  }
+                }
+              }
+            },
+            'Mapping': {
+              'type': 'object',
+              'additionalProperties': false,
+              'properties': {
+                'InputKey': {
+                  'type': [
+                    'null',
+                    'string'
+                  ]
+                },
+                'Contract': {
+                  'oneOf': [
+                    {
+                      'type': 'null'
+                    },
+                    {
+                      '$ref': '#'
+                    }
+                  ]
+                },
+                'ContractKey': {
                   'type': [
                     'null',
                     'string'

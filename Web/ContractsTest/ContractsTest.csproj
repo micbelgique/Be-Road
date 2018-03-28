@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BeContractsMock.cs" />
     <Compile Include="BeContractSchemaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BeContractCallTest.cs" />
