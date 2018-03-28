@@ -1,13 +1,9 @@
 # Introduction 
-In Belgium, public services interact with each others directly.
-For example, when a hospital need to know your National Identification Number, it's administration will access you town administration services.
-This access is marked with a reason.
+In Belgium, public services interact with each others directly. For example, when a hospital need to know your National Identification Number, it's administration will access you town administration services. This access is marked with a reason.
 
 Privacy Passport is a portal on which any Belgian citizen can connect to with their e-ID in order to see all these accesses.
 
-But this project is not only about that portal.
-It also contains a hole system through which the public services should be going in order to communicate.
-This central point redirects requests between public services and log these accesses in a private blockchain.
+But this project is not only about that portal. It also contains a hole system through which the public services should be going in order to communicate. This central point redirects requests between public services and log these accesses in a private blockchain.
 
 This project is a prototype that will be used to show the usability of this system.
 
@@ -22,8 +18,7 @@ The following chart represents the infrastructure of Be-Road.
 
 The blockchain genesis is stored on a VM on Azure.
 
-The public services are able to communicate through Be-Road using contracts.
-Find more about them in [the 3rd section below](#how-to-create-and-use-contracts).
+The public services are able to communicate through Be-Road using contracts. Find more about them in [the 3rd section below](#how-to-create-and-use-contracts).
 
 # Getting Started
 ## Summary
@@ -54,11 +49,9 @@ You will have to change the connection strings in the Web.config files in the 3 
 ```
 
 ### Blockchain implementation
-The blockchain is a prototype too.
-In the final project, that will be done later by more advanced developers, it will certainly be created from scratch.
+The blockchain is a prototype too. In the final project, that will be done later by more advanced developers, it will certainly be created from scratch.
 
-Currently, we used Multichain to create our private blockchain.
-For advanced knowledge on how to create your own blockchain with multichain, check their [website](https://www.multichain.com/).
+Currently, we used Multichain to create our private blockchain. For advanced knowledge on how to create your own blockchain with multichain, check their [website](https://www.multichain.com/).
 
 To implement a multichain blockchain in the project, we used a NuGet package called LucidOcean.Multichain ([GitHub](https://github.com/LucidOcean/multichain)) that gathers a set of class to call the RPC API of your blockchain, and so controlling it from the outside.
 
@@ -76,25 +69,19 @@ Then you just have to change the data in the MessageLog\Web.Config file :
 </appSettings>
 ```
 
-If you have problems understanding these, check [multichain documentation](https://www.multichain.com/developers/).
-We have set these in all the Web.config files in order to have access to a developement and a staging blockchains.
+If you have problems understanding these, check [multichain documentation](https://www.multichain.com/developers/). We have set these in all the Web.config files in order to have access to a developement and a staging blockchains.
 
 ### How to create and use contracts
-Contracts are JSON bits of code serialized and deserialized in C#.
-They have inputs, outputs, and a body made of queries.
+Contracts are JSON bits of code serialized and deserialized in C#. They have inputs, outputs, and a body made of queries.
 
-They work like functions that can call other contracts.
-Their inputs are parameters that the target needs to retreive the date.
-The outputs are the information that was asked.
-The querries are not always necessary.
-You will use these those when you miss data that are stored in other services.
-They call other contracts passing inouts to them.
+They work like functions that can call other contracts. Their inputs are parameters that the target needs to retreive the date. The outputs are the information that was asked. The querries are not always necessary. You will use these those when you miss data that are stored in other services. They call other contracts passing inouts to them.
 
 The contracts are created in Be-Road with recommandations asked to services.
 
 #### Example
 ##### Without queries
 
+JSON :
 ```json
 {
     "Id": "GetOwnerIdByDogId",
@@ -119,26 +106,178 @@ The contracts are created in Be-Road with recommandations asked to services.
     ]
 }
 ```
-
+C# :
 ```csharp
-
+var GetDogOwnerContract = new BeContract()
+{
+    Id = "GetOwnerIdByDogId",
+    Description = "This contract is used to get the dog owner id",
+    Version = "V001",
+    Inputs = new List<Input>()
+    {
+        new Input()
+        {
+            Key = "DogID",
+            Description = "The ID of the Dog",
+            Required = true,
+            Type = typeof(string)
+        }
+    },
+};
+GetDogOwnerContract.Queries = new List<Query>();
+GetDogOwnerContract.Outputs = new List<Output>()
+{
+    new Output()
+    {
+        Contract = GetDogOwnerContract,
+        Key = "OwnerIDOfTheDog",
+        Description = "The ID of the owner of the dog",
+        Type = typeof(string)
+    }
+};
 ```
 
 ##### With queries
 
 ```json
 {
-    
+    "Id": "GetAddressByDogId",
+    "Description": "This contract is used to get the address by dog id",
+    "Version": "V001",
+    "Inputs": [
+        {
+            "Type": "String",
+            "Key": "MyDogID",
+            "Required": true,
+            "Description": "The ID of the Dog"
+        }
+    ],
+    "Queries": [
+        {
+            "Contract": "GetOwnerIdByDogId",
+            "Mappings": [
+                {
+                    "InputKey": "DogID",
+                    "Contract": "GetAddressByDogId",
+                    "ContractKey": "MyDogID"
+                }
+            ]
+        },
+        {
+            "Contract": "GetAddressByOwnerId",
+            "Mappings": [
+                {
+                    "InputKey": "OwnerID",
+                    "Contract": "GetOwnerIdByDogId",
+                    "ContractKey": "OwnerIDOfTheDog"
+                }
+            ]
+        }
+    ],
+    "Outputs": [
+        {
+            "Contract": "GetAddressByOwnerId",
+             "Type": "String",
+             "Description": "Street name",
+             "Key": "Street"
+        },
+        {
+             "Contract": "GetAddressByOwnerId",
+             "Type": "Int32",
+             "Description": "Street number",
+             "Key": "StreetNumber"
+       },
+       {
+             "Contract": "GetAddressByOwnerId",
+             "Type": "String",
+             "Description": "Country of the address",
+             "Key": "Country"
+       }
+    ]
 }
 ```
 
 ```csharp
+var GetAddressByOwnerContract = GetAddressByOwnerId();
+var GetOwnerIdByDogContract = GetOwnerIdByDogId();
 
+var GetAddressByDogContract = new BeContract()
+{
+    Id = "GetAddressByDogId",
+    Description = "This contract is used to get the address by dog id",
+    Version = "V001",
+    Inputs = new List<Input>()
+    {
+        new Input()
+        {
+            Key = "MyDogID",
+            Description = "The ID of the Dog",
+            Required = true,
+            Type = typeof(string)
+        }
+    },
+};
+
+GetAddressByDogContract.Queries = new List<Query>()
+{
+    new Query()
+    {
+        Contract = GetOwnerIdByDogContract,
+        Mappings = new List<Mapping>()
+        {
+            new Mapping()
+            {
+                InputKey = "DogID",
+                Contract = GetAddressByDogContract,
+                ContractKey = "MyDogID"
+            }
+        }
+    },
+    new Query()
+    {
+        Contract = GetAddressByOwnerContract,
+        Mappings = new List<Mapping>()
+        {
+            new Mapping()
+            {
+                InputKey = "OwnerID",
+                Contract = GetOwnerIdByDogContract,
+                ContractKey = "OwnerIDOfTheDog"
+            }
+        }
+    }
+};
+
+GetAddressByDogContract.Outputs = new List<Output>()
+{
+    new Output()
+    {
+        Contract = GetAddressByOwnerContract,
+        Key = "Street",
+        Description = "Street name",
+        Type = typeof(string)
+    },
+    new Output()
+    {
+        Contract = GetAddressByOwnerContract,
+        Key = "StreetNumber",
+        Description = "Street number",
+        Type = typeof(int)
+    },
+    new Output()
+    {
+        Contract = GetAddressByOwnerContract,
+        Key = "Country",
+        Description = "Country of the address",
+        Type = typeof(string)
+    }
+};
 ```
 
+Contracts are added in a database so that they can be used either directly or via queries.
+
 ### Packages included
-We used different packages in these projects.
-Here is a list of them and their utility in each project :
+We used different packages in these projects. Here is a list of them and their utility in each project :
 
 <table>
   <tr>
@@ -220,7 +359,7 @@ Here is a list of them and their utility in each project :
     <td>Provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.</td>
   </tr>
   <tr>
-    <td rowspan="7">MessageLog</td>
+    <td rowspan="3">MessageLog</td>
     <td>LucidOcean.Multichain</td>
     <td>0.0.0.10</td>
     <td>This library attempts to wrap the JSON-RPC calls provided by MultiChain. Where applicable, some initial design for ease of use and separation of calls has been made.</td>
@@ -234,6 +373,17 @@ Here is a list of them and their utility in each project :
     <td>EntityFramework</td>
     <td>6.2.0</td>
     <td>Another Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, interpreters, compilers, and translators from grammatical descriptions containing actions in a variety of target languages.</td>
+  </tr>
+  <tr>
+    <td rowspan="2">Contracts</td>
+    <td>Newtonsoft.Json</td>
+    <td>10.0.2</td>
+    <td>Json.NET is a popular high-performance JSON framework for .NET.</td>
+  </tr>
+  <tr>
+    <td>NJsonSchema</td>
+    <td>9.10.41</td>
+    <td>JSON Schema reader, generator and validator for .NET</td>
   </tr>
 </table>
 
