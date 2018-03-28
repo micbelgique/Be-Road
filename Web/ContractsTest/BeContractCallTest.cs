@@ -20,65 +20,27 @@ namespace ContractsTest
 
         public BeContract CreateGoodContract()
         {
-            return new BeContract()
-            {
-                Id = "GetDogOwner",
-                Description = "This contract is used to get the dog owner",
-                Version = "V001",
-                Inputs = new List<Input>()
-                {
-                    new Input()
-                    {
-                        Key = "DogID",
-                        Description = "The ID of the Dog",
-                        Required = true,
-                        Type = typeof(string)
-                    },
-                    new Input()
-                    {
-                        Key = "Age",
-                        Description = "Age of the dog",
-                        Required = false,
-                        Type = typeof(int)
-                    }
-                },
-                //Query
-                Queries = new List<BeContract>(){
-                    new BeContract()
-                    {
-                        Id = "GetCitizenIDfromDogID",
-                        Description = "This contract is used to get the dog owner ID",
-                        Version = "V001",
-                        Inputs = new List<Input>()
-                        {
-                            new Input()
-                            {
-                                Key = "DogID",
-                                Description = "The ID of the Dog",
-                                Required = true,
-                                Type = typeof(string)
-                            }
-                        }
-                    }
-                    //db.Contracts.FindById("GetCitizenIDfromDogID")
-                }
-            };
+            return BeContractsMock.GetOwnerIdByDogId();
         }
 
         public string GetBeContractCallString()
         {
             return @"{
-            'Id': 'GetDogOwner',
+            'Id': 'GetOwnerIdByDogId',
 	        'Inputs': {
-                    'DogID': 'EG-673KL',
-                    'Age': 54
+                    'DogID': 'EG-673KL'
                 }
             }";
         }
 
+        public BeContractCall GetBeContractCall(string str)
+        {
+            return Validators.Generators.GenerateBeContractCall(str);
+        }
+
         public BeContractCall GetBeContractCall()
         {
-            return Validators.Generators.GenerateBeContractCall(GetBeContractCallString());
+            return GetBeContractCall(GetBeContractCallString());
         }
 
         #endregion
@@ -88,9 +50,8 @@ namespace ContractsTest
         public void TestGetBeContractFromJsonWorking()
         {
             var call = Validators.Generators.GenerateBeContractCall(GetBeContractCallString());
-            Assert.AreEqual("GetDogOwner", call.Id);
+            Assert.AreEqual("GetOwnerIdByDogId", call.Id);
             Assert.AreEqual("EG-673KL", call.Inputs["DogID"] as string);
-            Assert.AreEqual(54, (int)call.Inputs["Age"]);
         }
 
         [TestMethod]
@@ -98,8 +59,7 @@ namespace ContractsTest
         {
             var json =  @"{
 	        'Inputs': {
-                    'DogID': 'EG-673KL',
-                    'Age': 54
+                    'DogID': 'EG-673KL'
                 }
             }";
             try
@@ -131,7 +91,7 @@ namespace ContractsTest
         {
             var contract = CreateGoodContract();
             var call = GetBeContractCall();
-            call.Inputs["Age"] = "54";
+            call.Inputs["DogID"] = 54;
             try
             {
                 Validators.ValidateBeContractCall(contract, call);
@@ -139,7 +99,7 @@ namespace ContractsTest
             }
             catch (BeContractException ex)
             {
-                Assert.AreEqual($"The contract expects {contract.Inputs[1].Type.Name} but {call.Inputs["Age"].GetType().Name} was found", ex.Message);
+                Assert.AreEqual($"The contract expects {contract.Inputs[0].Type.Name} but {call.Inputs["DogID"].GetType().Name} was found", ex.Message);
             }
         }
         
@@ -161,11 +121,16 @@ namespace ContractsTest
         }
         
         [TestMethod]
-        public void TestValidateBeContractCallWithEmptyInputNptRequiredWorking()
+        public void TestValidateBeContractCallWithEmptyInputNotRequiredWorking()
         {
-            var contract = CreateGoodContract();
-            var call = GetBeContractCall();
-            call.Inputs.Remove("Age");
+            var contract = BeContractsMock.GetDoubleInputContract();
+            var callString = @"{
+            'Id': 'DoubleInputContract',
+	        'Inputs': {
+                    'First': 1090
+                }
+            }";
+            var call = GetBeContractCall(callString);
             Validators.ValidateBeContractCall(contract, call);
         }
 

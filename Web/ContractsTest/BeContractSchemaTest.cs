@@ -21,61 +21,7 @@ namespace ContractsTest
 
         public BeContract CreateGoodContract()
         {
-            var GetDogOwnerContract = new BeContract()
-            {
-                Id = "GetDogOwner",
-                Description = "This contract is used to get the dog owner",
-                Version = "V001",
-                Inputs = new List<Input>()
-                {
-                    new Input()
-                    {
-                        Key = "DogID",
-                        Description = "The ID of the Dog",
-                        Required = true,
-                        Type = typeof(string)
-                    },
-                    new Input()
-                    {
-                        Key = "Age",
-                        Description = "Age of the dog",
-                        Required = false,
-                        Type = typeof(int)
-                    },
-                },
-                //Query
-                Queries = new List<BeContract>(){
-                    new BeContract()
-                    {
-                        Id = "GetCitizenIDfromDogID",
-                        Description = "This contract is used to get the dog owner ID",
-                        Version = "V001",
-                        Inputs = new List<Input>()
-                        {
-                            new Input()
-                            {
-                                Key = "DogID",
-                                Description = "The ID of the Dog",
-                                Required = true,
-                                Type = typeof(string)
-                            }
-                        }
-                    }
-                    //db.Contracts.FindById("GetCitizenIDfromDogID")
-                }
-            };
-
-            GetDogOwnerContract.Outputs = new List<Output>()
-            {
-                new Output()
-                {
-                    Contract = GetDogOwnerContract,
-                    Key = "OwnerID",
-                    Description = "The ID of the owner of the dog",
-                    Type = typeof(string)
-                }
-            };
-            return GetDogOwnerContract;
+            return BeContractsMock.GetOwnerIdByDogId();
         }
 
         #endregion
@@ -91,44 +37,15 @@ namespace ContractsTest
         {
             try
             {
-                await Validators.ValidateBeContract(new BeContract()
-                {
-                    Description = "This contract is used to get the dog owner",
-                    Version = "V001",
-                    Inputs = new List<Input>()
-                    {
-                        new Input()
-                        {
-                            Key = "DogID",
-                            Description = "The ID of the Dog",
-                            Required = true,
-                            Type = typeof(string)
-                        }
-                    },
-                    //Query
-                    Queries = new List<BeContract>(){
-                        new BeContract()
-                        {
-                            Id = "GetCitizenIDfromDogID",
-                            Description = "This contract is used to get the dog owner ID",
-                            Version = "V001",
-                            Inputs = new List<Input>()
-                            {
-                                new Input()
-                                {
-                                    Key = "DogID",
-                                    Description = "The ID of the Dog",
-                                    Required = true,
-                                    Type = typeof(string)
-                                }
-                            }
-                        }
-                        //db.Contracts.FindById("GetCitizenIDfromDogID")
-                    }
-                });
+                var contract = BeContractsMock.GetAddressByOwnerId();
+                contract.Id = null;
+                await Validators.ValidateBeContract(contract);
                 Assert.Fail("Contract should not be valid without an Id");
             }
-            catch (BeContractException) {}
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         [TestMethod]
@@ -136,44 +53,15 @@ namespace ContractsTest
         {
             try
             {
-                await Validators.ValidateBeContract(new BeContract()
-                {
-                    Id = "GetOwnerIdByDogId",
-                    Description = "This contract is used to get the dog owner",
-                    Version = "V001",
-                    Inputs = new List<Input>()
-                    {
-                        new Input()
-                        {
-                            Description = "The ID of the Dog",
-                            Required = true,
-                            Type = typeof(string)
-                        }
-                    },
-                    //Query
-                    Queries = new List<BeContract>(){
-                        new BeContract()
-                        {
-                            Id = "GetCitizenIDfromDogID",
-                            Description = "This contract is used to get the dog owner ID",
-                            Version = "V001",
-                            Inputs = new List<Input>()
-                            {
-                                new Input()
-                                {
-                                    Key = "DogID",
-                                    Description = "The ID of the Dog",
-                                    Required = true,
-                                    Type = typeof(string)
-                                }
-                            }
-                        }
-                        //db.Contracts.FindById("GetCitizenIDfromDogID")
-                    }
-                });
-                Assert.Fail("Contract should not be valid without an Id");
+                var contract = BeContractsMock.GetAddressByOwnerId();
+                contract.Inputs[0].Key = null;
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an input key");
             }
-            catch (BeContractException) { }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         [TestMethod]
@@ -181,46 +69,16 @@ namespace ContractsTest
         {
             try
             {
-                await Validators.ValidateBeContract(new BeContract()
-                {
-                    Id = "GetOwnerIdByDogId",
-                    Description = "This contract is used to get the dog owner",
-                    Version = "V001",
-                    Inputs = new List<Input>()
-                    {
-                        new Input()
-                        {
-                            Key = "DogId",
-                            Description = "The ID of the Dog",
-                            Required = true,
-                        }
-                    },
-                    //Query
-                    Queries = new List<BeContract>(){
-                        new BeContract()
-                        {
-                            Id = "GetCitizenIDfromDogID",
-                            Description = "This contract is used to get the dog owner ID",
-                            Version = "V001",
-                            Inputs = new List<Input>()
-                            {
-                                new Input()
-                                {
-                                    Key = "DogID",
-                                    Description = "The ID of the Dog",
-                                    Required = true,
-                                    Type = typeof(string)
-                                }
-                            }
-                        }
-                        //db.Contracts.FindById("GetCitizenIDfromDogID")
-                    }
-                });
-                Assert.Fail("Contract should not be valid without an Id");
+                var contract = BeContractsMock.GetAddressByOwnerId();
+                contract.Inputs[0].Type = null;
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an input type");
             }
-            catch (BeContractException) { }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
-
 
         [TestMethod]
         public async Task TestValidateBeContractWithoutOutputTypeFail()
@@ -233,7 +91,10 @@ namespace ContractsTest
                 await Validators.ValidateBeContract(contract);
                 Assert.Fail("Contract should not be valid without an output type");
             }
-            catch (BeContractException) { }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         [TestMethod]
@@ -247,7 +108,10 @@ namespace ContractsTest
                 await Validators.ValidateBeContract(contract);
                 Assert.Fail("Contract should not be valid without an output contract");
             }
-            catch (BeContractException) { }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         [TestMethod]
@@ -261,7 +125,10 @@ namespace ContractsTest
                 await Validators.ValidateBeContract(contract);
                 Assert.Fail("Contract should not be valid without an output Key");
             }
-            catch (BeContractException) { }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
     }
