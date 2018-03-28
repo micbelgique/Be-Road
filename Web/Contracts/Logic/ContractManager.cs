@@ -85,7 +85,7 @@ namespace Contracts.Logic
                     q.Contract.Inputs.ForEach(input =>
                     {
                         var mapping = q.Mappings.FirstOrDefault(m => m.InputKey.Equals(input.Key));
-                        if(contract.Id.Equals(mapping.Contract.Id))
+                        if(contract.Id.Equals(mapping?.Contract?.Id))
                         {
                             //We need to check our contract input
                             if (!call.Inputs.TryGetValue(mapping.ContractKey, out dynamic value))
@@ -136,8 +136,8 @@ namespace Contracts.Logic
             var filtredReturns = CallAndLoopQueries(call, contract)
                 .SelectMany(r => r.Outputs)
                 .Where(pair => contract.Outputs.Any(output => output.Key.Equals(pair.Key)))
-                .ToDictionary(pair => pair.Key, pair => pair.Value)
-                ;
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
+
             var contractReturn = new BeContractReturn()
             {
                 Id = contract.Id,
