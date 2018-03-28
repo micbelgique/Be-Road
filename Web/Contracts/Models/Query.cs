@@ -11,6 +11,7 @@ namespace Contracts.Models
     [JsonConverter(typeof(BeContractQueryConverter))]
     public class Query
     {
+        [JsonProperty(Required = Required.Always)]
         public BeContract Contract { get; set; }
         public List<Mapping> Mappings { get; set; }
     }

@@ -131,5 +131,79 @@ namespace ContractsTest
             }
         }
 
+        [TestMethod]
+        public async Task TestValidateBeContractWithQueryContractFail()
+        {
+            try
+            {
+                var contract = BeContractsMock.GetAddressByDogId();
+                contract.Queries[0].Contract = null;
+
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an query contract");
+            }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+
+        [TestMethod]
+        public async Task TestValidateBeContractWithQueryMappingInputKeyFail()
+        {
+            try
+            {
+                var contract = BeContractsMock.GetAddressByDogId();
+                contract.Queries[0].Mappings[0].InputKey = null;
+
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an query mapping input key");
+            }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        
+        [TestMethod]
+        public async Task TestValidateBeContractWithQueryMappingContractFail()
+        {
+            try
+            {
+                var contract = BeContractsMock.GetAddressByDogId();
+                contract.Queries[0].Mappings[0].Contract = null;
+
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an query mapping contract");
+            }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        
+        [TestMethod]
+        public async Task TestValidateBeContractWithQueryMappingContractKeyFail()
+        {
+            try
+            {
+                var contract = BeContractsMock.GetAddressByDogId();
+                contract.Queries[0].Mappings[0].ContractKey = null;
+
+                await Validators.ValidateBeContract(contract);
+                Assert.Fail("Contract should not be valid without an query mapping contractkey");
+            }
+            catch (BeContractException ex)
+            {
+                Console.WriteLine(ex);
+            }
+        }
+        
+        [TestMethod]
+        public async Task TestValidateBeContractWithoutQueryMappingContractKeyFail()
+        {
+            var contract = BeContractsMock.GetAddressByDogId();
+            await Validators.ValidateBeContract(contract);
+        }
     }
 }

@@ -94,16 +94,12 @@ namespace Contracts.Logic
             'Query': {
               'type': 'object',
               'additionalProperties': false,
+              'required': [
+                'Contract'
+              ],
               'properties': {
                 'Contract': {
-                  'oneOf': [
-                    {
-                      'type': 'null'
-                    },
-                    {
-                      '$ref': '#'
-                    }
-                  ]
+                  'type': 'string'
                 },
                 'Mappings': {
                   'type': [
@@ -119,28 +115,20 @@ namespace Contracts.Logic
             'Mapping': {
               'type': 'object',
               'additionalProperties': false,
+              'required': [
+                'Contract',
+                'ContractKey',
+                'Input'
+              ],
               'properties': {
                 'InputKey': {
-                  'type': [
-                    'null',
-                    'string'
-                  ]
+                  'type': 'string'
                 },
                 'Contract': {
-                  'oneOf': [
-                    {
-                      'type': 'null'
-                    },
-                    {
-                      '$ref': '#'
-                    }
-                  ]
+                  'type': 'string'
                 },
                 'ContractKey': {
-                  'type': [
-                    'null',
-                    'string'
-                  ]
+                  'type': 'string'
                 }
               }
             },

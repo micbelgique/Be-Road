@@ -46,12 +46,14 @@ namespace Contracts.Converters
             var query = value as Query;
             var jObject = new JObject();
             var jMappings = new JArray();
-            query?.Mappings.ForEach(m =>
+            query?.Mappings?.ForEach(m =>
             {
-                var jMapping = new JObject();
-                jMapping.Add(new JProperty("InputKey", m.InputKey));
-                jMapping.Add(new JProperty("Contract", m?.Contract.Id));
-                jMapping.Add(new JProperty("ContractKey", m.ContractKey));
+                var jMapping = new JObject
+                {
+                    new JProperty("InputKey", m.InputKey),
+                    new JProperty("Contract", m.Contract?.Id),
+                    new JProperty("ContractKey", m.ContractKey)
+                };
                 jMappings.Add(jMapping);
             });
             jObject.AddFirst(new JProperty("Contract", query?.Contract?.Id));
