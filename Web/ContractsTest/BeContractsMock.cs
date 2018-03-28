@@ -223,5 +223,50 @@ namespace ContractsTest
             };
             return GetMathemathicContract;
         }
+        public static BeContract GetDoubleInputContract()
+        {
+            var DoubleInputContract = new BeContract()
+            {
+                Id = "DoubleInputContract",
+                Description = "This contract is an examples with 2 inputs",
+                Version = "V001",
+                Inputs = new List<Input>()
+                {
+                    new Input()
+                    {
+                        Key = "First",
+                        Description = "First string",
+                        Required = false,
+                        Type = typeof(int)
+                    },
+                    new Input()
+                    {
+                        Key = "Second",
+                        Description = "First number",
+                        Required = false,
+                        Type = typeof(int)
+                    }
+                },
+            };
+
+            DoubleInputContract.Outputs = new List<Output>()
+            {
+                new Output()
+                {
+                    Contract = DoubleInputContract,
+                    Key = "IsFirstNull",
+                    Description = "Return true if the first input is empty",
+                    Type = typeof(bool)
+                },
+                new Output()
+                {
+                    Contract = DoubleInputContract,
+                    Key = "IsSecondNull",
+                    Description = "Return true if the first input is empty",
+                    Type = typeof(bool)
+                }
+            };
+            return DoubleInputContract;
+        }
     }
 }
