@@ -18,12 +18,7 @@ namespace ContractsTest
             Validators = new Validators();
         }
 
-        public BeContract CreateGoodContract()
-        {
-            return BeContractsMock.GetOwnerIdByDogId();
-        }
-
-        public string GetContractString()
+        public string GetOwnerIdByDogIdString()
         {
             return @"
                 {
@@ -50,39 +45,125 @@ namespace ContractsTest
                 }";
         }
 
+        public string GetAddressByDogIdString()
+        {
+            return @"
+                {
+                  'Id': 'GetAddressByDogId',
+                  'Description': 'This contract is used to get the address by dog id',
+                  'Version': 'V001',
+                  'Inputs': [
+                    {
+                      'Type': 'String',
+                      'Key': 'MyDogID',
+                      'Required': true,
+                      'Description': 'The ID of the Dog'
+                    }
+                  ],
+                  'Queries': [
+                    {
+                      'Contract': 'GetOwnerIdByDogId',
+                      'Mappings': [
+                        {
+                          'InputKey': 'DogID',
+                          'Contract': 'GetAddressByDogId',
+                          'ContractKey': 'MyDogID'
+                        }
+                      ]
+                    },
+                    {
+                      'Contract': 'GetAddressByOwnerId',
+                      'Mappings': [
+                        {
+                          'InputKey': 'OwnerID',
+                          'Contract': 'GetOwnerIdByDogId',
+                          'ContractKey': 'OwnerIDOfTheDog'
+                        }
+                      ]
+                    }
+                  ],
+                  'Outputs': [
+                    {
+                      'Contract': 'GetAddressByOwnerId',
+                      'Type': 'String',
+                      'Description': 'Street name',
+                      'Key': 'Street'
+                    },
+                    {
+                      'Contract': 'GetAddressByOwnerId',
+                      'Type': 'Int32',
+                      'Description': 'Street number',
+                      'Key': 'StreetNumber'
+                    },
+                    {
+                      'Contract': 'GetAddressByOwnerId',
+                      'Type': 'String',
+                      'Description': 'Country of the address',
+                      'Key': 'Country'
+                    }
+                  ]
+                }";
+        }
+
         #endregion
 
-        [TestMethod]
-        public void TestSerializeBeContract()
+        public void TestSerializedJson(string expected, string actual)
         {
-            var json = new Generators().SerializeBeContract(CreateGoodContract());
-            var expected = Regex.Replace(GetContractString(), @"\s+", "").Replace("'", "\"");
-            var actual = Regex.Replace(json, @"\s+", "");
+            expected = Regex.Replace(expected, @"\s+", "").Replace("'", "\"");
+            actual = Regex.Replace(actual, @"\s+", "");
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void TestDeserializeBeContract()
+        public void TestDeserializedContracts(BeContract expected, BeContract actual)
         {
-            var contractByJson = new Generators().DeserializeBeContract(GetContractString());
-            var contract = CreateGoodContract();
-            Assert.AreEqual(contract.Description, contractByJson.Description);
-            Assert.AreEqual(contract.Id, contractByJson.Id);
-            Assert.AreEqual(contract.Version, contractByJson.Version);
-            for(int i = 0; i < contract.Inputs.Count; i++)
+            Assert.AreEqual(expected.Description, actual.Description);
+            Assert.AreEqual(expected.Id, actual.Id);
+            Assert.AreEqual(expected.Version, actual.Version);
+            for (int i = 0; i < expected.Inputs.Count; i++)
             {
-                Assert.AreEqual(contract.Inputs[i].Description, contractByJson.Inputs[i].Description);
-                Assert.AreEqual(contract.Inputs[i].Key, contractByJson.Inputs[i].Key);
-                Assert.AreEqual(contract.Inputs[i].Required, contractByJson.Inputs[i].Required);
-                Assert.AreEqual(contract.Inputs[i].Type, contractByJson.Inputs[i].Type);
+                Assert.AreEqual(expected.Inputs[i].Description, actual.Inputs[i].Description);
+                Assert.AreEqual(expected.Inputs[i].Key, actual.Inputs[i].Key);
+                Assert.AreEqual(expected.Inputs[i].Required, actual.Inputs[i].Required);
+                Assert.AreEqual(expected.Inputs[i].Type, actual.Inputs[i].Type);
             }
-            for (int i = 0; i < contract.Outputs.Count; i++)
+            for (int i = 0; i < expected.Outputs.Count; i++)
             {
-                Assert.AreEqual(contract.Outputs[i].Description, contractByJson.Outputs[i].Description);
-                Assert.AreEqual(contract.Outputs[i].Key, contractByJson.Outputs[i].Key);
-                Assert.AreEqual(contract.Outputs[i].Contract.Id, contractByJson.Outputs[i].Contract.Id);
-                Assert.AreEqual(contract.Outputs[i].Type, contractByJson.Outputs[i].Type);
+                Assert.AreEqual(expected.Outputs[i].Description, actual.Outputs[i].Description);
+                Assert.AreEqual(expected.Outputs[i].Key, actual.Outputs[i].Key);
+                Assert.AreEqual(expected.Outputs[i].Contract.Id, actual.Outputs[i].Contract.Id);
+                Assert.AreEqual(expected.Outputs[i].Type, actual.Outputs[i].Type);
             }
+        }
+
+        [TestMethod]
+        public void TestSerializeBeContractWithoutQuery()
+        {
+            var json = Validators.Generators.SerializeBeContract(BeContractsMock.GetOwnerIdByDogId());
+            TestSerializedJson(GetOwnerIdByDogIdString(), json);
+        }
+
+
+        [TestMethod]
+        public void TestDeserializeBeContractWithoutQuery()
+        {
+            var contractByJson = Validators.Generators.DeserializeBeContract(GetOwnerIdByDogIdString());
+            var contract = BeContractsMock.GetOwnerIdByDogId();
+            TestDeserializedContracts(contract, contractByJson);
+        }
+
+        [TestMethod]
+        public void TestSerializeBeContractWithQuery()
+        {
+            var json = Validators.Generators.SerializeBeContract(BeContractsMock.GetAddressByDogId());
+            TestSerializedJson(GetAddressByDogIdString(), json);
+        }
+
+        [TestMethod]
+        public void TestDeserializeBeContractWithQuery()
+        {
+            var contractByJson = Validators.Generators.DeserializeBeContract(GetAddressByDogIdString());
+            var contract = BeContractsMock.GetAddressByDogId();
+            TestDeserializedContracts(contract, contractByJson);
         }
     }
 }

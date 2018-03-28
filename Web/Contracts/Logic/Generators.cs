@@ -193,11 +193,11 @@ namespace Contracts.Logic
 
         public string SerializeBeContract(BeContract contract)
         {
-            return JsonConvert.SerializeObject(contract, Formatting.Indented, new BeContractInputConverter(), new BeContractOutputConverter());
+            return JsonConvert.SerializeObject(contract, Formatting.Indented, new BeContractInputConverter());
         }
         public BeContract DeserializeBeContract(string json)
         {
-            return JsonConvert.DeserializeObject<BeContract>(json, new BeContractInputConverter(), new BeContractOutputConverter());
+            return JsonConvert.DeserializeObject<BeContract>(json, new BeContractInputConverter());
         }
     }
 }
