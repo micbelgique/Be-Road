@@ -49,11 +49,13 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ASSMock.cs" />
     <Compile Include="BeContractsMock.cs" />
     <Compile Include="BeContractSchemaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BeContractCallTest.cs" />
     <Compile Include="BeContractSerializeTest.cs" />
+    <Compile Include="AdapterServerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
