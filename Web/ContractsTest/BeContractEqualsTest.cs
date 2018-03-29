@@ -15,14 +15,14 @@ namespace ContractsTest
             Assert.AreEqual(expected.Description, actual.Description);
             Assert.AreEqual(expected.Id, actual.Id);
             Assert.AreEqual(expected.Version, actual.Version);
-            for (int i = 0; i < expected.Inputs.Count; i++)
+            for (int i = 0; i < expected.Inputs?.Count; i++)
             {
                 Assert.AreEqual(expected.Inputs[i].Description, actual.Inputs[i].Description);
                 Assert.AreEqual(expected.Inputs[i].Key, actual.Inputs[i].Key);
                 Assert.AreEqual(expected.Inputs[i].Required, actual.Inputs[i].Required);
                 Assert.AreEqual(expected.Inputs[i].Type, actual.Inputs[i].Type);
             }
-            for (int i = 0; i < expected.Queries.Count; i++)
+            for (int i = 0; i < expected.Queries?.Count; i++)
             {
                 Assert.AreEqual(expected.Queries[i].Contract.Id, actual.Queries[i].Contract.Id);
                 for (int j = 0; j < expected.Queries[i].Mappings.Count; j++)
@@ -33,7 +33,7 @@ namespace ContractsTest
                 }
             }
 
-            for (int i = 0; i < expected.Outputs.Count; i++)
+            for (int i = 0; i < expected.Outputs?.Count; i++)
             {
                 Assert.AreEqual(expected.Outputs[i].Description, actual.Outputs[i].Description);
                 Assert.AreEqual(expected.Outputs[i].Key, actual.Outputs[i].Key);
