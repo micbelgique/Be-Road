@@ -12,7 +12,27 @@ namespace Contracts.Dal
     {
         public ContractContext() : base("name=ContractContext")
         {
-            
+
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<BeContract>()
+                .HasMany(c => c.Inputs)
+                .WithOptional()
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<BeContract>()
+                .HasMany(c => c.Queries)
+                .WithOptional()
+                .WillCascadeOnDelete();
+
+            modelBuilder.Entity<BeContract>()
+                .HasMany(c => c.Outputs)
+                .WithOptional()
+                .WillCascadeOnDelete();
+
+            base.OnModelCreating(modelBuilder);
         }
 
         public DbSet<BeContract> Contracts { get; set; }

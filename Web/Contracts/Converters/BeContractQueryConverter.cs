@@ -31,8 +31,8 @@ namespace Contracts.Converters
                 query.Mappings.Add(new Mapping()
                 {
                     Contract = new BeContract() { Id = (string)token["Contract"] },
-                    ContractKey = (string)obj["ContractKey"],
-                    InputKey = (string)obj["InputKey"],
+                    ContractKey = (string)token["ContractKey"],
+                    InputKey = (string)token["InputKey"],
                 });
             });
 

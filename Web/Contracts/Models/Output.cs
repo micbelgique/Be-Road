@@ -24,7 +24,11 @@ namespace Contracts.Models
         /// Contract where the output comes from (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public BeContract Contract { get; set; }
+        public virtual BeContract Contract { get; set; } 
+        /// <summary>
+        /// Id of the contract, used for EF
+        /// </summary>
+        public string ContractId { get; set; }
         /// <summary>
         /// Name of the variable returned (Required)
         /// </summary>

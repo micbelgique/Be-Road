@@ -24,10 +24,14 @@ namespace Contracts.Models
         /// Contract called
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public BeContract Contract { get; set; }
+        public virtual BeContract Contract { get; set; }
+        /// <summary>
+        /// Id of the contract, used for EF
+        /// </summary>
+        public string ContractId { get; set; }
         /// <summary>
         /// Set of mappings used to know what other contracts to call
         /// </summary>
-        public List<Mapping> Mappings { get; set; }
+        public virtual List<Mapping> Mappings { get; set; }
     }
 }
