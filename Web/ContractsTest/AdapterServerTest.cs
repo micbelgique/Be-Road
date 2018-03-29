@@ -1,5 +1,6 @@
 ﻿using System;
-using Contracts.Dal.Mock;
+using System.Collections.Generic;
+using Contracts.Dal;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -24,15 +25,19 @@ namespace ContractsTest
         [TestMethod]
         public void TestFindASPass()
         {
-            var ads = asService.FindAS("GetOwnerIdByDogId");
-            Assert.AreEqual(new AdapterServer() { ContractNames = { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" }, ads);
+            var adsActual = asService.FindAS("GetOwnerIdByDogId");
+            var adsExpected = new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" };
+            CollectionAssert.AreEqual(adsExpected.ContractNames, adsActual.ContractNames);
+            Assert.AreEqual(adsExpected.ISName, adsActual.ISName);
+            Assert.AreEqual(adsExpected.Url, adsActual.Url);
+
         }
 
         [TestMethod]
         public void TestFindASFail()
         {
-            var ads = asService.FindAS("Fail");
-            Assert.AreEqual(new AdapterServer() { ContractNames = { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" }, ads);
+            var adsActual = asService.FindAS("Fail");
+            Assert.AreEqual(null, adsActual);
         }
     }
 }

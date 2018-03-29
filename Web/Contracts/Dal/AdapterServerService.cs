@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Dal.Mock
+namespace Contracts.Dal
 {
     /// <summary>
     /// Class used to find an adapter server

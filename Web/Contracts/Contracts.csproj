@@ -64,7 +64,6 @@
     <Compile Include="Dal\AdapterServerService.cs" />
     <Compile Include="Dal\ContractContext.cs" />
     <Compile Include="Dal\Mock\AddressMock.cs" />
-    <Compile Include="Dal\Mock\ASSMock.cs" />
     <Compile Include="Dal\Mock\BeContractsMock.cs" />
     <Compile Include="Dal\Mock\MathematicsMock.cs" />
     <Compile Include="Dal\Mock\VeterinaryMock.cs" />
