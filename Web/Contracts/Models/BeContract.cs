@@ -28,14 +28,14 @@ namespace Contracts.Models
         /// <summary>
         /// Values used by the contract
         /// </summary>
-        public List<Input> Inputs { get; set; }
+        public virtual List<Input> Inputs { get; set; }
         /// <summary>
         /// Other contracts to call to get the needed data
         /// </summary>
-        public List<Query> Queries { get; set; }
+        public virtual List<Query> Queries { get; set; }
         /// <summary>
         /// Values returned by the contract
         /// </summary>
-        public List<Output> Outputs { get; set; }
+        public virtual List<Output> Outputs { get; set; }
     }
 }

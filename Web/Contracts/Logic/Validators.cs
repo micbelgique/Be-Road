@@ -71,11 +71,10 @@ namespace Contracts.Logic
                         call.Inputs[input.Key] = value;
                     }
 
-
                     //Check the types
-                    if (value.GetType() != input.Type)
+                    if (value.GetType().Name != input.Type)
                     {
-                        throw new BeContractException($"The contract expects {input.Type.Name} but {value.GetType().Name} was found")
+                        throw new BeContractException($"The contract expects {input.Type} but {value.GetType().Name} was found")
                         {
                             BeContract = contract,
                             BeContractCall = call
@@ -119,9 +118,9 @@ namespace Contracts.Logic
 
 
                     //Check the types
-                    if (value.GetType() != output.Type)
+                    if (value.GetType().Name != output.Type)
                     {
-                        throw new BeContractException($"The contract expects {output.Type.Name} but {value.GetType().Name} was found")
+                        throw new BeContractException($"The contract expects {output.Type} but {value.GetType().Name} was found")
                         {
                             BeContract = contract,
                             BeContractReturn = ret

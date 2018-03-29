@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,12 @@ namespace Contracts.Models
     public class Input
     {
         /// <summary>
+        /// Key for entity framework
+        /// </summary>
+        [Key]
+        [JsonIgnore]
+        public int Id { get; set; }
+        /// <summary>
         /// Name of the variable (Required)
         /// </summary>
         [JsonProperty(Required = Newtonsoft.Json.Required.Always)]
@@ -22,7 +29,7 @@ namespace Contracts.Models
         /// Type of the value (Required)
         /// </summary>
         [JsonProperty(Required = Newtonsoft.Json.Required.Always)]
-        public Type Type { get; set; }
+        public string Type { get; set; }
         /// <summary>
         /// Used to define whether the variable is required or not
         /// </summary>

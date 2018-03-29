@@ -27,8 +27,8 @@ namespace ContractsTest
                   'Version': 'V001',
                   'Inputs': [
                     {
-                      'Type': 'String',
                       'Key': 'DogID',
+                      'Type': 'String',
                       'Required': true,
                       'Description': 'The ID of the Dog'
                     }
@@ -54,8 +54,8 @@ namespace ContractsTest
                   'Version': 'V001',
                   'Inputs': [
                     {
-                      'Type': 'String',
                       'Key': 'MyDogID',
+                      'Type': 'String',
                       'Required': true,
                       'Description': 'The ID of the Dog'
                     }
@@ -126,6 +126,17 @@ namespace ContractsTest
                 Assert.AreEqual(expected.Inputs[i].Required, actual.Inputs[i].Required);
                 Assert.AreEqual(expected.Inputs[i].Type, actual.Inputs[i].Type);
             }
+            for (int i = 0; i < expected.Queries.Count; i++)
+            {
+                Assert.AreEqual(expected.Queries[i].Contract.Id, actual.Queries[i].Contract.Id);
+                for (int j = 0; j < expected.Queries[i].Mappings.Count; j++)
+                {
+                    Assert.AreEqual(expected.Queries[i].Mappings[j].ContractKey, actual.Queries[i].Mappings[j].ContractKey);
+                    Assert.AreEqual(expected.Queries[i].Mappings[j].Contract.Id, actual.Queries[i].Mappings[j].Contract.Id);
+                    Assert.AreEqual(expected.Queries[i].Mappings[j].InputKey, actual.Queries[i].Mappings[j].InputKey);
+                }
+            }
+
             for (int i = 0; i < expected.Outputs.Count; i++)
             {
                 Assert.AreEqual(expected.Outputs[i].Description, actual.Outputs[i].Description);

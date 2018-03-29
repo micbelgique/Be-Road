@@ -104,7 +104,7 @@ namespace ContractsTest
             }
             catch (BeContractException ex)
             {
-                Assert.AreEqual($"The contract expects {contract.Inputs[0].Type.Name} but {call.Inputs["DogID"].GetType().Name} was found", ex.Message);
+                Assert.AreEqual($"The contract expects {contract.Inputs[0].Type} but {call.Inputs["DogID"].GetType().Name} was found", ex.Message);
             }
         }
         

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,10 +16,19 @@ namespace Contracts.Models
     public class Output
     {
         /// <summary>
+        /// Key for entity framework
+        /// </summary>
+        [Key]
+        public int Id { get; set; }
+        /// <summary>
         /// Contract where the output comes from (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public BeContract Contract { get; set; }
+        public virtual BeContract Contract { get; set; } 
+        /// <summary>
+        /// Id of the contract, used for EF
+        /// </summary>
+        public string ContractId { get; set; }
         /// <summary>
         /// Name of the variable returned (Required)
         /// </summary>
@@ -28,7 +38,7 @@ namespace Contracts.Models
         /// Type of the variable returned (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public Type Type { get; set; }
+        public string Type { get; set; }
         /// <summary>
         /// Describes the returned variable
         /// </summary>

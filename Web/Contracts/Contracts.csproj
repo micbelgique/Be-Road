@@ -30,6 +30,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -40,6 +46,7 @@
       <HintPath>..\packages\NJsonSchema.9.10.41\lib\net45\NJsonSchema.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Runtime.Serialization" />
@@ -52,10 +59,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeContractException.cs" />
-    <Compile Include="Converters\BeContractInputConverter.cs" />
     <Compile Include="Converters\BeContractOutputConverter.cs" />
     <Compile Include="Converters\BeContractQueryConverter.cs" />
     <Compile Include="Dal\AdapterServerService.cs" />
+    <Compile Include="Dal\ContractContext.cs" />
     <Compile Include="Dal\Mock\AddressMock.cs" />
     <Compile Include="Dal\Mock\ASSMock.cs" />
     <Compile Include="Dal\Mock\BeContractsMock.cs" />
