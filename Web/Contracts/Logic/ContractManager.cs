@@ -11,11 +11,14 @@ namespace Contracts.Logic
 {
     public class ContractManager
     {
-        private Validators Validators { get; set; }
+        private Validators validators;
+        private AdapterServerService asService;
+        
 
         public ContractManager()
         {
-            Validators = new Validators();
+            validators = new Validators();
+            asService = new AdapterServerService();
         }
         
         /// <summary>
@@ -28,21 +31,17 @@ namespace Contracts.Logic
         {
             //Forward the call to the good service
             BeContractReturn returns = null;
-            if (call.Id.Equals("GetOwnerIdByDogId"))
-                returns = VeterinaryMock.GetOwnerId(call);
-            else if (call.Id.Equals("GetMathemathicFunction"))
-                returns = MathematicsMock.GetSumFunction(call);
-            else if (call.Id.Equals("GetAddressByOwnerId"))
-                returns = AddressMock.GetAddressByOwnerId(call);
-            else if (call.Id.Equals("GetAddressByDogId"))
-                Console.WriteLine("Queries not yet supported");
+
+            var ads = asService.FindAS(call.Id);
+            if (ads != null)
+                ads.Call(call.Id);
             else
                 throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
 
             //TODO:
             //  -Send error to the service
             if (returns != null)
-                Validators.ValidateBeContractReturn(contract, returns);
+                validators.ValidateBeContractReturn(contract, returns);
 
             return returns;
         }
@@ -65,7 +64,7 @@ namespace Contracts.Logic
             if (call == null)
                 throw new BeContractException("Contract call is null");
 
-            Validators.ValidateBeContractCall(contract, call);
+            validators.ValidateBeContractCall(contract, call);
 
             var returns = new List<BeContractReturn>();
 
