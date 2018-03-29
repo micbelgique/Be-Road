@@ -1,4 +1,6 @@
-﻿using Contracts.Logic;
+﻿using Contracts.Dal;
+using Contracts.Dal.Mock;
+using Contracts.Logic;
 using Contracts.Models;
 using System;
 using System.Collections.Generic;
@@ -35,14 +37,19 @@ namespace ConsoleTesting
 
         static void Main(string[] args)
         {
+            AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
+            Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
             var manager = new ContractManager();
-            manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
+            var db = new ContractContext();
+
+            Console.WriteLine(db.Contracts);
+            /*manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:"));
             manager.Call(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !"));
             manager.Call(CreateContractCall("GetAddressByDogId", "MyDogID:D-123"));
-            manager.Call(CreateContractCall("GetMathemathicFunction", "A:5", "B:19"));
-            Console.Read();
+            manager.Call(CreateContractCall("GetMathemathicFunction", "A:5", "B:19"));*/
+            Console.ReadLine();
         }
     }
 }
