@@ -34,7 +34,7 @@ namespace ContractsTest
                         Key = "DogID",
                         Description = "The ID of the Dog",
                         Required = true,
-                        Type = typeof(string)
+                        Type = typeof(string).Name
                     }
                 },
             };
@@ -46,7 +46,7 @@ namespace ContractsTest
                     Contract = GetDogOwnerContract,
                     Key = "OwnerIDOfTheDog",
                     Description = "The ID of the owner of the dog",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
             return GetDogOwnerContract;
@@ -66,7 +66,7 @@ namespace ContractsTest
                         Key = "OwnerID",
                         Description = "The ID of the Owner",
                         Required = true,
-                        Type = typeof(string)
+                        Type = typeof(string).Name
                     }
                 },
             };
@@ -78,21 +78,21 @@ namespace ContractsTest
                     Contract = GetAddressByOwnerContract,
                     Key = "Street",
                     Description = "Street name",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "StreetNumber",
                     Description = "Street number",
-                    Type = typeof(int)
+                    Type = typeof(int).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "Country",
                     Description = "Country of the address",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
             return GetAddressByOwnerContract;
@@ -115,7 +115,7 @@ namespace ContractsTest
                         Key = "MyDogID",
                         Description = "The ID of the Dog",
                         Required = true,
-                        Type = typeof(string)
+                        Type = typeof(string).Name
                     }
                 },
             };
@@ -157,21 +157,21 @@ namespace ContractsTest
                     Contract = GetAddressByOwnerContract,
                     Key = "Street",
                     Description = "Street name",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "StreetNumber",
                     Description = "Street number",
-                    Type = typeof(int)
+                    Type = typeof(int).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "Country",
                     Description = "Country of the address",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
 
@@ -192,14 +192,14 @@ namespace ContractsTest
                         Key = "A",
                         Description = "First number",
                         Required = true,
-                        Type = typeof(int)
+                        Type = typeof(int).Name
                     },
                     new Input()
                     {
                         Key = "B",
                         Description = "First number",
                         Required = true,
-                        Type = typeof(int)
+                        Type = typeof(int).Name
                     }
                 },
             };
@@ -211,14 +211,14 @@ namespace ContractsTest
                     Contract = GetMathemathicContract,
                     Key = "Total",
                     Description = "This is the sum of a + b",
-                    Type = typeof(int)
+                    Type = typeof(int).Name
                 },
                 new Output()
                 {
                     Contract = GetMathemathicContract,
                     Key = "Formula",
                     Description = "This is the sum formula",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
             return GetMathemathicContract;
@@ -237,14 +237,14 @@ namespace ContractsTest
                         Key = "First",
                         Description = "First string",
                         Required = false,
-                        Type = typeof(int)
+                        Type = typeof(int).Name
                     },
                     new Input()
                     {
                         Key = "Second",
                         Description = "First number",
                         Required = false,
-                        Type = typeof(int)
+                        Type = typeof(int).Name
                     }
                 },
             };
@@ -256,14 +256,14 @@ namespace ContractsTest
                     Contract = DoubleInputContract,
                     Key = "IsFirstNull",
                     Description = "Return true if the first input is empty",
-                    Type = typeof(bool)
+                    Type = typeof(bool).Name
                 },
                 new Output()
                 {
                     Contract = DoubleInputContract,
                     Key = "IsSecondNull",
                     Description = "Return true if the first input is empty",
-                    Type = typeof(bool)
+                    Type = typeof(bool).Name
                 }
             };
             return DoubleInputContract;

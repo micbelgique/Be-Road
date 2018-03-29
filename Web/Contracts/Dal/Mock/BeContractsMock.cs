@@ -34,7 +34,7 @@ namespace Contracts.Dal.Mock
                         Key = "DogID",
                         Description = "The ID of the Dog",
                         Required = true,
-                        Type = typeof(string)
+                        Type = typeof(string).Name
                     }
                 },
             };
@@ -46,7 +46,7 @@ namespace Contracts.Dal.Mock
                     Contract = GetDogOwnerContract,
                     Key = "OwnerIDOfTheDog",
                     Description = "The ID of the owner of the dog",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
             return GetDogOwnerContract;
@@ -66,7 +66,7 @@ namespace Contracts.Dal.Mock
                         Key = "OwnerID",
                         Description = "The ID of the Owner",
                         Required = true,
-                        Type = typeof(string)
+                        Type = typeof(string).Name
                     }
                 },
             };
@@ -78,21 +78,21 @@ namespace Contracts.Dal.Mock
                     Contract = GetAddressByOwnerContract,
                     Key = "Street",
                     Description = "Street name",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "StreetNumber",
                     Description = "Street number",
-                    Type = typeof(int)
+                    Type = typeof(int).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "Country",
                     Description = "Country of the address",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
             return GetAddressByOwnerContract;
@@ -115,7 +115,7 @@ namespace Contracts.Dal.Mock
                         Key = "MyDogID",
                         Description = "The ID of the Dog",
                         Required = true,
-                        Type = typeof(string)
+                        Type = typeof(string).Name
                     }
                 },
             };
@@ -157,21 +157,21 @@ namespace Contracts.Dal.Mock
                     Contract = GetAddressByOwnerContract,
                     Key = "Street",
                     Description = "Street name",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "StreetNumber",
                     Description = "Street number",
-                    Type = typeof(int)
+                    Type = typeof(int).Name
                 },
                 new Output()
                 {
                     Contract = GetAddressByOwnerContract,
                     Key = "Country",
                     Description = "Country of the address",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
 
@@ -192,14 +192,14 @@ namespace Contracts.Dal.Mock
                         Key = "A",
                         Description = "First number",
                         Required = true,
-                        Type = typeof(int)
+                        Type = typeof(int).Name
                     },
                     new Input()
                     {
                         Key = "B",
                         Description = "First number",
                         Required = true,
-                        Type = typeof(int)
+                        Type = typeof(int).Name
                     }
                 },
             };
@@ -211,14 +211,14 @@ namespace Contracts.Dal.Mock
                     Contract = GetMathemathicContract,
                     Key = "Total",
                     Description = "This is the sum of a + b",
-                    Type = typeof(int)
+                    Type = typeof(int).Name
                 },
                 new Output()
                 {
                     Contract = GetMathemathicContract,
                     Key = "Formula",
                     Description = "This is the sum formula",
-                    Type = typeof(string)
+                    Type = typeof(string).Name
                 }
             };
             return GetMathemathicContract;

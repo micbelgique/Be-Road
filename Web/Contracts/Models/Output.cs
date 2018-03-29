@@ -34,7 +34,7 @@ namespace Contracts.Models
         /// Type of the variable returned (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public Type Type { get; set; }
+        public string Type { get; set; }
         /// <summary>
         /// Describes the returned variable
         /// </summary>

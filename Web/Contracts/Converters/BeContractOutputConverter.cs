@@ -25,20 +25,20 @@ namespace Contracts.Converters
                 Contract = new BeContract() { Id = (string)obj["Contract"] },
                 Description = (string)obj["Description"],
                 Key = (string)obj["Key"],
-                Type = Type.GetType($"System.{(string)obj["Type"]}")
+                Type = (string)obj["Type"]
             };
             return output;
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var converters = serializer.Converters.Where(x => !(x is BeContractInputConverter)).ToArray();
+            var converters = serializer.Converters.Where(x => !(x is BeContractOutputConverter)).ToArray();
             //Create a whole new JObject for exception: Self referencing loop throws by JObject.FromObject
             var output = value as Output;
             var jObject = new JObject();
             jObject.AddFirst(new JProperty("Key", output.Key));
             jObject.AddFirst(new JProperty("Description", output?.Description));
-            jObject.AddFirst(new JProperty("Type", output.Type?.Name));
+            jObject.AddFirst(new JProperty("Type", output.Type));
             jObject.AddFirst(new JProperty("Contract", output.Contract?.Id));
             jObject.WriteTo(writer, converters);
         }

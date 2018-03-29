@@ -27,8 +27,8 @@ namespace ContractsTest
                   'Version': 'V001',
                   'Inputs': [
                     {
-                      'Type': 'String',
                       'Key': 'DogID',
+                      'Type': 'String',
                       'Required': true,
                       'Description': 'The ID of the Dog'
                     }
@@ -54,8 +54,8 @@ namespace ContractsTest
                   'Version': 'V001',
                   'Inputs': [
                     {
-                      'Type': 'String',
                       'Key': 'MyDogID',
+                      'Type': 'String',
                       'Required': true,
                       'Description': 'The ID of the Dog'
                     }

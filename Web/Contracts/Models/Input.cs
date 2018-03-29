@@ -18,6 +18,7 @@ namespace Contracts.Models
         /// Key for entity framework
         /// </summary>
         [Key]
+        [JsonIgnore]
         public int Id { get; set; }
         /// <summary>
         /// Name of the variable (Required)
@@ -28,7 +29,7 @@ namespace Contracts.Models
         /// Type of the value (Required)
         /// </summary>
         [JsonProperty(Required = Newtonsoft.Json.Required.Always)]
-        public Type Type { get; set; }
+        public string Type { get; set; }
         /// <summary>
         /// Used to define whether the variable is required or not
         /// </summary>

@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BeContractException.cs" />
-    <Compile Include="Converters\BeContractInputConverter.cs" />
     <Compile Include="Converters\BeContractOutputConverter.cs" />
     <Compile Include="Converters\BeContractQueryConverter.cs" />
     <Compile Include="Dal\ContractContext.cs" />
