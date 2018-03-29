@@ -36,5 +36,9 @@ namespace Contracts.Dal
         }
 
         public DbSet<BeContract> Contracts { get; set; }
+        public DbSet<Input> Inputs { get; set; }
+        public DbSet<Query> Queries { get; set; }
+        public DbSet<Mapping> Mappings { get; set; }
+        public DbSet<Output> Outputs { get; set; }
     }
 }
