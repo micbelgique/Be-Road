@@ -19,6 +19,9 @@ namespace Contracts.Models
         /// </summary>
         [Key]
         public int Id { get; set; }
+        /// <summary>
+        /// Name of the variable (Required)
+        /// </summary>
         [JsonProperty(Required = Newtonsoft.Json.Required.Always)]
         public string Key { get; set; }
         /// <summary>
