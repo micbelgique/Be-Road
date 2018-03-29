@@ -16,6 +16,5 @@ namespace Contracts.Dal
         }
 
         public DbSet<BeContract> Contracts { get; set; }
-        public DbSet<Temporary> Temps { get; set; }
     }
 }

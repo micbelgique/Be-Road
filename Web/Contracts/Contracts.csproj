@@ -76,7 +76,6 @@
     <Compile Include="Models\Mapping.cs" />
     <Compile Include="Models\Output.cs" />
     <Compile Include="Models\Query.cs" />
-    <Compile Include="Models\Temporary.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

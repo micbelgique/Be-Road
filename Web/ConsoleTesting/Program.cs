@@ -38,11 +38,10 @@ namespace ConsoleTesting
         static void Main(string[] args)
         {
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            Console.WriteLine(System.IO.Directory.GetCurrentDirectory());
             var manager = new ContractManager();
             var db = new ContractContext();
 
-            Console.WriteLine(db.Contracts);
+            Console.WriteLine(db.Contracts.Count());
             /*manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:"));
