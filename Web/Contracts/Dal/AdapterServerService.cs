@@ -36,7 +36,7 @@ namespace Contracts.Dal
             var ads = FindAS(call.Id);
             if (ads != null)
             {
-                Console.WriteLine($"Calling {0} at {1}", ads.ISName, ads.Url);
+                Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
                 return FindMock(ads, call);
             }
             else
