@@ -65,6 +65,7 @@
     <Compile Include="BeContractSerializeTest.cs" />
     <Compile Include="AdapterServerTest.cs" />
     <Compile Include="BeContractDalTest.cs" />
+    <Compile Include="ContractManagerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
