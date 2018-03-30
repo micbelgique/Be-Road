@@ -32,6 +32,11 @@ namespace Contracts.Dal
                 .WithOptional()
                 .WillCascadeOnDelete();
 
+            modelBuilder.Entity<Query>()
+                .HasMany(q => q.Mappings)
+                .WithOptional()
+                .WillCascadeOnDelete();
+
             base.OnModelCreating(modelBuilder);
         }
 
