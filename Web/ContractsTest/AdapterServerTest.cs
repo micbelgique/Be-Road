@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Contracts.Dal;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Contracts.Logic;
+using Contracts;
 
 namespace ContractsTest
 {
@@ -11,6 +13,18 @@ namespace ContractsTest
     {
         #region Initializing
         private AdapterServerService asService;
+        private BeContractCall call;
+        private Validators valid;
+
+        public string GetBeContractCallString()
+        {
+            return @"{
+            'Id': 'GetOwnerIdByDogId',
+	        'Inputs': {
+                    'DogID': 'D-123'
+                }
+            }";
+        }
 
         [TestInitialize]
         public void TestInitialize()
@@ -19,25 +33,34 @@ namespace ContractsTest
             {
                 ADSList = ASSMock.Fill()
             };
+
+            valid = new Validators();
+            call = valid.Generators.GenerateBeContractCall(GetBeContractCallString());
         }
         #endregion
 
         [TestMethod]
-        public void TestFindASPass()
+        public void TestCallPass()
         {
-            var adsActual = asService.FindAS("GetOwnerIdByDogId");
-            var adsExpected = new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" };
-            CollectionAssert.AreEqual(adsExpected.ContractNames, adsActual.ContractNames);
-            Assert.AreEqual(adsExpected.ISName, adsActual.ISName);
-            Assert.AreEqual(adsExpected.Url, adsActual.Url);
-
+            var returnsActual = asService.Call(call);
+            var returnsExpected = new BeContractReturn()
+            {
+                Id = "GetOwnerIdByDogId",
+                Outputs = new Dictionary<string, dynamic>()
+                {
+                    { "OwnerIDOfTheDog", "Wilson !"}
+                }
+            };
+            CollectionAssert.AreEqual(returnsExpected.Outputs, returnsActual.Outputs);
+            Assert.AreEqual(returnsExpected.Id, returnsActual.Id);
         }
 
         [TestMethod]
-        public void TestFindASFail()
+        [ExpectedException(typeof(BeContractException))]
+        public void TestCallFail()
         {
-            var adsActual = asService.FindAS("Fail");
-            Assert.AreEqual(null, adsActual);
+            call.Id = "Fail";
+            var returnsActual = asService.Call(call);
         }
     }
 }

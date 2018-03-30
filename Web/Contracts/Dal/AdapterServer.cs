@@ -23,13 +23,5 @@ namespace Contracts.Models
         /// URL of the adapter server API
         /// </summary>
         public string Url { get; set; }
-
-        /// <summary>
-        /// Calls the api of the Information System
-        /// </summary>
-        public void Call(string id)
-        {
-            Console.WriteLine($"Calling {0}", ISName);
-        }
     }
 }

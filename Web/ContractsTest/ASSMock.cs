@@ -10,7 +10,7 @@ namespace ContractsTest
     /// <summary>
     /// Class used to fill the Adapter Server list for the tests
     /// </summary>
-    class ASSMock
+    public class ASSMock
     {
         /// <summary>
         /// Fills the the Adapter Server list
@@ -22,7 +22,7 @@ namespace ContractsTest
             {
                 new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" },
                 new AdapterServer() { ContractNames = new List<string>  { "GetMathemathicFunction" }, ISName = "MathLovers", Url = "www.mathlovers.com/api/" },
-                new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "www.doggies.com/api/" },
+                new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "www.citizens.com/api/" },
             };
 
             return asList;

@@ -1,13 +1,13 @@
-﻿using Contracts.Dal;
-using Contracts.Dal.Mock;
-using Contracts.Logic;
-using Contracts.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Contracts.Models;
+using Contracts.Dal;
+using ContractsTest;
+using Contracts.Logic;
 
 namespace ConsoleTesting
 {
@@ -38,7 +38,12 @@ namespace ConsoleTesting
         {
             //Used for connection string
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            var manager = new ContractManager();
+            var asService = new AdapterServerService
+            {
+                ADSList = ASSMock.Fill()
+            };
+
+            var manager = new ContractManager(asService);
 
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
             manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));

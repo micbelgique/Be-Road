@@ -15,10 +15,10 @@ namespace Contracts.Logic
         private AdapterServerService asService;
         
 
-        public ContractManager()
+        public ContractManager(AdapterServerService asService)
         {
             validators = new Validators();
-            asService = new AdapterServerService();
+            this.asService = asService;
         }
         
         /// <summary>
@@ -30,13 +30,7 @@ namespace Contracts.Logic
         private BeContractReturn CallService(BeContract contract, BeContractCall call)
         {
             //Forward the call to the good service
-            BeContractReturn returns = null;
-
-            var ads = asService.FindAS(call.Id);
-            if (ads != null)
-                ads.Call(call.Id);
-            else
-                throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
+            BeContractReturn returns = asService.Call(call);
 
             //TODO:
             //  -Send error to the service

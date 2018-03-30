@@ -57,6 +57,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ContractsTest\ContractsTest.csproj">
+      <Project>{0b85ceff-4cc7-4c67-a289-9695b2824e98}</Project>
+      <Name>ContractsTest</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
       <Name>Contracts</Name>
