@@ -5,6 +5,7 @@ using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Contracts.Logic;
 using Contracts;
+using Contracts.Dal.Mock;
 
 namespace ContractsTest
 {
@@ -56,11 +57,32 @@ namespace ContractsTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(BeContractException))]
         public void TestCallFail()
         {
             call.Id = "Fail";
-            var returnsActual = asService.Call(call);
+            Assert.ThrowsException<BeContractException>(() => asService.Call(call), "No service found for Fail");
+        }
+
+        [TestMethod]
+        public void TestCSPass()
+        {
+            var mockActual = CentralServer.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" }, call);
+            var mockExpected = new BeContractReturn()
+            {
+                Id = "GetOwnerIdByDogId",
+                Outputs = new Dictionary<string, dynamic>()
+                {
+                    { "OwnerIDOfTheDog", "Wilson !"}
+                }
+            };
+            CollectionAssert.AreEqual(mockExpected.Outputs, mockActual.Outputs);
+            Assert.AreEqual(mockExpected.Id, mockActual.Id);
+        }
+
+        [TestMethod]
+        public void TestCSFail()
+        {
+            Assert.ThrowsException<BeContractException>(() => CentralServer.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Fail", Url = "www.doggies.com/api/" }, call), "Unauthorized access for Doggies");
         }
     }
 }

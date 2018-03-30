@@ -65,12 +65,13 @@
     <Compile Include="Dal\ContractContext.cs" />
     <Compile Include="Dal\Mock\AddressMock.cs" />
     <Compile Include="Dal\Mock\BeContractsMock.cs" />
+    <Compile Include="Dal\Mock\CentralServer.cs" />
     <Compile Include="Dal\Mock\MathematicsMock.cs" />
     <Compile Include="Dal\Mock\VeterinaryMock.cs" />
     <Compile Include="Logic\ContractManager.cs" />
     <Compile Include="Logic\Generators.cs" />
     <Compile Include="Logic\Validators.cs" />
-    <Compile Include="Dal\AdapterServer.cs" />
+    <Compile Include="Models\AdapterServer.cs" />
     <Compile Include="Models\BeContract.cs" />
     <Compile Include="Models\BeContractCall.cs" />
     <Compile Include="Models\BeContractReturn.cs" />

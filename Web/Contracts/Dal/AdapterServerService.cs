@@ -37,33 +37,12 @@ namespace Contracts.Dal
             if (ads != null)
             {
                 Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
-                return FindMock(ads, call);
+                return CentralServer.FindMock(ads, call);
             }
             else
                 throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
         }
 
-        /// <summary>
-        /// Finds the Mock (Temporary)
-        /// </summary>
-        /// <returns>The wanted mock class</returns>
-        public BeContractReturn FindMock(AdapterServer ads, BeContractCall call)
-        {
-            BeContractReturn res = null;
-            switch (ads.ISName)
-            {
-                case "CitizenDatabank":
-                    res = AddressMock.GetAddressByOwnerId(call);
-                    break;
-                case "MathLovers":
-                    res = MathematicsMock.GetSumFunction(call);
-                    break;
-                case "Doggies":
-                    res = VeterinaryMock.GetOwnerId(call);
-                    break;
-            }
-
-            return res;
-        }
+        
     }
 }
