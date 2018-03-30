@@ -50,13 +50,9 @@ namespace Contracts.Logic
         {
             if(contract == null)
                 contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
-
-            //TODO: 
-            //  -Check if the caller has the permission to use the contract
+            
             if (contract == null)
-                throw new BeContractException("Contract is null");
-            if (call == null)
-                throw new BeContractException("Contract call is null");
+                throw new BeContractException($"No contract was found with id {call.Id}");
 
             validators.ValidateBeContractCall(contract, call);
 
@@ -123,8 +119,11 @@ namespace Contracts.Logic
         /// <returns></returns>
         public BeContractReturn Call(BeContractCall call)
         {
+            if (call == null)
+                throw new BeContractException("Contract call is null");
+
             var contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
-            Console.WriteLine($"Calling contract {contract.Id}");
+            Console.WriteLine($"Calling contract {contract?.Id}");
             //Filter to onlt gives the correct outputs
             var filtredReturns = CallAndLoopQueries(call, contract)
                 .SelectMany(r => r.Outputs)
