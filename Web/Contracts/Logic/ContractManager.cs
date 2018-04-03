@@ -24,7 +24,7 @@ namespace Contracts.Logic
         /// <summary>
         /// Call the contract with the specified inputs to a specified service
         /// </summary>
-        /// <param name="contract">Contract that's will be called</param>
+        /// <param name="contract">Contract that will be called</param>
         /// <param name="call">The inputs for the contract</param>
         /// <returns>Returns the outputs for that specific contract</returns>
         private BeContractReturn CallService(BeContract contract, BeContractCall call)
@@ -124,7 +124,7 @@ namespace Contracts.Logic
 
             var contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
             Console.WriteLine($"Calling contract {contract?.Id}");
-            //Filter to onlt gives the correct outputs
+            //Filter to only give the correct outputs
             var filtredReturns = CallAndLoopQueries(call, contract)
                 .SelectMany(r => r.Outputs)
                 .Where(pair => contract.Outputs.Any(output => output.Key.Equals(pair.Key)))
