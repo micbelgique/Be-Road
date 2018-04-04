@@ -24,14 +24,10 @@ namespace Proxy.Models
         [JsonProperty(Required = Required.Always)]
         public string InputKey { get; set; }
         /// <summary>
-        /// Contract need to get the InputKey (Required)
+        /// Contract needed to get the InputKey (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
         public virtual BeContract Contract { get; set; }
-        /// <summary>
-        /// Id of the contract, used for EF
-        /// </summary>
-        public string ContractId { get; set; }
         /// <summary>
         /// Key required to find the InputKey in the contract (Required)
         /// </summary>

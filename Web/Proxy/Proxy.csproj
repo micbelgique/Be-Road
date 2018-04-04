@@ -137,9 +137,9 @@
     <Compile Include="Logic\ContractManager.cs" />
     <Compile Include="Logic\Generators.cs" />
     <Compile Include="Logic\Validators.cs" />
-    <Compile Include="Migrations\201804031432331_Initial-Create.cs" />
-    <Compile Include="Migrations\201804031432331_Initial-Create.Designer.cs">
-      <DependentUpon>201804031432331_Initial-Create.cs</DependentUpon>
+    <Compile Include="Migrations\201804041036243_Initial-Create.cs" />
+    <Compile Include="Migrations\201804041036243_Initial-Create.Designer.cs">
+      <DependentUpon>201804041036243_Initial-Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdapterServer.cs" />
@@ -176,8 +176,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804031432331_Initial-Create.resx">
-      <DependentUpon>201804031432331_Initial-Create.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804041036243_Initial-Create.resx">
+      <DependentUpon>201804041036243_Initial-Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

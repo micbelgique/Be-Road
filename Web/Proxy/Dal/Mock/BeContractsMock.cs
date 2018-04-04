@@ -9,14 +9,14 @@ namespace Proxy.Dal.Mock
 {
     public class BeContractsMock
     {
-        public static List<BeContract> GetContracts()
+        public static List<BeContract> GetContracts(ContractContext ctx)
         {
             return new List<BeContract>()
             {
                 GetOwnerIdByDogId(),
                 GetMathemathicFunction(),
                 GetAddressByOwnerId(),
-                GetAddressByDogId()
+                GetAddressByDogId(ctx)
             };
         }
 
@@ -98,10 +98,10 @@ namespace Proxy.Dal.Mock
             return GetAddressByOwnerContract;
         }
 
-        public static BeContract GetAddressByDogId()
+        public static BeContract GetAddressByDogId(ContractContext ctx)
         {
-            var GetAddressByOwnerContract = GetAddressByOwnerId();
-            var GetOwnerIdByDogContract = GetOwnerIdByDogId();
+            var GetAddressByOwnerContract = ctx.Contracts.Find("GetAddressByOwnerId");
+            var GetOwnerIdByDogContract = ctx.Contracts.Find("GetOwnerIdByDogId");
 
             var GetAddressByDogContract = new BeContract()
             {
@@ -124,12 +124,13 @@ namespace Proxy.Dal.Mock
             {
                 new Query()
                 {
+                    ContractId = GetAddressByDogContract.Id,
                     Contract = GetOwnerIdByDogContract,
                     Mappings = new List<Mapping>()
                     {
                         new Mapping()
                         {
-                            InputKey = "DogID",
+                            InputKey = "DogID",                            
                             Contract = GetAddressByDogContract,
                             ContractKey = "MyDogID"
                         }
@@ -137,6 +138,7 @@ namespace Proxy.Dal.Mock
                 },
                 new Query()
                 {
+                    ContractId = GetAddressByDogContract.Id,
                     Contract = GetAddressByOwnerContract,
                     Mappings = new List<Mapping>()
                     {

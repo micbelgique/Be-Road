@@ -79,6 +79,7 @@
     <Compile Include="BeContractDalTest.cs" />
     <Compile Include="ContractManagerTest.cs" />
     <Compile Include="ADSMockTest.cs" />
+    <Compile Include="TestProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

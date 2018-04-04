@@ -1,6 +1,9 @@
 namespace Proxy.Migrations
 {
+    using Proxy.Models;
+    using Proxy.Dal.Mock;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
@@ -12,12 +15,11 @@ namespace Proxy.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Proxy.Dal.ContractContext context)
+        protected override void Seed(Dal.ContractContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            List<BeContract> contracts = BeContractsMock.GetContracts(context);
+            contracts.ForEach(c => context.Contracts.AddOrUpdate(c));
+            context.SaveChanges();
         }
     }
 }

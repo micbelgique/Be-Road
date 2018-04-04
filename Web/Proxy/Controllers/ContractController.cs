@@ -17,9 +17,8 @@ namespace Proxy.Controllers
     {
         [HttpPost]
         [Route("call")]
-        public string CallContract(string callJSON)
+        public string CallContract(BeContractCall call)
         {
-            var call = JsonConvert.DeserializeObject<BeContractCall>(callJSON);
             AdapterServerService ass = null;
             var cm = new ContractManager(ass = new AdapterServerService()
             {

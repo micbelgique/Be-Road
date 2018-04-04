@@ -13,12 +13,13 @@ namespace Proxy.Logic
     {
         private Validators validators;
         private AdapterServerService asService;
-        
+        private ContractContext ctx;
 
         public ContractManager(AdapterServerService asService)
         {
             validators = new Validators();
             this.asService = asService;
+            ctx = new ContractContext();
         }
         
         /// <summary>
@@ -49,7 +50,7 @@ namespace Proxy.Logic
         private List<BeContractReturn> CallAndLoopQueries(BeContractCall call, BeContract contract = null)
         {
             if(contract == null)
-                contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
+                contract = ctx.Contracts.Find(call.Id);
             
             if (contract == null)
                 throw new BeContractException($"No contract was found with id {call.Id}");
@@ -73,7 +74,7 @@ namespace Proxy.Logic
                     //Fill in the inputs of the BeContractCall
                     q.Contract.Inputs.ForEach(input =>
                     {
-                        var mapping = q.Mappings.FirstOrDefault(m => m.InputKey.Equals(input.Key));
+                        var mapping = q.Mappings.Find(m => m.InputKey.Equals(input.Key));
                         if(contract.Id.Equals(mapping?.Contract?.Id))
                         {
                             //We need to check our contract input
@@ -86,7 +87,7 @@ namespace Proxy.Logic
                         else
                         {
                             //Find the contract where we need to search the value
-                            var returnToBeUsed = returns.FirstOrDefault(ret => ret.Id.Equals(mapping.Contract.Id));
+                            var returnToBeUsed = returns.Find(ret => ret.Id.Equals(mapping.Contract.Id));
                             if (returnToBeUsed == null)
                                 throw new BeContractException($"No output was found for query {q.Contract.Id} with mapping contract {mapping.Contract.Id}")
                                 { BeContractCall = call };
@@ -122,7 +123,7 @@ namespace Proxy.Logic
             if (call == null)
                 throw new BeContractException("Contract call is null");
 
-            var contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
+            var contract = ctx.Contracts.Find(call.Id);
             Console.WriteLine($"Calling contract {contract?.Id}");
             //Filter to only give the correct outputs
             var filtredReturns = CallAndLoopQueries(call, contract)

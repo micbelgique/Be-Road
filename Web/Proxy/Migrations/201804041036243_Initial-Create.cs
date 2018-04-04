@@ -69,14 +69,14 @@ namespace Proxy.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         InputKey = c.String(),
-                        ContractId = c.String(maxLength: 128),
                         ContractKey = c.String(),
+                        Contract_Id = c.String(maxLength: 128),
                         Query_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BeContracts", t => t.ContractId)
+                .ForeignKey("dbo.BeContracts", t => t.Contract_Id)
                 .ForeignKey("dbo.Queries", t => t.Query_Id, cascadeDelete: true)
-                .Index(t => t.ContractId)
+                .Index(t => t.Contract_Id)
                 .Index(t => t.Query_Id);
             
         }
@@ -85,13 +85,13 @@ namespace Proxy.Migrations
         {
             DropForeignKey("dbo.Queries", "BeContract_Id", "dbo.BeContracts");
             DropForeignKey("dbo.Mappings", "Query_Id", "dbo.Queries");
-            DropForeignKey("dbo.Mappings", "ContractId", "dbo.BeContracts");
+            DropForeignKey("dbo.Mappings", "Contract_Id", "dbo.BeContracts");
             DropForeignKey("dbo.Queries", "ContractId", "dbo.BeContracts");
             DropForeignKey("dbo.Outputs", "BeContract_Id", "dbo.BeContracts");
             DropForeignKey("dbo.Outputs", "ContractId", "dbo.BeContracts");
             DropForeignKey("dbo.Inputs", "BeContract_Id", "dbo.BeContracts");
             DropIndex("dbo.Mappings", new[] { "Query_Id" });
-            DropIndex("dbo.Mappings", new[] { "ContractId" });
+            DropIndex("dbo.Mappings", new[] { "Contract_Id" });
             DropIndex("dbo.Queries", new[] { "BeContract_Id" });
             DropIndex("dbo.Queries", new[] { "ContractId" });
             DropIndex("dbo.Outputs", new[] { "BeContract_Id" });

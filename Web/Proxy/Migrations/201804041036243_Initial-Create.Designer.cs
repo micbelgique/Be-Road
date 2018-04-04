@@ -13,7 +13,7 @@ namespace Proxy.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804031432331_Initial-Create"; }
+            get { return "201804041036243_Initial-Create"; }
         }
         
         string IMigrationMetadata.Source
