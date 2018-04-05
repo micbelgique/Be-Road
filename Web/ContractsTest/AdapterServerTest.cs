@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CentralServer.Dal;
+using Contracts;
 using Contracts.Dal;
+using Contracts.Dal.Mock;
+using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Contracts.Logic;
-using Contracts;
-using Contracts.Dal.Mock;
+using System.Collections.Generic;
 
 namespace ContractsTest
 {
@@ -30,10 +30,8 @@ namespace ContractsTest
         [TestInitialize]
         public void TestInitialize()
         {
-            asService = new AdapterServerService
-            {
-                ADSList = ASSMock.Fill()
-            };
+            asService = new AdapterServerService();
+            asService.SetADSList(ASSMock.Fill());
 
             valid = new Validators();
             call = valid.Generators.GenerateBeContractCall(GetBeContractCallString());
@@ -66,7 +64,7 @@ namespace ContractsTest
         [TestMethod]
         public void TestCSPass()
         {
-            var mockActual = CentralServer.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" }, call);
+            var mockActual = CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" }, call);
             var mockExpected = new BeContractReturn()
             {
                 Id = "GetOwnerIdByDogId",
@@ -82,7 +80,7 @@ namespace ContractsTest
         [TestMethod]
         public void TestCSFail()
         {
-            Assert.ThrowsException<BeContractException>(() => CentralServer.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Fail", Url = "www.doggies.com/api/" }, call), "Unauthorized access for Doggies");
+            Assert.ThrowsException<BeContractException>(() => CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Fail", Url = "www.doggies.com/api/" }, call), "Unauthorized access for Doggies");
         }
     }
 }

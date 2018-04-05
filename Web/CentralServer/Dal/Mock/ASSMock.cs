@@ -1,11 +1,7 @@
-﻿using Proxy.Models;
-using System;
+﻿using Contracts.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Proxy
+namespace CentralServer.Dal
 {
     /// <summary>
     /// Class used to fill the Adapter Server list for the tests

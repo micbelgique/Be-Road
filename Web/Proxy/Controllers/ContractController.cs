@@ -1,13 +1,8 @@
-﻿using ContractsTest;
+﻿using Contracts.Dal;
+using Contracts.Dal.Mock;
+using Contracts.Logic;
+using Contracts.Models;
 using Newtonsoft.Json;
-using Proxy.Dal;
-using Proxy.Logic;
-using Proxy.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace Proxy.Controllers
@@ -20,10 +15,8 @@ namespace Proxy.Controllers
         public string CallContract(BeContractCall call)
         {
             AdapterServerService ass = null;
-            var cm = new ContractManager(ass = new AdapterServerService()
-            {
-                ADSList = ASSMock.Fill()
-            });
+            var cm = new ContractManager(ass = new AdapterServerService());
+            ass.SetADSList(ASSMock.Fill());
 
             var res = cm.Call(call);
 

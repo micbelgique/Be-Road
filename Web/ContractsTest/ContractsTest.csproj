@@ -68,7 +68,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ASSMock.cs" />
     <Compile Include="BeContractEqualsTest.cs" />
     <Compile Include="BeContractsMock.cs" />
     <Compile Include="BeContractSchemaTest.cs" />
@@ -86,9 +85,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CentralServer\CentralServer.csproj">
+      <Project>{a0389450-7dea-40ca-8c87-49f5c4921fd4}</Project>
+      <Name>CentralServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
       <Name>Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Proxy\Proxy.csproj">
+      <Project>{692d090d-72ad-4ce3-85e6-aef12b1b2944}</Project>
+      <Name>Proxy</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

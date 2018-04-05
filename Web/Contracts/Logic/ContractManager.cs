@@ -4,8 +4,6 @@ using Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Contracts.Logic
 {
@@ -13,12 +11,14 @@ namespace Contracts.Logic
     {
         private Validators validators;
         private AdapterServerService asService;
+        private ContractContext ctx;
         
 
         public ContractManager(AdapterServerService asService)
         {
             validators = new Validators();
             this.asService = asService;
+            ctx = new ContractContext();
         }
         
         /// <summary>

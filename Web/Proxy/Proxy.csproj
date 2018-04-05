@@ -62,6 +62,9 @@
     </Reference>
     <Reference Include="System.Net" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -72,6 +75,12 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -102,15 +111,6 @@
     <Reference Include="System.Web.Mvc">
       <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http.Formatting">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Http.WebHost">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
@@ -119,37 +119,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="BeContractException.cs" />
     <Compile Include="Controllers\ContractController.cs" />
-    <Compile Include="Converters\BeContractOutputConverter.cs" />
-    <Compile Include="Converters\BeContractQueryConverter.cs" />
-    <Compile Include="Dal\AdapterServerService.cs" />
-    <Compile Include="Dal\ContractContext.cs" />
-    <Compile Include="Dal\Mock\AddressMock.cs" />
-    <Compile Include="Dal\Mock\ASSMock.cs" />
-    <Compile Include="Dal\Mock\BeContractsMock.cs" />
-    <Compile Include="Dal\Mock\CentralServer.cs" />
-    <Compile Include="Dal\Mock\MathematicsMock.cs" />
-    <Compile Include="Dal\Mock\VeterinaryMock.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Logic\ContractManager.cs" />
-    <Compile Include="Logic\Generators.cs" />
-    <Compile Include="Logic\Validators.cs" />
-    <Compile Include="Migrations\201804041036243_Initial-Create.cs" />
-    <Compile Include="Migrations\201804041036243_Initial-Create.Designer.cs">
-      <DependentUpon>201804041036243_Initial-Create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AdapterServer.cs" />
-    <Compile Include="Models\BeContract.cs" />
-    <Compile Include="Models\BeContractCall.cs" />
-    <Compile Include="Models\BeContractReturn.cs" />
-    <Compile Include="Models\Input.cs" />
-    <Compile Include="Models\Mapping.cs" />
-    <Compile Include="Models\Output.cs" />
-    <Compile Include="Models\Query.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -164,21 +137,18 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Dal\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ContractsTest\ContractsTest.csproj">
-      <Project>{0b85ceff-4cc7-4c67-a289-9695b2824e98}</Project>
-      <Name>ContractsTest</Name>
+    <ProjectReference Include="..\CentralServer\CentralServer.csproj">
+      <Project>{a0389450-7dea-40ca-8c87-49f5c4921fd4}</Project>
+      <Name>CentralServer</Name>
     </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{440674AC-0914-4A84-9D61-A59AC3EF4F5A}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804041036243_Initial-Create.resx">
-      <DependentUpon>201804041036243_Initial-Create.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

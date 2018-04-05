@@ -1,12 +1,6 @@
-﻿using Contracts.Converters;
-using Contracts.Models;
+﻿using Contracts.Models;
 using Newtonsoft.Json;
 using NJsonSchema;
-using NJsonSchema.Generation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Contracts.Logic

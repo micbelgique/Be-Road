@@ -1,11 +1,7 @@
 ﻿using Contracts.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ContractsTest
+namespace Contracts.Dal.Mock
 {
     /// <summary>
     /// Class used to fill the Adapter Server list for the tests

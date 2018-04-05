@@ -5,6 +5,8 @@ using Contracts.Dal;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Proxy;
+using Contracts.Dal.Mock;
 
 namespace ContractsTest
 {
@@ -19,10 +21,8 @@ namespace ContractsTest
         public void Init()
         {
             //TODO: init the ads
-            cm = new ContractManager(ass = new AdapterServerService()
-            {
-                ADSList = ASSMock.Fill()
-            });
+            cm = new ContractManager(ass = new AdapterServerService());
+            ass.SetADSList(ASSMock.Fill());
 
             mathCall = new BeContractCall()
             {
@@ -47,11 +47,11 @@ namespace ContractsTest
         [TestMethod]
         public void TestNoServiceFoundWillThrowException()
         {
-            var ads = ass.ADSList.FirstOrDefault(a => a.ISName.Equals("MathLovers"));
-            ass.ADSList.Remove(ads);
+            var ads = ass.GetADSList().FirstOrDefault(a => a.ISName.Equals("MathLovers"));
+            ass.GetADSList().Remove(ads);
             var ex = Assert.ThrowsException<BeContractException>(() => cm.Call(mathCall));
             Assert.AreEqual("No service found for GetMathemathicFunction", ex.Message);
-            ass.ADSList.Add(ads);
+            ass.GetADSList().Add(ads);
         }
 
         [TestMethod]
