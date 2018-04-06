@@ -87,6 +87,13 @@ namespace Contracts.Logic
                         }
                         else
                         {
+                            //There must be a sync problem !
+                            Console.WriteLine(mapping.Contract.Id);
+                            if (returns.Count() > 0)
+                                Console.WriteLine(returns[0].Id);
+                            else
+                                Console.WriteLine("No returns");
+
                             //Find the contract where we need to search the value
                             var returnToBeUsed = returns.FirstOrDefault(ret => ret.Id.Equals(mapping.Contract.Id));
                             if (returnToBeUsed == null)
@@ -103,12 +110,14 @@ namespace Contracts.Logic
                     });
 
                     //Call the contract
-                    returns.AddRange(await CallAndLoopQueriesAsync(callInQuery));
+                    var loopdQueries = await CallAndLoopQueriesAsync(callInQuery);
+                    returns.AddRange(loopdQueries);
                 });
             }
             else
             {
-                returns.Add(await CallServiceAsync(contract, call));
+                var serviceReturns = await CallServiceAsync(contract, call);
+                returns.Add(serviceReturns);
             }
           
             return returns;

@@ -53,6 +53,9 @@
     <Compile Include="ASSMock.cs" />
     <Compile Include="BeContractService.cs" />
     <Compile Include="BeContractsMock.cs" />
+    <Compile Include="Mock\AddressMock.cs" />
+    <Compile Include="Mock\MathematicsMock.cs" />
+    <Compile Include="Mock\VeterinaryMock.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

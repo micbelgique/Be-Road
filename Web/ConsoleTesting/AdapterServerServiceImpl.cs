@@ -1,4 +1,5 @@
 ﻿using ConsoleTesting;
+using ConsoleTesting.Mock;
 using Contracts;
 using Contracts.Dal;
 using Contracts.Models;
@@ -46,27 +47,15 @@ namespace ConsoleTesting
 
         public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
-            /*BeContractReturn res = null;
-            using (var client = new HttpClient())
+            //Empty await for the method
+            await Task.Run(() => { });
+            switch (ads.ISName)
             {
-                client.BaseAddress = new Uri("http://localhost:53369/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
-
-                string json = JsonConvert.SerializeObject(new ASFindRequest() {
-                    Ads = ads,
-                    Call = call
-                });
-                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("api/central/find", httpContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    res = await response.Content.ReadAsAsync<BeContractReturn>();
-                }
+                case "Doggies": return VeterinaryMock.GetOwnerId(call);
+                case "MathLovers": return MathematicsMock.GetSumFunction(call);
+                case "CitizenDatabank": return AddressMock.GetAddressByOwnerId(call);
+                default: return new BeContractReturn();
             }
-
-            return res;*/
-            return null;
         }
     }
 }

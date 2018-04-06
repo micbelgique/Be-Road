@@ -50,6 +50,7 @@ namespace Proxy.Dal
             BeContractReturn res = null;
             using (var client = new HttpClient())
             {
+                //Use the ads.Url as baseaddress, don't send this to Be-Road !
                 client.BaseAddress = new Uri("http://localhost:53369/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
