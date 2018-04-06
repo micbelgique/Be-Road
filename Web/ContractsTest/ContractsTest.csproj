@@ -80,7 +80,8 @@
     <Compile Include="BeContractDalTest.cs" />
     <Compile Include="ContractManagerTest.cs" />
     <Compile Include="ADSMockTest.cs" />
-    <Compile Include="TestProxy.cs" />
+    <Compile Include="ProxyTest.cs" />
+    <Compile Include="CentralServerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

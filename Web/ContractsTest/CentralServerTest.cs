@@ -1,25 +1,23 @@
-﻿using CentralServer.Dal;
+﻿using System;
+using System.Collections.Generic;
+using CentralServer.Dal;
 using Contracts;
 using Contracts.Dal;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ContractsTest
 {
     [TestClass]
-    public class AdapterServerTest
+    public class CentralServerTest
     {
-        #region Initializing
-        private AdapterServerService asService;
+        #region Initialize
         private BeContractCall call;
         private Validators valid;
 
-        public AdapterServerTest()
+        public CentralServerTest()
         {
-            asService = new ASSMock();
             valid = new Validators();
             call = valid.Generators.GenerateBeContractCall(GetBeContractCallString());
         }
@@ -36,10 +34,10 @@ namespace ContractsTest
         #endregion
 
         [TestMethod]
-        public async Task TestCallPassAsync()
+        public void TestCSPass()
         {
-            var returnsActual = await asService.CallAsync(call);
-            var returnsExpected = new BeContractReturn()
+            var mockActual = CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" }, call);
+            var mockExpected = new BeContractReturn()
             {
                 Id = "GetOwnerIdByDogId",
                 Outputs = new Dictionary<string, dynamic>()
@@ -47,16 +45,14 @@ namespace ContractsTest
                     { "OwnerIDOfTheDog", "Wilson !"}
                 }
             };
-            CollectionAssert.AreEqual(returnsExpected.Outputs, returnsActual.Outputs);
-            Assert.AreEqual(returnsExpected.Id, returnsActual.Id);
+            CollectionAssert.AreEqual(mockExpected.Outputs, mockActual.Outputs);
+            Assert.AreEqual(mockExpected.Id, mockActual.Id);
         }
 
         [TestMethod]
-        public void TestCallFail()
+        public void TestCSFail()
         {
-            call.Id = "Fail";
-            Assert.ThrowsException<BeContractException>(async () => await asService.CallAsync(call), "No service found for Fail");
+            Assert.ThrowsException<BeContractException>(() => CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Fail", Url = "www.doggies.com/api/" }, call), "Unauthorized access for Doggies");
         }
-
     }
 }

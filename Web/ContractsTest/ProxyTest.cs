@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace ContractsTest
 {
     [TestClass]
-    public class TestProxy
+    public class ProxyTest
     {
         static async Task RunAsync(string expectedId)
         {
