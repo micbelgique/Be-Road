@@ -52,10 +52,10 @@ namespace ContractsTest
         }
 
         [TestMethod]
-        public void TestCallFail()
+        public async Task TestCallFail()
         {
             call.Id = "Fail";
-            Assert.ThrowsException<BeContractException>(async () => await asService.CallAsync(call), "No service found for Fail");
+            await Assert.ThrowsExceptionAsync<BeContractException>(() => asService.CallAsync(call), "No service found for Fail");
         }
 
     }

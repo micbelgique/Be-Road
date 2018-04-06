@@ -42,7 +42,7 @@ namespace Contracts.Dal
                 throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
         }
 
-        public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+        public virtual async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
             BeContractReturn res = null;
             using (var client = new HttpClient())

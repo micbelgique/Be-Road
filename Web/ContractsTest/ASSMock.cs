@@ -1,6 +1,7 @@
 ﻿using Contracts.Dal;
 using Contracts.Models;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ContractsTest
@@ -19,30 +20,27 @@ namespace ContractsTest
                 new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "www.citizens.com/api/" },
             };
         }
-        public new async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+        public async override Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
-            System.Console.WriteLine("Mocking this task");
-            /*BeContractReturn res = null;
-            using (var client = new HttpClient())
+            //Empty await for the method
+            await Task.Run(() => { });
+            switch (call.Id)
             {
-                client.BaseAddress = new Uri("http://localhost:53369/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+                case "GetOwnerIdByDogId": return HandleGetOwnerIdByDogId(call);
+                default: return new BeContractReturn();
+            }
+        }
 
-                string json = JsonConvert.SerializeObject(new ASFindRequest()
-                {
-                    Ads = ads,
-                    Call = call
-                });
-                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("api/central/find", httpContent);
-                if (response.IsSuccessStatusCode)
-                {
-                    res = await response.Content.ReadAsAsync<BeContractReturn>();
-                }
-            }*/
-
-            return null;
+        private BeContractReturn HandleGetOwnerIdByDogId(BeContractCall call)
+        {
+            var ret = new BeContractReturn()
+            {
+                Id = call.Id,
+                Outputs = new Dictionary<string, dynamic>()
+            };
+            if ((call.Inputs["DogID"] as string).Equals("D-123"))
+                ret.Outputs.Add("OwnerIDOfTheDog", "Wilson !");
+            return ret;
         }
     }
 }
