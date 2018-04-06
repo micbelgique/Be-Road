@@ -13,13 +13,13 @@ namespace ContractsTest
     public class AdapterServerTest
     {
         #region Initializing
-        private AdapterServerService asService;
+        private IAdapterServerService asService;
         private BeContractCall call;
         private Validators valid;
 
         public AdapterServerTest()
         {
-            asService = new ASSMock();
+            asService = new AdapterServerServiceMockImpl();
             valid = new Validators();
             call = valid.Generators.GenerateBeContractCall(GetBeContractCallString());
         }

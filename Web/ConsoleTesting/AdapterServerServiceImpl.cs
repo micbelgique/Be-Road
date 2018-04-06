@@ -1,5 +1,7 @@
-﻿using Contracts.Models;
-using Newtonsoft.Json;
+﻿using ConsoleTesting;
+using Contracts;
+using Contracts.Dal;
+using Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +10,21 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Dal
+namespace ConsoleTesting
 {
     /// <summary>
     /// Class used to find an adapter server
     /// </summary>
-    public class AdapterServerService
+    public class AdapterServerServiceImpl : IAdapterServerService
     {
-        public List<AdapterServer> ADSList { get; set; }
+        public List<AdapterServer> ADSList { get; set; } = ASSMock.Fill();
 
         /// <summary>
         /// Find an adapter server with the name of the contract used
         /// </summary>
         /// <param name="name">The name of the contract used</param>
         /// <returns>The found adapter server</returns>
-        private AdapterServer FindAS(string name)
+        public AdapterServer FindAS(string name)
         {
             return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
         }
@@ -42,9 +44,9 @@ namespace Contracts.Dal
                 throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
         }
 
-        public virtual async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+        public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
-            BeContractReturn res = null;
+            /*BeContractReturn res = null;
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:53369/");
@@ -63,7 +65,8 @@ namespace Contracts.Dal
                 }
             }
 
-            return res;
+            return res;*/
+            return null;
         }
     }
 }

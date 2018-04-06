@@ -1,17 +1,24 @@
-﻿using Contracts.Dal;
+﻿using Contracts;
+using Contracts.Dal;
 using Contracts.Models;
+using System;
 using System.Collections.Generic;
-using System.Threading;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ContractsTest
 {
     /// <summary>
-    /// Class used to mock the Adapter Server Service
+    /// Class used to find an adapter server
     /// </summary>
-    public class ASSMock : AdapterServerService
+    public class AdapterServerServiceMockImpl : IAdapterServerService
     {
-        public ASSMock()
+        public List<AdapterServer> ADSList{ get; set; }
+
+        public AdapterServerServiceMockImpl()
         {
             ADSList = new List<AdapterServer>
             {
@@ -20,7 +27,33 @@ namespace ContractsTest
                 new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "www.citizens.com/api/" },
             };
         }
-        public async override Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+
+        /// <summary>
+        /// Find an adapter server with the name of the contract used
+        /// </summary>
+        /// <param name="name">The name of the contract used</param>
+        /// <returns>The found adapter server</returns>
+        public AdapterServer FindAS(string name)
+        {
+            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
+        }
+
+        /// <summary>
+        /// Calls the api of the Information System
+        /// </summary>
+        public async Task<BeContractReturn> CallAsync(BeContractCall call)
+        {
+            var ads = FindAS(call.Id);
+            if (ads != null)
+            {
+                Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
+                return await FindAsync(ads, call);
+            }
+            else
+                throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
+        }
+
+        public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
             //Empty await for the method
             await Task.Run(() => { });

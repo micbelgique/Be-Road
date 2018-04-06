@@ -13,7 +13,7 @@ namespace ContractsTest
     public class ContractManagerTest
     {
         private ContractManager cm;
-        private AdapterServerService ass;
+        private AdapterServerServiceMockImpl ass;
         private BeContractCall mathCall, adrByDog;
 
         public ContractManagerTest()
@@ -21,7 +21,7 @@ namespace ContractsTest
             //TODO: init the ads
             cm = new ContractManager()
             {
-                AsService = ass = new ASSMock(),
+                AsService = ass = new AdapterServerServiceMockImpl(),
                 BcService = new BeContractService()
             };
 

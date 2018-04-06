@@ -44,19 +44,16 @@ namespace ConsoleTesting
             //Console.WriteLine(ctx.Contracts.Count());
             var manager = new ContractManager()
             {
-                AsService = new AdapterServerService()
-                {
-                    ADSList = ASSMock.Fill()
-                },
+                AsService = new AdapterServerServiceImpl(),
                 BcService = new BeContractService()
             };
 
-            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
-            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));
-            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:"));
-            manager.CallAsync(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !"));
-            manager.CallAsync(CreateContractCall("GetAddressByDogId", "MyDogID:D-123"));
-            manager.CallAsync(CreateContractCall("GetMathemathicFunction", "A:5", "B:19"));
+            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123")).Wait();
+            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122")).Wait();
+            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:")).Wait();
+            manager.CallAsync(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !")).Wait();
+            manager.CallAsync(CreateContractCall("GetAddressByDogId", "MyDogID:D-123")).Wait();
+            manager.CallAsync(CreateContractCall("GetMathemathicFunction", "A:5", "B:19")).Wait();
             Console.ReadLine();
         }
     }

@@ -68,7 +68,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ASSMock.cs" />
+    <Compile Include="AdapterServerServiceMockImpl.cs" />
     <Compile Include="BeContractEqualsTest.cs" />
     <Compile Include="BeContractService.cs" />
     <Compile Include="BeContractsMock.cs" />

@@ -18,10 +18,7 @@ namespace Proxy.Controllers
         {
             cm = new ContractManager()
             {
-                AsService = new AdapterServerService()
-                {
-                    ADSList = ASSMock.Fill()
-                },
+                AsService = new AdapterServerServiceImpl(),
                 BcService = new BeContractService()
             };
         }

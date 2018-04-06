@@ -12,7 +12,7 @@ namespace Contracts.Logic
         private Validators validators;
         private ContractContext ctx;
 
-        public AdapterServerService AsService { get; set; }
+        public IAdapterServerService AsService { get; set; }
         public IBeContractService BcService { get; set; }
 
 
