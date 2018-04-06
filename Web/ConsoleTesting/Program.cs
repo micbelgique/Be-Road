@@ -1,4 +1,5 @@
 ﻿using Contracts.Dal;
+using Contracts.Dal.Mock;
 using Contracts.Logic;
 using Contracts.Models;
 using Proxy;
@@ -39,7 +40,10 @@ namespace ConsoleTesting
             asService.SetADSList(ASSMock.Fill());
 
             var ctx = new ContractContext();
-            ctx.Contracts.AddRange(Contracts.Dal.Mock.BeContractsMock.GetContracts(ctx));
+            ctx.Contracts.Add(BeContractsMock.GetAddressByDogId());
+            ctx.Contracts.Add(BeContractsMock.GetAddressByOwnerId());
+            ctx.Contracts.Add(BeContractsMock.GetOwnerIdByDogId());
+            ctx.Contracts.Add(BeContractsMock.GetMathemathicFunction());
             ctx.SaveChanges();
             Console.WriteLine(ctx.Contracts.Count());
             var manager = new ContractManager(asService);

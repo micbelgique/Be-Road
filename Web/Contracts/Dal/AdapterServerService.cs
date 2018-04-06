@@ -60,7 +60,6 @@ namespace Contracts.Dal
 
         static async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
-            string product = null;
             BeContractReturn res = null;
             using (var client = new HttpClient())
             {
@@ -76,8 +75,7 @@ namespace Contracts.Dal
                 HttpResponseMessage response = await client.PostAsync("api/central/find", httpContent);
                 if (response.IsSuccessStatusCode)
                 {
-                    product = await response.Content.ReadAsAsync<string>();
-                    res = JsonConvert.DeserializeObject<BeContractReturn>(product);
+                    res = await response.Content.ReadAsAsync<BeContractReturn>();
                 }
             }
 
