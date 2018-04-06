@@ -5,6 +5,7 @@ using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ContractsTest
 {
@@ -15,13 +16,12 @@ namespace ContractsTest
         private AdapterServerService ass;
         private BeContractCall mathCall, adrByDog;
 
-        [TestInitialize]
-        public void Init()
+        public ContractManagerTest()
         {
             //TODO: init the ads
             cm = new ContractManager()
             {
-                AsService = new AdapterServerService()
+                AsService = ass = new AdapterServerService()
                 {
                     ADSList = ASSMock.Fill()
                 },
@@ -49,29 +49,29 @@ namespace ContractsTest
         }
 
         [TestMethod]
-        public void TestNoServiceFoundWillThrowException()
+        public async Task TestNoServiceFoundWillThrowException()
         {
             var ads = ass.ADSList.FirstOrDefault(a => a.ISName.Equals("MathLovers"));
             ass.ADSList.Remove(ads);
-            var ex = Assert.ThrowsException<BeContractException>(async () => await cm.CallAsync(mathCall));
+            var ex = await Assert.ThrowsExceptionAsync<BeContractException>(() => cm.CallAsync(mathCall));
             Assert.AreEqual("No service found for GetMathemathicFunction", ex.Message);
             ass.ADSList.Add(ads);
         }
 
         [TestMethod]
-        public void TestContractIsNullWillThrowException()
+        public async Task TestContractIsNullWillThrowException()
         {
             var id = mathCall.Id;
             mathCall.Id = "UnexistingId";
-            var ex = Assert.ThrowsException<BeContractException>(async () => await cm.CallAsync(mathCall));
+            var ex = await Assert.ThrowsExceptionAsync<BeContractException>(async () => await cm.CallAsync(mathCall));
             Assert.AreEqual("No contract was found with id UnexistingId", ex.Message);
             mathCall.Id = id;
         }
 
         [TestMethod]
-        public void TestContractCallIsNullWillThrowException()
+        public async Task TestContractCallIsNullWillThrowException()
         {
-            var ex = Assert.ThrowsException<BeContractException>(async () => await cm.CallAsync(null));
+            var ex = await Assert.ThrowsExceptionAsync<BeContractException>(async () => await cm.CallAsync(null));
             Assert.AreEqual("Contract call is null", ex.Message);
         }
     }
