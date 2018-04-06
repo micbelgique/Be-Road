@@ -1,27 +1,48 @@
-﻿using Contracts.Models;
+﻿using Contracts.Dal;
+using Contracts.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ContractsTest
 {
     /// <summary>
-    /// Class used to fill the Adapter Server list for the tests
+    /// Class used to mock the Adapter Server Service
     /// </summary>
-    public class ASSMock
+    public class ASSMock : AdapterServerService
     {
-        /// <summary>
-        /// Fills the the Adapter Server list
-        /// </summary>
-        /// <returns>List of Adapter Servers</returns>
-        public static List<AdapterServer> Fill()
+        public ASSMock()
         {
-            List<AdapterServer> asList = new List<AdapterServer>
+            ADSList = new List<AdapterServer>
             {
                 new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" },
                 new AdapterServer() { ContractNames = new List<string>  { "GetMathemathicFunction" }, ISName = "MathLovers", Url = "www.mathlovers.com/api/" },
                 new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "www.citizens.com/api/" },
             };
+        }
+        public new async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+        {
+            System.Console.WriteLine("Mocking this task");
+            /*BeContractReturn res = null;
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:53369/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
 
-            return asList;
+                string json = JsonConvert.SerializeObject(new ASFindRequest()
+                {
+                    Ads = ads,
+                    Call = call
+                });
+                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("api/central/find", httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    res = await response.Content.ReadAsAsync<BeContractReturn>();
+                }
+            }*/
+
+            return null;
         }
     }
 }

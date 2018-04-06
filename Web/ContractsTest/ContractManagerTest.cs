@@ -21,10 +21,7 @@ namespace ContractsTest
             //TODO: init the ads
             cm = new ContractManager()
             {
-                AsService = ass = new AdapterServerService()
-                {
-                    ADSList = ASSMock.Fill()
-                },
+                AsService = ass = new ASSMock(),
                 BcService = new BeContractService()
             };
 

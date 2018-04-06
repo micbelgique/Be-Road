@@ -27,14 +27,9 @@ namespace ContractsTest
             }";
         }
 
-        [TestInitialize]
-        public void TestInitialize()
+        public AdapterServerTest()
         {
-            asService = new AdapterServerService()
-            {
-                ADSList = ASSMock.Fill()
-            };
-
+            asService = new ASSMock();
             valid = new Validators();
             call = valid.Generators.GenerateBeContractCall(GetBeContractCallString());
         }
