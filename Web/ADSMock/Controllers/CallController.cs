@@ -1,14 +1,7 @@
-﻿using Contracts.Dal;
-using Contracts.Dal.Mock;
-using Contracts.Logic;
-using Contracts.Models;
+﻿using Contracts.Models;
 using Newtonsoft.Json;
-using Proxy;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace ADSMock.Controllers
@@ -24,10 +17,7 @@ namespace ADSMock.Controllers
         [Route("ownerbydog/{dogid}")]
         public string GetOwnerByDog(string dogId) {
             // This section will be in the proxy later
-            AdapterServerService ass = null;
-
-            var cm = new ContractManager(ass = new AdapterServerService());
-            ass.SetADSList(ASSMock.Fill());
+            //
 
             var ownerByDog = new BeContractCall()
             {
@@ -39,9 +29,9 @@ namespace ADSMock.Controllers
             };
 
             // Another call will be made (to the API of the Proxy)
-            var res = cm.Call(ownerByDog);
-            
-            return res.Outputs.FirstOrDefault().Value;
+            //var res = cm.Call(ownerByDog);
+
+            return null; /*res.Outputs.FirstOrDefault().Value;*/
         }
 
         /// <summary>
@@ -54,10 +44,7 @@ namespace ADSMock.Controllers
         public string GetAddressByDog(string dogId)
         {
             // This section will be in the proxy later
-            AdapterServerService ass = null;
-
-            var cm = new ContractManager(ass = new AdapterServerService());
-            ass.SetADSList(ASSMock.Fill());
+            //
 
             var addrByDog = new BeContractCall()
             {
@@ -69,9 +56,9 @@ namespace ADSMock.Controllers
             };
 
             // Another call will be made (to the API of the Proxy)
-            var res = cm.Call(addrByDog);
+            //var res = cm.Call(addrByDog);
 
-            return res.Outputs.FirstOrDefault().Value;
+            return null;// res.Outputs.FirstOrDefault().Value;
         }
 
         /// <summary>

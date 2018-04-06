@@ -1,12 +1,10 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using Contracts;
+﻿using Contracts;
 using Contracts.Dal;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Proxy;
-using Contracts.Dal.Mock;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ContractsTest
 {
@@ -21,8 +19,14 @@ namespace ContractsTest
         public void Init()
         {
             //TODO: init the ads
-            cm = new ContractManager(ass = new AdapterServerService());
-            ass.SetADSList(ASSMock.Fill());
+            cm = new ContractManager()
+            {
+                AsService = new AdapterServerService()
+                {
+                    ADSList = ASSMock.Fill()
+                },
+                BcService = new BeContractService()
+            };
 
             mathCall = new BeContractCall()
             {
@@ -47,11 +51,11 @@ namespace ContractsTest
         [TestMethod]
         public void TestNoServiceFoundWillThrowException()
         {
-            var ads = ass.GetADSList().FirstOrDefault(a => a.ISName.Equals("MathLovers"));
-            ass.GetADSList().Remove(ads);
-            var ex = Assert.ThrowsException<BeContractException>(() => cm.Call(mathCall));
+            var ads = ass.ADSList.FirstOrDefault(a => a.ISName.Equals("MathLovers"));
+            ass.ADSList.Remove(ads);
+            var ex = Assert.ThrowsException<BeContractException>(async () => await cm.CallAsync(mathCall));
             Assert.AreEqual("No service found for GetMathemathicFunction", ex.Message);
-            ass.GetADSList().Add(ads);
+            ass.ADSList.Add(ads);
         }
 
         [TestMethod]
@@ -59,7 +63,7 @@ namespace ContractsTest
         {
             var id = mathCall.Id;
             mathCall.Id = "UnexistingId";
-            var ex = Assert.ThrowsException<BeContractException>(() => cm.Call(mathCall));
+            var ex = Assert.ThrowsException<BeContractException>(async () => await cm.CallAsync(mathCall));
             Assert.AreEqual("No contract was found with id UnexistingId", ex.Message);
             mathCall.Id = id;
         }
@@ -67,7 +71,7 @@ namespace ContractsTest
         [TestMethod]
         public void TestContractCallIsNullWillThrowException()
         {
-            var ex = Assert.ThrowsException<BeContractException>(() => cm.Call(null));
+            var ex = Assert.ThrowsException<BeContractException>(async () => await cm.CallAsync(null));
             Assert.AreEqual("Contract call is null", ex.Message);
         }
     }

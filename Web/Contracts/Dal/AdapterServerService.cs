@@ -15,23 +15,7 @@ namespace Contracts.Dal
     /// </summary>
     public class AdapterServerService
     {
-        private List<AdapterServer> aDSList;
-
-        /// <summary>
-        /// List of the adapter servers
-        /// </summary>
-        public List<AdapterServer> GetADSList()
-        {
-            return aDSList;
-        }
-
-        /// <summary>
-        /// List of the adapter servers
-        /// </summary>
-        public void SetADSList(List<AdapterServer> value)
-        {
-            aDSList = value;
-        }
+        public List<AdapterServer> ADSList { get; set; }
 
         /// <summary>
         /// Find an adapter server with the name of the contract used
@@ -40,25 +24,25 @@ namespace Contracts.Dal
         /// <returns>The found adapter server</returns>
         private AdapterServer FindAS(string name)
         {
-            return GetADSList().FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
+            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
         }
 
         /// <summary>
         /// Calls the api of the Information System
         /// </summary>
-        public BeContractReturn Call(BeContractCall call)
+        public async Task<BeContractReturn> CallAsync(BeContractCall call)
         {
             var ads = FindAS(call.Id);
             if (ads != null)
             {
                 Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
-                return FindAsync(ads, call).GetAwaiter().GetResult();
+                return await FindAsync(ads, call);
             }
             else
                 throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
         }
 
-        static async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+        public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
             BeContractReturn res = null;
             using (var client = new HttpClient())

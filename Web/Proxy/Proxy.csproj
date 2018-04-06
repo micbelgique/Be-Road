@@ -120,6 +120,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Dal\BeContractService.cs" />
+    <Compile Include="Dal\Mock\ASSMock.cs" />
+    <Compile Include="Dal\Mock\BeContractsMock.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -137,7 +140,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Dal\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

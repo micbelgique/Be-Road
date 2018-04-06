@@ -1,11 +1,11 @@
 ﻿using CentralServer.Dal;
 using Contracts;
 using Contracts.Dal;
-using Contracts.Dal.Mock;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ContractsTest
 {
@@ -30,8 +30,10 @@ namespace ContractsTest
         [TestInitialize]
         public void TestInitialize()
         {
-            asService = new AdapterServerService();
-            asService.SetADSList(ASSMock.Fill());
+            asService = new AdapterServerService()
+            {
+                ADSList = ASSMock.Fill()
+            };
 
             valid = new Validators();
             call = valid.Generators.GenerateBeContractCall(GetBeContractCallString());
@@ -39,9 +41,9 @@ namespace ContractsTest
         #endregion
 
         [TestMethod]
-        public void TestCallPass()
+        public async Task TestCallPassAsync()
         {
-            var returnsActual = asService.Call(call);
+            var returnsActual = await asService.CallAsync(call);
             var returnsExpected = new BeContractReturn()
             {
                 Id = "GetOwnerIdByDogId",
@@ -58,7 +60,7 @@ namespace ContractsTest
         public void TestCallFail()
         {
             call.Id = "Fail";
-            Assert.ThrowsException<BeContractException>(() => asService.Call(call), "No service found for Fail");
+            Assert.ThrowsException<BeContractException>(async () => await asService.CallAsync(call), "No service found for Fail");
         }
 
         [TestMethod]

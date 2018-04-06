@@ -66,8 +66,7 @@
     <Compile Include="Converters\BeContractQueryConverter.cs" />
     <Compile Include="Dal\AdapterServerService.cs" />
     <Compile Include="Dal\ContractContext.cs" />
-    <Compile Include="Dal\Mock\ASSMock.cs" />
-    <Compile Include="Dal\Mock\BeContractsMock.cs" />
+    <Compile Include="Dal\IBeContractService.cs" />
     <Compile Include="Logic\ContractManager.cs" />
     <Compile Include="Logic\Generators.cs" />
     <Compile Include="Logic\Validators.cs" />

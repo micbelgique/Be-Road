@@ -1,7 +1,7 @@
 ﻿using Contracts.Models;
 using System.Collections.Generic;
 
-namespace Contracts.Dal.Mock
+namespace ConsoleTesting
 {
     /// <summary>
     /// Class used to fill the Adapter Server list for the tests

@@ -1,7 +1,7 @@
 ﻿using Contracts.Models;
 using System.Collections.Generic;
 
-namespace Contracts.Dal.Mock
+namespace ConsoleTesting
 {
     public class BeContractsMock
     {

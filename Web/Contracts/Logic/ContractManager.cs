@@ -1,23 +1,24 @@
 ﻿using Contracts.Dal;
-using Contracts.Dal.Mock;
 using Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Contracts.Logic
 {
     public class ContractManager
     {
         private Validators validators;
-        private AdapterServerService asService;
         private ContractContext ctx;
-        
 
-        public ContractManager(AdapterServerService asService)
+        public AdapterServerService AsService { get; set; }
+        public IBeContractService BcService { get; set; }
+
+
+        public ContractManager()
         {
             validators = new Validators();
-            this.asService = asService;
             ctx = new ContractContext();
         }
         
@@ -27,10 +28,10 @@ namespace Contracts.Logic
         /// <param name="contract">Contract that will be called</param>
         /// <param name="call">The inputs for the contract</param>
         /// <returns>Returns the outputs for that specific contract</returns>
-        private BeContractReturn CallService(BeContract contract, BeContractCall call)
+        private async Task<BeContractReturn> CallServiceAsync(BeContract contract, BeContractCall call)
         {
             //Forward the call to the good service
-            BeContractReturn returns = asService.Call(call);
+            BeContractReturn returns = await AsService.CallAsync(call);
 
             //TODO:
             //  -Send error to the service
@@ -46,11 +47,12 @@ namespace Contracts.Logic
         /// </summary>
         /// <param name="call">The inputs for the contract call</param>
         /// <returns>Return a list of contract id with his return types</returns>
-        private List<BeContractReturn> CallAndLoopQueries(BeContractCall call, BeContract contract = null)
+        private async Task<List<BeContractReturn>> CallAndLoopQueriesAsync(BeContractCall call, BeContract contract = null)
         {
-            if(contract == null)
-                contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
-            
+            if (contract == null)
+                contract = BcService.FindBeContractById(call.Id);
+
+
             if (contract == null)
                 throw new BeContractException($"No contract was found with id {call.Id}");
 
@@ -61,7 +63,7 @@ namespace Contracts.Logic
             //If it's a nested contract, loop through it
             if (contract?.Queries?.Count > 0)
             {
-                contract.Queries.ForEach(q =>
+                contract.Queries.ForEach(async q =>
                 {
                     //Create the BeContractCall
                     var callInQuery = new BeContractCall()
@@ -74,7 +76,7 @@ namespace Contracts.Logic
                     q.Contract.Inputs.ForEach(input =>
                     {
                         var mapping = q.Mappings.FirstOrDefault(m => m.InputKey.Equals(input.Key));
-                        if(contract.Id.Equals(mapping?.Contract?.Id))
+                        if (contract.Id.Equals(mapping?.Contract?.Id))
                         {
                             //We need to check our contract input
                             if (!call.Inputs.TryGetValue(mapping.ContractKey, out dynamic value))
@@ -101,12 +103,12 @@ namespace Contracts.Logic
                     });
 
                     //Call the contract
-                    returns.AddRange(CallAndLoopQueries(callInQuery));
+                    returns.AddRange(await CallAndLoopQueriesAsync(callInQuery));
                 });
             }
             else
             {
-                returns.Add(CallService(contract, call));
+                returns.Add(await CallServiceAsync(contract, call));
             }
           
             return returns;
@@ -117,15 +119,16 @@ namespace Contracts.Logic
         /// </summary>
         /// <param name="call">The inputs for the contract call</param>
         /// <returns></returns>
-        public BeContractReturn Call(BeContractCall call)
+        public async Task<BeContractReturn> CallAsync(BeContractCall call)
         {
             if (call == null)
                 throw new BeContractException("Contract call is null");
 
-            var contract = BeContractsMock.GetContracts().FirstOrDefault(c => c.Id == call.Id);
+            var contract = BcService.FindBeContractById(call.Id);
             Console.WriteLine($"Calling contract {contract?.Id}");
             //Filter to only give the correct outputs
-            var filtredReturns = CallAndLoopQueries(call, contract)
+            var notFiltredReturns = await CallAndLoopQueriesAsync(call, contract);
+            var filtredReturns = notFiltredReturns
                 .SelectMany(r => r.Outputs)
                 .Where(pair => contract.Outputs.Any(output => output.Key.Equals(pair.Key)))
                 .ToDictionary(pair => pair.Key, pair => pair.Value);

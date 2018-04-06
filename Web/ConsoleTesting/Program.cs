@@ -1,8 +1,6 @@
 ﻿using Contracts.Dal;
-using Contracts.Dal.Mock;
 using Contracts.Logic;
 using Contracts.Models;
-using Proxy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,24 +34,29 @@ namespace ConsoleTesting
         {
             //Used for connection string
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            var asService = new AdapterServerService();
-            asService.SetADSList(ASSMock.Fill());
 
-            var ctx = new ContractContext();
-            ctx.Contracts.Add(BeContractsMock.GetAddressByDogId());
-            ctx.Contracts.Add(BeContractsMock.GetAddressByOwnerId());
-            ctx.Contracts.Add(BeContractsMock.GetOwnerIdByDogId());
-            ctx.Contracts.Add(BeContractsMock.GetMathemathicFunction());
-            ctx.SaveChanges();
-            Console.WriteLine(ctx.Contracts.Count());
-            var manager = new ContractManager(asService);
+            //var ctx = new ContractContext();
+            //ctx.Contracts.Add(BeContractsMock.GetAddressByDogId());
+            //ctx.Contracts.Add(BeContractsMock.GetAddressByOwnerId());
+            //ctx.Contracts.Add(BeContractsMock.GetOwnerIdByDogId());
+            //ctx.Contracts.Add(BeContractsMock.GetMathemathicFunction());
+            //ctx.SaveChanges();
+            //Console.WriteLine(ctx.Contracts.Count());
+            var manager = new ContractManager()
+            {
+                AsService = new AdapterServerService()
+                {
+                    ADSList = ASSMock.Fill()
+                },
+                BcService = new BeContractService()
+            };
 
-            manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
-            manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));
-            manager.Call(CreateContractCall("GetOwnerIdByDogId", "DogID:"));
-            manager.Call(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !"));
-            manager.Call(CreateContractCall("GetAddressByDogId", "MyDogID:D-123"));
-            manager.Call(CreateContractCall("GetMathemathicFunction", "A:5", "B:19"));
+            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123"));
+            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122"));
+            manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:"));
+            manager.CallAsync(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !"));
+            manager.CallAsync(CreateContractCall("GetAddressByDogId", "MyDogID:D-123"));
+            manager.CallAsync(CreateContractCall("GetMathemathicFunction", "A:5", "B:19"));
             Console.ReadLine();
         }
     }
