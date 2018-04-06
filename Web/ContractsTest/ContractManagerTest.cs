@@ -63,7 +63,7 @@ namespace ContractsTest
         {
             var id = mathCall.Id;
             mathCall.Id = "UnexistingId";
-            var ex = await Assert.ThrowsExceptionAsync<BeContractException>(async () => await cm.CallAsync(mathCall));
+            var ex = await Assert.ThrowsExceptionAsync<BeContractException>(() => cm.CallAsync(mathCall));
             Assert.AreEqual("No contract was found with id UnexistingId", ex.Message);
             mathCall.Id = id;
         }
@@ -71,7 +71,7 @@ namespace ContractsTest
         [TestMethod]
         public async Task TestContractCallIsNullWillThrowException()
         {
-            var ex = await Assert.ThrowsExceptionAsync<BeContractException>(async () => await cm.CallAsync(null));
+            var ex = await Assert.ThrowsExceptionAsync<BeContractException>(() => cm.CallAsync(null));
             Assert.AreEqual("Contract call is null", ex.Message);
         }
     }
