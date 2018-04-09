@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using ADSMock.Controllers;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
@@ -14,7 +15,7 @@ namespace ContractsTest
     [TestClass]
     public class ADSMockTest
     {
-        static async Task RunAsync(string id, string result, string url)
+        /*static async Task RunAsync(string id, string result, string url)
         {
             string product = null;
 
@@ -103,6 +104,6 @@ namespace ContractsTest
         public void TestGetServiceInfo()
         {
             ServiceInfoAsync().Wait();
-        }
+        }*/
     }
 }

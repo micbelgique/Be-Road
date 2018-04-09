@@ -88,6 +88,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ADSMock\ADSMock.csproj">
+      <Project>{07fa5705-68a6-40e5-a170-6c8e2a98cbe5}</Project>
+      <Name>ADSMock</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CentralServer\CentralServer.csproj">
       <Project>{a0389450-7dea-40ca-8c87-49f5c4921fd4}</Project>
       <Name>CentralServer</Name>
