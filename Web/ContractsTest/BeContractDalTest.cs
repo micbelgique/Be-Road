@@ -11,16 +11,21 @@ namespace BeRoadTest
     {
         public ContractContext Db { get; set; }
         public BeContractEqualsTest BeContractEquals { get; set; }
+        
+        public BeContractDalTest()
+        {
+            BeContractEquals = new BeContractEqualsTest();
+            Db = new ContractContext();
+        }
 
-        [TestInitialize]
-        public void Init()
+        [ClassInitialize]
+        public static void Init(TestContext context)
         {
             //Used for connectionstring
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            BeContractEquals = new BeContractEqualsTest();
-            Db = new ContractContext();
-            Db.Contracts.RemoveRange(Db.Contracts);
-            Db.SaveChanges();
+            var db = new ContractContext();
+            db.Contracts.RemoveRange(db.Contracts);
+            db.SaveChanges();
         }
 
         [TestMethod]
@@ -59,6 +64,16 @@ namespace BeRoadTest
         public void TestAddAndReadWithQuery()
         {
             TestAddAndRead(BeContractsMock.GetAddressByDogId());
+        }
+
+        [TestMethod]
+        public void TestRemoveAllAndAddAll()
+        {
+            TestRemoveAll();
+            TestAddAndReadDogOwner();
+            TestAddAndReadDoubleInputsWithoutQuery();
+            TestAddAndReadWithQuery();
+            TestRemoveAll();
         }
 
     }
