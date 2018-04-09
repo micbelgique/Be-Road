@@ -19,18 +19,14 @@ namespace Contracts.Models
         [JsonProperty(Required = Required.Always)]
         public string InputKey { get; set; }
         /// <summary>
-        /// Contract need to get the InputKey (Required)
+        /// Used to know in which query or contract we will take the inputs (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public virtual BeContract Contract { get; set; }
+        public int LookupInputId { get; set; }
         /// <summary>
-        /// Id of the contract, used for EF
-        /// </summary>
-        public string ContractId { get; set; }
-        /// <summary>
-        /// Key required to find the InputKey in the contract (Required)
+        /// Used to know which input to take in the query or contract (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public string ContractKey { get; set; }
+        public string LookupInputKey { get; set; }
     }
 }

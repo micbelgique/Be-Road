@@ -30,8 +30,8 @@ namespace Contracts.Converters
             {
                 query.Mappings.Add(new Mapping()
                 {
-                    Contract = new BeContract() { Id = (string)token["Contract"] },
-                    ContractKey = (string)token["ContractKey"],
+                    LookupInputId = (int)token["LookupInputId"],
+                    LookupInputKey = (string)token["LookupInputKey"],
                     InputKey = (string)token["InputKey"],
                 });
             });
@@ -51,8 +51,8 @@ namespace Contracts.Converters
                 var jMapping = new JObject
                 {
                     new JProperty("InputKey", m.InputKey),
-                    new JProperty("Contract", m.Contract?.Id),
-                    new JProperty("ContractKey", m.ContractKey)
+                    new JProperty("LookupInputId", m.LookupInputId),
+                    new JProperty("LookupInputKey", m.LookupInputKey)
                 };
                 jMappings.Add(jMapping);
             });

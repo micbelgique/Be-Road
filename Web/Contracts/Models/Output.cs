@@ -16,14 +16,10 @@ namespace Contracts.Models
         [Key]
         public int Id { get; set; }
         /// <summary>
-        /// Contract where the output comes from (Required)
+        /// Used to know in which query or contract we will take the inputs (Required)
         /// </summary>
         [JsonProperty(Required = Required.Always)]
-        public virtual BeContract Contract { get; set; } 
-        /// <summary>
-        /// Id of the contract, used for EF
-        /// </summary>
-        public string ContractId { get; set; }
+        public int LookupInputId { get; set; }
         /// <summary>
         /// Name of the variable returned (Required)
         /// </summary>

@@ -98,23 +98,6 @@ namespace BeRoadTest
         }
 
         [TestMethod]
-        public async Task TestValidateBeContractWithoutOutputContractFail()
-        {
-            try
-            {
-                var contract = CreateGoodContract();
-                contract.Outputs[0].Contract = null;
-
-                await Validators.ValidateBeContract(contract);
-                Assert.Fail("Contract should not be valid without an output contract");
-            }
-            catch (BeContractException ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-
-        [TestMethod]
         public async Task TestValidateBeContractWithoutOutputKeyFail()
         {
             try
@@ -166,29 +149,12 @@ namespace BeRoadTest
         }
         
         [TestMethod]
-        public async Task TestValidateBeContractWithQueryMappingContractFail()
+        public async Task TestValidateBeContractWithoutQueryMappingContractKeyFail()
         {
             try
             {
                 var contract = BeContractsMock.GetAddressByDogId();
-                contract.Queries[0].Mappings[0].Contract = null;
-
-                await Validators.ValidateBeContract(contract);
-                Assert.Fail("Contract should not be valid without an query mapping contract");
-            }
-            catch (BeContractException ex)
-            {
-                Console.WriteLine(ex);
-            }
-        }
-        
-        [TestMethod]
-        public async Task TestValidateBeContractWithQueryMappingContractKeyFail()
-        {
-            try
-            {
-                var contract = BeContractsMock.GetAddressByDogId();
-                contract.Queries[0].Mappings[0].ContractKey = null;
+                contract.Queries[0].Mappings[0].LookupInputKey = null;
 
                 await Validators.ValidateBeContract(contract);
                 Assert.Fail("Contract should not be valid without an query mapping contractkey");
@@ -200,7 +166,7 @@ namespace BeRoadTest
         }
         
         [TestMethod]
-        public async Task TestValidateBeContractWithoutQueryMappingContractKeyFail()
+        public async Task TestValidateBeContractWithQueryMappingLookupInputKeySuccess()
         {
             var contract = BeContractsMock.GetAddressByDogId();
             await Validators.ValidateBeContract(contract);

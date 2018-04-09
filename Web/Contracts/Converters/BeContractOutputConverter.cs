@@ -22,7 +22,7 @@ namespace Contracts.Converters
             var output = new Output
             {
                 //Take only the id and not the object it self
-                Contract = new BeContract() { Id = (string)obj["Contract"] },
+                LookupInputId = (int)obj["LookupInputId"],
                 Description = (string)obj["Description"],
                 Key = (string)obj["Key"],
                 Type = (string)obj["Type"]
@@ -39,7 +39,7 @@ namespace Contracts.Converters
             jObject.AddFirst(new JProperty("Key", output.Key));
             jObject.AddFirst(new JProperty("Description", output?.Description));
             jObject.AddFirst(new JProperty("Type", output.Type));
-            jObject.AddFirst(new JProperty("Contract", output.Contract?.Id));
+            jObject.AddFirst(new JProperty("LookupInputId", output.LookupInputId));
             jObject.WriteTo(writer, converters);
         }
     }

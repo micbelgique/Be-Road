@@ -39,7 +39,7 @@ namespace BeRoadTest
                   'Queries': [],
                   'Outputs': [
                     {
-                      'Contract': 'GetOwnerIdByDogId',
+                      'LookupInputId': 0,
                       'Type': 'String',
                       'Description': 'The ID of the owner of the dog',
                       'Key': 'OwnerIDOfTheDog'
@@ -69,8 +69,8 @@ namespace BeRoadTest
                       'Mappings': [
                         {
                           'InputKey': 'DogID',
-                          'Contract': 'GetAddressByDogId',
-                          'ContractKey': 'MyDogID'
+                          'LookupInputId': 0,
+                          'LookupInputKey': 'MyDogID'
                         }
                       ]
                     },
@@ -79,27 +79,27 @@ namespace BeRoadTest
                       'Mappings': [
                         {
                           'InputKey': 'OwnerID',
-                          'Contract': 'GetOwnerIdByDogId',
-                          'ContractKey': 'OwnerIDOfTheDog'
+                          'LookupInputId': 1,
+                          'LookupInputKey': 'OwnerIDOfTheDog'
                         }
                       ]
                     }
                   ],
                   'Outputs': [
                     {
-                      'Contract': 'GetAddressByOwnerId',
+                      'LookupInputId': 1,
                       'Type': 'String',
                       'Description': 'Street name',
                       'Key': 'Street'
                     },
                     {
-                      'Contract': 'GetAddressByOwnerId',
+                      'LookupInputId': 1,
                       'Type': 'Int32',
                       'Description': 'Street number',
                       'Key': 'StreetNumber'
                     },
                     {
-                      'Contract': 'GetAddressByOwnerId',
+                      'LookupInputId': 1,
                       'Type': 'String',
                       'Description': 'Country of the address',
                       'Key': 'Country'

@@ -110,18 +110,18 @@ namespace Contracts.Logic
               'type': 'object',
               'additionalProperties': false,
               'required': [
-                'Contract',
-                'ContractKey',
-                'Input'
+                'LookupInputId',
+                'LookupInputKey',
+                'InputKey'
               ],
               'properties': {
+                'LookupInputId': {
+                  'type': 'int'
+                },
+                'LookupInputKey': {
+                  'type': 'string'
+                },
                 'InputKey': {
-                  'type': 'string'
-                },
-                'Contract': {
-                  'type': 'string'
-                },
-                'ContractKey': {
                   'type': 'string'
                 }
               }
@@ -130,13 +130,13 @@ namespace Contracts.Logic
               'type': 'object',
               'additionalProperties': false,
               'required': [
-                'Contract',
+                'LookupInputId',
                 'Key',
                 'Type'
               ],
               'properties': {
-                'Contract': {
-                  'type': 'string'
+                'LookupInputId': {
+                  'type': 'int'
                 },
                 'Key': {
                   'type': 'string'

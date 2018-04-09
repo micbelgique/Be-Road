@@ -19,7 +19,6 @@ namespace BeRoadTest
                 GetAddressByDogId()
             };
         }
-
         public static BeContract GetOwnerIdByDogId()
         {
             var GetDogOwnerContract = new BeContract()
@@ -37,13 +36,14 @@ namespace BeRoadTest
                         Type = typeof(string).Name
                     }
                 },
+                Queries = new List<Query>()
             };
-            GetDogOwnerContract.Queries = new List<Query>();
+
             GetDogOwnerContract.Outputs = new List<Output>()
             {
                 new Output()
                 {
-                    Contract = GetDogOwnerContract,
+                    LookupInputId = 0,
                     Key = "OwnerIDOfTheDog",
                     Description = "The ID of the owner of the dog",
                     Type = typeof(string).Name
@@ -69,27 +69,28 @@ namespace BeRoadTest
                         Type = typeof(string).Name
                     }
                 },
+                Queries = new List<Query>()
             };
 
             GetAddressByOwnerContract.Outputs = new List<Output>()
             {
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 0,
                     Key = "Street",
                     Description = "Street name",
                     Type = typeof(string).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 0,
                     Key = "StreetNumber",
                     Description = "Street number",
                     Type = typeof(int).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 0,
                     Key = "Country",
                     Description = "Country of the address",
                     Type = typeof(string).Name
@@ -130,8 +131,8 @@ namespace BeRoadTest
                         new Mapping()
                         {
                             InputKey = "DogID",
-                            Contract = GetAddressByDogContract,
-                            ContractKey = "MyDogID"
+                            LookupInputId = 0,
+                            LookupInputKey = "MyDogID"
                         }
                     }
                 },
@@ -143,8 +144,8 @@ namespace BeRoadTest
                         new Mapping()
                         {
                             InputKey = "OwnerID",
-                            Contract = GetOwnerIdByDogContract,
-                            ContractKey = "OwnerIDOfTheDog"
+                            LookupInputId = 1,
+                            LookupInputKey = "OwnerIDOfTheDog"
                         }
                     }
                 }
@@ -154,21 +155,21 @@ namespace BeRoadTest
             {
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 1,
                     Key = "Street",
                     Description = "Street name",
                     Type = typeof(string).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 1,
                     Key = "StreetNumber",
                     Description = "Street number",
                     Type = typeof(int).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 1,
                     Key = "Country",
                     Description = "Country of the address",
                     Type = typeof(string).Name
@@ -208,14 +209,14 @@ namespace BeRoadTest
             {
                 new Output()
                 {
-                    Contract = GetMathemathicContract,
+                    LookupInputId = 0,
                     Key = "Total",
                     Description = "This is the sum of a + b",
                     Type = typeof(int).Name
                 },
                 new Output()
                 {
-                    Contract = GetMathemathicContract,
+                    LookupInputId = 0,
                     Key = "Formula",
                     Description = "This is the sum formula",
                     Type = typeof(string).Name
@@ -253,14 +254,14 @@ namespace BeRoadTest
             {
                 new Output()
                 {
-                    Contract = DoubleInputContract,
+                    LookupInputId = 0,
                     Key = "IsFirstNull",
                     Description = "Return true if the first input is empty",
                     Type = typeof(bool).Name
                 },
                 new Output()
                 {
-                    Contract = DoubleInputContract,
+                    LookupInputId = 0,
                     Key = "IsSecondNull",
                     Description = "Return true if the first input is empty",
                     Type = typeof(bool).Name

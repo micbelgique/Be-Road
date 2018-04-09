@@ -15,7 +15,6 @@ namespace ConsoleTesting
                 GetAddressByDogId()
             };
         }
-
         public static BeContract GetOwnerIdByDogId()
         {
             var GetDogOwnerContract = new BeContract()
@@ -33,13 +32,14 @@ namespace ConsoleTesting
                         Type = typeof(string).Name
                     }
                 },
+                Queries = new List<Query>()
             };
 
             GetDogOwnerContract.Outputs = new List<Output>()
             {
                 new Output()
                 {
-                    Contract = GetDogOwnerContract,
+                    LookupInputId = 0,
                     Key = "OwnerIDOfTheDog",
                     Description = "The ID of the owner of the dog",
                     Type = typeof(string).Name
@@ -65,27 +65,28 @@ namespace ConsoleTesting
                         Type = typeof(string).Name
                     }
                 },
+                Queries = new List<Query>()
             };
 
             GetAddressByOwnerContract.Outputs = new List<Output>()
             {
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 0,
                     Key = "Street",
                     Description = "Street name",
                     Type = typeof(string).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 0,
                     Key = "StreetNumber",
                     Description = "Street number",
                     Type = typeof(int).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 0,
                     Key = "Country",
                     Description = "Country of the address",
                     Type = typeof(string).Name
@@ -126,8 +127,8 @@ namespace ConsoleTesting
                         new Mapping()
                         {
                             InputKey = "DogID",
-                            Contract = GetAddressByDogContract,
-                            ContractKey = "MyDogID"
+                            LookupInputId = 0,
+                            LookupInputKey = "MyDogID"
                         }
                     }
                 },
@@ -139,8 +140,8 @@ namespace ConsoleTesting
                         new Mapping()
                         {
                             InputKey = "OwnerID",
-                            Contract = GetOwnerIdByDogContract,
-                            ContractKey = "OwnerIDOfTheDog"
+                            LookupInputId = 1,
+                            LookupInputKey = "OwnerIDOfTheDog"
                         }
                     }
                 }
@@ -150,21 +151,21 @@ namespace ConsoleTesting
             {
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 1,
                     Key = "Street",
                     Description = "Street name",
                     Type = typeof(string).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 1,
                     Key = "StreetNumber",
                     Description = "Street number",
                     Type = typeof(int).Name
                 },
                 new Output()
                 {
-                    Contract = GetAddressByOwnerContract,
+                    LookupInputId = 1,
                     Key = "Country",
                     Description = "Country of the address",
                     Type = typeof(string).Name
@@ -204,20 +205,65 @@ namespace ConsoleTesting
             {
                 new Output()
                 {
-                    Contract = GetMathemathicContract,
+                    LookupInputId = 0,
                     Key = "Total",
                     Description = "This is the sum of a + b",
                     Type = typeof(int).Name
                 },
                 new Output()
                 {
-                    Contract = GetMathemathicContract,
+                    LookupInputId = 0,
                     Key = "Formula",
                     Description = "This is the sum formula",
                     Type = typeof(string).Name
                 }
             };
             return GetMathemathicContract;
+        }
+        public static BeContract GetDoubleInputContract()
+        {
+            var DoubleInputContract = new BeContract()
+            {
+                Id = "DoubleInputContract",
+                Description = "This contract is an examples with 2 inputs",
+                Version = "V001",
+                Inputs = new List<Input>()
+                {
+                    new Input()
+                    {
+                        Key = "First",
+                        Description = "First string",
+                        Required = false,
+                        Type = typeof(int).Name
+                    },
+                    new Input()
+                    {
+                        Key = "Second",
+                        Description = "First number",
+                        Required = false,
+                        Type = typeof(int).Name
+                    }
+                },
+            };
+
+            DoubleInputContract.Outputs = new List<Output>()
+            {
+                new Output()
+                {
+                    LookupInputId = 0,
+                    Key = "IsFirstNull",
+                    Description = "Return true if the first input is empty",
+                    Type = typeof(bool).Name
+                },
+                new Output()
+                {
+                    LookupInputId = 0,
+                    Key = "IsSecondNull",
+                    Description = "Return true if the first input is empty",
+                    Type = typeof(bool).Name
+                }
+            };
+            return DoubleInputContract;
         }
     }
 }

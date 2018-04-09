@@ -10,9 +10,10 @@ namespace CentralServer.Controllers
     {
         [HttpPost]
         [Route("find")]
-        public BeContractReturn Find(ASFindRequest req)
+        public BeContractReturn Find()
         {
-            return CentralServerManager.FindMock(req.Ads, req.Call);
+            //Tmp
+            return null;//CentralServerManager.FindMock(req.Ads, req.Call);
         }
     }
 }

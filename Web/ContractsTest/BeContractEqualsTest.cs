@@ -27,8 +27,8 @@ namespace BeRoadTest
                 Assert.AreEqual(expected.Queries[i].Contract.Id, actual.Queries[i].Contract.Id);
                 for (int j = 0; j < expected.Queries[i].Mappings.Count; j++)
                 {
-                    Assert.AreEqual(expected.Queries[i].Mappings[j].ContractKey, actual.Queries[i].Mappings[j].ContractKey);
-                    Assert.AreEqual(expected.Queries[i].Mappings[j].Contract.Id, actual.Queries[i].Mappings[j].Contract.Id);
+                    Assert.AreEqual(expected.Queries[i].Mappings[j].LookupInputKey, actual.Queries[i].Mappings[j].LookupInputKey);
+                    Assert.AreEqual(expected.Queries[i].Mappings[j].LookupInputId, actual.Queries[i].Mappings[j].LookupInputId);
                     Assert.AreEqual(expected.Queries[i].Mappings[j].InputKey, actual.Queries[i].Mappings[j].InputKey);
                 }
             }
@@ -37,7 +37,7 @@ namespace BeRoadTest
             {
                 Assert.AreEqual(expected.Outputs[i].Description, actual.Outputs[i].Description);
                 Assert.AreEqual(expected.Outputs[i].Key, actual.Outputs[i].Key);
-                Assert.AreEqual(expected.Outputs[i].Contract.Id, actual.Outputs[i].Contract.Id);
+                Assert.AreEqual(expected.Outputs[i].LookupInputId, actual.Outputs[i].LookupInputId);
                 Assert.AreEqual(expected.Outputs[i].Type, actual.Outputs[i].Type);
             }
         }
