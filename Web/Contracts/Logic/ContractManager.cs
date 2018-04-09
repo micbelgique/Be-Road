@@ -111,12 +111,16 @@ namespace Contracts.Logic
 
                     //Call the contract
                     var loopdQueries = await CallAndLoopQueriesAsync(callInQuery);
+                    if (loopdQueries.Contains(null))
+                        throw new BeContractException($"Got an null in loopqueries with id {callInQuery.Id}");
                     returns.AddRange(loopdQueries);
                 });
             }
             else
             {
                 var serviceReturns = await CallServiceAsync(contract, call);
+                if (serviceReturns == null)
+                    throw new BeContractException($"Got an null in serviceCall with id {call.Id}");
                 returns.Add(serviceReturns);
             }
           

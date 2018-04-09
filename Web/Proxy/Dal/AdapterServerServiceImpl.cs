@@ -54,12 +54,8 @@ namespace Proxy.Dal
                 client.BaseAddress = new Uri(ads.Url);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string json = JsonConvert.SerializeObject(new ASFindRequest() {
-                    Ads = ads,
-                    Call = call
-                });
-                var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+                
+                var httpContent = new StringContent(JsonConvert.SerializeObject(call), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(ads.Root+ "/" + call.Id, httpContent);
                 if (response.IsSuccessStatusCode)
                 {

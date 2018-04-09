@@ -3,20 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
 
 namespace ADSMock.Controllers
 {
     [RoutePrefix("api/read")]
-    public class ReadController : Controller
+    public class ReadController : ApiController
     {
         /// <summary>
         /// Calls the IS to get it's info (mock)
         /// </summary>
         /// <returns>The contract return containing the IS info</returns>
-        [HttpGet]
+        [HttpPost]
         [Route("GetServiceInfo")]
-        public BeContractReturn GetServiceInfo()
+        public BeContractReturn GetServiceInfo(BeContractCall call)
         {
            // Calling the IS to get their info
            return new BeContractReturn()
@@ -44,10 +44,10 @@ namespace ADSMock.Controllers
         }
 
         [HttpPost]
-        [Route("GetOwnerId")]
+        [Route("GetOwnerIdByDogId")]
         public BeContractReturn GetOwnerId(BeContractCall call)
         {
-            switch (call.Inputs["DogID"])
+            switch (call?.Inputs["DogID"])
             {
                 case "D-123": return ReturnAnswer("Wilson !");
                 case "D-122": return ReturnAnswer("Mika !");
