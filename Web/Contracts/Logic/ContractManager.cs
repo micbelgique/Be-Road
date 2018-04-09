@@ -62,7 +62,7 @@ namespace Contracts.Logic
             //If it's a nested contract, loop through it
             if (contract?.Queries?.Count > 0)
             {
-                contract.Queries.ForEach(async q =>
+                foreach(var q in contract.Queries)
                 {
                     //Create the BeContractCall
                     var callInQuery = new BeContractCall()
@@ -87,13 +87,6 @@ namespace Contracts.Logic
                         //Find the contract where we need to search the value
                         else
                         {
-                            //There must be a sync problem !
-                            //Console.WriteLine("Checking for lookupinputid: " + mapping.LookupInputId);
-                            //if (returns.Count > 0)
-                            //    Console.WriteLine("Gives: " + returns[mapping.LookupInputId-1].Id);
-                            //else
-                            //    Console.WriteLine("Hey ! No returns");
-
                             if ((mapping.LookupInputId - 1) >= returns.Count)
                                 throw new BeContractException($"Mapping LookupInputId n°{mapping.LookupInputId} is bigger then the returns size {returns.Count}");
                             var returnToBeUsed = returns[mapping.LookupInputId - 1];
@@ -116,7 +109,7 @@ namespace Contracts.Logic
                     if (loopdQueries.Contains(null))
                         throw new BeContractException($"Got an null in loopqueries with id {callInQuery.Id}");
                     returns.AddRange(loopdQueries);
-                });
+                };
             }
             else
             {

@@ -38,7 +38,6 @@ namespace Proxy.Dal
             var ads = FindAS(call.Id);
             if (ads != null)
             {
-                Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
                 return await FindAsync(ads, call);
             }
             else
