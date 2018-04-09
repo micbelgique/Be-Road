@@ -2,6 +2,10 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace ADSMock.Controllers
@@ -15,10 +19,7 @@ namespace ADSMock.Controllers
         /// <returns>The dog owner's ID</returns>
         [HttpGet]
         [Route("ownerbydog/{dogid}")]
-        public string GetOwnerByDog(string dogId) {
-            // This section will be in the proxy later
-            //
-
+        public async Task<BeContractReturn> GetOwnerByDogAsync(string dogId) {
             var ownerByDog = new BeContractCall()
             {
                 Id = "GetOwnerIdByDogId",
@@ -27,11 +28,8 @@ namespace ADSMock.Controllers
                     { "DogID", dogId },
                 }
             };
-
-            // Another call will be made (to the API of the Proxy)
-            //var res = cm.Call(ownerByDog);
-
-            return null; /*res.Outputs.FirstOrDefault().Value;*/
+            
+            return await CallToProxyAsync(ownerByDog);
         }
 
         /// <summary>
@@ -40,12 +38,9 @@ namespace ADSMock.Controllers
         /// <param name="dogId">The ID of the dog</param>
         /// <returns>The dog address</returns>
         [HttpGet]
-        [Route("addrbydog/{dogid}")]
-        public string GetAddressByDog(string dogId)
+        [Route("addressbydog/{dogid}")]
+        public async Task<BeContractReturn> GetAddressByDogAsync(string dogId)
         {
-            // This section will be in the proxy later
-            //
-
             var addrByDog = new BeContractCall()
             {
                 Id = "GetAddressByDogId",
@@ -55,33 +50,27 @@ namespace ADSMock.Controllers
                 }
             };
 
-            // Another call will be made (to the API of the Proxy)
-            //var res = cm.Call(addrByDog);
-
-            return null;// res.Outputs.FirstOrDefault().Value;
+            return await CallToProxyAsync(addrByDog);
         }
 
-        /// <summary>
-        /// Calls the IS to get it's info (mock)
-        /// </summary>
-        /// <returns>The contract return containing the IS info</returns>
-        [HttpGet]
-        [Route("serviceinfo")]
-        public string GetServiceInfo()
+        private async Task<BeContractReturn> CallToProxyAsync(BeContractCall call)
         {
-            // Calling the IS to get their info
-            var res =  new BeContractReturn()
+            BeContractReturn ret = null;
+            using (var client = new HttpClient())
             {
-                Id = "GetServiceInfo",
-                Outputs = new Dictionary<string, dynamic>()
-                {
-                    { "Name", "MockADS"},
-                    { "Purpose", "Testing"},
-                    { "CreationDate", DateTime.Now.ToShortDateString() }
-                }
-            };
+                client.BaseAddress = new Uri("http://localhost:52831/");
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-            return JsonConvert.SerializeObject(res);
+                var httpContent = new StringContent(JsonConvert.SerializeObject(call), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync("api/contract/call", httpContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    ret = await response.Content.ReadAsAsync<BeContractReturn>();
+                }
+            }
+            return ret;
         }
+        
     }
 }
