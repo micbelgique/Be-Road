@@ -33,22 +33,21 @@ namespace ConsoleTesting
         /// <summary>
         /// Calls the api of the Information System
         /// </summary>
-        public async Task<BeContractReturn> CallAsync(BeContractCall call)
+        public Task<BeContractReturn> CallAsync(BeContractCall call)
         {
             var ads = FindAS(call.Id);
             if (ads != null)
             {
                 Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
-                return await FindAsync(ads, call);
+                return FindAsync(ads, call);
             }
             else
                 throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
         }
 
+        //Warning is nothing
         public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
-            //Empty await for the method
-            await Task.Run(() => { });
             switch (ads.ISName)
             {
                 case "Doggies": return VeterinaryMock.GetOwnerId(call);
@@ -57,5 +56,6 @@ namespace ConsoleTesting
                 default: return new BeContractReturn();
             }
         }
+
     }
 }

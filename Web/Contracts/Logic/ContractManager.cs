@@ -52,7 +52,6 @@ namespace Contracts.Logic
             if (contract == null)
                 contract = BcService.FindBeContractById(call.Id);
 
-
             if (contract == null)
                 throw new BeContractException($"No contract was found with id {call.Id}");
 
@@ -61,7 +60,7 @@ namespace Contracts.Logic
             var returns = new List<BeContractReturn>();
 
             //If it's a nested contract, loop through it
-            /*if (contract?.Queries?.Count > 0)
+            if (contract?.Queries?.Count > 0)
             {
                 contract.Queries.ForEach(async q =>
                 {
@@ -76,33 +75,36 @@ namespace Contracts.Logic
                     q.Contract.Inputs.ForEach(input =>
                     {
                         var mapping = q.Mappings.FirstOrDefault(m => m.InputKey.Equals(input.Key));
-                        if (contract.Id.Equals(mapping?.Contract?.Id))
+                        //We need to check our contract input
+                        if (mapping?.LookupInputId == 0)
                         {
-                            //We need to check our contract input
                             if (!call.Inputs.TryGetValue(mapping.LookupInputKey, out dynamic value))
-                                throw new BeContractException($"No value was found for the key {mapping.LookupInputKey} in the contract input of {mapping.Contract.Id}")
+                                throw new BeContractException($"No value was found for the key {mapping.LookupInputKey} in the lookupinputid n°{mapping.LookupInputId}")
                                 { BeContractCall = call };
 
                             callInQuery.Inputs.Add(input.Key, value);
                         }
+                        //Find the contract where we need to search the value
                         else
                         {
                             //There must be a sync problem !
-                            Console.WriteLine(mapping.Contract.Id);
-                            if (returns.Count() > 0)
-                                Console.WriteLine(returns[0].Id);
-                            else
-                                Console.WriteLine("No returns");
+                            //Console.WriteLine("Checking for lookupinputid: " + mapping.LookupInputId);
+                            //if (returns.Count > 0)
+                            //    Console.WriteLine("Gives: " + returns[mapping.LookupInputId-1].Id);
+                            //else
+                            //    Console.WriteLine("Hey ! No returns");
 
-                            //Find the contract where we need to search the value
-                            var returnToBeUsed = returns.FirstOrDefault(ret => ret.Id.Equals(mapping.Contract.Id));
+                            if ((mapping.LookupInputId - 1) >= returns.Count)
+                                throw new BeContractException($"Mapping LookupInputId n°{mapping.LookupInputId} is bigger then the returns size {returns.Count}");
+                            var returnToBeUsed = returns[mapping.LookupInputId - 1];
+
                             if (returnToBeUsed == null)
-                                throw new BeContractException($"No output was found for query {q.Contract.Id} with mapping contract {mapping.Contract.Id}")
+                                throw new BeContractException($"No output was found for query {q.Contract.Id} with mapping lookupinputid n°{mapping.LookupInputId}")
                                 { BeContractCall = call };
 
                             //We need to check our contract outputs
                             if (!returnToBeUsed.Outputs.TryGetValue(mapping.LookupInputKey, out dynamic value))
-                                throw new BeContractException($"No value was found for the key {mapping.LookupInputKey} in the contract outputs of {mapping.Contract.Id}")
+                                throw new BeContractException($"No value was found for the key {mapping.LookupInputKey} in the contract outputs of n°{mapping.LookupInputId}")
                                 { BeContractCall = call };
 
                             callInQuery.Inputs.Add(input.Key, value);
@@ -115,8 +117,7 @@ namespace Contracts.Logic
                         throw new BeContractException($"Got an null in loopqueries with id {callInQuery.Id}");
                     returns.AddRange(loopdQueries);
                 });
-            }*/
-            if (false) ;
+            }
             else
             {
                 var serviceReturns = await CallServiceAsync(contract, call);

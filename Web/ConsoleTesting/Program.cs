@@ -52,7 +52,7 @@ namespace ConsoleTesting
             manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-122")).Wait();
             manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:")).Wait();
             manager.CallAsync(CreateContractCall("GetAddressByOwnerId", "OwnerID:Mika !")).Wait();
-            manager.CallAsync(CreateContractCall("GetAddressByDogId", "MyDogID:D-123")).Wait();
+            manager.CallAsync(CreateContractCall("GetAddressByDogId", "MyDogID:D-122")).Wait();
             manager.CallAsync(CreateContractCall("GetMathemathicFunction", "A:5", "B:19")).Wait();
             Console.ReadLine();
         }
