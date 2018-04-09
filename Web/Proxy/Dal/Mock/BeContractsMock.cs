@@ -13,11 +13,51 @@ namespace Proxy.Dal.Mock
         {
             return new List<BeContract>()
             {
+                GetServiceInfo(),
                 GetOwnerIdByDogId(),
                 GetMathemathicFunction(),
                 GetAddressByOwnerId(),
                 GetAddressByDogId()
             };
+        }
+
+        public static BeContract GetServiceInfo()
+        {
+            var GetServiceInfoContract =  new BeContract()
+            {
+                Id = "GetServiceInfo",
+                Description = "This contract is used to get the information of the service",
+                Version = "V001",
+                Inputs = new List<Input>(),
+                Queries = new List<Query>()                
+            };
+
+            GetServiceInfoContract.Outputs = new List<Output>()
+            {
+                new Output()
+                {
+                    Contract = GetServiceInfoContract,
+                    Key = "Name",
+                    Description = "The name of the service",
+                    Type = typeof(string).Name
+                },
+                new Output()
+                {
+                    Contract = GetServiceInfoContract,
+                    Key = "Purpose",
+                    Description = "The purpose of the service",
+                    Type = typeof(string).Name
+                },
+                new Output()
+                {
+                    Contract = GetServiceInfoContract,
+                    Key = "CreationDate",
+                    Description = "The creation date of the service",
+                    Type = typeof(string).Name
+                }
+            };
+
+            return GetServiceInfoContract;
         }
 
         public static BeContract GetOwnerIdByDogId()
