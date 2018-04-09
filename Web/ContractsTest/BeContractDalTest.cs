@@ -4,7 +4,7 @@ using Contracts.Dal;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ContractsTest
+namespace BeRoadTest
 {
     [TestClass]
     public class BeContractDalTest

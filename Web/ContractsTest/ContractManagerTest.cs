@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ContractsTest
+namespace BeRoadTest
 {
     [TestClass]
     public class ContractManagerTest

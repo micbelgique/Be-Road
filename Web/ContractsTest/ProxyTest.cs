@@ -8,7 +8,7 @@ using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 
-namespace ContractsTest
+namespace BeRoadTest
 {
     [TestClass]
     public class ProxyTest

@@ -68,9 +68,9 @@
       <Project>{a0389450-7dea-40ca-8c87-49f5c4921fd4}</Project>
       <Name>CentralServer</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ContractsTest\ContractsTest.csproj">
+    <ProjectReference Include="..\ContractsTest\BeRoadTest.csproj">
       <Project>{0b85ceff-4cc7-4c67-a289-9695b2824e98}</Project>
-      <Name>ContractsTest</Name>
+      <Name>BeRoadTest</Name>
     </ProjectReference>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>

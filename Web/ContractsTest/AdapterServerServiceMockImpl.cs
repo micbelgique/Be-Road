@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ContractsTest
+namespace BeRoadTest
 {
     /// <summary>
     /// Class used to find an adapter server

@@ -3,7 +3,7 @@ using Contracts.Models;
 using Proxy.Dal.Mock;
 using System.Linq;
 
-namespace ContractsTest
+namespace BeRoadTest
 {
     public class BeContractService : IBeContractService
     {

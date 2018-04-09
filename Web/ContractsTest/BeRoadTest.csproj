@@ -9,8 +9,8 @@
     <ProjectGuid>{0B85CEFF-4CC7-4C67-A289-9695B2824E98}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ContractsTest</RootNamespace>
-    <AssemblyName>ContractsTest</AssemblyName>
+    <RootNamespace>BeRoadTest</RootNamespace>
+    <AssemblyName>BeRoadTest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
