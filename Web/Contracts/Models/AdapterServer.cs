@@ -19,5 +19,9 @@ namespace Contracts.Models
         /// URL of the adapter server API
         /// </summary>
         public string Url { get; set; }
+        /// <summary>
+        /// Root of the API to call 
+        /// </summary>
+        public string Root { get; set; }
     }
 }

@@ -22,9 +22,9 @@ namespace ContractsTest
         {
             ADSList = new List<AdapterServer>
             {
-                new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" },
-                new AdapterServer() { ContractNames = new List<string>  { "GetMathemathicFunction" }, ISName = "MathLovers", Url = "www.mathlovers.com/api/" },
-                new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "www.citizens.com/api/" },
+                new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId", "GetAddressByDogId", "GetServiceInfo" }, ISName = "Doggies", Url = "http://localhost:59317/", Root = "api/read" },
+                new AdapterServer() { ContractNames = new List<string>  { "GetMathemathicFunction" }, ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
             };
         }
 

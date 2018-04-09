@@ -51,16 +51,16 @@ namespace Proxy.Dal
             using (var client = new HttpClient())
             {
                 //Use the ads.Url as baseaddress, don't send this to Be-Road !
-                client.BaseAddress = new Uri("http://localhost:53369/");
+                client.BaseAddress = new Uri(ads.Url);
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 string json = JsonConvert.SerializeObject(new ASFindRequest() {
                     Ads = ads,
                     Call = call
                 });
                 var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync("api/central/find", httpContent);
+                HttpResponseMessage response = await client.PostAsync(ads.Root+ "/" + call.Id, httpContent);
                 if (response.IsSuccessStatusCode)
                 {
                     res = await response.Content.ReadAsAsync<BeContractReturn>();

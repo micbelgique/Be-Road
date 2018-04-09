@@ -25,11 +25,9 @@ namespace Proxy.Controllers
 
         [HttpPost]
         [Route("call")]
-        public async Task<string> CallContractAsync(BeContractCall call)
+        public async Task<BeContractReturn> CallContractAsync(BeContractCall call)
         {
-            var res = await cm.CallAsync(call);
-
-            return JsonConvert.SerializeObject(res);
+            return await cm.CallAsync(call);
         }
     }
 }
