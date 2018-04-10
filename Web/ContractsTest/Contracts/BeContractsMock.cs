@@ -1,11 +1,7 @@
 ﻿using Contracts.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace BeRoadTest
+namespace BeRoadTest.Contracts
 {
     public class BeContractsMock
     {
@@ -198,7 +194,7 @@ namespace BeRoadTest
                     new Input()
                     {
                         Key = "B",
-                        Description = "First number",
+                        Description = "Second number",
                         Required = true,
                         Type = typeof(int).Name
                     }

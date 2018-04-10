@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BeRoadTest
+namespace BeRoadTest.ADSMock
 {
     [TestClass]
     public class AdapterServerTest

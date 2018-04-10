@@ -1,9 +1,8 @@
 ﻿using Contracts.Dal;
 using Contracts.Models;
-using Proxy.Dal.Mock;
 using System.Linq;
 
-namespace BeRoadTest
+namespace BeRoadTest.Contracts
 {
     public class BeContractService : IBeContractService
     {

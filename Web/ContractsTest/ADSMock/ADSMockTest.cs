@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using ADSMock.Controllers;
-using Contracts.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BeRoadTest
+namespace BeRoadTest.ADSMock
 {
     [TestClass]
     public class ADSMockTest

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Contracts;
+﻿using Contracts;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
-namespace BeRoadTest
+namespace BeRoadTest.Contracts
 {
     [TestClass]
     public class BeContractCallTest
