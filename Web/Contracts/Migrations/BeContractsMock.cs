@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Proxy.Dal.Mock
+namespace Contracts.Migrations
 {
     public class BeContractsMock
     {

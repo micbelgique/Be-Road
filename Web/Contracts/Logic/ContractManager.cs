@@ -75,8 +75,11 @@ namespace Contracts.Logic
                     q.Contract.Inputs.ForEach(input =>
                     {
                         var mapping = q.Mappings.FirstOrDefault(m => m.InputKey.Equals(input.Key));
+                        if (mapping == null)
+                            throw new BeContractException($"No mapping exists for inputKey {input.Key}");
+
                         //We need to check our contract input
-                        if (mapping?.LookupInputId == 0)
+                        if (mapping.LookupInputId == 0)
                         {
                             if (!call.Inputs.TryGetValue(mapping.LookupInputKey, out dynamic value))
                                 throw new BeContractException($"No value was found for the key {mapping.LookupInputKey} in the lookupinputid n°{mapping.LookupInputId}")

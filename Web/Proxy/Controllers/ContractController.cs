@@ -20,7 +20,7 @@ namespace Proxy.Controllers
             cm = new ContractManager()
             {
                 AsService = new AdapterServerServiceImpl(),
-                BcService = new BeContractService()
+                BcService = new BeContractServiceImpl()
             };
         }
 
