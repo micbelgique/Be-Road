@@ -127,7 +127,7 @@ namespace Contracts.Logic
         /// </summary>
         /// <param name="call">The inputs for the contract call</param>
         /// <returns></returns>
-        public async Task<BeContractReturn> CallAsync(BeContractCall call)
+        public async Task<Dictionary<int, BeContractReturn>> CallAsync(BeContractCall call)
         {
             if (call == null)
                 throw new BeContractException("Contract call is null");
@@ -136,23 +136,34 @@ namespace Contracts.Logic
             Console.WriteLine($"Calling contract {contract?.Id}");
             //Filter to only give the correct outputs
             var notFiltredReturns = await CallAndLoopQueriesAsync(call, contract);
-            var filtredReturns = notFiltredReturns
-                .SelectMany(r => r.Outputs)
-                .Where(pair => contract.Outputs.Any(output => output.Key.Equals(pair.Key)))
-                .ToDictionary(pair => pair.Key, pair => pair.Value);
 
-            var contractReturn = new BeContractReturn()
+            var filtredReturns = new Dictionary<int, BeContractReturn>();
+            var groupedOutputs = contract.Outputs.GroupBy(output => output.LookupInputId);
+            groupedOutputs.ToList().ForEach(group =>
             {
-                Id = contract.Id,
-                Outputs = filtredReturns
-            };
+                var beContractReturn = new BeContractReturn
+                {
+                    Outputs = new Dictionary<string, dynamic>()
+                };
+                group.ToList().ForEach(output =>
+                {
+                    var ret = notFiltredReturns[output.LookupInputId].Outputs.FirstOrDefault(o => o.Key.Equals(output.Key));
+                    beContractReturn.Id = notFiltredReturns[output.LookupInputId].Id;
+                    beContractReturn.Outputs.Add(ret.Key, ret.Value);
+                });
+                filtredReturns.Add(group.Key, beContractReturn);
+            });
             
-            contractReturn.Outputs.ToList().ForEach(output =>
+            filtredReturns.ToList().ForEach(ret =>
             {
-                Console.WriteLine($"-{output.Key} = {output.Value}");
+                Console.WriteLine($"At LookupInputId {ret.Key} for contract {ret.Value.Id}");
+                ret.Value.Outputs.ToList().ForEach(output =>
+                {
+                    Console.WriteLine($"\t{output.Key} - {output.Value}");
+                });
             });
 
-            return contractReturn;
+            return filtredReturns;
         }
     }
 }
