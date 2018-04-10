@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Contracts;
+﻿using Contracts;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Threading.Tasks;
 
-namespace BeRoadTest
+namespace BeRoadTest.Contracts
 {
     [TestClass]
     public class BeContractSchemaTest
@@ -170,6 +169,29 @@ namespace BeRoadTest
         {
             var contract = BeContractsMock.GetAddressByDogId();
             await Validators.ValidateBeContract(contract);
+        }
+
+        [TestMethod]
+        public async Task TestValidateBeContractWithDuplicatedInputsSuccess()
+        {
+            var contract = BeContractsMock.GetMathemathicFunction();
+            Assert.IsTrue(await Validators.ValidateBeContract(contract));
+        }
+
+        [TestMethod]
+        public async Task TestValidateBeContractWithDuplicatedInputsFailAsync()
+        {
+            var contract = BeContractsMock.GetMathemathicFunction();
+            contract.Inputs[0].Key = "B";
+            try
+            {
+                await Validators.ValidateBeContract(contract);
+            }
+            catch(BeContractException ex)
+            {
+                var exc = new BeContractException("Duplicated key in GetMathemathicFunction contract for Inputs B, B");
+                Assert.AreEqual(ex.Message, exc.Message);
+            }
         }
     }
 }

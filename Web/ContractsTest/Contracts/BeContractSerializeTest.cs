@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using Contracts.Logic;
-using Contracts.Models;
+﻿using Contracts.Logic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Text.RegularExpressions;
 
-namespace BeRoadTest
+namespace BeRoadTest.Contracts
 {
     [TestClass]
     public class BeContractSerializeTest

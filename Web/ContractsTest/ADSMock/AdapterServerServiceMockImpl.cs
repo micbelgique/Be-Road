@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeRoadTest
+namespace BeRoadTest.ADSMock
 {
     /// <summary>
     /// Class used to find an adapter server

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using NJsonSchema;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -19,6 +20,19 @@ namespace Contracts.Logic
 
         public async Task<Boolean> ValidateBeContract(BeContract contract)
         {
+            var duplicated = new List<string>();
+            contract.Inputs.ForEach(input1 =>
+                {
+                    var occur = contract.Inputs.Count(input2 => input1.Key == input2.Key);
+
+                    if (occur > 1)
+                        duplicated.Add(input1.Key);
+                }
+            );
+
+            if (duplicated.Count > 0)
+                throw new BeContractException("Duplicated key in " + contract.Id + " contract for Inputs " + string.Join(", ", duplicated));
+
             try
             {
                 if(Schema == null)

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using CentralServer.Dal;
+﻿using CentralServer.Dal;
 using Contracts;
-using Contracts.Dal;
 using Contracts.Logic;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
-namespace BeRoadTest
+namespace BeRoadTest.CentralServer
 {
     [TestClass]
     public class CentralServerTest

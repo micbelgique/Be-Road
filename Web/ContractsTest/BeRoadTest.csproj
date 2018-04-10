@@ -68,20 +68,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdapterServerServiceMockImpl.cs" />
-    <Compile Include="BeContractEqualsTest.cs" />
-    <Compile Include="BeContractService.cs" />
-    <Compile Include="BeContractsMock.cs" />
-    <Compile Include="BeContractSchemaTest.cs" />
+    <Compile Include="ADSMock\AdapterServerServiceMockImpl.cs" />
+    <Compile Include="Contracts\BeContractEqualsTest.cs" />
+    <Compile Include="Contracts\BeContractService.cs" />
+    <Compile Include="Contracts\BeContractsMock.cs" />
+    <Compile Include="Contracts\BeContractSchemaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BeContractCallTest.cs" />
-    <Compile Include="BeContractSerializeTest.cs" />
-    <Compile Include="AdapterServerTest.cs" />
-    <Compile Include="BeContractDalTest.cs" />
-    <Compile Include="ContractManagerTest.cs" />
-    <Compile Include="ADSMockTest.cs" />
-    <Compile Include="ProxyTest.cs" />
-    <Compile Include="CentralServerTest.cs" />
+    <Compile Include="Contracts\BeContractCallTest.cs" />
+    <Compile Include="Contracts\BeContractSerializeTest.cs" />
+    <Compile Include="ADSMock\AdapterServerTest.cs" />
+    <Compile Include="Contracts\BeContractDalTest.cs" />
+    <Compile Include="Contracts\ContractManagerTest.cs" />
+    <Compile Include="ADSMock\ADSMockTest.cs" />
+    <Compile Include="Proxy\ProxyTest.cs" />
+    <Compile Include="CentralServer\CentralServerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -105,6 +105,7 @@
       <Name>Proxy</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
