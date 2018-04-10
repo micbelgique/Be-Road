@@ -42,6 +42,10 @@ namespace BeRoadTest.Contracts
 
         public void TestAddAndRead(BeContract contract)
         {
+            if (Db.Contracts.Any(c => c.Id.Equals(contract.Id)))
+            {
+                Db.Contracts.Remove(Db.Contracts.FirstOrDefault(c => c.Id.Equals(contract.Id)));
+            }
             Db.Contracts.Add(contract);
             Db.SaveChanges();
             var owner = Db.Contracts.FirstOrDefault(c => c.Id.Equals(contract.Id));
@@ -63,7 +67,13 @@ namespace BeRoadTest.Contracts
         [TestMethod]
         public void TestAddAndReadWithQuery()
         {
-            TestAddAndRead(BeContractsMock.GetAddressByDogId());
+            TestAddAndRead(BeContractsMock.GetOwnerIdByDogId());
+            TestAddAndRead(BeContractsMock.GetAddressByOwnerId());
+
+            var addrByDog = BeContractsMock.GetAddressByDogId();
+            addrByDog.Queries[0].Contract = Db.Contracts.FirstOrDefault(c => c.Id.Equals("GetOwnerIdByDogId"));
+            addrByDog.Queries[1].Contract = Db.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByOwnerId"));
+            TestAddAndRead(addrByDog);
         }
 
         [TestMethod]
