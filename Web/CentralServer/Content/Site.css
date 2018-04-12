@@ -16,14 +16,14 @@ textarea {
     max-width: 280px;
 }
 
-.input-add-btn, .query-add-btn, .output-add-btn, .mappings-add-btn {
+.input-add-btn, .query-add-btn, .output-add-btn, .mapping-add-btn {
     max-width: 70px;
 }
 
-.rem-btn{
+.input-rem-btn, .query-rem-btn, .output-rem-btn, .mapping-rem-btn {
     width: auto !important;
 }
 
-.input{
+.input, .query, .output, .mapping{
     display: none;
 }

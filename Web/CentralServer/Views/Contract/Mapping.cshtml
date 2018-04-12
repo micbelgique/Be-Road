@@ -1,0 +1,35 @@
+﻿@model Contracts.Models.Mapping
+
+@{
+    ViewBag.Title = "Mapping";
+}
+
+<div class="mapping" id="mapping">
+    <br />
+    <div class="form-group">
+        <label class="control-label col-md-2">InputKey</label>
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.InputKey, new { htmlAttributes = new { @class = "form-control", placeholder = "Name of the input of the contract to call" } })
+            @Html.ValidationMessageFor(model => model.InputKey, "", new { @class = "text-danger" })
+        </div>
+        <button type="button" class="mapping-rem-btn btn btn-default col-md-6"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="form-group">
+        <label class = "control-label col-md-2">Lookup input ID</label>
+        <div class="col-md-10">
+            <select class="form-control dropdown lookupid-select" id="LookupInputId" name="LookupInputId">
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Lookup input key</label>
+        <div class="col-md-10">
+            <select class="form-control dropdown lookupkey-select" id="LookupInputKey" name="LookupInputKey">
+            </select>
+        </div>
+    </div>
+    <hr />
+</div>
+
