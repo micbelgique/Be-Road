@@ -2,6 +2,7 @@
     var inputNb = 0;
     var us = new UpdateSelect();
     us.queryCpt = -1;
+    $('.query-rem-btn').hide();
 
     $('.input-add-btn').click(
         function () {
@@ -31,12 +32,8 @@
             queryNb++;
             $('#query').clone().appendTo('#queries').attr('id', 'query' + queryNb);
             $('#query' + queryNb).show();
-            $('#query' + queryNb).find('.query-rem-btn').bind('click', function () {
-                var id = this.parentElement.parentElement.id;
-                us.queryCpt--;
-                us.refresh(us.queryCpt);
-                $('#queries').find('#' + id).remove();
-            });
+            $('.query-rem-btn').show();
+            $('#queries').css('margin-top', '50px');
 
             var mappingNb = 0;
             us.queryCpt++;
@@ -63,6 +60,16 @@
                 }
             );
             us.fillQContractNameSelect(us.queryCpt, queryNb);
+        }
+    );
+
+    $('.query-rem-btn').click(
+        function () {
+            $('#queries').css('margin-top', '0px');
+            $('.query-rem-btn').hide();
+            us.queryCpt = -1;
+            queryNb = 0;
+            $('#queries').find('.query').remove();
         }
     );
 });

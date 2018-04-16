@@ -155,9 +155,9 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Contract\Create.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Contract\Input.cshtml" />
     <Content Include="Views\Contract\Query.cshtml" />
     <Content Include="Views\Contract\Mapping.cshtml" />
+    <Content Include="Views\Contract\Input.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -15,7 +15,7 @@ namespace CentralServer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create([Bind(Prefix = "c")]BeContract contract)
+        public ActionResult Create(BeContract contract)
         {
             return View();
         }
