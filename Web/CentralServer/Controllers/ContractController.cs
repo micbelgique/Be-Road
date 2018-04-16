@@ -1,5 +1,6 @@
 ﻿using CentralServer.Dal;
 using Contracts.Dal;
+using Contracts.Models;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -10,10 +11,11 @@ namespace CentralServer.Controllers
         // GET: Contract
         public ActionResult Index()
         {
-            return RedirectToAction("Create");
+            return View("Create");
         }
 
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult Create([Bind(Prefix = "c")]BeContract contract)
         {
             return View();
         }
@@ -22,11 +24,21 @@ namespace CentralServer.Controllers
         public ActionResult GetOutput(string lookUpId, string contractId)
         {
             var ctx = new ContractContext();
-            var total = ctx.Contracts.ToList();
             var contract = ctx.Contracts.FirstOrDefault(c => c.Id == contractId);
             var res = contract.Outputs.FindAll(o => o.LookupInputId == int.Parse(lookUpId) - 1);
             if (res != null)
                 return Json(res, JsonRequestBehavior.AllowGet);
+            else
+                return Json("Null", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult GetContracts()
+        {
+            var ctx = new ContractContext();
+            var contracts = ctx.Contracts.ToList();
+            if (contracts != null)
+                return Json(contracts, JsonRequestBehavior.AllowGet);
             else
                 return Json("Null", JsonRequestBehavior.AllowGet);
         }

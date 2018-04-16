@@ -121,6 +121,8 @@
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ContractsCreator\AjaxCalls.js" />
+    <Content Include="Scripts\ContractsCreator\UpdateSelect.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -129,7 +131,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\Script.js" />
+    <Content Include="Scripts\ContractsCreator\Script.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

@@ -1,19 +1,31 @@
 ﻿$(function () {
     var inputNb = 0;
+    var us = new UpdateSelect();
+    us.queryCpt = -1;
+
     $('.input-add-btn').click(
         function () {
             inputNb++;
             $('#input').clone().appendTo('#inputs').attr('id', 'input' + inputNb);
             $('#input' + inputNb).show();
+            $('#input' + inputNb).removeClass('input');
+            $('#input' + inputNb).addClass('added-input');
+            us.updateSelects(us.queryCpt);
             $('#input' + inputNb).find('.input-rem-btn').bind('click', function () {
                 var id = this.parentElement.parentElement.id;
                 $('#inputs').find('#' + id).remove();
+                us.refresh(us.queryCpt);
             });
+
+            $('#input' + inputNb).find('.input-key').bind('keyup', 
+                function () {
+                    us.updateSelects(us.queryCpt);
+                }
+            );
         }
     );
 
     var queryNb = 0;
-    var cpt = -1;
     $('.query-add-btn').click(
         function () {
             queryNb++;
@@ -21,14 +33,20 @@
             $('#query' + queryNb).show();
             $('#query' + queryNb).find('.query-rem-btn').bind('click', function () {
                 var id = this.parentElement.parentElement.id;
-                cpt--;
-                updateLookupIdSelect(cpt);
-                updateLookupKeySelect(cpt)
+                us.queryCpt--;
+                us.refresh(us.queryCpt);
                 $('#queries').find('#' + id).remove();
             });
 
             var mappingNb = 0;
-            cpt++;
+            us.queryCpt++;
+
+            $('#query' + queryNb).find('.qcontractname-select').bind('change',
+                function () {
+                    us.updateSelects(cpt);
+                }
+            );
+
             $('#query' + queryNb).find('.mapping-add-btn').bind('click',
                 function () {
                     var qId = this.parentElement.parentElement.parentElement.parentElement.id;
@@ -37,63 +55,15 @@
                     $('#mapping' + mappingNb + qId).show();
                     $('#mapping' + mappingNb + qId).find('.mapping-rem-btn').bind('click', function () {
                         var id = this.parentElement.parentElement.id;
+                        us.refresh(us.queryCpt);
                         $('#' + qId + ' #mappings').find('#' + id).remove();
                     });
+
+                    us.updateSelects(us.queryCpt);
                 }
             );
-            updateLookupIdSelect(cpt);
-            updateLookupKeySelect(cpt)
+            us.fillQContractNameSelect(us.queryCpt, queryNb);
         }
     );
 });
 
-function updateLookupIdSelect(cpt) {
-    var optSel = '<option selected="selected" value="0">';
-    var optDef = '<option value="'+cpt+'">';
-    var optEnd = '</option>';
-
-    $('.lookupid-select').find('option').remove();
-    for (var i = 0; i <= cpt; i++) {
-        if (i > 0) {
-            $('.lookupid-select').append(optDef + "Query #"+ i + optEnd);
-        }
-        else {
-            $('.lookupid-select').append(optSel + 'Main contract' + optEnd);
-        }
-    }
-}
-
-function updateLookupKeySelect(cpt) {
-    var optSel = '<option selected="selected" value="0">';
-    var optDef = '<option value="' + cpt + '">';
-    var optEnd = '</option>';
-
-    $('.lookupkey-select').find('option').remove();
-    for (var i = 0; i <= cpt; i++) {
-        outputGet(i).then(function (result) {
-            for (var j = 0; j <= result.length; j++) {
-                $('.lookupkey-select').append(optDef + result[j].Key + optEnd);
-            }
-        });
-    }
-}
-
-async function outputGet(lookUpId) {
-    var params = {
-        'lookUpId': lookUpId,
-        'contractId': 'GetAddressByOwnerId'
-    };
-    return await $.ajax({
-        type: "POST",
-        url: 'GetOutput',
-        contentType: "application/json; charset=utf-8",
-        data:  JSON.stringify(params),
-        dataType: "json",
-        success: function (result) {
-            //alert(result.Key);
-        },
-        error: function () {
-            alert('AJAX Error');
-        }
-    });
-}

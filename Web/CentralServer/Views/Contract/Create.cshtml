@@ -7,7 +7,7 @@
 <h2>Create a BeContract</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Contract", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -44,7 +44,7 @@
             <div class="col-md-12" id="inputs">
             </div>
             <div class="col-md-10">
-                <button type="button" class="input-add-btn btn btn-default form-control"><i class="fas fa-plus"></i></button>
+                <button type="button" class="input-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
             </div>
         </div>
 
@@ -53,7 +53,7 @@
             <div class="col-md-12" id="queries">
             </div>
             <div class="col-md-10">
-                <button type="button" class="query-add-btn btn btn-default form-control"><i class="fas fa-plus"></i></button>
+                <button type="button" class="query-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
             </div>
         </div>
 
@@ -62,7 +62,7 @@
             <div class="col-md-12" id="outputs">
             </div>
             <div class="col-md-10">
-                <button type="button" class="output-add-btn btn btn-default form-control"><i class="fas fa-plus"></i></button>
+                <button type="button" class="output-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
             </div>
         </div>
 
@@ -81,3 +81,6 @@
 @Html.Partial("Input")
 @Html.Partial("Query")
 @Html.Partial("Mapping")
+<script src="~/Scripts/ContractsCreator/AjaxCalls.js"></script>
+<script src="~/Scripts/ContractsCreator/UpdateSelect.js"></script>
+<script src="~/Scripts/ContractsCreator/Script.js"></script>
