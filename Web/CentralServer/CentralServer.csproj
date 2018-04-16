@@ -158,6 +158,7 @@
     <Content Include="Views\Contract\Query.cshtml" />
     <Content Include="Views\Contract\Mapping.cshtml" />
     <Content Include="Views\Contract\Input.cshtml" />
+    <Content Include="Views\Contract\Output.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

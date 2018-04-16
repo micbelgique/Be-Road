@@ -1,5 +1,6 @@
 ﻿$(function () {
     var inputNb = 0;
+    var outputNb = 0;
     var us = new UpdateSelect();
     us.queryCpt = -1;
     $('.query-rem-btn').hide();
@@ -70,6 +71,20 @@
             us.queryCpt = -1;
             queryNb = 0;
             $('#queries').find('.query').remove();
+        }
+    );
+
+    $('.output-add-btn').click(
+        function () {
+            outputNb++;
+            $('#output').clone().appendTo('#outputs').attr('id', 'output' + outputNb);
+            $('#output' + outputNb).show();
+            $('#output' + outputNb).removeClass('output');
+            $('#output' + outputNb).addClass('added-output');
+            $('#output' + outputNb).find('.input-rem-btn').bind('click', function () {
+                var id = this.parentElement.parentElement.id;
+                $('#outputs').find('#' + id).remove();
+            });
         }
     );
 });
