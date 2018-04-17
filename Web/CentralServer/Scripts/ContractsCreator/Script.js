@@ -93,7 +93,14 @@
                 $('#outputs').find('#' + id).remove();
             });
 
+            $('#output' + outputNb).find('.olookupid-select').bind('change',
+                function () {
+                    us.updateOutputKeySelect('#' + $(this).parent().parent().parent().attr('id'));
+                }
+            );
+
             us.updateOLookupIdSelect(outputNb, us.queryCpt);
+            us.updateOutputKeySelect('#output' + outputNb);
         }
     );
 });

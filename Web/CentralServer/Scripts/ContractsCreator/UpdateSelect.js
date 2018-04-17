@@ -142,15 +142,59 @@
 
     updateOLookupIdSelect(outputId, cpt) {
         var optSel = '<option selected="selected" value="0">';
-        var optDef = '<option value="' + cpt + '">';
+        var optDef;
         var optEnd = '</option>';
 
-        for (var i = 0; i <= cpt; i++) {
+        for (var i = 0; i <= cpt + 1; i++) {
             if (i > 0) {
+                optDef = '<option value="' + i + '">';
                 $('#output' + outputId).find('.olookupid-select').append(optDef + "Query #" + i + optEnd);
             }
             else {
                 $('#output' + outputId).find('.olookupid-select').append(optSel + 'Main contract' + optEnd);
+            }
+        }
+    }
+
+    updateOutputKeySelect(outputId) {
+        var optDef = '<option value="';
+        var optEnd = '</option>';
+        var inputs;
+        var selectedContract;
+        var inner;
+
+        $(outputId).find('.outputkey-select').find('option').remove();
+        var lookupQueryId = $(outputId).find('.olookupid-select').find(':selected').val();
+        if (lookupQueryId == '0') {
+            inputs = $('.added-input');
+            if (inputs.length == 0) {
+                $(outputId).find('.outputkey-select').append('<option selected="selected">No input</option>');
+            }
+            else {
+                for (var j = 0; j <= inputs.length; j++) {
+                    if (inputs[j] != null) {
+                        inner = inputs[j].children[1].children[1].children[0].value;
+                        if (inner != '') {
+                            $(outputId).find('.outputkey-select').append(optDef + inner + '">' + inner + optEnd);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            selectedContract = this.contracts.find(c => c.Id == $('#query' + lookupQueryId + ' .qcontractname-select').find(':selected').val());
+            if (selectedContract.Outputs.length == 0) {
+                $(outputId).find('.outputkey-select').append('<option selected="selected">No output</option>');
+            }
+            else {
+                for (var j = 0; j <= selectedContract.Outputs.length; j++) {
+                    if (selectedContract.Outputs[j] != null) {
+                        inner = selectedContract.Outputs[j].Key;
+                        if (inner != '') {
+                            $(outputId).find('.outputkey-select').append(optDef + inner + '">' + inner + optEnd);
+                        }
+                    }
+                }
             }
         }
     }
