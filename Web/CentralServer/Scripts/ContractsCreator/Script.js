@@ -41,6 +41,9 @@
 
             $('#query' + queryNb).find('.qcontractname-select').bind('change',
                 function () {
+                    for (var i = queryNb; i <= us.queryCpt + 1; i++) {
+                        $('#query' + i).find('.lookupid-select').find('option').remove();
+                    }
                     us.updateSelects(us.queryCpt);
                 }
             );
