@@ -6,7 +6,7 @@
         };
         return await $.ajax({
             type: "POST",
-            url: 'GetOutput',
+            url: 'Contract/GetOutput',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(params),
             dataType: "json",
@@ -23,7 +23,7 @@
         $('.lookupkey-select').append('<option selected="selected">Loading...</option>');
         return await $.ajax({
             type: "GET",
-            url: 'GetContracts',
+            url: 'Contract/GetContracts',
             contentType: "application/json; charset=utf-8",
             success: function (result) {
                 //alert(this.contracts + '\n' + result);

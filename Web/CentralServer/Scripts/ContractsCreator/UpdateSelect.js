@@ -63,6 +63,48 @@
         }
     }
 
+    updateOneKeySelect(mappingId, qId) {
+        var optDef = '<option value="';
+        var optEnd = '</option>';
+        var inputs;
+        var selectedContract;
+
+        $(mappingId).find('.key-select').find('option').remove();
+        var lookupQueryId = $(mappingId).find('.lookupid-select').find(':selected').val();
+        if (lookupQueryId == '0') {
+            inputs = $('.added-input');
+            if (inputs.length == 0) {
+                $(mappingId).find('.key-select').append('<option selected="selected">No input</option>');
+            }
+            else {
+                for (var j = 0; j <= inputs.length; j++) {
+                    if (inputs[j] != null) {
+                        inner = inputs[j].children[1].children[1].children[0].value;
+                        if (inner != '') {
+                            $(mappingId).find('.key-select').append(optDef + inner + '">' + inner + optEnd);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            selectedContract = this.contracts.find(c => c.Id == $('#query' + lookupQueryId + ' .qcontractname-select').find(':selected'));
+            if (selectedContract.Outputs.length == 0) {
+                $(mappingId).find('.key-select').append('<option selected="selected">No output</option>');
+            }
+            else {
+                for (var j = 0; j <= selectedContract.Outputs.length; j++) {
+                    if (selectedContract.Outputs[j] != null) {
+                        inner = selectedContract.Outputs[j];
+                        if (inner != '') {
+                            $(mappingId).find('.key-select').append(optDef + inner + '">' + inner + optEnd);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     updateLookupKeySelect(cpt) {
         var optDef = '<option value="';
         var optEnd = '</option>';
@@ -71,8 +113,6 @@
 
         $('.lookupkey-select ').find('option').remove();
         for (var i = 1; i <= cpt + 1; i++) {
-            //queryId = $('#mapping' + i +'query' + i + ' .lookupid-select').find(':selected').value;
-            //alert(queryId);
             selectedContract = this.contracts.find(c => c.Id == $('#query' + i + ' .qcontractname-select').find(':selected').text());
             if (selectedContract.Inputs.length == 0) {
                 $('#query' + i).find('.lookupkey-select ').append('<option selected="selected">None</option>');
@@ -97,5 +137,20 @@
             }
             this.updateLookupKeySelect(cpt);
         }.bind(this));
+    }
+
+    updateOLookupIdSelect(outputId, cpt) {
+        var optSel = '<option selected="selected" value="0">';
+        var optDef = '<option value="' + cpt + '">';
+        var optEnd = '</option>';
+
+        for (var i = 0; i <= cpt; i++) {
+            if (i > 0) {
+                $('#output' + outputId).find('.olookupid-select').append(optDef + "Query #" + i + optEnd);
+            }
+            else {
+                $('#output' + outputId).find('.olookupid-select').append(optSel + 'Main contract' + optEnd);
+            }
+        }
     }
 }

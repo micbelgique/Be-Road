@@ -41,7 +41,7 @@
 
             $('#query' + queryNb).find('.qcontractname-select').bind('change',
                 function () {
-                    us.updateSelects(cpt);
+                    us.updateSelects(us.queryCpt);
                 }
             );
 
@@ -51,11 +51,14 @@
                     mappingNb++;
                     $('#mapping').clone().appendTo('#' + qId + ' #mappings').attr('id', 'mapping' + mappingNb + qId);
                     $('#mapping' + mappingNb + qId).show();
-                    $('#mapping' + mappingNb + qId).find('.mapping-rem-btn').bind('click', function () {
-                        var id = this.parentElement.parentElement.id;
-                        us.refresh(us.queryCpt);
-                        $('#' + qId + ' #mappings').find('#' + id).remove();
-                    });
+
+                    $('#mapping' + mappingNb + qId).find('.lookupid-select').bind('change',
+                        function () {
+                            us.updateOneKeySelect('#mapping' + mappingNb + qId, qId);
+                        }
+                    );
+                    
+                    $('#query' + queryNb).find('.lookupid-select').find('option').remove();
 
                     us.updateSelects(us.queryCpt);
                 }
@@ -70,6 +73,7 @@
             $('.query-rem-btn').hide();
             us.queryCpt = -1;
             queryNb = 0;
+            mappingNb = 0;
             $('#queries').find('.query').remove();
         }
     );
@@ -81,10 +85,12 @@
             $('#output' + outputNb).show();
             $('#output' + outputNb).removeClass('output');
             $('#output' + outputNb).addClass('added-output');
-            $('#output' + outputNb).find('.input-rem-btn').bind('click', function () {
+            $('#output' + outputNb).find('.output-rem-btn').bind('click', function () {
                 var id = this.parentElement.parentElement.id;
                 $('#outputs').find('#' + id).remove();
             });
+
+            us.updateOLookupIdSelect(outputNb, us.queryCpt);
         }
     );
 });
