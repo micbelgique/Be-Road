@@ -27,3 +27,20 @@ textarea {
 .input, .query, .output, .mapping{
     display: none;
 }
+
+.added-input{
+    background-color: #f4f8fc;
+}
+
+.query {
+    background-color: #f4f8fc;
+    padding-top: 20px;
+}
+
+.mapping {
+    background-color: #e5f2fe;
+}
+
+.added-output {
+    background-color: #f4f8fc;
+}

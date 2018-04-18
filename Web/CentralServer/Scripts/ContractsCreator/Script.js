@@ -57,7 +57,7 @@
 
                     $('#mapping' + mappingNb + qId).find('.lookupid-select').bind('change',
                         function () {
-                            us.updateOneKeySelect('#mapping' + mappingNb + qId, qId);
+                            us.updateOneLookupKeySelect('#mapping' + mappingNb + qId, qId);
                         }
                     );
                     
@@ -67,17 +67,6 @@
                 }
             );
             us.fillQContractNameSelect(us.queryCpt, queryNb);
-        }
-    );
-
-    $('.query-rem-btn').click(
-        function () {
-            $('#queries').css('margin-top', '0px');
-            $('.query-rem-btn').hide();
-            us.queryCpt = -1;
-            queryNb = 0;
-            mappingNb = 0;
-            $('#queries').find('.query').remove();
         }
     );
 
@@ -101,6 +90,19 @@
 
             us.updateOLookupIdSelect(outputNb, us.queryCpt);
             us.updateOutputKeySelect('#output' + outputNb);
+        }
+    );
+
+    $('.query-rem-btn').click(
+        function () {
+            $('#queries').css('margin-top', '0px');
+            $('.query-rem-btn').hide();
+            $('.added-output').remove();
+            outputNb = 0;
+            us.queryCpt = -1;
+            queryNb = 0;
+            mappingNb = 0;
+            $('#queries').find('.query').remove();
         }
     );
 });
