@@ -94,7 +94,7 @@
     returnToList() {
         $.ajax({
             type: "GET",
-            url: 'Contract/ReturnToList',
+            url: 'Contract/GoToList',
             success: function () {
                 //alert(result);
             },

@@ -25,12 +25,29 @@ namespace CentralServer.Controllers
                 ctx.Contracts.Remove(test);
                 ctx.SaveChanges();
             }
+
             return View("Create");
         }
 
-        public ActionResult ReturnToList()
+        public ActionResult GoToList()
         {
-            return View();
+            var contracts = ctx.Contracts.Select(c =>
+                new BeContractViewModel()
+                {
+                    Id = c.Id,
+                    Description = c.Description,
+                    Version = c.Version,
+                    Inputs = c.Inputs,
+                    Queries = c.Queries.Select(q =>
+                    new QueryViewModel()
+                    {
+                        Contract = q.Contract.Id,
+                        Mappings = q.Mappings
+                    }).ToList(),
+                    Outputs = c.Outputs
+                }
+            ).ToList();
+            return View("Display", contracts);
         }
 
         [HttpPost]

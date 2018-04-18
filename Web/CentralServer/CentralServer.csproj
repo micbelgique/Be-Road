@@ -139,6 +139,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CentralController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Dal\CentralServerManager.cs" />
     <Compile Include="Dal\Mock\AddressMock.cs" />
     <Compile Include="Dal\Mock\MathematicsMock.cs" />
@@ -161,6 +162,7 @@
     <Content Include="Views\Contract\Mapping.cshtml" />
     <Content Include="Views\Contract\Input.cshtml" />
     <Content Include="Views\Contract\Output.cshtml" />
+    <Content Include="Views\Contract\Display.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -171,6 +173,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
