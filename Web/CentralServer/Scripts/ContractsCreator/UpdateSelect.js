@@ -136,6 +136,7 @@
             for (var j = 0; j < result.length; j++) {
                 $('#query' + i).find('.qcontractname-select').append(optDef + result[j].Id + '">' + result[j].Id + optEnd);
             }
+            $('#query' + i).find('.mapping-add-btn').removeAttr('disabled');
             this.updateLookupKeySelect(cpt);
         }.bind(this));
     }
@@ -166,22 +167,17 @@
         $(outputId).find('.outputkey-select').find('option').remove();
         var lookupQueryId = $(outputId).find('.olookupid-select').find(':selected').val();
         if (lookupQueryId == '0') {
-            inputs = $('.added-input');
-            if (inputs.length == 0) {
-                $(outputId).find('.outputkey-select').append('<option selected="selected">No input</option>');
-            }
-            else {
-                for (var j = 0; j <= inputs.length; j++) {
-                    if (inputs[j] != null) {
-                        inner = inputs[j].children[1].children[1].children[0].value;
-                        if (inner != '') {
-                            $(outputId).find('.outputkey-select').append(optDef + inner + '">' + inner + optEnd);
-                        }
-                    }
-                }
-            }
+            $(outputId).find('#HiddenKey').attr('id', 'Key');
+            $(outputId).find('.outputkey-select').attr('id', 'HiddenKey');
+            $(outputId).find('#Key').show();
+            $(outputId).find('.outputkey-select').hide();
         }
         else {
+            $(outputId).find('#Key').attr('id', 'HiddenKey');
+            $(outputId).find('.outputkey-select').attr('id', 'Key');
+            $(outputId).find('#HiddenKey').hide();
+            $(outputId).find('.outputkey-select').show();
+
             selectedContract = this.contracts.find(c => c.Id == $('#query' + lookupQueryId + ' .qcontractname-select').find(':selected').val());
             if (selectedContract.Outputs.length == 0) {
                 $(outputId).find('.outputkey-select').append('<option selected="selected">No output</option>');

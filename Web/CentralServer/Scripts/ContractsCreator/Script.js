@@ -48,6 +48,7 @@
                 }
             );
 
+            $('#query' + queryNb).find('.mapping-add-btn').attr('disabled', 'disabled');
             $('#query' + queryNb).find('.mapping-add-btn').bind('click',
                 function () {
                     var qId = this.parentElement.parentElement.parentElement.parentElement.id;
@@ -90,6 +91,7 @@
 
             us.updateOLookupIdSelect(outputNb, us.queryCpt);
             us.updateOutputKeySelect('#output' + outputNb);
+            $('#output' + outputNb).find('#HiddenKey').hide();
         }
     );
 
@@ -103,6 +105,24 @@
             queryNb = 0;
             mappingNb = 0;
             $('#queries').find('.query').remove();
+        }
+    );
+
+    $('#create-btn').click(
+        function () {
+            us.calls.createContract().then(function (result) {
+                switch (result.Status) {
+                    case '1':
+                        us.calls.returnToList();
+                        break;
+                    case '2':
+                        $('#error-message').text('Validation error : ' + result.Error);
+                        break;
+                    case '3':
+                        $('#error-message').text('Database error : ' + result.Error);
+                        break;
+                }
+            });
         }
     );
 });
