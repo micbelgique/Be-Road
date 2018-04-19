@@ -1,0 +1,191 @@
+﻿@model CentralServer.ViewModels.BeContractViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details of @Model.Id</h2>
+
+<div>
+    <h4>BeContract</h4>
+    <hr />
+    <h4 class="col-md-offset-1">Main information</h4>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+    </dl>
+    <hr />
+
+    <h4 class="col-md-offset-1">
+            Inputs
+    </h4>
+    @for (int i = 0; i < Model.Inputs.Count; i++)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                Key
+            </dt>
+
+            <dd>
+                @Model.Inputs[i].Key
+            </dd>
+            <dt>
+                Required
+            </dt>
+
+            <dd>
+                @if (Model.Inputs[i].Required)
+                {
+                    <span>Yes</span>
+                }
+                else
+                {
+                    <span>No</span>
+                }
+            </dd>
+            <dt>
+                Type
+            </dt>
+
+            <dd>
+                @Model.Inputs[i].Type
+            </dd>
+            <dt>
+                Description
+            </dt>
+
+            <dd>
+                @Model.Inputs[i].Description
+            </dd>
+        </dl>
+        if (i < Model.Inputs.Count - 1)
+        {
+            <hr />
+        }
+    }
+    <hr />
+
+    <h4 class="col-md-offset-1">Queries</h4>
+    @for (int i = 0; i < Model.Queries.Count; i++)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                Contract
+            </dt>
+            <dd>
+                @Model.Queries[i].Contract
+            </dd>
+
+            <dt>
+                Mappings
+            </dt>
+            <dd>
+                <br />
+                @for (int j = 0; j < Model.Queries[i].Mappings.Count; j++)
+                {
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Input key
+                        </dt>
+                        <dd>
+                            @Model.Queries[i].Mappings[j].InputKey
+                        </dd>
+
+                        <dt>
+                            Lookup input id
+                        </dt>
+                        <dd>
+                            @if (Model.Queries[i].Mappings[j].LookupInputId > 0)
+                            {
+                                <span>Query #@Model.Queries[i].Mappings[j].LookupInputId</span>
+                            }
+                            else
+                            {
+                                <span>Main contract</span>
+                            }
+                        </dd>
+
+                        <dt>
+                            Lookup input key
+                        </dt>
+                        <dd>
+                            @Model.Queries[i].Mappings[j].LookupInputKey
+                        </dd>
+                    </dl>
+                    if (i < Model.Queries[i].Mappings.Count - 1)
+                    {
+                        <hr />
+                    }
+                }
+            </dd>
+        </dl>
+        if (i < Model.Queries.Count - 1)
+        {
+            <hr />
+        }
+    }
+    <hr />
+
+    <h4 class="col-md-offset-1">Outputs</h4>
+    @for (int i = 0; i < Model.Outputs.Count; i++)
+    {
+        <dl class="dl-horizontal">
+            <dt>
+                Key
+            </dt>
+
+            <dd>
+                @Model.Outputs[i].Key
+            </dd>
+            <dt>
+                Type
+            </dt>
+
+            <dd>
+                @Model.Outputs[i].Type
+            </dd>
+            <dt>
+                Description
+            </dt>
+
+            <dd>
+                @Model.Outputs[i].Description
+            </dd>
+            <dt>
+                Lookup input id
+            </dt>
+
+            <dd>
+                @Model.Outputs[i].LookupInputId
+            </dd>
+        </dl>
+        if (i < Model.Outputs.Count - 1)
+        {
+            <hr/>
+        }
+    }
+</div>
+<p>
+    @Html.ActionLink("Back to List", "GoToList")
+</p>

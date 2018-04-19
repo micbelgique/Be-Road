@@ -29,6 +29,27 @@ namespace CentralServer.Controllers
             return View("Create");
         }
 
+        public ActionResult Details(string id)
+        {
+            var contract = ctx.Contracts.FirstOrDefault(c => c.Id == id);
+            var contractVM = new BeContractViewModel()
+            {
+                Id = contract.Id,
+                Description = contract.Description,
+                Version = contract.Version,
+                Inputs = contract.Inputs,
+                Queries = contract.Queries.Select(q =>
+                new QueryViewModel()
+                {
+                    Contract = q.Contract.Id,
+                    Mappings = q.Mappings
+                }).ToList(),
+                Outputs = contract.Outputs
+            };
+
+            return View("Details", contractVM);
+        }
+
         public ActionResult GoToList()
         {
             var contracts = ctx.Contracts.Select(c =>
