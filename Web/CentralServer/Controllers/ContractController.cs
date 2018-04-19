@@ -29,6 +29,15 @@ namespace CentralServer.Controllers
             return View("Create");
         }
 
+        [HttpPost]
+        public ActionResult Delete(string modalValue)
+        {
+            var contract = ctx.Contracts.FirstOrDefault(c => c.Id == modalValue);
+            ctx.Contracts.Remove(contract);
+            ctx.SaveChanges();
+            return RedirectToAction("GoToList");
+        }
+
         public ActionResult Details(string id)
         {
             var contract = ctx.Contracts.FirstOrDefault(c => c.Id == id);

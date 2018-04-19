@@ -121,6 +121,7 @@
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\ContractList\ListManager.js" />
     <Content Include="Scripts\ContractsCreator\AjaxCalls.js" />
     <Content Include="Scripts\ContractsCreator\UpdateSelect.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -164,6 +165,7 @@
     <Content Include="Views\Contract\Output.cshtml" />
     <Content Include="Views\Contract\Display.cshtml" />
     <Content Include="Views\Contract\Details.cshtml" />
+    <Content Include="Views\Contract\DeleteModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

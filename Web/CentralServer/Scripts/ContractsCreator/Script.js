@@ -113,7 +113,7 @@
             us.calls.createContract().then(function (result) {
                 switch (result.Status) {
                     case '1':
-                        us.calls.returnToList();
+                        $('#success-message').text('BeContract successfully created !');
                         break;
                     case '2':
                         $('#error-message').text('Validation error : ' + result.Error);
