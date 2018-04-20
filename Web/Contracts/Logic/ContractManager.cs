@@ -10,7 +10,6 @@ namespace Contracts.Logic
     public class ContractManager
     {
         private Validators validators;
-        private ContractContext ctx;
 
         public IAdapterServerService AsService { get; set; }
         public IBeContractService BcService { get; set; }
@@ -19,7 +18,6 @@ namespace Contracts.Logic
         public ContractManager()
         {
             validators = new Validators();
-            ctx = new ContractContext();
         }
         
         /// <summary>
