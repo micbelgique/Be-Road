@@ -9,6 +9,6 @@ namespace Contracts.Dal
 {
     public interface IBeContractService
     {
-        BeContract FindBeContractById(string id);
+        Task<BeContract> FindBeContractByIdAsync(string id);
     }
 }

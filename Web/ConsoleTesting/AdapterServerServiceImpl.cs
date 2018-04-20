@@ -48,13 +48,18 @@ namespace ConsoleTesting
         //Warning is nothing
         public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
         {
-            switch (ads.ISName)
+            BeContractReturn ret = null;
+            await Task.Run(() =>
             {
-                case "Doggies": return VeterinaryMock.GetOwnerId(call);
-                case "MathLovers": return MathematicsMock.GetSumFunction(call);
-                case "CitizenDatabank": return AddressMock.GetAddressByOwnerId(call);
-                default: return new BeContractReturn();
-            }
+                switch (ads.ISName)
+                {
+                    case "Doggies": ret = VeterinaryMock.GetOwnerId(call); break;
+                    case "MathLovers": ret = MathematicsMock.GetSumFunction(call); break;
+                    case "CitizenDatabank": ret = AddressMock.GetAddressByOwnerId(call); break;
+                    default: ret = new BeContractReturn(); break;
+                }
+            });
+            return ret;
         }
 
     }

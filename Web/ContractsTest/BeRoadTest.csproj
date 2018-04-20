@@ -70,7 +70,7 @@
   <ItemGroup>
     <Compile Include="ADSMock\AdapterServerServiceMockImpl.cs" />
     <Compile Include="Contracts\BeContractEqualsTest.cs" />
-    <Compile Include="Contracts\BeContractService.cs" />
+    <Compile Include="Contracts\BeContractServiceImpl.cs" />
     <Compile Include="Contracts\BeContractsMock.cs" />
     <Compile Include="Contracts\BeContractSchemaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

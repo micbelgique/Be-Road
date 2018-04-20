@@ -48,7 +48,7 @@ namespace Contracts.Logic
         private async Task<List<BeContractReturn>> CallAndLoopQueriesAsync(BeContractCall call, BeContract contract = null)
         {
             if (contract == null)
-                contract = BcService.FindBeContractById(call.Id);
+                contract = await BcService.FindBeContractByIdAsync(call.Id);
 
             if (contract == null)
                 throw new BeContractException($"No contract was found with id {call.Id}");
@@ -133,7 +133,7 @@ namespace Contracts.Logic
             if (call == null)
                 throw new BeContractException("Contract call is null");
 
-            var contract = BcService.FindBeContractById(call.Id);
+            var contract = await BcService.FindBeContractByIdAsync(call.Id);
             Console.WriteLine($"Calling contract {contract?.Id}");
             //Filter to only give the correct outputs
             var notFiltredReturns = await CallAndLoopQueriesAsync(call, contract);

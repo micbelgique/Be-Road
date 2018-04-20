@@ -1,6 +1,7 @@
-﻿using CentralServer.Dal;
+﻿using Contracts.Dal;
 using Contracts.Models;
 using Newtonsoft.Json;
+using System.Linq;
 using System.Web.Http;
 
 namespace CentralServer.Controllers
@@ -8,12 +9,13 @@ namespace CentralServer.Controllers
     [RoutePrefix("api/central")]
     public class CentralController : ApiController
     {
-        [HttpPost]
-        [Route("find")]
-        public BeContractReturn Find()
+        private ContractContext context = new ContractContext();
+
+        [HttpGet]
+        [Route("contracts")]
+        public BeContract Contracts(string id)
         {
-            //Tmp
-            return null;//CentralServerManager.FindMock(req.Ads, req.Call);
+            return context.Contracts.FirstOrDefault(c => c.Id.Equals(id));
         }
     }
 }

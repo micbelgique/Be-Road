@@ -22,7 +22,7 @@ namespace BeRoadTest.Contracts
             cm = new ContractManager()
             {
                 AsService = ass = new AdapterServerServiceMockImpl(),
-                BcService = new BeContractService()
+                BcService = new BeContractServiceImpl()
             };
 
             mathCall = new BeContractCall()

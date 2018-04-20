@@ -45,7 +45,7 @@ namespace ConsoleTesting
             var manager = new ContractManager()
             {
                 AsService = new AdapterServerServiceImpl(),
-                BcService = new BeContractService()
+                BcService = new BeContractServiceImpl()
             };
 
             manager.CallAsync(CreateContractCall("GetOwnerIdByDogId", "DogID:D-123")).Wait();

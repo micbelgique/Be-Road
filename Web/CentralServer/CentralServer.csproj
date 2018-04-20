@@ -141,10 +141,6 @@
     <Compile Include="Controllers\CentralController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Dal\CentralServerManager.cs" />
-    <Compile Include="Dal\Mock\AddressMock.cs" />
-    <Compile Include="Dal\Mock\MathematicsMock.cs" />
-    <Compile Include="Dal\Mock\VeterinaryMock.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -175,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Dal\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>

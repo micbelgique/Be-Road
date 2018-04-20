@@ -1,5 +1,4 @@
-﻿using CentralServer.Dal;
-using CentralServer.ViewModels;
+﻿using CentralServer.ViewModels;
 using Contracts;
 using Contracts.Dal;
 using Contracts.Logic;
