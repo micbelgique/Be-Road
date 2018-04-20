@@ -16,7 +16,7 @@ namespace Contracts.Models
         /// <summary>
         /// Names of the contracts handled by the Information System
         /// </summary>
-        public List<string> ContractNames { get; set; }
+        public virtual List<ContractName> ContractNames { get; set; }
         /// <summary>
         /// Name of the Information System
         /// </summary>

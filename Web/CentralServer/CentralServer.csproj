@@ -119,6 +119,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
+    <Content Include="Scripts\ADSEdit\EditManager.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ContractList\ListManager.js" />
@@ -138,6 +139,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ADSController.cs" />
     <Compile Include="Controllers\CentralController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -166,6 +168,11 @@
     <Content Include="Views\Contract\Display.cshtml" />
     <Content Include="Views\Contract\Details.cshtml" />
     <Content Include="Views\Contract\DeleteModal.cshtml" />
+    <Content Include="Views\ADS\Create.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\ADS\Display.cshtml" />
+    <Content Include="Views\ADS\Details.cshtml" />
+    <Content Include="Views\ADS\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,7 +183,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="Views\Home\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj">

@@ -11,7 +11,7 @@ namespace CentralServer.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            return RedirectToAction("GoToList", "Contract");
+            return View();
         }
     }
 }

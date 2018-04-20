@@ -34,7 +34,7 @@ namespace BeRoadTest.CentralServer
         [TestMethod]
         public void TestCSPass()
         {
-            var mockActual = CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Doggies", Url = "www.doggies.com/api/" }, call);
+            var mockActual = CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<ContractName> { new ContractName() { Name = "GetOwnerIdByDogId" } }, ISName = "Doggies", Url = "www.doggies.com/api/" }, call);
             var mockExpected = new BeContractReturn()
             {
                 Id = "GetOwnerIdByDogId",
@@ -50,7 +50,7 @@ namespace BeRoadTest.CentralServer
         [TestMethod]
         public void TestCSFail()
         {
-            Assert.ThrowsException<BeContractException>(() => CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId" }, ISName = "Fail", Url = "www.doggies.com/api/" }, call), "Unauthorized access for Doggies");
+            Assert.ThrowsException<BeContractException>(() => CentralServerManager.FindMock(new AdapterServer() { ContractNames = new List<ContractName>() { new ContractName() { Name = "GetOwnerIdByDogId" } }, ISName = "Fail", Url = "www.doggies.com/api/" }, call), "Unauthorized access for Doggies");
         }
     }
 }

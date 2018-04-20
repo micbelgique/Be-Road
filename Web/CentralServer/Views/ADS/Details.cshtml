@@ -1,0 +1,49 @@
+﻿@model Contracts.Models.AdapterServer
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>AdapterServer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Information System
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ISName)
+        </dd>
+
+        <dt>
+            URL
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            API Root
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Root)
+        </dd>
+    </dl>
+
+    <h5>Contracts</h5>
+    <ul>
+    @foreach(var c in Model.ContractNames)
+    {
+        <li>@c.Name</li>
+    }
+    </ul>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

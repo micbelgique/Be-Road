@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Contracts.Models.AdapterServer>
+
+@{
+    ViewBag.Title = "Display";
+}
+
+<h2>Display</h2>
+
+<p>
+    @Html.ActionLink("Create an Adapter Server", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Information System
+        </th>
+        <th>
+            URL
+        </th>
+        <th>
+            API Root
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ISName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Url)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Root)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

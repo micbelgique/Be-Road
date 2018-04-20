@@ -26,7 +26,7 @@ namespace Proxy.Dal
         /// <returns>The found adapter server</returns>
         public AdapterServer FindAS(string name)
         {
-            return ctx.AdapterServers.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
+            return ctx.AdapterServers.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name)));
         }
 
         /// <summary>
