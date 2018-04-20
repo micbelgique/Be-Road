@@ -3,7 +3,6 @@ using Contracts.Logic;
 using Contracts.Models;
 using Newtonsoft.Json;
 using Proxy.Dal;
-using Proxy.Dal.Mock;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Http;

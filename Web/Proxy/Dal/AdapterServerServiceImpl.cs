@@ -2,7 +2,6 @@
 using Contracts.Dal;
 using Contracts.Models;
 using Newtonsoft.Json;
-using Proxy.Dal.Mock;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +17,7 @@ namespace Proxy.Dal
     /// </summary>
     public class AdapterServerServiceImpl : IAdapterServerService
     {
-        public List<AdapterServer> ADSList { get; set; } = ASSMock.Fill();
+        private ContractContext ctx = new ContractContext();
 
         /// <summary>
         /// Find an adapter server with the name of the contract used
@@ -27,7 +26,7 @@ namespace Proxy.Dal
         /// <returns>The found adapter server</returns>
         public AdapterServer FindAS(string name)
         {
-            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
+            return ctx.AdapterServers.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
         }
 
         /// <summary>

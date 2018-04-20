@@ -40,5 +40,6 @@ namespace Contracts.Dal
         public DbSet<Query> Queries { get; set; }
         public DbSet<Mapping> Mappings { get; set; }
         public DbSet<Output> Outputs { get; set; }
+        public DbSet<AdapterServer> AdapterServers { get; set; }
     }
 }
