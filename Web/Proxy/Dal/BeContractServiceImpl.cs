@@ -14,14 +14,16 @@ namespace Proxy.Dal
         public async Task<BeContract> FindBeContractByIdAsync(string id)
         {
             BeContract ret = await FindSingleBeContractByIdAsync(id);
+
             //Because we only get the contracts id's from the queries
             //We need to get the queries contracts objects from here
-      
             //Does it works for recursive contracts ?
-            foreach (var q in ret.Queries)
+            if (ret?.Queries != null)
             {
-                q.Contract = await FindBeContractByIdAsync(q.Contract.Id);
-                //q.Contract = await FindSingleBeContractByIdAsync(q.Contract.Id);
+                foreach (var q in ret?.Queries)
+                {
+                    q.Contract = await FindBeContractByIdAsync(q.Contract.Id);
+                }
             }
 
             return ret;
