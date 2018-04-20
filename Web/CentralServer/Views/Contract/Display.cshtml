@@ -43,6 +43,11 @@
     }
 </table>
 
+@if (ViewData["Error"] != null)
+{
+    <div class="alert-danger" id="delete-error">Deletion error : @ViewBag.error is used by antother BeContract</div>
+}
+
 @Html.Partial("DeleteModal")
 
 <script src="~/Scripts/ContractList/ListManager.js"></script>
