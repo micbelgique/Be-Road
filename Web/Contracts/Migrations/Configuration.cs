@@ -38,14 +38,22 @@ namespace Contracts.Migrations
 
         private void ADSSeed(ContractContext context)
         {
-            List<AdapterServer> asList = new List<AdapterServer>
+            List<AdapterServer> asList = new List<AdapterServer>()
             {
-                new AdapterServer() { Id = 1, ContractNames = new List<ContractName> { new ContractName() { Name = "GetOwnerIdByDogId" }, new ContractName() { Name = "GetAddressByDogId" }, new ContractName() { Name = "GetServiceInfo" } }, ISName = "Doggies", Url = "http://localhost:59317/", Root = "api/read" },
-                new AdapterServer() { Id = 2, ContractNames = new List<ContractName>  { new ContractName() { Name = "GetMathemathicFunction" } }, ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
-                new AdapterServer() { Id = 3, ContractNames = new List<ContractName>  { new ContractName() { Name = "GetAddressByOwnerId" } }, ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer() { Id = 1, ContractNames = new List<ContractName>(), ISName = "Doggie style", Url = "http://localhost:59317/", Root = "api/read" },
+                new AdapterServer() { Id = 2, ContractNames = new List<ContractName>(), ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer() { Id = 3, ContractNames = new List<ContractName>(), ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
             };
 
-            asList.ForEach(ads => context.AdapterServers.AddOrUpdate(ads));
+            asList[0].ContractNames.Add(new ContractName() { Id = 1, Name = "GetOwnerIdByDogId" });
+            asList[0].ContractNames.Add(new ContractName() { Id = 2, Name = "GetAddressByDogId" });
+            asList[0].ContractNames.Add(new ContractName() { Id = 3, Name = "GetServiceInfo" });
+            asList[1].ContractNames.Add(new ContractName() { Id = 4, Name = "GetMathemathicFunction" });
+            asList[2].ContractNames.Add(new ContractName() { Id = 5, Name = "GetAddressByOwnerId" });
+
+            context.AdapterServers.AddOrUpdate(asList[0]);
+            context.AdapterServers.AddOrUpdate(asList[1]);
+            context.AdapterServers.AddOrUpdate(asList[2]);
         }
     }
 }

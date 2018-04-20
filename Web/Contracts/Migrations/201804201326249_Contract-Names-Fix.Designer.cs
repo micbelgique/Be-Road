@@ -13,7 +13,7 @@ namespace Contracts.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804201204557_Contract-Names-Fix"; }
+            get { return "201804201326249_Contract-Names-Fix"; }
         }
         
         string IMigrationMetadata.Source

@@ -82,9 +82,9 @@
     <Compile Include="Migrations\201804200822038_Added-AdapterServers.Designer.cs">
       <DependentUpon>201804200822038_Added-AdapterServers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804201204557_Contract-Names-Fix.cs" />
-    <Compile Include="Migrations\201804201204557_Contract-Names-Fix.Designer.cs">
-      <DependentUpon>201804201204557_Contract-Names-Fix.cs</DependentUpon>
+    <Compile Include="Migrations\201804201326249_Contract-Names-Fix.cs" />
+    <Compile Include="Migrations\201804201326249_Contract-Names-Fix.Designer.cs">
+      <DependentUpon>201804201326249_Contract-Names-Fix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BeContractsMock.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -113,8 +113,8 @@
     <EmbeddedResource Include="Migrations\201804200822038_Added-AdapterServers.resx">
       <DependentUpon>201804200822038_Added-AdapterServers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804201204557_Contract-Names-Fix.resx">
-      <DependentUpon>201804201204557_Contract-Names-Fix.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804201326249_Contract-Names-Fix.resx">
+      <DependentUpon>201804201326249_Contract-Names-Fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

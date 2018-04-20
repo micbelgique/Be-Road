@@ -39,8 +39,19 @@ namespace CentralServer.Controllers
         public ActionResult Edit(int id)
         {
             var ads = ctx.AdapterServers.FirstOrDefault(a => a.Id == id);
-            
-            //ViewBag.Contracts = ctx.Contracts.Where(c => ));
+
+            var usedContractNames = ctx.ContractNames.Select(cn => cn.Name);
+            var allContracts = ctx.Contracts.Select(c => c.Id);
+            var filteredContracts = allContracts.Where(c => !usedContractNames.Any(u => c.Equals(u)));
+            ViewBag.contracts = filteredContracts.ToList();
+
+            return View("Edit", ads);
+        }
+
+        public ActionResult Save(AdapterServer ads)
+        {
+            ctx.AdapterServers.Add(ads);
+            ctx.SaveChanges();
 
             return View("Edit", ads);
         }
