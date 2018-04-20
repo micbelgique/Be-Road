@@ -1,7 +1,7 @@
 ﻿using Contracts.Models;
 using System.Data.Entity;
 
-namespace Contracts.Dal
+namespace CentralServer.Dal
 {
     public class ContractContext : DbContext
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Contracts.Migrations
+namespace CentralServer.Migrations
 {
     public class BeContractsMock
     {

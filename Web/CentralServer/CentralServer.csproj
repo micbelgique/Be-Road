@@ -141,9 +141,16 @@
     <Compile Include="Controllers\CentralController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Dal\ContractContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804200931364_Initial-Migration.cs" />
+    <Compile Include="Migrations\201804200931364_Initial-Migration.Designer.cs">
+      <DependentUpon>201804200931364_Initial-Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\BeContractsMock.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BeContractViewModel.cs" />
     <Compile Include="ViewModels\QueryViewModel.cs" />
@@ -171,7 +178,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Dal\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Home\" />
   </ItemGroup>
@@ -180,6 +186,11 @@
       <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804200931364_Initial-Migration.resx">
+      <DependentUpon>201804200931364_Initial-Migration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

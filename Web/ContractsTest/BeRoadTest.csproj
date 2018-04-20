@@ -77,11 +77,10 @@
     <Compile Include="Contracts\BeContractCallTest.cs" />
     <Compile Include="Contracts\BeContractSerializeTest.cs" />
     <Compile Include="ADSMock\AdapterServerTest.cs" />
-    <Compile Include="Contracts\BeContractDalTest.cs" />
+    <Compile Include="CentralServer\BeContractDalTest.cs" />
     <Compile Include="Contracts\ContractManagerTest.cs" />
     <Compile Include="ADSMock\ADSMockTest.cs" />
     <Compile Include="Proxy\ProxyTest.cs" />
-    <Compile Include="CentralServer\CentralServerTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

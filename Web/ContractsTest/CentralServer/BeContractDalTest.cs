@@ -1,10 +1,12 @@
-﻿using Contracts.Dal;
+﻿using BeRoadTest.Contracts;
+using CentralServer.Dal;
+using Contracts.Dal;
 using Contracts.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 
-namespace BeRoadTest.Contracts
+namespace BeRoadTest.CentralServer
 {
     [TestClass]
     public class BeContractDalTest

@@ -64,22 +64,11 @@
     <Compile Include="BeContractException.cs" />
     <Compile Include="Converters\BeContractOutputConverter.cs" />
     <Compile Include="Converters\BeContractQueryConverter.cs" />
-    <Compile Include="Dal\ContractContext.cs" />
     <Compile Include="Dal\IAdapterServerService.cs" />
     <Compile Include="Dal\IBeContractService.cs" />
     <Compile Include="Logic\ContractManager.cs" />
     <Compile Include="Logic\Generators.cs" />
     <Compile Include="Logic\Validators.cs" />
-    <Compile Include="Migrations\201804100938201_InitialCreate.cs" />
-    <Compile Include="Migrations\201804100938201_InitialCreate.Designer.cs">
-      <DependentUpon>201804100938201_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804101235284_Add-Mock-Contracts.cs" />
-    <Compile Include="Migrations\201804101235284_Add-Mock-Contracts.Designer.cs">
-      <DependentUpon>201804101235284_Add-Mock-Contracts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\BeContractsMock.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AdapterServer.cs" />
     <Compile Include="Models\BeContract.cs" />
     <Compile Include="Models\BeContractCall.cs" />
@@ -93,14 +82,6 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804100938201_InitialCreate.resx">
-      <DependentUpon>201804100938201_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804101235284_Add-Mock-Contracts.resx">
-      <DependentUpon>201804101235284_Add-Mock-Contracts.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
