@@ -1,11 +1,12 @@
-﻿using Contracts.Models;
+﻿using CentralServer.Helpers;
+using Contracts.Models;
 using System.Data.Entity;
 
 namespace CentralServer.Dal
 {
     public class ContractContext : DbContext
     {
-        public ContractContext() : base("name=ContractContext")
+        public ContractContext() : base(ConfigHelper.GetConnectionString("ContractContext"))
         {
 
         }

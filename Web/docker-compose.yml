@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+  proxy:
+    container_name: proxy
+    image: proxy
+    build:
+      context: .\Proxy
+      dockerfile: Dockerfile
+
+  centralserver:
+    container_name: centralserver
+    image: centralserver
+    build:
+      context: .\CentralServer
+      dockerfile: Dockerfile
+
+  adsmock:
+    container_name: adsmock
+    image: adsmock
+    build:
+      context: .\ADSMock
+      dockerfile: Dockerfile
+

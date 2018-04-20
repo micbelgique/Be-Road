@@ -35,11 +35,11 @@ namespace Proxy.Dal
             using (var client = new HttpClient())
             {
                 //Use docker container name !
-                client.BaseAddress = new Uri("http://localhost:53369/api/central/");
+                client.BaseAddress = new Uri("http://centralserver/api/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                HttpResponseMessage response = await client.GetAsync($"contracts?id={id}");
+                HttpResponseMessage response = await client.GetAsync($"central/contracts?id={id}");
                 if (response.IsSuccessStatusCode)
                 {
                     ret = await response.Content.ReadAsAsync<BeContract>();
