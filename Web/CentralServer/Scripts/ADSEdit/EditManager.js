@@ -4,7 +4,7 @@
     var contractNb = 0;
 
     if (contracts.length == 0) {
-        //$('.contract-add-btn').attr('disabled', 'disabled');
+        $('.contract-add-btn').attr('disabled', 'disabled');
     }
 
     $('.contract-add-btn').click(
@@ -33,4 +33,41 @@
             contractNb++;
         }
     );
+
+    $('#save').click(
+        function () {
+            editADS();
+        }
+    );
 });
+
+async function editADS() {
+    var ads = {
+        'ISName': $('#ISName').val(),
+        'Url': $('#Url').val(),
+        'Root': $('#Root').val()
+    };
+
+    ads.ContractNames = [];
+    for (var i = 0; i < $('#contracts').children().length; i++) {
+        ads.ContractNames[i] = {
+            'Id' : null,
+            'Name' : $('#' + $('#contracts').children()[i].id).find('#contractName').find(':selected').val()
+        };
+    }
+
+    await $.ajax({
+        type: "POST",
+        url: '/ADS/Save',
+        data: JSON.stringify(ads),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () {
+            //alert(result);
+        },
+        error: function (result) {
+            if (result.status != 200)
+                alert('AJAX Error');
+        }
+    });
+}

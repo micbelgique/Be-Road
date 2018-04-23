@@ -120,6 +120,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\ADSEdit\EditManager.js" />
+    <Content Include="Scripts\ADSEdit\ListManager.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\ContractList\ListManager.js" />
@@ -173,6 +174,7 @@
     <Content Include="Views\ADS\Display.cshtml" />
     <Content Include="Views\ADS\Details.cshtml" />
     <Content Include="Views\ADS\Edit.cshtml" />
+    <Content Include="Views\ADS\DeleteADSModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

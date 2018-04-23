@@ -48,10 +48,22 @@ namespace CentralServer.Controllers
             return View("Edit", ads);
         }
 
+        [HttpPost]
         public ActionResult Save(AdapterServer ads)
         {
-            ctx.AdapterServers.Add(ads);
-            ctx.SaveChanges();
+            var newAds = ctx.AdapterServers.FirstOrDefault(a => a.ISName == ads.ISName);
+            if(newAds != null)
+            {
+                newAds.Url = ads.Url;
+                newAds.Root = ads.Root;
+                if(ads.ContractNames != null)
+                    ads.ContractNames.ForEach(cn => newAds.ContractNames.Add(cn));
+                ctx.SaveChanges();
+                ViewBag.Message = "Adapter Server successfully edited !";
+            }
+            else{
+                ViewBag.Error = "This Adapter Server does not exist !";
+            }
 
             return View("Edit", ads);
         }
@@ -63,11 +75,21 @@ namespace CentralServer.Controllers
             return View("Details", ads);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Search(string searchString)
         {
-            var ads = ctx.AdapterServers.FirstOrDefault(a => a.Id == id);
-            ctx.AdapterServers.Remove(ads);
-            ctx.SaveChanges();
+            var adsList = ctx.AdapterServers.Where(ads => ads.ISName == searchString).ToList();
+
+            return View("Display", adsList);
+        }
+
+        public ActionResult Delete(string modalValue)
+        {
+            var ads = ctx.AdapterServers.FirstOrDefault(a => a.ISName == modalValue.Trim());
+            if (ads != null)
+            {
+                ctx.AdapterServers.Remove(ads);
+                ctx.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }
