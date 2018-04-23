@@ -54,3 +54,7 @@ textarea {
 .added-contract > select {
     margin-right: 1em;
 }
+
+#search-grp {
+    padding-right: 205px !important;
+}
