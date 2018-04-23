@@ -1,14 +1,25 @@
 version: '3'
 
 services:
+  sqlserver:
+    image: microsoft/mssql-server-windows-express
+    container_name: sqlserver
+    environment:
+      sa_password: ""
+      ACCEPT_EULA: Y
+    ports:
+      - "1433:1433"
+
   proxy:
     ports:
       - "80"
+
   centralserver:
     environment:
-      - ContractContext=Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\ContractContext.mdf;Integrated Security=True;
+      - ContractContext="Server=sqlserver;Database=ContractContext.mdf"
     ports:
       - "80"
+
   adsmock:
     ports:
       - "80"

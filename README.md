@@ -30,10 +30,16 @@ The public services are able to communicate through Be-Road using contracts. Fin
 
 ### Clone the code
 To get the websites and the central part on your machine, you just have to clone the project in your git.
-The solution contains 3 projects :
-* Web (the main portal)
+The solution contains 9 projects :
+* ADSMock (Mock of the Adapter Servers)
+* BeRoadTest (Unit test project)
+* CenterServer (Handle Contracts ands ADS)
+* ConsoleTesting (A console project for quickly test some features)
+* Contracts (A class library that contains the logic for contracts)
+* MessageLog (Logging API with blockchain implementation)
+* Proxy (Proxy that handle inputs to BeRoad)
 * PublicService (the public service mock)
-* MessageLog (the central part)
+* Web (The privacy passport portal)
 
 You will have to change the connection strings in the Web.config files in the 3 projects
 ```xml
