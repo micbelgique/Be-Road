@@ -41,7 +41,14 @@ The solution contains 9 projects :
 * PublicService (the public service mock)
 * Web (The privacy passport portal)
 
-You will have to change the connection strings in the Web.config files in the 3 projects
+#### How to build
+There's a docker-compose file that will be used to build the project.
+To build & run every component, set the docker-compose as startup project and hit run.
+The first time you run the project, docker will download all the images and this will take some time.
+
+---
+_This section will is old and will be replaced soon_  
+_You will have to change the connection strings in the Web.config files in the 3 projects_
 ```xml
 <!-- Local connection string (Web.Debug.Config) -->
 <connectionStrings>
@@ -53,6 +60,7 @@ You will have to change the connection strings in the Web.config files in the 3 
     <add name="{ContextName}" connectionString="Server=tcp:{ServerName},1433;Initial Catalog={DatabaseName};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient"/>
 </connectionStrings>
 ```
+---
 
 ### Blockchain implementation
 The blockchain is a prototype too. In the final project, that will be done later by more advanced developers, it will certainly be created from scratch.
