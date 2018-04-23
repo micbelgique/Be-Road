@@ -49,6 +49,8 @@ https://dotnetthoughts.net/dockerize-an-existing-aspnet-mvc5-application/
 To build & run every component, set the docker-compose as startup project and hit run.
 The first time you run the project, docker will download all the images and this will take some time.
 
+To build on command line use this: _docker-compose up -d --build_ (add a service to deploy this service only)
+
 ---
 _This section will is old and will be replaced soon_  
 _You will have to change the connection strings in the Web.config files in the 3 projects_

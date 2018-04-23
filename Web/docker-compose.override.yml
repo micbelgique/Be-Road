@@ -1,31 +1,18 @@
 version: '3'
 
 services:
-  sqlserver:
-    image: microsoft/mssql-server-windows-express
-    container_name: sqlserver
-    environment:
-      sa_password: ""
-      ACCEPT_EULA: Y
-    ports:
-      - "1433:1433"
-
   proxy:
     ports:
-      - "80"
+      - "3000"
 
   centralserver:
     environment:
       - ContractContext="Server=sqlserver;Database=ContractContext.mdf"
     ports:
-      - "80"
+      - "3001"
 
   adsmock:
     ports:
-      - "80"
-networks:
-  default:
-    external:
-      name: nat
+      - "3002"
 
 
