@@ -20,8 +20,18 @@ namespace CentralServer.Controllers
             return View("Display", adsList);
         }
 
+        public ActionResult CreateIndex()
+        {
+            return View("Create");
+        }
+
         public ActionResult Create(AdapterServer ads)
         {
+            if(ads.ISName == null || ads.Root == null || ads.Url == null)
+            {
+                ViewBag.Error = "You must fill all inputs !";
+                return View("Create");
+            }
             if (ctx.AdapterServers.Any(a => a.ISName == ads.ISName))
             {
                 ViewBag.Error = "This Adapter Server already exists !";
@@ -56,16 +66,17 @@ namespace CentralServer.Controllers
             {
                 newAds.Url = ads.Url;
                 newAds.Root = ads.Root;
-                if(ads.ContractNames != null)
-                    ads.ContractNames.ForEach(cn => newAds.ContractNames.Add(cn));
+                if(ads.ContractNames.Count > newAds.ContractNames.Count)
+                    ads.ContractNames.ForEach(cn => {
+                        newAds.ContractNames.Add(cn);
+                    });
                 ctx.SaveChanges();
-                ViewBag.Message = "Adapter Server successfully edited !";
+                return Json("OK");
             }
             else{
-                ViewBag.Error = "This Adapter Server does not exist !";
-            }
+                return Json("Cannot edit this Adapter Server !");
 
-            return View("Edit", ads);
+            }            
         }
 
         public ActionResult Details(int id)

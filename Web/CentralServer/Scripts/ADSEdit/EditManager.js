@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $('#contract').hide();
+    $('.contract').hide();
     
     var contractNb = 0;
 
@@ -62,12 +62,16 @@ async function editADS() {
         data: JSON.stringify(ads),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        success: function () {
-            //alert(result);
+        success: function (result) {
+            if (result == 'OK') {
+                window.location.href = '/ADS/Index';
+            }
+            else {
+                $('#error').val(result);
+            }
         },
         error: function (result) {
-            if (result.status != 200)
-                alert('AJAX Error');
+            //alert('AJAX Error');
         }
     });
 }
