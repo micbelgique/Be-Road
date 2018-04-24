@@ -1,6 +1,6 @@
 namespace CentralServer.Migrations
 {
-    using Contracts.Dal;
+    using CentralServer.Dal;
     using Contracts.Models;
     using System;
     using System.Collections.Generic;
@@ -8,14 +8,14 @@ namespace CentralServer.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<CentralServer.Dal.ContractContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ContractContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(CentralServer.Dal.ContractContext context)
+        protected override void Seed(ContractContext context)
         {
             ContractSeed(context);
             ADSSeed(context);
@@ -39,9 +39,9 @@ namespace CentralServer.Migrations
         {
             List<AdapterServer> asList = new List<AdapterServer>()
             {
-                new AdapterServer() { Id = 1, ContractNames = new List<ContractName>(), ISName = "Doggie style", Url = "http://localhost:59317/", Root = "api/read" },
-                new AdapterServer() { Id = 2, ContractNames = new List<ContractName>(), ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
-                new AdapterServer() { Id = 3, ContractNames = new List<ContractName>(), ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer() { Id = 1, ContractNames = new List<ContractName>(), ISName = "Doggie style", Url = "http://adsmock/", Root = "api/read" },
+                new AdapterServer() { Id = 2, ContractNames = new List<ContractName>(), ISName = "MathLovers", Url = "http://adsmock/", Root = "/api/read" },
+                new AdapterServer() { Id = 3, ContractNames = new List<ContractName>(), ISName = "CitizenDatabank", Url = "http://adsmock/", Root = "/api/read" },
             };
 
             asList[0].ContractNames.Add(new ContractName() { Id = 1, Name = "GetOwnerIdByDogId" });

@@ -33,9 +33,11 @@ namespace BeRoadTest.ADSMock
         /// </summary>
         /// <param name="name">The name of the contract used</param>
         /// <returns>The found adapter server</returns>
-        public AdapterServer FindAS(string name)
+        public async Task<AdapterServer> FindASAsync(string name)
         {
-            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name)));
+            AdapterServer ads = null;
+            await Task.Run(() => ads = ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name))));
+            return ads;
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace BeRoadTest.ADSMock
         /// </summary>
         public async Task<BeContractReturn> CallAsync(BeContractCall call)
         {
-            var ads = FindAS(call.Id);
+            var ads = await FindASAsync(call.Id);
             if (ads != null)
             {
                 Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");

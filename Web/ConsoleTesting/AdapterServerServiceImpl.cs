@@ -25,21 +25,23 @@ namespace ConsoleTesting
         /// </summary>
         /// <param name="name">The name of the contract used</param>
         /// <returns>The found adapter server</returns>
-        public AdapterServer FindAS(string name)
+        public async Task<AdapterServer> FindASAsync(string name)
         {
-            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name)));
+            AdapterServer ads = null;
+            await Task.Run(() => ads = ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name))));
+            return ads;
         }
 
         /// <summary>
         /// Calls the api of the Information System
         /// </summary>
-        public Task<BeContractReturn> CallAsync(BeContractCall call)
+        public async Task<BeContractReturn> CallAsync(BeContractCall call)
         {
-            var ads = FindAS(call.Id);
+            var ads = await FindASAsync(call.Id);
             if (ads != null)
             {
                 Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
-                return FindAsync(ads, call);
+                return await FindAsync(ads, call);
             }
             else
                 throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };

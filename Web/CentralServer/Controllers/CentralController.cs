@@ -18,5 +18,12 @@ namespace CentralServer.Controllers
         {
             return ctx.Contracts.FirstOrDefault(c => c.Id.Equals(id));
         }
+
+        [HttpGet]
+        [Route("adapterserver")]
+        public AdapterServer AdapterServer(string name)
+        {
+            return ctx.AdapterServers.FirstOrDefault(ads => ads.ContractNames.Any(c => c.Name.Equals(name)));
+        }
     }
 }

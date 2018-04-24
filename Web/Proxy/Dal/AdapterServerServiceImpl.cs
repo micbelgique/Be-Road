@@ -17,16 +17,30 @@ namespace Proxy.Dal
     /// </summary>
     public class AdapterServerServiceImpl : IAdapterServerService
     {
-        private ContractContext ctx = new ContractContext();
-
-        /// <summary>
-        /// Find an adapter server with the name of the contract used
-        /// </summary>
-        /// <param name="name">The name of the contract used</param>
-        /// <returns>The found adapter server</returns>
-        public AdapterServer FindAS(string name)
+        public async Task<AdapterServer> FindASAsync(string name)
         {
-            return ctx.AdapterServers.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name)));
+            AdapterServer ret = null;
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri("http://centralserver/api/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage response = await client.GetAsync($"central/adapterserver?name={name}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        ret = await response.Content.ReadAsAsync<AdapterServer>();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new BeContractException("Error with Central Service when finding the AdapterServer: " + ex.Message);
+                }
+            }
+          
+            return ret;
         }
 
         /// <summary>
@@ -34,7 +48,7 @@ namespace Proxy.Dal
         /// </summary>
         public async Task<BeContractReturn> CallAsync(BeContractCall call)
         {
-            var ads = FindAS(call.Id);
+            var ads = await FindASAsync(call.Id);
             if (ads != null)
             {
                 return await FindAsync(ads, call);

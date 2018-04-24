@@ -28,7 +28,7 @@ namespace Proxy.Controllers
 
         [HttpPost]
         [Route("call")]
-        public async /*Task<Dictionary<int, BeContractReturn>>*/ Task<HttpResponseMessage> CallContractAsync(BeContractCall call)
+        public async Task<HttpResponseMessage> CallContractAsync(BeContractCall call)
         {
             try
             {

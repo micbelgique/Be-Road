@@ -19,13 +19,6 @@ namespace CentralServer.Controllers
         // GET: Contract
         public ActionResult Index()
         {
-            var test = ctx.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByDogIdTest"));
-            if (test != null)
-            {
-                ctx.Contracts.Remove(test);
-                ctx.SaveChanges();
-            }
-
             return View("Create");
         }
 

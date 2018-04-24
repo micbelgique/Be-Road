@@ -21,7 +21,7 @@ namespace Contracts.Logic
         public async Task<Boolean> ValidateBeContract(BeContract contract)
         {
             var duplicated = new List<string>();
-            contract.Inputs.ForEach(input1 =>
+            contract.Inputs?.ForEach(input1 =>
                 {
                     var occur = contract.Inputs.Count(input2 => input1.Key == input2.Key);
 
@@ -70,7 +70,7 @@ namespace Contracts.Logic
             }
 
             //Test inputs
-            contract.Inputs.ForEach(input =>
+            contract.Inputs?.ForEach(input =>
             {
                 if (call.Inputs.TryGetValue(input.Key, out dynamic value))
                 {
@@ -115,7 +115,7 @@ namespace Contracts.Logic
             }
 
             //Test outputs
-            contract.Outputs.ForEach(output =>
+            contract.Outputs?.ForEach(output =>
             {
                 if (ret.Outputs.TryGetValue(output.Key, out dynamic value))
                 {

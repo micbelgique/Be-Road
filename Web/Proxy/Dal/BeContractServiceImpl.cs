@@ -1,11 +1,11 @@
 ﻿using Contracts.Dal;
 using Contracts.Models;
 using System.Linq;
-using Proxy.Dal.Mock;
 using System.Net.Http;
 using System;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Contracts;
 
 namespace Proxy.Dal
 {
@@ -34,15 +34,21 @@ namespace Proxy.Dal
             BeContract ret = null;
             using (var client = new HttpClient())
             {
-                //Use docker container name !
-                client.BaseAddress = new Uri("http://centralserver/api/");
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                HttpResponseMessage response = await client.GetAsync($"central/contracts?id={id}");
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    ret = await response.Content.ReadAsAsync<BeContract>();
+                    client.BaseAddress = new Uri("http://centralserver/api/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage response = await client.GetAsync($"central/contracts?id={id}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        ret = await response.Content.ReadAsAsync<BeContract>();
+                    }
+                }
+                catch(Exception ex)
+                {
+                    throw new BeContractException("Error with Central Service when finding the BeContract: " + ex.Message);
                 }
             }
 

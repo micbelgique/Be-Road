@@ -9,7 +9,7 @@ namespace Contracts.Dal
 {
     public interface IAdapterServerService
     {
-        AdapterServer FindAS(string name);
+        Task<AdapterServer> FindASAsync(string name);
         Task<BeContractReturn> CallAsync(BeContractCall call);
         Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call);
     }
