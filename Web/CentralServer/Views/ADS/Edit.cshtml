@@ -47,6 +47,21 @@
         <div class="form-group">
             <h4 class="col-md-12">Contracts</h4>
             <div class="col-md-12" id="contracts">
+                @for(int i = 0; i < Model.ContractNames.Count; i++)
+                {
+                    <div class="added-contract" id="contract">
+                        <select class="form-control dropdown contract-select" id="contractName" name="contractName">
+                            @for (int j = 0; j < Model.ContractNames.Count; j++)
+                            {
+                                <option value="@Model.ContractNames[j].Name" @if (i == j) { <text>selected="selected"</text>}>
+                                    @Model.ContractNames[j].Name
+                                </option>
+                            }
+                        </select>
+                        <button type="button" class="contract-rem-btn btn btn-danger"><i class="fas fa-times"></i></button>
+                        <br />
+                    </div>
+                }
             </div>
             <div class="col-md-10">
                 <button type="button" class="contract-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
@@ -63,12 +78,7 @@
 
 @if (ViewBag.Error != null)
 {
-    <div class="alert-danger">@ViewBag.Error</div>
-}
-
-@if (ViewBag.Message != null)
-{
-    <div class="alert-success">@ViewBag.Message</div>
+    <div class="alert-danger" id="error">@ViewBag.Error</div>
 }
 
 <div>
