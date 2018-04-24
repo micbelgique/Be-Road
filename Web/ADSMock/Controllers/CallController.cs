@@ -19,7 +19,7 @@ namespace ADSMock.Controllers
         /// <returns>The dog owner's ID</returns>
         [HttpGet]
         [Route("ownerbydog/{dogid}")]
-        public async Task<BeContractReturn> GetOwnerByDogAsync(string dogId) {
+        public async Task<Dictionary<int, BeContractReturn>> GetOwnerByDogAsync(string dogId) {
             var ownerByDog = new BeContractCall()
             {
                 Id = "GetOwnerIdByDogId",
@@ -39,7 +39,7 @@ namespace ADSMock.Controllers
         /// <returns>The dog address</returns>
         [HttpGet]
         [Route("addressbydog/{dogid}")]
-        public async Task<BeContractReturn> GetAddressByDogAsync(string dogId)
+        public async Task<Dictionary<int, BeContractReturn>> GetAddressByDogAsync(string dogId)
         {
             var addrByDog = new BeContractCall()
             {
@@ -53,12 +53,12 @@ namespace ADSMock.Controllers
             return await CallToProxyAsync(addrByDog);
         }
 
-        private async Task<BeContractReturn> CallToProxyAsync(BeContractCall call)
+        private async Task<Dictionary<int, BeContractReturn>> CallToProxyAsync(BeContractCall call)
         {
-            BeContractReturn ret = null;
+            Dictionary<int, BeContractReturn> ret = null;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:52831/");
+                client.BaseAddress = new Uri("http://proxy/");
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -66,7 +66,7 @@ namespace ADSMock.Controllers
                 HttpResponseMessage response = await client.PostAsync("api/contract/call", httpContent);
                 if (response.IsSuccessStatusCode)
                 {
-                    ret = await response.Content.ReadAsAsync<BeContractReturn>();
+                    ret = await response.Content.ReadAsAsync<Dictionary<int, BeContractReturn>>();
                 }
             }
             return ret;
