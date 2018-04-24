@@ -139,10 +139,6 @@
       <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Proxy\Proxy.csproj">
-      <Project>{692d090d-72ad-4ce3-85e6-aef12b1b2944}</Project>
-      <Name>Proxy</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

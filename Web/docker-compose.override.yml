@@ -7,12 +7,19 @@ services:
 
   centralserver:
     environment:
-      - ContractContext="Server=sqlserver;Database=ContractContext.mdf"
+      - ContractContext= Server=tcp:be-road-dev.database.windows.net,1433;Initial Catalog=Central-Server-DB;Persist Security Info=False;User ID=Stage2018PrivacyPassport;Password=MIC2018PssPrt;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
     ports:
       - "3001"
 
   adsmock:
     ports:
       - "3002"
+      
+networks:
+  default:
+    external:
+      name: nat
+  beroad:
+  
 
 

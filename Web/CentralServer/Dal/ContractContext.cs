@@ -1,4 +1,5 @@
 ﻿using CentralServer.Helpers;
+using CentralServer.Migrations;
 using Contracts.Models;
 using System.Data.Entity;
 
@@ -6,13 +7,15 @@ namespace CentralServer.Dal
 {
     public class ContractContext : DbContext
     {
-        public ContractContext() : base(ConfigHelper.GetConnectionString("ContractContext"))
+        public ContractContext() : base(ConfigHelper.GetAppSetting("ContractContext"))
         {
 
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ContractContext, Configuration>());
+
             modelBuilder.Entity<BeContract>()
                 .HasMany(c => c.Inputs)
                 .WithOptional()

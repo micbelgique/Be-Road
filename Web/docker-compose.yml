@@ -10,8 +10,8 @@ services:
     networks:
       - beroad
     depends_on:
-      - centralserver
       - adsmock
+      - centralserver
 
   centralserver:
     container_name: centralserver
@@ -19,17 +19,6 @@ services:
     build:
       context: .\CentralServer
       dockerfile: Dockerfile
-    networks:
-      - beroad
-    depends_on:
-      - sqlserver
-      
-  sqlserver:
-    image: microsoft/mssql-server-windows-express
-    container_name: sqlserver
-    environment:
-      sa_password: ""
-      ACCEPT_EULA: Y
     networks:
       - beroad
 
@@ -42,10 +31,4 @@ services:
     networks:
       - beroad
 
-networks:
-  default:
-    external:
-      name: nat
-  beroad:
-  
 

@@ -50,15 +50,22 @@ namespace Proxy.Dal
             using (var client = new HttpClient())
             {
                 //Use the ads.Url as baseaddress, don't send this to Be-Road !
-                client.BaseAddress = new Uri(ads.Url);
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                
-                var httpContent = new StringContent(JsonConvert.SerializeObject(call), Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(ads.Root+ "/" + call.Id, httpContent);
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    res = await response.Content.ReadAsAsync<BeContractReturn>();
+                    client.BaseAddress = new Uri(ads.Url);
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(call), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync(ads.Root + "/" + call.Id, httpContent);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        res = await response.Content.ReadAsAsync<BeContractReturn>();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new BeContractException("Cannot call the Adapter Server: " + ex.Message);
                 }
             }
 

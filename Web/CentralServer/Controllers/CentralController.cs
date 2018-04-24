@@ -1,4 +1,5 @@
 ﻿using CentralServer.Dal;
+using CentralServer.Helpers;
 using Contracts.Models;
 using Newtonsoft.Json;
 using System.Linq;
@@ -9,13 +10,13 @@ namespace CentralServer.Controllers
     [RoutePrefix("api/central")]
     public class CentralController : ApiController
     {
-        private ContractContext context = new ContractContext();
+        ContractContext ctx = new ContractContext();
 
         [HttpGet]
         [Route("contracts")]
         public BeContract Contracts(string id)
         {
-            return context.Contracts.FirstOrDefault(c => c.Id.Equals(id));
+            return ctx.Contracts.FirstOrDefault(c => c.Id.Equals(id));
         }
     }
 }

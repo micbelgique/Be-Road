@@ -10,8 +10,9 @@ namespace CentralServer.Helpers
     {
         public static string GetAppSetting(string appSettingName)
         {
-            return GetSettingFromEnvironmentVariable(appSettingName) ??
+            var cs = GetSettingFromEnvironmentVariable(appSettingName) ??
                 ConfigurationManager.AppSettings[appSettingName];
+            return cs;
         }
 
         public static string GetConnectionString(string connectionStringName)

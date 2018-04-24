@@ -16,9 +16,9 @@ namespace Proxy.Dal.Mock
         {
             List<AdapterServer> asList = new List<AdapterServer>
             {
-                new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId", "GetAddressByDogId", "GetServiceInfo" }, ISName = "Doggies", Url = "http://localhost:59317/", Root = "api/read" },
-                new AdapterServer() { ContractNames = new List<string>  { "GetMathemathicFunction" }, ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
-                new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId", "GetAddressByDogId", "GetServiceInfo" }, ISName = "Doggies", Url = "http://adsmock/", Root = "api/read" },
+                new AdapterServer() { ContractNames = new List<string>  { "GetMathemathicFunction" }, ISName = "MathLovers", Url = "http://adsmock/", Root = "/api/read" },
+                new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "http://adsmock/", Root = "/api/read" },
             };
 
             return asList;

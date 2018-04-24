@@ -9,7 +9,7 @@ namespace CentralServer.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(CentralServer.Dal.ContractContext context)
