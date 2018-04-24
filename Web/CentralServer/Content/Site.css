@@ -16,11 +16,11 @@ textarea {
     max-width: 280px;
 }
 
-.input-add-btn, .query-add-btn, .output-add-btn, .mapping-add-btn {
+.input-add-btn, .query-add-btn, .output-add-btn, .mapping-add-btn, .contract-add-btn {
     max-width: 70px;
 }
 
-.input-rem-btn, .query-rem-btn, .output-rem-btn, .mapping-rem-btn {
+.input-rem-btn, .query-rem-btn, .output-rem-btn, .mapping-rem-btn, .contract-rem-btn {
     width: auto !important;
 }
 
@@ -43,4 +43,18 @@ textarea {
 
 .added-output {
     background-color: #f4f8fc;
+}
+
+/* BeContracts - ADS */
+.added-contract {
+    display: flex;
+    margin-bottom: 1em;
+}
+
+.added-contract > select {
+    margin-right: 1em;
+}
+
+#search-grp {
+    padding-right: 205px !important;
 }

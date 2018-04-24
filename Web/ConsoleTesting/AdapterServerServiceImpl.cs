@@ -27,7 +27,7 @@ namespace ConsoleTesting
         /// <returns>The found adapter server</returns>
         public AdapterServer FindAS(string name)
         {
-            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
+            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name)));
         }
 
         /// <summary>

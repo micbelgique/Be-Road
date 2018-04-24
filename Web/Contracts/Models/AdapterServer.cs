@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Contracts.Models
 {
@@ -8,9 +10,13 @@ namespace Contracts.Models
     public class AdapterServer
     {
         /// <summary>
+        /// Id of the ADS, used for EF
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// Names of the contracts handled by the Information System
         /// </summary>
-        public List<string> ContractNames { get; set; }
+        public virtual List<ContractName> ContractNames { get; set; }
         /// <summary>
         /// Name of the Information System
         /// </summary>

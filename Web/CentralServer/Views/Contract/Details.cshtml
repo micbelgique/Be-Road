@@ -177,7 +177,15 @@
             </dt>
 
             <dd>
-                @Model.Outputs[i].LookupInputId
+                @if(Model.Queries.Count > 0)
+                {
+                    var qId = Model.Outputs[i].LookupInputId + 1;
+                    <span>Query #@qId</span>
+                }
+                else
+                {
+                    <span>Main contract</span>
+                }
             </dd>
         </dl>
         if (i < Model.Outputs.Count - 1)

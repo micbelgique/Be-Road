@@ -4,7 +4,6 @@ using Contracts.Logic;
 using Contracts.Models;
 using Newtonsoft.Json;
 using Proxy.Dal;
-using Proxy.Dal.Mock;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;

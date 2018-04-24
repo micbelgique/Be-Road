@@ -22,9 +22,9 @@ namespace BeRoadTest.ADSMock
         {
             ADSList = new List<AdapterServer>
             {
-                new AdapterServer() { ContractNames = new List<string> { "GetOwnerIdByDogId", "GetAddressByDogId", "GetServiceInfo" }, ISName = "Doggies", Url = "http://localhost:59317/", Root = "api/read" },
-                new AdapterServer() { ContractNames = new List<string>  { "GetMathemathicFunction" }, ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
-                new AdapterServer() { ContractNames = new List<string>  { "GetAddressByOwnerId" }, ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer() { Id = 1, ContractNames = new List<ContractName> { new ContractName() { Name = "GetOwnerIdByDogId" }, new ContractName() { Name = "GetAddressByDogId" }, new ContractName() { Name = "GetServiceInfo" } }, ISName = "Doggies", Url = "http://localhost:59317/", Root = "api/read" },
+                new AdapterServer() { Id = 2, ContractNames = new List<ContractName>  { new ContractName() { Name = "GetMathemathicFunction" } }, ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer() { Id = 3, ContractNames = new List<ContractName>  { new ContractName() { Name = "GetAddressByOwnerId" } }, ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
             };
         }
 
@@ -35,7 +35,7 @@ namespace BeRoadTest.ADSMock
         /// <returns>The found adapter server</returns>
         public AdapterServer FindAS(string name)
         {
-            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Equals(name)));
+            return ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name)));
         }
 
         /// <summary>

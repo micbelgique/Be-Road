@@ -33,6 +33,11 @@ namespace CentralServer.Controllers
         public ActionResult Delete(string modalValue)
         {
             var contract = ctx.Contracts.FirstOrDefault(c => c.Id == modalValue);
+            if (ctx.Queries.Count(q => q.Contract.Id == contract.Id) > 0)
+            {
+                TempData["Error"] = contract.Id;
+                return RedirectToAction("GoToList");
+            }
             ctx.Contracts.Remove(contract);
             ctx.SaveChanges();
             return RedirectToAction("GoToList");
@@ -77,6 +82,8 @@ namespace CentralServer.Controllers
                     Outputs = c.Outputs
                 }
             ).ToList();
+
+            ViewBag.Error = TempData["Error"];
             return View("Display", contracts);
         }
 
