@@ -1,7 +1,9 @@
 ﻿@model Contracts.Models.AdapterServer
 
 @{
-    ViewBag.Title = "Details";
+                /**/
+
+                ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
@@ -37,10 +39,10 @@
 
     <h5>Contracts</h5>
     <ul>
-    @foreach(var c in Model.ContractNames)
-    {
-        <li>@c.Name</li>
-    }
+        @foreach (var c in Model.ContractNames)
+        {
+            <li>@c.Id</li>
+        }
     </ul>
 </div>
 <p>

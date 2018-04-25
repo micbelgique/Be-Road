@@ -47,14 +47,14 @@
         <div class="form-group">
             <h4 class="col-md-12">Contracts</h4>
             <div class="col-md-12" id="contracts">
-                @for(int i = 0; i < Model.ContractNames.Count; i++)
+                @for (int i = 0; i < Model.ContractNames.Count; i++)
                 {
                     <div class="added-contract" id="contract">
                         <select class="form-control dropdown contract-select" id="contractName" name="contractName">
                             @for (int j = 0; j < Model.ContractNames.Count; j++)
                             {
-                                <option value="@Model.ContractNames[j].Name" @if (i == j) { <text>selected="selected"</text>}>
-                                    @Model.ContractNames[j].Name
+                                <option value="@Model.ContractNames[j].Id" @if (i == j) { <text> selected="selected" </text> }>
+                                    @Model.ContractNames[j].Id
                                 </option>
                             }
                         </select>

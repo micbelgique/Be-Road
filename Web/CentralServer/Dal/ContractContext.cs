@@ -45,6 +45,5 @@ namespace CentralServer.Dal
         public DbSet<Mapping> Mappings { get; set; }
         public DbSet<Output> Outputs { get; set; }
         public DbSet<AdapterServer> AdapterServers { get; set; }
-        public DbSet<ContractName> ContractNames { get; set; }
     }
 }

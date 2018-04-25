@@ -28,7 +28,7 @@ namespace CentralServer.Controllers
 
         public ActionResult Create(AdapterServer ads)
         {
-            if(ads.ISName == null || ads.Root == null || ads.Url == null)
+            if (ads.ISName == null || ads.Root == null || ads.Url == null)
             {
                 ViewBag.Error = "You must fill all inputs !";
                 return View("Create");
@@ -51,7 +51,7 @@ namespace CentralServer.Controllers
         {
             var ads = ctx.AdapterServers.FirstOrDefault(a => a.Id == id);
 
-            var usedContractNames = ctx.ContractNames.Select(cn => cn.Name);
+            var usedContractNames = ads.ContractNames.Select(cn => cn.Id);
             var allContracts = ctx.Contracts.Select(c => c.Id);
             var filteredContracts = allContracts.Where(c => !usedContractNames.Any(u => c.Equals(u)));
             ViewBag.contracts = filteredContracts.ToList();
@@ -63,21 +63,22 @@ namespace CentralServer.Controllers
         public ActionResult Save(AdapterServer ads)
         {
             var newAds = ctx.AdapterServers.FirstOrDefault(a => a.ISName == ads.ISName);
-            if(newAds != null)
+            if (newAds != null)
             {
                 newAds.Url = ads.Url;
                 newAds.Root = ads.Root;
-                if(ads.ContractNames.Count > newAds.ContractNames.Count)
+                if (ads.ContractNames.Count > newAds.ContractNames.Count)
                     ads.ContractNames.ForEach(cn => {
                         newAds.ContractNames.Add(cn);
                     });
                 ctx.SaveChanges();
                 return Json("OK");
             }
-            else{
+            else
+            {
                 return Json("Cannot edit this Adapter Server !");
 
-            }            
+            }
         }
 
         public ActionResult Details(int id)

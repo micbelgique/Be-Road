@@ -28,7 +28,7 @@ namespace ConsoleTesting
         public async Task<AdapterServer> FindASAsync(string name)
         {
             AdapterServer ads = null;
-            await Task.Run(() => ads = ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name))));
+            await Task.Run(() => ads = ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Id.Equals(name))));
             return ads;
         }
 

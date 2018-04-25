@@ -13,6 +13,7 @@ namespace CentralServer.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(ContractContext context)
@@ -37,18 +38,41 @@ namespace CentralServer.Migrations
 
         private void ADSSeed(ContractContext context)
         {
-            List<AdapterServer> asList = new List<AdapterServer>()
+            List<AdapterServer> asList = new List<AdapterServer>
             {
-                new AdapterServer() { Id = 1, ContractNames = new List<ContractName>(), ISName = "Doggie style", Url = "http://adsmock/", Root = "api/read" },
-                new AdapterServer() { Id = 2, ContractNames = new List<ContractName>(), ISName = "MathLovers", Url = "http://adsmock/", Root = "/api/read" },
-                new AdapterServer() { Id = 3, ContractNames = new List<ContractName>(), ISName = "CitizenDatabank", Url = "http://adsmock/", Root = "/api/read" },
+                new AdapterServer()
+                {
+                    Id = 1, ContractNames = new List<BeContract>
+                    {
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetOwnerIdByDogId")),
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByDogId")),
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetServiceInfo"))
+                    },
+                    ISName = "Doggie style",
+                    Url = "http://adsmock/",
+                    Root = "api/read"
+                },
+                new AdapterServer()
+                {
+                    Id = 2, ContractNames = new List<BeContract>
+                    {
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetMathemathicFunction"))
+                    },
+                    ISName = "MathLovers",
+                    Url = "http://adsmock/",
+                    Root = "api/read"
+                },
+                new AdapterServer() {
+                    Id = 3,
+                    ContractNames = new List<BeContract>
+                    {
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByOwnerId"))
+                    },
+                    ISName = "CitizenDatabank",
+                    Url = "http://adsmock/",
+                    Root = "api/read"
+                },
             };
-
-            asList[0].ContractNames.Add(new ContractName() { Id = 1, Name = "GetOwnerIdByDogId" });
-            asList[0].ContractNames.Add(new ContractName() { Id = 2, Name = "GetAddressByDogId" });
-            asList[0].ContractNames.Add(new ContractName() { Id = 3, Name = "GetServiceInfo" });
-            asList[1].ContractNames.Add(new ContractName() { Id = 4, Name = "GetMathemathicFunction" });
-            asList[2].ContractNames.Add(new ContractName() { Id = 5, Name = "GetAddressByOwnerId" });
 
             context.AdapterServers.AddOrUpdate(asList[0]);
             context.AdapterServers.AddOrUpdate(asList[1]);

@@ -23,7 +23,7 @@ namespace CentralServer.Controllers
         [Route("adapterserver")]
         public AdapterServer AdapterServer(string name)
         {
-            return ctx.AdapterServers.FirstOrDefault(ads => ads.ContractNames.Any(c => c.Name.Equals(name)));
+            return ctx.AdapterServers.FirstOrDefault(ads => ads.ContractNames.Any(c => c.Id.Equals(name)));
         }
     }
 }

@@ -73,7 +73,6 @@
     <Compile Include="Models\BeContract.cs" />
     <Compile Include="Models\BeContractCall.cs" />
     <Compile Include="Models\BeContractReturn.cs" />
-    <Compile Include="Models\ContractName.cs" />
     <Compile Include="Models\Input.cs" />
     <Compile Include="Models\Mapping.cs" />
     <Compile Include="Models\Output.cs" />

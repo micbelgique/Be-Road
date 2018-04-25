@@ -16,9 +16,38 @@ namespace ConsoleTesting
         {
             List<AdapterServer> asList = new List<AdapterServer>
             {
-                new AdapterServer() { Id = 1, ContractNames = new List<ContractName> { new ContractName() { Name = "GetOwnerIdByDogId" }, new ContractName() { Name = "GetAddressByDogId" }, new ContractName() { Name = "GetServiceInfo" } }, ISName = "Doggies", Url = "http://localhost:59317/", Root = "api/read" },
-                new AdapterServer() { Id = 2, ContractNames = new List<ContractName>  { new ContractName() { Name = "GetMathemathicFunction" } }, ISName = "MathLovers", Url = "http://localhost:59317/", Root = "/api/read" },
-                new AdapterServer() { Id = 3, ContractNames = new List<ContractName>  { new ContractName() { Name = "GetAddressByOwnerId" } }, ISName = "CitizenDatabank", Url = "http://localhost:59317/", Root = "/api/read" },
+                new AdapterServer()
+                {
+                    Id = 1, ContractNames = new List<BeContract>
+                    {
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetOwnerIdByDogId")),
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByDogId")),
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetServiceInfo"))
+                    },
+                    ISName = "Doggie style",
+                    Url = "http://adsmock/",
+                    Root = "api/read"
+                },
+                new AdapterServer()
+                {
+                    Id = 2, ContractNames = new List<BeContract>
+                    {
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetMathemathicFunction"))
+                    },
+                    ISName = "MathLovers",
+                    Url = "http://adsmock/",
+                    Root = "api/read"
+                },
+                new AdapterServer() {
+                    Id = 3,
+                    ContractNames = new List<BeContract>
+                    {
+                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByOwnerId"))
+                    },
+                    ISName = "CitizenDatabank",
+                    Url = "http://adsmock/",
+                    Root = "api/read"
+                },
             };
 
             return asList;
