@@ -1,5 +1,4 @@
 ﻿using CentralServer.Helpers;
-using CentralServer.Migrations;
 using Contracts.Models;
 using System.Data.Entity;
 
@@ -14,7 +13,7 @@ namespace CentralServer.Dal
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ContractContext, Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ContractContext, Configuration>());
 
             modelBuilder.Entity<BeContract>()
                 .HasMany(c => c.Inputs)

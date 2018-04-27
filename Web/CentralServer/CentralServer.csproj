@@ -154,9 +154,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ConfigHelper.cs" />
-    <Compile Include="Migrations\201804200931364_Initial-Migration.cs" />
-    <Compile Include="Migrations\201804200931364_Initial-Migration.Designer.cs">
-      <DependentUpon>201804200931364_Initial-Migration.cs</DependentUpon>
+    <Compile Include="Migrations\201804270814172_Initial-Create.cs" />
+    <Compile Include="Migrations\201804270814172_Initial-Create.Designer.cs">
+      <DependentUpon>201804270814172_Initial-Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\BeContractsMock.cs" />
     <Compile Include="Migrations\Configuration.cs" />
@@ -203,8 +203,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804200931364_Initial-Migration.resx">
-      <DependentUpon>201804200931364_Initial-Migration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804270814172_Initial-Create.resx">
+      <DependentUpon>201804270814172_Initial-Create.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
