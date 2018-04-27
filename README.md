@@ -51,6 +51,12 @@ The first time you run the project, docker will download all the images and this
 
 To build on command line use this: _docker-compose up -d --build_ (add a service to deploy this service only)
 
+##### Docker
+Ip addresses
+- **Proxy**: 172.16.42.10
+- **CentralServer**: 172.16.42.11
+- **ADSMock**: 172.16.42.13
+
 ---
 _This section will is old and will be replaced soon_  
 _You will have to change the connection strings in the Web.config files in the 3 projects_
