@@ -34,49 +34,75 @@ namespace CentralServer.Migrations
             context.Contracts.AddOrUpdate(ownerIdByDogIdContract);
             context.Contracts.AddOrUpdate(addressByOwnerIdContract);
             context.Contracts.AddOrUpdate(addressByDogIdContract);
+            context.Contracts.AddOrUpdate(BeContractsMock.GetDoubleInputContract());
+            context.SaveChanges();
         }
 
         private void ADSSeed(ContractContext context)
         {
-            List<AdapterServer> asList = new List<AdapterServer>
+            var cn1 = new List<BeContract>
             {
-                new AdapterServer()
-                {
-                    Id = 1, ContractNames = new List<BeContract>
-                    {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetOwnerIdByDogId")),
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByDogId")),
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetServiceInfo"))
-                    },
-                    ISName = "Doggie style",
-                    Url = "http://adsmock/",
-                    Root = "api/read"
-                },
-                new AdapterServer()
-                {
-                    Id = 2, ContractNames = new List<BeContract>
-                    {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetMathemathicFunction"))
-                    },
-                    ISName = "MathLovers",
-                    Url = "http://adsmock/",
-                    Root = "api/read"
-                },
-                new AdapterServer() {
-                    Id = 3,
-                    ContractNames = new List<BeContract>
-                    {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByOwnerId"))
-                    },
-                    ISName = "CitizenDatabank",
-                    Url = "http://adsmock/",
-                    Root = "api/read"
-                },
+                context.Contracts.FirstOrDefault(c => c.Id.Equals("GetOwnerIdByDogId")),
+                context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByOwnerId")),
+                context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByDogId")),
+                context.Contracts.FirstOrDefault(c => c.Id.Equals("GetServiceInfo"))
             };
 
-            context.AdapterServers.AddOrUpdate(asList[0]);
-            context.AdapterServers.AddOrUpdate(asList[1]);
-            context.AdapterServers.AddOrUpdate(asList[2]);
+            var cn2 = new List<BeContract>
+            {
+                context.Contracts.FirstOrDefault(c => c.Id.Equals("GetMathemathicFunction"))
+            };
+
+            var cn3 = new List<BeContract>
+            {
+                context.Contracts.FirstOrDefault(c => c.Id.Equals("DoubleInputContract"))
+            };
+
+            var ads1 = new AdapterServer()
+            {
+                Id = 1,
+                ContractNames = cn1,
+                ISName = "Doggie style",
+                Url = "http://adsmock/",
+                Root = "api/read"
+            };
+            var ads2 = new AdapterServer()
+            {
+                Id = 2,
+                ContractNames = cn2,
+                ISName = "MathLovers",
+                Url = "http://adsmock/",
+                Root = "api/read"
+            };
+            var ads3 = new AdapterServer()
+            {
+                Id = 3,
+                ContractNames = cn3,
+                ISName = "CitizenDatabank",
+                Url = "http://adsmock/",
+                Root = "api/read"
+            };
+
+            var ads1db = context.AdapterServers.FirstOrDefault(ads => ads.ISName == ads1.ISName);
+            var ads2db = context.AdapterServers.FirstOrDefault(ads => ads.ISName == ads2.ISName);
+            var ads3db = context.AdapterServers.FirstOrDefault(ads => ads.ISName == ads3.ISName);
+
+            if (ads1db != null)
+                context.AdapterServers.Remove(ads1db);
+
+            if (ads2db != null)
+                context.AdapterServers.Remove(ads2db);
+
+            if (ads3db != null)
+                context.AdapterServers.Remove(ads3db);
+
+            //if (!System.Diagnostics.Debugger.IsAttached)
+            //    System.Diagnostics.Debugger.Launch();
+
+            context.AdapterServers.Add(ads1);
+            context.AdapterServers.Add(ads2);
+            context.AdapterServers.Add(ads3);
+            context.SaveChanges();
         }
     }
 }

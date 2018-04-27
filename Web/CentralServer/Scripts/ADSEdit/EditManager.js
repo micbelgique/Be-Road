@@ -34,6 +34,14 @@
         }
     );
 
+    $('.contract-rem-btn').click(
+        function ()
+        {
+            contractNb--;
+            $(this).parent().remove();
+        }
+    );
+
     $('#save').click(
         function () {
             editADS();
@@ -51,8 +59,7 @@ async function editADS() {
     ads.ContractNames = [];
     for (var i = 0; i < $('#contracts').children().length; i++) {
         ads.ContractNames[i] = {
-            'Id' : null,
-            'Name' : $('#' + $('#contracts').children()[i].id).find('#contractName').find(':selected').val()
+            'Id' : $('#' + $('#contracts').children()[i].id).find('#contractName').find(':selected').val()
         };
     }
 
