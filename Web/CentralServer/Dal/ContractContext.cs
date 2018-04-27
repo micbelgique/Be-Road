@@ -6,7 +6,7 @@ namespace CentralServer.Dal
 {
     public class ContractContext : DbContext
     {
-        public ContractContext() : base(ConfigHelper.GetAppSetting("ContractContext"))
+        public ContractContext() : base(/*ConfigHelper.GetAppSetting(*/"ContractContext"/*)*/)
         {
 
         }
