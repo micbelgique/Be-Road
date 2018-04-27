@@ -72,6 +72,13 @@ namespace Contracts.Logic
             //Test inputs
             contract.Inputs?.ForEach(input =>
             {
+                if (call.Inputs == null)
+                    throw new BeContractException("The BeContracts needs inputs but the call hasn't inputs !")
+                    {
+                        BeContract = contract,
+                        BeContractCall = call
+                    };
+
                 if (call.Inputs.TryGetValue(input.Key, out dynamic value))
                 {
                     //Check if the dynamic is a int64

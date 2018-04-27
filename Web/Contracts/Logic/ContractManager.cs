@@ -70,7 +70,7 @@ namespace Contracts.Logic
                     };
 
                     //Fill in the inputs of the BeContractCall
-                    q.Contract.Inputs.ForEach(input =>
+                    q.Contract.Inputs?.ForEach(input =>
                     {
                         var mapping = q.Mappings.FirstOrDefault(m => m.InputKey.Equals(input.Key));
                         if (mapping == null)
@@ -139,7 +139,7 @@ namespace Contracts.Logic
             var notFiltredReturns = await CallAndLoopQueriesAsync(call, contract);
 
             var filtredReturns = new Dictionary<int, BeContractReturn>();
-            var groupedOutputs = contract.Outputs.GroupBy(output => output.LookupInputId);
+            var groupedOutputs = contract.Outputs?.GroupBy(output => output.LookupInputId);
             groupedOutputs.ToList().ForEach(group =>
             {
                 var beContractReturn = new BeContractReturn
