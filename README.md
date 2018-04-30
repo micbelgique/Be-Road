@@ -356,8 +356,8 @@ The log feature of Be-Road is handle by the MessageLog project. It uses an API t
         <td>
             <strong>ContractId</strong> : Id of the contract
             <br />
-            <strong>UserName</strong> : Name of the system user
-            <br /> (IS)
+            <strong>UserName</strong> : Name of the system user (IS)
+            <br />
             <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
             <br />            
             <strong>Response</strong> : Is a response to another call (boolean)

@@ -8,6 +8,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using CentralServer.Helpers;
+using System.Threading.Tasks;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace CentralServer.Controllers
 {
@@ -23,7 +28,7 @@ namespace CentralServer.Controllers
         }
 
         [HttpPost]
-        public ActionResult Delete(string modalValue)
+        public async Task<ActionResult> Delete(string modalValue)
         {
             var contract = ctx.Contracts.FirstOrDefault(c => c.Id == modalValue);
             if (ctx.Queries.Count(q => q.Contract.Id == contract.Id) > 0)
@@ -33,6 +38,7 @@ namespace CentralServer.Controllers
             }
             ctx.Contracts.Remove(contract);
             ctx.SaveChanges();
+            await CallToMLAsync(new { ContractId = contract.Id, UserName = "TEMP" }, "api/Contract/Delete");
             return RedirectToAction("GoToList");
         }
 
@@ -123,6 +129,7 @@ namespace CentralServer.Controllers
             {
                 ctx.Contracts.Add(contract);
                 ctx.SaveChanges();
+                await CallToMLAsync(new { ContractId = contract.Id, UserName = "TEMP" }, "api/Contract/Add");
             }
             catch(Exception ex)
             {
@@ -162,6 +169,27 @@ namespace CentralServer.Controllers
                 return Json(contracts, JsonRequestBehavior.AllowGet);
             else
                 return Json("Null", JsonRequestBehavior.AllowGet);
+        }
+
+        private async Task CallToMLAsync(dynamic args, string route)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri("http://messagelog/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(args), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync(route, httpContent);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
         }
     }
 }
