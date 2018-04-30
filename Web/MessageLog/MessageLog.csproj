@@ -141,6 +141,10 @@
     <Compile Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.Designer.cs">
       <DependentUpon>201804300839270_Log-Model-AccessInfo-Rem.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804300941076_Log-Model-Message.cs" />
+    <Compile Include="Migrations\201804300941076_Log-Model-Message.Designer.cs">
+      <DependentUpon>201804300941076_Log-Model-Message.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\Dto\AccessInfoDto.cs" />
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.resx">
       <DependentUpon>201804300839270_Log-Model-AccessInfo-Rem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804300941076_Log-Model-Message.resx">
+      <DependentUpon>201804300941076_Log-Model-Message.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
