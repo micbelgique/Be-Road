@@ -18,7 +18,7 @@ namespace BeRoadTest.CentralServer
         public BeContractDalTest()
         {
             BeContractEquals = new BeContractEqualsTest();
-            Db = new ContractContext();
+            Db = new ContractContext("");
         }
 
         //[ClassInitialize]
@@ -26,7 +26,7 @@ namespace BeRoadTest.CentralServer
         {
             //Used for connectionstring
             AppDomain.CurrentDomain.SetData("DataDirectory", System.IO.Directory.GetCurrentDirectory());
-            var db = new ContractContext();
+            var db = new ContractContext("");
             db.Contracts.RemoveRange(db.Contracts);
             db.SaveChanges();
         }

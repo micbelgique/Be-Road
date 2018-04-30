@@ -57,6 +57,19 @@ Ip addresses
 - **CentralServer**: 172.16.42.11
 - **ADSMock**: 172.16.42.13
 
+Compose files
+- docker-compose.override.yml
+  - Is used for development
+- docker-compose.prod.yml
+  - Is used for production (not implemented yet)
+
+##### Entity Framework
+In BeRoad there are currently 2 DbContexts that need a connectionstring
+- Central Server
+- Message Log
+
+The connection strings need to be defined in ...
+
 ---
 _This section will is old and will be replaced soon_  
 _You will have to change the connection strings in the Web.config files in the 3 projects_
