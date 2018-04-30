@@ -25,7 +25,7 @@ The public services are able to communicate through Be-Road using contracts. Fin
 1.	[Clone the code](#clone-the-code)
 2.  [Blockchain implementation](#blockchain-implementation)
 3.  [How to create and use contracts](#how-to-create-and-use-contracts)
-4.  [Call to MessageLog API](#call-to-message-log-api)
+4.  [Call to MessageLog API](#call-to-messagelog-api)
 5.	[Packages included](#packages-included)
 6.	[Latest releases](#latest-releases)
 
