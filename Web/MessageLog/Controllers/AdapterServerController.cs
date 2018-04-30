@@ -41,7 +41,7 @@ namespace MessageLog.Controllers
                 return new System.Web.Http.Results.ResponseMessageResult(
                     Request.CreateErrorResponse(
                         (HttpStatusCode)422,
-                        new HttpError($"Error in Log : {res} cannot must contain a value")
+                        new HttpError($"Error in Log : {res} must contain a value")
                     )
                 );
             }
@@ -78,7 +78,7 @@ namespace MessageLog.Controllers
                 return new System.Web.Http.Results.ResponseMessageResult(
                     Request.CreateErrorResponse(
                         (HttpStatusCode)422,
-                        new HttpError($"Error in Log : {res} cannot must contain a value")
+                        new HttpError($"Error in Log : {res} must contain a value")
                     )
                 );
             }
@@ -116,7 +116,7 @@ namespace MessageLog.Controllers
                 return new System.Web.Http.Results.ResponseMessageResult(
                     Request.CreateErrorResponse(
                         (HttpStatusCode)422,
-                        new HttpError($"Error in Log : {res} cannot must contain a value")
+                        new HttpError($"Error in Log : {res} must contain a value")
                     )
                 );
             }
