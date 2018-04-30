@@ -70,8 +70,16 @@ namespace CentralServer.Controllers
                 newAds.Root = ads.Root;
                 if (ads.ContractNames.Count > newAds.ContractNames.Count)
                     ads.ContractNames.ForEach(cn => {
-                        newAds.ContractNames.Add(cn);
+                        newAds.ContractNames.Add(ctx.Contracts.FirstOrDefault(c => c.Id.Equals(cn.Id)));
                     });
+                if(ads.ContractNames.Count < newAds.ContractNames.Count)
+                {
+                    newAds.ContractNames.Clear();
+                    ads.ContractNames.ForEach(cn => {
+                        var contract = ctx.Contracts.FirstOrDefault(c => c.Id.Equals(cn.Id));
+                        newAds.ContractNames.Add(contract);
+                    });
+                }
                 ctx.SaveChanges();
                 return Json("OK");
             }
