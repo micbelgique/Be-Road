@@ -150,8 +150,13 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\Dto\AccessInfoDto.cs" />
+    <Compile Include="Models\Dto\AdsDtoDelete.cs" />
+    <Compile Include="Models\Dto\AdsDtoGeneric.cs" />
     <Compile Include="Models\Dto\ApplicationUserDto.cs" />
+    <Compile Include="Models\Dto\ContractDtoCall.cs" />
+    <Compile Include="Models\Dto\ContractDtoGeneric.cs" />
     <Compile Include="Models\Dto\DataDto.cs" />
+    <Compile Include="Models\Dto\ExceptionDto.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utils\HashUtils.cs" />

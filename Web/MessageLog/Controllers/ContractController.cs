@@ -1,5 +1,6 @@
 ﻿using MessageLog.Dal;
 using MessageLog.Models;
+using MessageLog.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,15 @@ using System.Web.Http;
 
 namespace MessageLog.Controllers
 {
+    [RoutePrefix("api/Contract")]
     public class ContractController : ApiController
     {
         private LogContext db = new LogContext();
 
         // POST: api/Contract/Add
         [HttpPost]
-        public async Task<IHttpActionResult> Add([FromBody]string contractId, [FromBody]string userName)
+        [Route("Add")]
+        public async Task<IHttpActionResult> Add(ContractDtoGeneric logDto)
         {
             if (!ModelState.IsValid)
             {
@@ -26,12 +29,12 @@ namespace MessageLog.Controllers
             Log log = new Log()
             {
                 Deter = Determiner.BeContract,
-                ContractId = contractId,
+                ContractId = logDto.ContractId,
                 UseType = "Create",
                 Response = false,
                 UserType = "DataProvider",
-                UserName = userName,
-                Message = $"Creation of {contractId}",
+                UserName = logDto.UserName,
+                Message = $"Creation of {logDto.ContractId}",
                 CreationDate = DateTime.Now
             };
 
@@ -53,8 +56,9 @@ namespace MessageLog.Controllers
         }
 
         [HttpPost]
+        [Route("Delete")]
         // POST: api/Contract/Delete
-        public async Task<IHttpActionResult> Delete([FromBody]string contractId, [FromBody]string userName)
+        public async Task<IHttpActionResult> Delete(ContractDtoGeneric logDto)
         {
             if (!ModelState.IsValid)
             {
@@ -64,12 +68,12 @@ namespace MessageLog.Controllers
             Log log = new Log()
             {
                 Deter = Determiner.BeContract,
-                ContractId = contractId,
+                ContractId = logDto.ContractId,
                 UseType = "Delete",
                 Response = false,
                 UserType = "DataProvider",
-                UserName = userName,
-                Message = $"Removal of {contractId}",
+                UserName = logDto.UserName,
+                Message = $"Removal of {logDto.ContractId}",
                 CreationDate = DateTime.Now
             };
 
@@ -91,8 +95,9 @@ namespace MessageLog.Controllers
         }
 
         [HttpPost]
+        [Route("Call")]
         // POST: api/Contract/Call
-        public async Task<IHttpActionResult> Call([FromBody]string contractId, [FromBody]string userName, [FromBody]string userType, [FromBody]bool response)
+        public async Task<IHttpActionResult> Call(ContractDtoCall logDto)
         {
             if (!ModelState.IsValid)
             {
@@ -102,12 +107,12 @@ namespace MessageLog.Controllers
             Log log = new Log()
             {
                 Deter = Determiner.BeContract,
-                ContractId = contractId,
+                ContractId = logDto.ContractId,
                 UseType = "Call",
-                Response = response,
-                UserType = userType,
-                UserName = userName,
-                Message = $"Call of {contractId}",
+                Response = logDto.Response,
+                UserType = logDto.UserType,
+                UserName = logDto.UserName,
+                Message = $"Call of {logDto.ContractId}",
                 CreationDate = DateTime.Now
             };
 

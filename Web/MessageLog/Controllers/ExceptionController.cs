@@ -1,5 +1,6 @@
 ﻿using MessageLog.Dal;
 using MessageLog.Models;
+using MessageLog.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,15 @@ using System.Web.Http;
 
 namespace MessageLog.Controllers
 {
+    [RoutePrefix("api/Exception")]
     public class ExceptionController : ApiController
     {
         private LogContext db = new LogContext();
 
         // POST: api/Exception/Call
         [HttpPost]
-        public async Task<IHttpActionResult> Call([FromBody]string userType, [FromBody]string userName, [FromBody]string message)
+        [Route("Call")]
+        public async Task<IHttpActionResult> Call(ExceptionDto logDto)
         {
             if (!ModelState.IsValid)
             {
@@ -29,9 +32,9 @@ namespace MessageLog.Controllers
                 ContractId = "None",
                 UseType = "Error",
                 Response = false,
-                UserType = userType,
-                UserName = userName,
-                Message = message,
+                UserType = logDto.UserType,
+                UserName = logDto.UserName,
+                Message = logDto.Message,
                 CreationDate = DateTime.Now
             };
 

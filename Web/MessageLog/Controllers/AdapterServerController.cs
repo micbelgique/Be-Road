@@ -1,5 +1,6 @@
 ﻿using MessageLog.Dal;
 using MessageLog.Models;
+using MessageLog.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,15 @@ using System.Web.Http;
 
 namespace MessageLog.Controllers
 {
+    [RoutePrefix("api/AdapterServer")]
     public class AdapterServerController : ApiController
     {
         private LogContext db = new LogContext();
 
         // POST: api/AdapterServer/Add
         [HttpPost]
-        public async Task<IHttpActionResult> Add([FromBody]string userType, [FromBody]string userName)
+        [Route("Add")]
+        public async Task<IHttpActionResult> Add(AdsDtoGeneric logDto)
         {
             if (!ModelState.IsValid)
             {
@@ -29,9 +32,9 @@ namespace MessageLog.Controllers
                 ContractId = "None",
                 UseType = "Create",
                 Response = false,
-                UserType = userType,
-                UserName = userName,
-                Message = $"Creation of {userName}'s ADS",
+                UserType = logDto.UserType,
+                UserName = logDto.UserName,
+                Message = $"Creation of {logDto.UserName}'s ADS",
                 CreationDate = DateTime.Now
             };
 
@@ -52,8 +55,10 @@ namespace MessageLog.Controllers
             return StatusCode(HttpStatusCode.OK);
         }
 
+        [HttpPost]
+        [Route("Update")]
         // PUT: api/AdapterServer/Update
-        public async Task<IHttpActionResult> Update([FromBody]string userType, [FromBody]string userName)
+        public async Task<IHttpActionResult> Update(AdsDtoGeneric logDto)
         {
             if (!ModelState.IsValid)
             {
@@ -66,9 +71,9 @@ namespace MessageLog.Controllers
                 ContractId = "None",
                 UseType = "Update",
                 Response = false,
-                UserType = userType,
-                UserName = userName,
-                Message = $"Update of {userName}'s ADS",
+                UserType = logDto.UserType,
+                UserName = logDto.UserName,
+                Message = $"Update of {logDto.UserName}'s ADS",
                 CreationDate = DateTime.Now
             };
 
@@ -91,7 +96,8 @@ namespace MessageLog.Controllers
 
         // DELETE: api/AdapterServer/Delete
         [HttpPost]
-        public async Task<IHttpActionResult> Delete([FromBody]string userName)
+        [Route("Delete")]
+        public async Task<IHttpActionResult> Delete(AdsDtoDelete logDto)
         {
             if (!ModelState.IsValid)
             {
@@ -105,8 +111,8 @@ namespace MessageLog.Controllers
                 UseType = "Delete",
                 Response = false,
                 UserType = "Admin",
-                UserName = userName,
-                Message = $"Removal of {userName}'s ADS",
+                UserName = logDto.UserName,
+                Message = $"Removal of {logDto.UserName}'s ADS",
                 CreationDate = DateTime.Now
             };
 
