@@ -25,8 +25,9 @@ The public services are able to communicate through Be-Road using contracts. Fin
 1.	[Clone the code](#clone-the-code)
 2.  [Blockchain implementation](#blockchain-implementation)
 3.  [How to create and use contracts](#how-to-create-and-use-contracts)
-3.	[Packages included](#packages-included)
-4.	[Latest releases](#latest-releases)
+4.  [Call to MessageLog API](#call-to-message-log-api)
+5.	[Packages included](#packages-included)
+6.	[Latest releases](#latest-releases)
 
 ### Clone the code
 To get the websites and the central part on your machine, you just have to clone the project in your git.
@@ -53,7 +54,8 @@ The first time you run the project, docker will download all the images and this
 Ip addresses
 - **Proxy**: 172.16.42.10
 - **CentralServer**: 172.16.42.11
-- **ADSMock**: 172.16.42.13
+- **ADSMock**: 172.16.42.12
+- **MessageLog**: 172.16.42.1
 
 Compose files
 - docker-compose.override.yml
@@ -316,15 +318,108 @@ GetAddressByDogContract.Outputs = new List<Output>()
 
 Contracts are added in a database so that they can be used either directly or via queries.
 
+### Call to MessageLog API
+The log feature of Be-Road is handle by the MessageLog project. It uses an API to be accessed. Here are the different routes to call in the API and their purpose : 
+<table>
+    <tr>
+        <th>Root</th>
+        <th>Controller</th>
+        <th>Action</th>
+        <th>Parameters</th>
+    </tr>
+    <tr>
+        <td rowspan="15">/api</td>
+        <td rowspan="4">/Contract</td>
+        <td><strong>/Get/{page}</strong> : Returns a number of contract logs</td>
+        <td>
+            <strong>Page</strong> : Number of the page to return. One page is 50 logs.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Add</strong> : Logs a contract creation</td>
+        <td>
+            <strong>ContractId</strong> : Id of the contract
+            <br />
+            <strong>UserName</strong> : Name of the system user (IS)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Delete</strong> : Logs a contract removal</td>
+        <td>
+            <strong>ContractId</strong> : Id of the contract
+            <br />
+            <strong>UserName</strong> : Name of the system user (IS)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Call</strong> : Logs a contract call</td>
+        <td>
+            <strong>ContractId</strong> : Id of the contract
+            <br />
+            <strong>UserName</strong> : Name of the system user
+            <br /> (IS)
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+            <br />            
+            <strong>Response</strong> : Is a response to another call (boolean)
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="4">/AdapterServer</td>
+        <td><strong>/Get/{page}</strong> : Returns a number of adapater server logs</td>
+        <td>
+            <strong>Page</strong> : Number of the page to return. One page is 50 logs.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Add</strong> : Logs an adapter server creation</td>
+        <td>
+            <strong>UserName</strong> : Name of the system user (IS)
+            <br />
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Update</strong> : Logs a contract update</td>
+        <td>
+            <strong>UserName</strong> : Id of the contract
+            <br />
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Delete</strong> : Logs a contract removal</td>
+        <td>
+            <strong>UserName</strong> : Name of the system user (IS)
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="2">/Exception</td>
+        <td><strong>/Get/{page}</strong> : Returns a number of exception logs</td>
+        <td>
+            <strong>Page</strong> : Number of the page to return. One page is 50 logs.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Call</strong> : Logs an exception call</td>
+        <td>
+            <strong>UserName</strong> : Name of the system user (IS)
+            <br />
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+            <br />
+            <strong>Message</strong> : Message contained in the exception 
+        </td>
+    </tr>
+</table>
+
 ### Packages included
 We used different packages in these projects. Here is a list of them and their utility in each project :
 
 <table>
   <tr>
-    <td>Project</td>
-    <td>Package</td>
-    <td>Version</td>
-    <td>Description</td>
+    <th>Project</th>
+    <th>Package</th>
+    <th>Version</th>
+    <th>Description</th>
   </tr>
   <tr>
     <td rowspan="7">Web</td>

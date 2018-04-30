@@ -17,3 +17,7 @@ services:
   
 
 
+
+  messagelog:
+    ports:
+      - "80"

@@ -13,6 +13,7 @@ services:
        ipv4_address: 172.16.42.10
     depends_on:
       - adsmock
+      - messagelog
       - centralserver
 
   centralserver:
@@ -38,6 +39,17 @@ services:
        ipv4_address: 172.16.42.12
 
       
+  messagelog:
+    container_name: messagelog
+    hostname: messagelog
+    image: messagelog
+    build:
+      context: .\MessageLog
+      dockerfile: Dockerfile
+    networks:
+      beroad:
+       ipv4_address: 172.16.42.13
+
 networks:
   default:
     external:
@@ -47,4 +59,5 @@ networks:
     ipam:
       config:
         - subnet: 172.16.42.0/24
+
 
