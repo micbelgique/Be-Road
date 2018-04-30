@@ -120,6 +120,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccessLogController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Dal\LogContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -135,6 +136,10 @@
     <Compile Include="Migrations\201804300835475_Log-Model-UseType.cs" />
     <Compile Include="Migrations\201804300835475_Log-Model-UseType.Designer.cs">
       <DependentUpon>201804300835475_Log-Model-UseType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.cs" />
+    <Compile Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.Designer.cs">
+      <DependentUpon>201804300839270_Log-Model-AccessInfo-Rem.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
@@ -175,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804300835475_Log-Model-UseType.resx">
       <DependentUpon>201804300835475_Log-Model-UseType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.resx">
+      <DependentUpon>201804300839270_Log-Model-AccessInfo-Rem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

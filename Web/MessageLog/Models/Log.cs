@@ -7,8 +7,9 @@ namespace MessageLog.Models
 {
     public enum Determiner
     {
-        BeContract,
-        AdapterServer
+        Undefined = 0,
+        BeContract = 1,
+        AdapterServer = 2
     }
 
     public class Log
