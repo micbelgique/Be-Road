@@ -10,13 +10,13 @@ using System.Web.Http;
 
 namespace MessageLog.Controllers
 {
-    public class ContractController : ApiController
+    public class AdapterServerController : ApiController
     {
         private LogContext db = new LogContext();
 
-        // POST: api/Contract/Add
+        // POST: api/AdapterServer/Add
         [HttpPost]
-        public async Task<IHttpActionResult> Add([FromBody]string contractId, [FromBody]string userName)
+        public async Task<IHttpActionResult> Add([FromBody]string userType, [FromBody]string userName)
         {
             if (!ModelState.IsValid)
             {
@@ -25,89 +25,88 @@ namespace MessageLog.Controllers
 
             Log log = new Log()
             {
-                Deter = Determiner.BeContract,
-                ContractId = contractId,
+                Deter = Determiner.AdapterServer,
+                ContractId = "None",
                 UseType = "Create",
                 Response = false,
-                UserType = "DataProvider",
-                UserName = userName,
-                Message = $"Creation of {contractId}",
-                CreationDate = DateTime.Now
-            };
-
-            var res = CheckLog(log);
-            if (res != null)
-            {
-                return new System.Web.Http.Results.ResponseMessageResult(
-                    Request.CreateErrorResponse(
-                        (HttpStatusCode)422,
-                        new HttpError($"Error in Log : {res} cannot must contain a value")
-                    )
-                );
-            }
-
-            db.Logs.Add(log);
-            await db.SaveChangesAsync();
-
-            return StatusCode(HttpStatusCode.OK);
-        }
-
-        [HttpPost]
-        // POST: api/Contract/Delete
-        public async Task<IHttpActionResult> Delete([FromBody]string contractId, [FromBody]string userName)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Log log = new Log()
-            {
-                Deter = Determiner.BeContract,
-                ContractId = contractId,
-                UseType = "Delete",
-                Response = false,
-                UserType = "DataProvider",
-                UserName = userName,
-                Message = $"Removal of {contractId}",
-                CreationDate = DateTime.Now
-            };
-
-            var res = CheckLog(log);
-            if (res != null)
-            {
-                return new System.Web.Http.Results.ResponseMessageResult(
-                    Request.CreateErrorResponse(
-                        (HttpStatusCode)422,
-                        new HttpError($"Error in Log : {res} cannot must contain a value")
-                    )
-                );
-            }
-
-            db.Logs.Add(log);
-            await db.SaveChangesAsync();
-
-            return StatusCode(HttpStatusCode.OK);
-        }
-
-        [HttpPost]
-        // POST: api/Contract/Call
-        public async Task<IHttpActionResult> Call([FromBody]string contractId, [FromBody]string userName, [FromBody]string userType, [FromBody]bool response)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            Log log = new Log()
-            {
-                Deter = Determiner.BeContract,
-                ContractId = contractId,
-                UseType = "Call",
-                Response = response,
                 UserType = userType,
                 UserName = userName,
-                Message = $"Call of {contractId}",
+                Message = $"Creation of {userName}'s ADS",
+                CreationDate = DateTime.Now
+            };
+
+            var res = CheckLog(log);
+            if (res != null)
+            {
+                return new System.Web.Http.Results.ResponseMessageResult(
+                    Request.CreateErrorResponse(
+                        (HttpStatusCode)422,
+                        new HttpError($"Error in Log : {res} cannot must contain a value")
+                    )
+                );
+            }
+
+            db.Logs.Add(log);
+            await db.SaveChangesAsync();
+
+            return StatusCode(HttpStatusCode.OK);
+        }
+
+        // PUT: api/AdapterServer/Update
+        public async Task<IHttpActionResult> Update([FromBody]string userType, [FromBody]string userName)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Log log = new Log()
+            {
+                Deter = Determiner.AdapterServer,
+                ContractId = "None",
+                UseType = "Update",
+                Response = false,
+                UserType = userType,
+                UserName = userName,
+                Message = $"Update of {userName}'s ADS",
+                CreationDate = DateTime.Now
+            };
+
+            var res = CheckLog(log);
+            if (res != null)
+            {
+                return new System.Web.Http.Results.ResponseMessageResult(
+                    Request.CreateErrorResponse(
+                        (HttpStatusCode)422,
+                        new HttpError($"Error in Log : {res} cannot must contain a value")
+                    )
+                );
+            }
+
+            db.Logs.Add(log);
+            await db.SaveChangesAsync();
+
+            return StatusCode(HttpStatusCode.OK);
+        }
+
+        // DELETE: api/AdapterServer/Delete
+        [HttpPost]
+        public async Task<IHttpActionResult> Delete([FromBody]string userName)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Log log = new Log()
+            {
+                Deter = Determiner.AdapterServer,
+                ContractId = "None",
+                UseType = "Delete",
+                Response = false,
+                UserType = "Admin",
+                UserName = userName,
+                Message = $"Removal of {userName}'s ADS",
                 CreationDate = DateTime.Now
             };
 
