@@ -120,7 +120,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccessLogController.cs" />
-    <Compile Include="Controllers\LogController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Dal\LogContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
