@@ -132,6 +132,10 @@
     <Compile Include="Migrations\201804300820313_log-Model-Creation.Designer.cs">
       <DependentUpon>201804300820313_log-Model-Creation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804300835475_Log-Model-UseType.cs" />
+    <Compile Include="Migrations\201804300835475_Log-Model-UseType.Designer.cs">
+      <DependentUpon>201804300835475_Log-Model-UseType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\Dto\AccessInfoDto.cs" />
@@ -168,6 +172,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804300820313_log-Model-Creation.resx">
       <DependentUpon>201804300820313_log-Model-Creation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804300835475_Log-Model-UseType.resx">
+      <DependentUpon>201804300835475_Log-Model-UseType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

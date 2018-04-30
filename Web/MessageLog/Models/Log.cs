@@ -16,6 +16,7 @@ namespace MessageLog.Models
         public int Id { get; set; }
         public Determiner Deter { get; set; }
         public string ContractId { get; set; }
+        public string UseType { get; set; }
         public bool Response { get; set; }
         public string UserType { get; set; }
         public string UserName { get; set; }
