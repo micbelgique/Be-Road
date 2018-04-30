@@ -1,4 +1,5 @@
 ﻿using CentralServer.Dal;
+using CentralServer.Helpers;
 using Contracts.Dal;
 using Contracts.Models;
 using System;
@@ -11,7 +12,7 @@ namespace CentralServer.Controllers
 {
     public class ADSController : Controller
     {
-        private ContractContext ctx = new ContractContext();
+        private ContractContext ctx = new ContractContext(ConfigHelper.GetAppSetting("ContractContext"));
 
         // GET: ADS
         public ActionResult Index()

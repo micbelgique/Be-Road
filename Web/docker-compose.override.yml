@@ -14,12 +14,6 @@ services:
   adsmock:
     ports:
       - "3002"
-      
-networks:
-  default:
-    external:
-      name: nat
-  beroad:
   
 
 

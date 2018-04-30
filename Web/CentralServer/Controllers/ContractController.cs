@@ -13,7 +13,7 @@ namespace CentralServer.Controllers
 {
     public class ContractController : Controller
     {
-        ContractContext ctx = new ContractContext();
+        ContractContext ctx = new ContractContext(ConfigHelper.GetAppSetting("ContractContext"));
         Validators validators = new Validators();
         
         // GET: Contract
