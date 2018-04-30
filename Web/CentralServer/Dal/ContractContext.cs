@@ -6,11 +6,6 @@ namespace CentralServer.Dal
 {
     public class ContractContext : DbContext
     {
-        //public ContractContext() : base(ConfigHelper.GetAppSetting("ContractContext"))
-        //{
-
-        //}
-
         public ContractContext()
         {
 
@@ -23,8 +18,6 @@ namespace CentralServer.Dal
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<ContractContext, Configuration>());
-
             modelBuilder.Entity<BeContract>()
                 .HasMany(c => c.Inputs)
                 .WithOptional()

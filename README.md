@@ -68,23 +68,17 @@ In BeRoad there are currently 2 DbContexts that need a connectionstring
 - Central Server
 - Message Log
 
-The connection strings need to be defined in ...
+The connection strings need to be defined in the docker-compose.yml
+To add a migration or update a database, you need to to set the **project as startup** and as **default project** in the package manager console.
+After this you need to specify the connectionstring as well as the dataprovider when running the migrations commands.
 
----
-_This section will is old and will be replaced soon_  
-_You will have to change the connection strings in the Web.config files in the 3 projects_
-```xml
-<!-- Local connection string (Web.Debug.Config) -->
-<connectionStrings>
-    <add name="{ContextName}" connectionString="Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=LogContext-20180313142602; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|{ContextFileName}.mdf" providerName="System.Data.SqlClient" />
-</connectionStrings>
-
-<!-- Remote connection string (Web.Release.Config) -->
-<connectionStrings>
-    <add name="{ContextName}" connectionString="Server=tcp:{ServerName},1433;Initial Catalog={DatabaseName};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient"/>
-</connectionStrings>
+Example: 
 ```
----
+Add-Migration MigrationName -Verbose -ConnectionString "..." -ConnectionProviderName "System.Data.SqlClient"
+```
+```
+Update-Database -Verbose -ConnectionString "..." -ConnectionProviderName "System.Data.SqlClient"
+```
 
 ### Blockchain implementation
 The blockchain is a prototype too. In the final project, that will be done later by more advanced developers, it will certainly be created from scratch.
