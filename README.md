@@ -49,8 +49,6 @@ https://dotnetthoughts.net/dockerize-an-existing-aspnet-mvc5-application/
 To build & run every component, set the docker-compose as startup project and hit run.
 The first time you run the project, docker will download all the images and this will take some time.
 
-To build on command line use this: _docker-compose up -d --build_ (add a service to deploy this service only)
-
 ##### Docker
 Ip addresses
 - **Proxy**: 172.16.42.10
@@ -62,6 +60,16 @@ Compose files
   - Is used for development
 - docker-compose.prod.yml
   - Is used for production (not implemented yet)
+
+
+To build on command line use this: 
+```
+docker-compose 
+    -f "...\docker-compose.yml" 
+    -f "...\docker-compose.override.yml" 
+    -p prodcompose up 
+```
+
 
 ##### Entity Framework
 In BeRoad there are currently 2 DbContexts that need a connectionstring
