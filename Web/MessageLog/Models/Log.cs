@@ -21,6 +21,5 @@ namespace MessageLog.Models
         public string UserType { get; set; }
         public string UserName { get; set; }
         public DateTime CreationDate { get; set; }
-        public AccessInfo Access { get; set; }
     }
 }
