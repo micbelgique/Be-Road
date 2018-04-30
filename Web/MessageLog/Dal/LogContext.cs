@@ -20,5 +20,6 @@ namespace MessageLog.Dal
         }
 
         public System.Data.Entity.DbSet<MessageLog.Models.AccessInfo> AccessLogs { get; set; }
+        public System.Data.Entity.DbSet<MessageLog.Models.Log> Logs { get; set; }
     }
 }

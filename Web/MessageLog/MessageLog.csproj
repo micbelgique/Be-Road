@@ -124,9 +124,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803191525081_InitialCreate.cs" />
-    <Compile Include="Migrations\201803191525081_InitialCreate.Designer.cs">
-      <DependentUpon>201803191525081_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201804300819221_Initial-Create.cs" />
+    <Compile Include="Migrations\201804300819221_Initial-Create.Designer.cs">
+      <DependentUpon>201804300819221_Initial-Create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804300820313_log-Model-Creation.cs" />
+    <Compile Include="Migrations\201804300820313_log-Model-Creation.Designer.cs">
+      <DependentUpon>201804300820313_log-Model-Creation.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfo.cs" />
@@ -159,8 +163,11 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803191525081_InitialCreate.resx">
-      <DependentUpon>201803191525081_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804300819221_Initial-Create.resx">
+      <DependentUpon>201804300819221_Initial-Create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804300820313_log-Model-Creation.resx">
+      <DependentUpon>201804300820313_log-Model-Creation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
