@@ -9,7 +9,8 @@ namespace MessageLog.Models
     {
         Undefined = 0,
         BeContract = 1,
-        AdapterServer = 2
+        AdapterServer = 2,
+        Exception = 3
     }
 
     public class Log

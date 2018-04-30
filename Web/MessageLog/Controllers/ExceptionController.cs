@@ -1,6 +1,7 @@
 ﻿using MessageLog.Dal;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace MessageLog.Controllers
 {
@@ -15,6 +17,17 @@ namespace MessageLog.Controllers
     public class ExceptionController : ApiController
     {
         private LogContext db = new LogContext();
+
+        //GET: api/AdapterServer/Get
+        [HttpGet]
+        [Route("Get/{page}")]
+        public IHttpActionResult Get(int page = 1)
+        {
+            var logs = db.Logs.Where(l => l.Deter == Determiner.Exception).ToList();
+            var pagedLogs = new PagedList<Log>(logs, page, 50);
+
+            return new ResponseMessageResult(Request.CreateResponse(pagedLogs));
+        }
 
         // POST: api/Exception/Call
         [HttpPost]
@@ -28,7 +41,7 @@ namespace MessageLog.Controllers
 
             Log log = new Log()
             {
-                Deter = Determiner.AdapterServer,
+                Deter = Determiner.Exception,
                 ContractId = "None",
                 UseType = "Error",
                 Response = false,

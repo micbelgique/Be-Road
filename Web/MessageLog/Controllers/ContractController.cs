@@ -1,6 +1,7 @@
 ﻿using MessageLog.Dal;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Results;
 
 namespace MessageLog.Controllers
 {
@@ -15,6 +17,17 @@ namespace MessageLog.Controllers
     public class ContractController : ApiController
     {
         private LogContext db = new LogContext();
+
+        //GET: api/Contract/Get
+        [HttpGet]
+        [Route("Get/{page}")]
+        public IHttpActionResult Get(int page = 1)
+        {
+            var logs = db.Logs.Where(l => l.Deter == Determiner.BeContract).ToList();
+            var pagedLogs = new PagedList<Log>(logs, page, 50);
+
+            return new ResponseMessageResult(Request.CreateResponse(pagedLogs));
+        }
 
         // POST: api/Contract/Add
         [HttpPost]
@@ -41,7 +54,7 @@ namespace MessageLog.Controllers
             var res = CheckLog(log);
             if (res != null)
             {
-                return new System.Web.Http.Results.ResponseMessageResult(
+                return new ResponseMessageResult(
                     Request.CreateErrorResponse(
                         (HttpStatusCode)422,
                         new HttpError($"Error in Log : {res} must contain a value")
@@ -80,7 +93,7 @@ namespace MessageLog.Controllers
             var res = CheckLog(log);
             if (res != null)
             {
-                return new System.Web.Http.Results.ResponseMessageResult(
+                return new ResponseMessageResult(
                     Request.CreateErrorResponse(
                         (HttpStatusCode)422,
                         new HttpError($"Error in Log : {res} must contain a value")
@@ -119,7 +132,7 @@ namespace MessageLog.Controllers
             var res = CheckLog(log);
             if (res != null)
             {
-                return new System.Web.Http.Results.ResponseMessageResult(
+                return new ResponseMessageResult(
                     Request.CreateErrorResponse(
                         (HttpStatusCode)422,
                         new HttpError($"Error in Log : {res} must contain a value")
