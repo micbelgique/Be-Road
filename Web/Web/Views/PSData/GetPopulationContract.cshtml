@@ -12,7 +12,7 @@
     <ul class="collection with-header detailCollect">
         <li class="collection-header"><h4>@Resources.Global.PSD_Users_Title</h4></li>
 
-        @foreach (var element in Model.Datas)
+        @foreach (var element in Model?.Datas)
         {
             if(string.IsNullOrWhiteSpace(element.Value.Value))
             {

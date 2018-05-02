@@ -7,6 +7,5 @@ namespace Web.Models.PublicServiceData
 {
     public class PublicServiceData
     {
-        public string Content { get; set; }
     }
 }

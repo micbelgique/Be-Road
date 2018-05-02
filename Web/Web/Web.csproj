@@ -269,17 +269,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PSDataController.cs" />
     <Compile Include="Controllers\PSController.cs" />
-    <Compile Include="Dal\Services\CopsService.cs" />
-    <Compile Include="Dal\Services\IService.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDataService.cs" />
-    <Compile Include="Dal\Services\MicService.cs" />
-    <Compile Include="Dal\Services\MockAzureService.cs" />
-    <Compile Include="Dal\Services\MockFirstNamesService.cs" />
-    <Compile Include="Dal\Services\MockItunesService.cs" />
-    <Compile Include="Dal\Services\MockZippopotamService.cs" />
-    <Compile Include="Dal\Services\MockGeoipService.cs" />
-    <Compile Include="Dal\Services\PSService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -306,34 +297,27 @@
     <Compile Include="Migrations\201803200854280_Add-PS.Designer.cs">
       <DependentUpon>201803200854280_Add-PS.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805021201200_Refactor-Ps-Contracts.cs" />
+    <Compile Include="Migrations\201805021201200_Refactor-Ps-Contracts.Designer.cs">
+      <DependentUpon>201805021201200_Refactor-Ps-Contracts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\PublicService.cs" />
     <Compile Include="Models\PublicServiceData\PSDAccessInfo.cs" />
     <Compile Include="Models\PublicServiceData\PSDCar.cs" />
     <Compile Include="Models\PublicServiceData\PSDData.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDAzure.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDFirstNames.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDGeoip.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDItunes.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDZippopotam.cs" />
-    <Compile Include="Models\PublicServiceData\PSDMic.cs" />
     <Compile Include="Models\PublicServiceData\PSDUser.cs" />
     <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDPlace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="BeRoadSchema.png" />
-    <Content Include="Content\img\azure.png" />
+    <Content Include="Content\img\bank.png" />
     <Content Include="Content\img\CarouselBG.png" />
-    <Content Include="Content\img\firstnames.png" />
-    <Content Include="Content\img\freegoip.png" />
-    <Content Include="Content\img\itunes.png" />
-    <Content Include="Content\img\mic.jpg" />
+    <Content Include="Content\img\funny.png" />
     <Content Include="Content\img\police.jpg" />
     <Content Include="Content\img\ps.jpg" />
-    <Content Include="Content\img\zippopotam.png" />
     <Content Include="Content\materialize\css\materialize.css" />
     <Content Include="Content\materialize\css\materialize.min.css" />
     <Content Include="Content\materialize\font\material-design-icons\LICENSE.txt" />
@@ -449,17 +433,13 @@
     <Content Include="Views\PS\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\PSData\Index.cshtml" />
-    <Content Include="Views\PSData\Zippo.cshtml" />
-    <Content Include="Views\PSData\Itunes.cshtml" />
-    <Content Include="Views\PSData\Geoip.cshtml" />
-    <Content Include="Views\PSData\Firstnames.cshtml" />
-    <Content Include="Views\PSData\Azure.cshtml" />
-    <Content Include="Views\PSData\Cops.cshtml" />
+    <Content Include="Views\PSData\GetDivContract.cshtml" />
     <Content Include="Views\PSData\AccessInfo.cshtml" />
     <Content Include="Views\Eid\Details.cshtml" />
-    <Content Include="Views\PSData\Mic.cshtml" />
     <Content Include="Views\PSData\ResourcesIncluding.cshtml" />
-    <Content Include="Views\PSData\PublicService.cshtml" />
+    <Content Include="Views\PSData\GetPopulationContract.cshtml" />
+    <Content Include="Views\PSData\GetBankContract.cshtml" />
+    <Content Include="Views\PSData\GetFunnyContract.cshtml" />
     <None Include="Web.Privacy-Passport - Web Deploy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -497,6 +477,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803200854280_Add-PS.resx">
       <DependentUpon>201803200854280_Add-PS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805021201200_Refactor-Ps-Contracts.resx">
+      <DependentUpon>201805021201200_Refactor-Ps-Contracts.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
