@@ -69,6 +69,12 @@ namespace Contracts.Logic
                 };
             }
 
+            if(string.IsNullOrWhiteSpace(call.ISName))
+            {
+                //TODO: test if the ISName exists in the DB ?
+                throw new BeContractException("The BeContractCall has no ISName");
+            }
+
             //Test inputs
             contract.Inputs?.ForEach(input =>
             {

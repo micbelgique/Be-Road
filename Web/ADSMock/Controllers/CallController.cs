@@ -23,6 +23,7 @@ namespace ADSMock.Controllers
             var ownerByDog = new BeContractCall()
             {
                 Id = "GetOwnerIdByDogId",
+                ISName = "ADS Mock",
                 Inputs = new Dictionary<string, dynamic>()
                 {
                     { "DogID", dogId },
@@ -44,6 +45,7 @@ namespace ADSMock.Controllers
             var addrByDog = new BeContractCall()
             {
                 Id = "GetAddressByDogId",
+                ISName = "ADS Mock",
                 Inputs = new Dictionary<string, dynamic>()
                 {
                     { "MyDogID", dogId },

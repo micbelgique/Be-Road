@@ -66,6 +66,7 @@ namespace Contracts.Logic
                     var callInQuery = new BeContractCall()
                     {
                         Id = q.Contract.Id,
+                        ISName = call.ISName,
                         Inputs = new Dictionary<string, dynamic>()
                     };
 

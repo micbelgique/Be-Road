@@ -28,6 +28,7 @@ namespace BeRoadTest.ADSMock
         {
             return @"{
             'Id': 'GetOwnerIdByDogId',
+            'ISName': 'Test man',
 	        'Inputs': {
                     'DogID': 'D-123'
                 }

@@ -28,6 +28,7 @@ namespace BeRoadTest.Contracts
             mathCall = new BeContractCall()
             {
                 Id = "GetMathemathicFunction",
+                ISName = "Test Man",
                 Inputs = new Dictionary<string, dynamic>()
                 {
                     { "A", 54 },
@@ -38,6 +39,7 @@ namespace BeRoadTest.Contracts
             adrByDog = new BeContractCall()
             {
                 Id = "GetAddressByDogId",
+                ISName = "Test Man",
                 Inputs = new Dictionary<string, dynamic>()
                 {
                     { "MyDogID", "Heyto" },

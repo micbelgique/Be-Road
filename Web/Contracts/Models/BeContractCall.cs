@@ -14,6 +14,11 @@ namespace Contracts.Models
         [JsonProperty(Required = Required.Always)]
         public string Id { get; set; }
         /// <summary>
+        /// Used to recognize the caller (temporary, this will be removed when the Authorization Server will be created)
+        /// </summary>
+        [JsonRequired]
+        public string ISName { get; set; }
+        /// <summary>
         /// Passes the parameters to the contract
         /// </summary>
         public Dictionary<string, dynamic> Inputs { get; set; }

@@ -14,6 +14,7 @@ namespace ConsoleTesting
             var call = new BeContractCall()
             {
                 Id = id,
+                ISName = "Console App",
                 Inputs = new Dictionary<string, dynamic>()
             };
             parameters.ToList().ForEach(param =>

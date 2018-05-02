@@ -26,6 +26,7 @@ namespace BeRoadTest.Contracts
         {
             return @"{
             'Id': 'GetOwnerIdByDogId',
+            'ISName': 'Test man',
 	        'Inputs': {
                     'DogID': 'EG-673KL'
                 }
@@ -130,6 +131,7 @@ namespace BeRoadTest.Contracts
             var contract = BeContractsMock.GetDoubleInputContract();
             var callString = @"{
             'Id': 'DoubleInputContract',
+            'ISName': 'Test man',
 	        'Inputs': {
                     'First': 1090
                 }
@@ -167,6 +169,7 @@ namespace BeRoadTest.Contracts
             var contract = BeContractsMock.GetAddressByOwnerId();
             var callString = @"{
             'Id': 'GetAddressByOwner',
+            'ISName': 'Test man',
 	        'Outputs': {
                     'Street': 'Vandernoot',
                     'StreetNumber': 10,
@@ -192,6 +195,7 @@ namespace BeRoadTest.Contracts
             var contract = BeContractsMock.GetAddressByOwnerId();
             var callString = @"{
             'Id': 'GetAddressByOwnerId',
+            'ISName': 'Test man',
 	        'Outputs': {
                     'Street': 'Vandernoot',
                     'StreetNumber': '10',
@@ -258,5 +262,20 @@ namespace BeRoadTest.Contracts
             Validators.ValidateBeContractReturn(contract, call);
         }
 
+        [TestMethod]
+        public void TestValdateBeContractCallWithoutISNameWillFail()
+        {
+            var call = GetBeContractCall();
+            call.ISName = null;
+            try
+            {
+                Validators.ValidateBeContractCall(CreateGoodContract(), call);
+                Assert.Fail("BeContractCall without a ISName must throw a BeContractException");
+            }
+            catch (BeContractException ex)
+            {
+                Assert.AreEqual("The BeContractCall has no ISName", ex.Message);
+            }
+        }
     }
 }
