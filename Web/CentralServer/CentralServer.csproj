@@ -160,6 +160,7 @@
     </Compile>
     <Compile Include="Migrations\BeContractsMock.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\PrivacyPassportContracts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\BeContractViewModel.cs" />
     <Compile Include="ViewModels\QueryViewModel.cs" />

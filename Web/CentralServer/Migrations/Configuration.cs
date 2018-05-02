@@ -17,8 +17,18 @@ namespace CentralServer.Migrations
         protected override void Seed(ContractContext context)
         {
             ContractSeed(context);
+            PrivacyPassportContractsSeed(context);
             ADSSeed(context);
         }
+
+        private void PrivacyPassportContractsSeed(ContractContext context)
+        {
+            context.Contracts.AddOrUpdate(PrivacyPassportContracts.GetBankContract());
+            context.Contracts.AddOrUpdate(PrivacyPassportContracts.GetDIVContract());
+            context.Contracts.AddOrUpdate(PrivacyPassportContracts.GetPopulationContract());
+            context.Contracts.AddOrUpdate(PrivacyPassportContracts.GetFunnyContract());
+        }
+        
 
         private void ContractSeed(ContractContext context)
         {
