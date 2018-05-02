@@ -36,12 +36,12 @@ namespace Proxy.Controllers
             try
             {
                 var callRes = await cm.CallAsync(call);
-                await CallToMLAsync(new { ContractId = call.Id, UserName = "TEMP", UserType = "TEMP", Response = false }, "api/Contract/Call");
+                await CallToMLAsync(new { ContractId = call.Id, UserName = call.ISName, UserType = "TEMP", Response = false }, "api/Contract/Call");
                 return Request.CreateResponse(HttpStatusCode.OK, callRes);
             }
             catch(BeContractException ex)
             {
-                await CallToMLAsync(new { UserName = "TEMP", UserType = "TEMP", ex.Message }, "api/Exception/Call");
+                await CallToMLAsync(new { UserName = call.ISName ?? "Undefined username", UserType = "TEMP", ex.Message }, "api/Exception/Call");
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
             }
         }
