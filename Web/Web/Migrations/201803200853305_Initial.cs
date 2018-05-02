@@ -7,7 +7,6 @@ namespace Web.Migrations
     {
         public override void Up()
         {
-            DropTable("dbo.PublicServices");
             CreateTable(
                 "dbo.PublicServices",
                 c => new

@@ -27,3 +27,10 @@ services:
       - RootNodeAddress= 168b5yBVwaBgnhZmdLCfvpnyWWQvxmxjxCDe3F
     ports:
       - "3003"
+
+  web:
+    environment:
+      - PSContext= Server=tcp:be-road-dev.database.windows.net,1433;Initial Catalog=Privacy-Passport-DB;Persist Security Info=False;User ID=Stage2018PrivacyPassport;Password=MIC2018PssPrt;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+    ports:
+      - "3004"
+

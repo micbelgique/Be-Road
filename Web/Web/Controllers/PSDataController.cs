@@ -6,13 +6,14 @@ using System.Web;
 using System.Web.Mvc;
 using Web.App_Start;
 using Web.Dal;
+using Web.Helpers;
 using Web.Models;
 
 namespace Web.Controllers
 {
     public class PSDataController : Controller
     {
-        private PSContext context = new PSContext();
+        private PSContext context = new PSContext(ConfigHelper.GetAppSetting("PSContext"));
         private PSDataService service = new PSDataService();
 
         [AuthorizationFilter]

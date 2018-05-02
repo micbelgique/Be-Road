@@ -28,5 +28,9 @@ services:
     ports:
       - "3003"
 
-
+  web:
+    environment:
+      - PSContext= Data Source=pp-db.database.windows.net;Initial Catalog=Privacy-Passport-DB;User ID=Stage2018PrivacyPassport;Password=MIC2018PssPrt
+    ports:
+      - "3004"
 

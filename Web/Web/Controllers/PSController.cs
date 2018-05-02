@@ -3,12 +3,13 @@ using Web.Dal;
 using Web.App_Start;
 using Web.Models;
 using System.Linq;
+using Web.Helpers;
 
 namespace Web.Controllers
 {
     public class PSController : Controller
     {
-        private PSContext context = new PSContext();
+        private PSContext context = new PSContext(ConfigHelper.GetAppSetting("PSContext"));
 
         [AuthorizationFilter]
         public ActionResult Index()

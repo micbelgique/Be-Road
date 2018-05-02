@@ -50,6 +50,17 @@ services:
       beroad:
        ipv4_address: 172.16.42.13
 
+  web:
+    image: web
+    container_name: web
+    hostname: web
+    build:
+      context: .\Web
+      dockerfile: Dockerfile
+    networks:
+      beroad:
+       ipv4_address: 172.16.42.14
+
 networks:
   default:
     external:
@@ -59,5 +70,6 @@ networks:
     ipam:
       config:
         - subnet: 172.16.42.0/24
+
 
 

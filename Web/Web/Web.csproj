@@ -28,6 +28,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -289,6 +290,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.nl-BE.resx</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ConfigHelper.cs" />
     <Compile Include="Migrations\201803200853305_Initial.cs" />
     <Compile Include="Migrations\201803200853305_Initial.Designer.cs">
       <DependentUpon>201803200853305_Initial.cs</DependentUpon>
@@ -381,6 +383,10 @@
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.woff" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.eot" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\Privacy-Passport - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
