@@ -26,11 +26,11 @@ namespace BeRoadTest.ADSMock
                 {
                     Id = 1, ContractNames = new List<BeContract>
                     {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetOwnerIdByDogId")),
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByDogId")),
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetServiceInfo"))
+                        new BeContract() { Id = "GetOwnerIdByDogId" },
+                        new BeContract() { Id = "GetAddressByDogId" },
+                        new BeContract() { Id = "GetServiceInfo" }
                     },
-                    ISName = "Doggie style",
+                    ISName = "Doggies",
                     Url = "http://adsmock/",
                     Root = "api/read"
                 },
@@ -38,7 +38,7 @@ namespace BeRoadTest.ADSMock
                 {
                     Id = 2, ContractNames = new List<BeContract>
                     {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetMathemathicFunction"))
+                        new BeContract() { Id = "GetMathemathicFunction" }
                     },
                     ISName = "MathLovers",
                     Url = "http://adsmock/",
@@ -48,7 +48,7 @@ namespace BeRoadTest.ADSMock
                     Id = 3,
                     ContractNames = new List<BeContract>
                     {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByOwnerId"))
+                        new BeContract() { Id = "GetAddressByOwnerId" }
                     },
                     ISName = "CitizenDatabank",
                     Url = "http://adsmock/",
@@ -65,7 +65,7 @@ namespace BeRoadTest.ADSMock
         public async Task<AdapterServer> FindASAsync(string name)
         {
             AdapterServer ads = null;
-            await Task.Run(() => ads = ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Name.Equals(name))));
+            await Task.Run(() => ads = ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Id.Equals(name))));
             return ads;
         }
 
