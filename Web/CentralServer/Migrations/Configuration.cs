@@ -17,8 +17,9 @@ namespace CentralServer.Migrations
         protected override void Seed(ContractContext context)
         {
             ContractSeed(context);
-            PrivacyPassportContractsSeed(context);
             ADSSeed(context);
+            PrivacyPassportContractsSeed(context);
+            PrivacyPassportADSSeed(context);
         }
 
         private void PrivacyPassportContractsSeed(ContractContext context)
@@ -27,8 +28,65 @@ namespace CentralServer.Migrations
             context.Contracts.AddOrUpdate(PrivacyPassportContracts.GetDIVContract());
             context.Contracts.AddOrUpdate(PrivacyPassportContracts.GetPopulationContract());
             context.Contracts.AddOrUpdate(PrivacyPassportContracts.GetFunnyContract());
+            context.SaveChanges();
         }
-        
+
+        private void PrivacyPassportADSSeed(ContractContext context)
+        {   
+            var ads1 = new AdapterServer()
+            {
+                Id = 4,
+                ContractNames = new List<BeContract>() { context.Contracts.FirstOrDefault(c => c.Id.Equals("GetBankContract")) },
+                ISName = "Bank Service",
+                Url = "http://adsmock/",
+                Root = "api/bank"
+            };
+            var ads2 = new AdapterServer()
+            {
+                Id = 5,
+                ContractNames = new List<BeContract>() { context.Contracts.FirstOrDefault(c => c.Id.Equals("GetDivContract")) },
+                ISName = "Div Service",
+                Url = "http://adsmock/",
+                Root = "api/div"
+            };
+            var ads3 = new AdapterServer()
+            {
+                Id = 6,
+                ContractNames = new List<BeContract>() { context.Contracts.FirstOrDefault(c => c.Id.Equals("GetPopulationContract")) },
+                ISName = "Population Service",
+                Url = "http://adsmock/",
+                Root = "api/population"
+            };
+            var ads4 = new AdapterServer()
+            {
+                Id = 6,
+                ContractNames = new List<BeContract>() { context.Contracts.FirstOrDefault(c => c.Id.Equals("GetFunnyContract")) },
+                ISName = "Funny Service",
+                Url = "http://adsmock/",
+                Root = "api/funny"
+            };
+
+            var ads1db = context.AdapterServers.FirstOrDefault(ads => ads.ISName == ads1.ISName);
+            var ads2db = context.AdapterServers.FirstOrDefault(ads => ads.ISName == ads2.ISName);
+            var ads3db = context.AdapterServers.FirstOrDefault(ads => ads.ISName == ads3.ISName);
+            var ads4db = context.AdapterServers.FirstOrDefault(ads => ads.ISName == ads4.ISName);
+
+            if (ads1db != null)
+                context.AdapterServers.Remove(ads1db);
+            if (ads2db != null)
+                context.AdapterServers.Remove(ads2db);
+            if (ads3db != null)
+                context.AdapterServers.Remove(ads3db);
+            if (ads4db != null)
+                context.AdapterServers.Remove(ads3db);
+
+            context.AdapterServers.Add(ads1);
+            context.AdapterServers.Add(ads2);
+            context.AdapterServers.Add(ads3);
+            context.AdapterServers.Add(ads4);
+            context.SaveChanges();
+        }
+
 
         private void ContractSeed(ContractContext context)
         {
