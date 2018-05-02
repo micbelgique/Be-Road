@@ -20,11 +20,11 @@ namespace ConsoleTesting
                 {
                     Id = 1, ContractNames = new List<BeContract>
                     {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetOwnerIdByDogId")),
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByDogId")),
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetServiceInfo"))
+                        new BeContract() { Id = "GetOwnerIdByDogId" },
+                        new BeContract() { Id = "GetAddressByDogId" },
+                        new BeContract() { Id = "GetServiceInfo" }
                     },
-                    ISName = "Doggie style",
+                    ISName = "Doggies",
                     Url = "http://adsmock/",
                     Root = "api/read"
                 },
@@ -32,7 +32,7 @@ namespace ConsoleTesting
                 {
                     Id = 2, ContractNames = new List<BeContract>
                     {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetMathemathicFunction"))
+                        new BeContract() { Id = "GetMathemathicFunction" }
                     },
                     ISName = "MathLovers",
                     Url = "http://adsmock/",
@@ -42,7 +42,7 @@ namespace ConsoleTesting
                     Id = 3,
                     ContractNames = new List<BeContract>
                     {
-                        context.Contracts.FirstOrDefault(c => c.Id.Equals("GetAddressByOwnerId"))
+                        new BeContract() { Id = "GetAddressByOwnerId" }
                     },
                     ISName = "CitizenDatabank",
                     Url = "http://adsmock/",
