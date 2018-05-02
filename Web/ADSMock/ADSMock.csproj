@@ -111,6 +111,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\CallController.cs" />
     <Compile Include="Controllers\ReadController.cs" />
+    <Compile Include="Controllers\PrivacyPassportADSController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
