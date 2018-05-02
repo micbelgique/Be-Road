@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Contracts.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace Web.Dal
     {
         public async Task<PublicServiceData> GetDataOfAsync(PublicService ps, EidCard eid)
         {
+            var user = new PSDUser();
             using (var client = new HttpClient())
             {
                 try
@@ -24,15 +26,37 @@ namespace Web.Dal
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    var httpContent = new StringContent(JsonConvert.SerializeObject(new {  }), Encoding.UTF8, "application/json");
-                    HttpResponseMessage response = await client.PostAsync("api/contract/data", httpContent);
+                    var call = new BeContractCall
+                    {
+                        Id = ps.ContractId,
+                        ISName = "Privacy Passport",
+                        Inputs = new Dictionary<string, dynamic>()
+                        {
+                            { "NRID", eid.RNN },
+                            { "Justification", "Reading my own data"}
+                        }
+                    };
+                    var httpContent = new StringContent(JsonConvert.SerializeObject(call), Encoding.UTF8, "application/json");
+                    HttpResponseMessage response = await client.PostAsync("api/contract/call", httpContent);
+                    if(response.IsSuccessStatusCode)
+                    {
+                        var data = await response.Content.ReadAsAsync<Dictionary<int, BeContractReturn>>();
+                        var outputs = data.Values.Select(ret => ret.Outputs);
+                        user.NRID = eid.RNN;
+                        user.Datas = outputs.SelectMany(d => d)
+                                            .ToDictionary(t => t.Key, t => new PSDData()
+                                            {
+                                                Value = t.Value,
+                                                AccessInfos = new List<PSDAccessInfo>()
+                                            });
+                    }
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             }
-            return new PSDUser() { NRID = eid.RNN, Datas = new Dictionary<string, PSDData>() };
+            return user;
         }
     }
 }
