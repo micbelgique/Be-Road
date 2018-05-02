@@ -1,4 +1,5 @@
 ﻿using LucidOcean.MultiChain;
+using MessageLog.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,13 +39,13 @@ namespace MessageLog.Utils
         {
             return new MultiChainConnection()
             {
-                Hostname = System.Configuration.ConfigurationManager.AppSettings["Hostname"],
-                Port = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["Port"]),
-                Username = System.Configuration.ConfigurationManager.AppSettings["Username"],
-                Password = System.Configuration.ConfigurationManager.AppSettings["Password"],
-                ChainName = System.Configuration.ConfigurationManager.AppSettings["ChainName"],
-                BurnAddress = System.Configuration.ConfigurationManager.AppSettings["BurnAddress"],
-                RootNodeAddress = System.Configuration.ConfigurationManager.AppSettings["RootNodeAddress"]
+                Hostname = ConfigHelper.GetAppSetting("Hostname"),
+                Port = Convert.ToInt32(ConfigHelper.GetAppSetting("Port")),
+                Username = ConfigHelper.GetAppSetting("Username"),
+                Password = ConfigHelper.GetAppSetting("Password"),
+                ChainName = ConfigHelper.GetAppSetting("ChainName"),
+                BurnAddress = ConfigHelper.GetAppSetting("BurnAddress"),
+                RootNodeAddress = ConfigHelper.GetAppSetting("RootNoodAddress")
             };
         }
 

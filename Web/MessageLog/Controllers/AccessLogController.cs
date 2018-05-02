@@ -12,6 +12,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using LucidOcean.MultiChain.Util;
 using MessageLog.Dal;
+using MessageLog.Helpers;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
 using MessageLog.Utils;
@@ -20,7 +21,7 @@ namespace MessageLog.Controllers
 {
     public class AccessLogController : ApiController
     {
-        private LogContext db = new LogContext();
+        private LogContext db = new LogContext(ConfigHelper.GetAppSetting("LogContext"));
 
         // POST: api/AccessLog
         [ResponseType(typeof(void))]

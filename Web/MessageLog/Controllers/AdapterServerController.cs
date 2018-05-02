@@ -1,4 +1,5 @@
 ﻿using MessageLog.Dal;
+using MessageLog.Helpers;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
 using PagedList;
@@ -16,7 +17,7 @@ namespace MessageLog.Controllers
     [RoutePrefix("api/AdapterServer")]
     public class AdapterServerController : ApiController
     {
-        private LogContext db = new LogContext();
+        private LogContext db = new LogContext(ConfigHelper.GetAppSetting("LogContext"));
 
         //GET: api/AdapterServer/Get
         [HttpGet]
