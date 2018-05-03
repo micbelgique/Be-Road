@@ -320,8 +320,11 @@
     <Content Include="BeRoadSchema.png" />
     <Content Include="Content\img\bank.png" />
     <Content Include="Content\img\CarouselBG.png" />
+    <Content Include="Content\img\crowd.png" />
     <Content Include="Content\img\funny.png" />
+    <Content Include="Content\img\immatriculation.jpg" />
     <Content Include="Content\img\police.jpg" />
+    <Content Include="Content\img\Privacy_Passport.svg" />
     <Content Include="Content\img\ps.jpg" />
     <Content Include="Content\materialize\css\materialize.css" />
     <Content Include="Content\materialize\css\materialize.min.css" />

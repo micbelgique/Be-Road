@@ -30,7 +30,7 @@ namespace Web.Migrations
                        Name = "DIV",
                        Description = "Direction Immatriculation des Véhicules",
                        ContractId = "GetDivContract",
-                       ImageURI = "/Content/img/police.jpg"
+                       ImageURI = "/Content/img/immatriculation.jpg"
                    },
                    new PublicService
                    {

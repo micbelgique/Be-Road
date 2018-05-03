@@ -71,12 +71,12 @@
     $("#ps-identity").hover(
         function (event) {
             if ($(event.target).is('section')) {
-                $(this).css("background-color", "#4fc3f7");
+                $(this).css("background-color", "#FFFFFF");
             }
         },
         function (event) {
             if ($(event.target).is('section')) {
-                $(this).css("background-color", "#29b6f6");
+                $(this).css("background-color", "#FAFAFA");
             }
         });
 });
