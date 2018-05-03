@@ -171,9 +171,27 @@ namespace MessageLog.Controllers
 
         [HttpGet]
         [Route("justification")]
-        public List<AccessInfo> GetJustificationAboutContract(string contractId, string nrid)
+        public async Task<List<AccessInfoDto>> GetJustificationAboutContractAsync(string contractId, string nrid)
         {
-            return db.AccessLogs.Where(log => log.NRID.Equals(nrid) && log.ContractId.Equals(contractId)).ToList();
+            var lst = new List<AccessInfoDto>();
+            var logs = db.AccessLogs
+                .Where(log => log.NRID.Equals(nrid) && log.ContractId.Equals(contractId))
+                .ToList();
+
+            foreach(var log in logs)
+            {
+                lst.Add(new AccessInfoDto
+                {
+                    Date = log.Date,
+                    Id = log.Id,
+                    Name = log.Name,
+                    Justification = log.Justification,
+                    IsReliable = await accessInfoService.IsReliableAsync(log)
+                    }
+                );
+            }
+
+            return lst;
         }
 
         private string CheckLog(Log log)

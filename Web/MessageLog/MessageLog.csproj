@@ -163,6 +163,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfoHash.cs" />
     <Compile Include="Models\AccessInfo.cs" />
+    <Compile Include="Models\Dto\AccessInfoDto.cs" />
     <Compile Include="Models\Dto\AdsDtoDelete.cs" />
     <Compile Include="Models\Dto\AdsDtoGeneric.cs" />
     <Compile Include="Models\Dto\ContractDtoCall.cs" />
