@@ -27,7 +27,7 @@
                 @foreach (var ps in Model)
                 {
                     <div class="col s4" data-action="@Url.Action("Select", "PS", new { id = ps.ID })">
-                        <div class="card grey lighten-3 small public-service">
+                        <div class="card grey lighten-1 small public-service">
                             <div class="card-image">
                                 <img src="@ps.ImageURI" width="220" height="150" />
                             </div>
@@ -35,7 +35,7 @@
                                 <p>@Html.DisplayFor(model => ps.Description)</p>
                             </div>
                             <div class="card-action">
-                                @Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title card-link" })
+                                @Html.ActionLink(ps.Name, "Select", "PS", new { id = ps.ID }, new { @class = "ps-title white-text" })
                             </div>
                         </div>
                     </div>

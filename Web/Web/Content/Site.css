@@ -34,7 +34,8 @@ body {
 
 /* Home page */
 #crowd {
-    margin-top: 25px;
+    position: absolute;
+    bottom: 0;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -42,6 +43,7 @@ body {
 }
 
 #home-page {
+    position: relative;
     margin: 0 auto;
     /*padding-top: 100px;*/
     width: 660px;
@@ -79,10 +81,6 @@ body {
     color: #818181;
 }
 
-.card-link {
-    color: #818181 !important;
-}
-
 .public-service {
     border: 1px solid lightgray;
     width: 220px;
@@ -117,6 +115,7 @@ body {
 }
 
 #chkid {
+    text-align: center;
     vertical-align: middle;
     display: none;
     width: 100%;
