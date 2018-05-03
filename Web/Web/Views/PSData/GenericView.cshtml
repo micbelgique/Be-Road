@@ -1,4 +1,4 @@
-﻿@model Web.Models.PublicServiceData.PSDUser
+﻿@model Web.Models.PublicServiceData
 @{
     ViewBag.Title = "Generic View";
 }
@@ -20,14 +20,14 @@
 
         @foreach (var element in Model?.Datas)
         {
-            if (string.IsNullOrWhiteSpace(element.Value.Value))
+            if (string.IsNullOrWhiteSpace(element.Key))
             {
                 continue;
             }
-            <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(element.Value))">
+            <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.AccessInfos))">
                 <li class="collection-item">
                     <div>
-                        <strong>@element.Key :</strong> @Html.DisplayFor(model => element.Value.Value)
+                        <strong>@element.Key :</strong> @Html.DisplayFor(model => element.Value)
                         <i class="fas fa-arrow-alt-circle-right secondary-content"></i>
                     </div>
                 </li>

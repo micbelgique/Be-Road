@@ -307,13 +307,10 @@
       <DependentUpon>201805021201200_Refactor-Ps-Contracts.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Dto\AccessInfoDto.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\PublicService.cs" />
-    <Compile Include="Models\PublicServiceData\PSDAccessInfo.cs" />
-    <Compile Include="Models\PublicServiceData\PSDCar.cs" />
-    <Compile Include="Models\PublicServiceData\PSDData.cs" />
-    <Compile Include="Models\PublicServiceData\PSDUser.cs" />
-    <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
+    <Compile Include="Models\PublicServiceData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -445,13 +442,9 @@
     <Content Include="Views\PS\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\PSData\Index.cshtml" />
-    <Content Include="Views\PSData\GetDivContract.cshtml" />
     <Content Include="Views\PSData\AccessInfo.cshtml" />
     <Content Include="Views\Eid\Details.cshtml" />
     <Content Include="Views\PSData\ResourcesIncluding.cshtml" />
-    <Content Include="Views\PSData\GetPopulationContract.cshtml" />
-    <Content Include="Views\PSData\GetBankContract.cshtml" />
-    <Content Include="Views\PSData\GetFunnyContract.cshtml" />
     <Content Include="Views\PSData\GenericView.cshtml" />
     <None Include="Web.Privacy-Passport - Web Deploy.config">
       <DependentUpon>Web.config</DependentUpon>

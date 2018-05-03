@@ -7,9 +7,8 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Web.Models;
-using Web.Models.PublicServiceData;
+using Web.Models.Dto;
 
 namespace Web.Dal
 {
@@ -17,7 +16,7 @@ namespace Web.Dal
     {
         public async Task<PublicServiceData> GetDataOfAsync(PublicService ps, EidCard eid)
         {
-            var user = new PSDUser();
+            var user = new PublicServiceData();
             using (var client = new HttpClient())
             {
                 try
@@ -44,11 +43,8 @@ namespace Web.Dal
                         var outputs = data.Values.Select(ret => ret.Outputs);
                         user.NRID = eid.RNN;
                         user.Datas = outputs.SelectMany(d => d)
-                                            .ToDictionary(t => t.Key, t => new PSDData()
-                                            {
-                                                Value = t.Value,
-                                                AccessInfos = new List<PSDAccessInfo>()
-                                            });
+                                            .ToDictionary(t => t.Key, t => t.Value);
+                        user.AccessInfos = await GetAccessInfosOf(ps.ContractId, eid.RNN);
                     }
                 }
                 catch (Exception ex)
@@ -57,6 +53,31 @@ namespace Web.Dal
                 }
             }
             return user;
+        }
+
+        private async Task<List<AccessInfoDto>> GetAccessInfosOf(string contractId, string nrid)
+        {
+            var lst = new List<AccessInfoDto>();
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri("http://proxy/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+    
+                    HttpResponseMessage response = await client.GetAsync($"api/contract/justification?contractId={contractId}&nrid={nrid}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        lst = await response.Content.ReadAsAsync<List<AccessInfoDto>>();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+            return lst;
         }
     }
 }
