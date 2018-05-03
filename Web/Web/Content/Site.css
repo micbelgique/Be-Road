@@ -33,6 +33,14 @@ body {
 }
 
 /* Home page */
+#crowd {
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 90%;
+}
+
 #home-page {
     margin: 0 auto;
     /*padding-top: 100px;*/
@@ -50,6 +58,15 @@ body {
     background-color: rgb(52, 153, 165);
 }
 
+#logo{
+    width: 120px;
+}
+
+#app-title {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
 /* PS sections */
 
 .ps-title, .ps-title:active, .ps-title:visited {
@@ -60,6 +77,10 @@ body {
 .ps-title:hover {
     text-decoration: none;
     color: #818181;
+}
+
+.card-link {
+    color: #818181 !important;
 }
 
 .public-service {
@@ -75,7 +96,7 @@ body {
 #ps-identity {
     min-height: 90vh;
     width: 3%;
-    background-color: #29b6f6;
+    background-color: rgb(250, 250, 250);
 }
 
 #ps-sections {
@@ -104,12 +125,14 @@ body {
 #opener {
     float: right;
     margin-right: 10px;
+    color: lightgray;
 }
 
-#closer{
+#closer {
     display: none;
     float: right;
     margin-right: 10px;
+    color: lightgray;
 }
 
 
