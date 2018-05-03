@@ -46,6 +46,33 @@ namespace Proxy.Controllers
             }
         }
 
+        [HttpGet]
+        [Route("justification")]
+        public async Task<HttpResponseMessage> GetJustificationAboutContract([FromUri]string contractId, [FromUri]string nrid)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri("http://messagelog/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                    
+                    HttpResponseMessage response = await client.GetAsync($"api/contract/justification?contractId={contractId}&nrid={nrid}");
+                    if(response.IsSuccessStatusCode)
+                    {
+                        var res = response.Content.ReadAsAsync<dynamic>();
+                        return Request.CreateResponse(HttpStatusCode.OK, res);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+                }
+            }
+            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Cannot open httpclient");
+        }
+
         private async Task CallToMLAsync(dynamic args, string route)
         {
             using (var client = new HttpClient())

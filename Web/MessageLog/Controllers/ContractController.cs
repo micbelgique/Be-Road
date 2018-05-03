@@ -5,6 +5,7 @@ using MessageLog.Models;
 using MessageLog.Models.Dto;
 using PagedList;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -166,6 +167,13 @@ namespace MessageLog.Controllers
 
             await db.SaveChangesAsync();
             return StatusCode(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        [Route("justification")]
+        public List<AccessInfo> GetJustificationAboutContract(string contractId, string nrid)
+        {
+            return db.AccessLogs.Where(log => log.NRID.Equals(nrid) && log.ContractId.Equals(contractId)).ToList();
         }
 
         private string CheckLog(Log log)
