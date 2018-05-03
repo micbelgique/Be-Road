@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Web.Models.PublicServiceData
+namespace Web.Models.Dto
 {
-    public class PSDAccessInfo
+    public class AccessInfoDto
     {
         public int Id { get; set; }
+        public Boolean IsReliable { get; set; }
         public string Name { get; set; }
-        public string Reason { get; set; }
+        public string Justification { get; set; }
         public DateTime Date { get; set; }
     }
 }

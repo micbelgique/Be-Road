@@ -7,9 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using Web.Models;
-using Web.Models.PublicServiceData;
 
 namespace Web.Dal
 {
@@ -17,7 +15,7 @@ namespace Web.Dal
     {
         public async Task<PublicServiceData> GetDataOfAsync(PublicService ps, EidCard eid)
         {
-            var user = new PSDUser();
+            var user = new PublicServiceData();
             using (var client = new HttpClient())
             {
                 try
@@ -44,11 +42,7 @@ namespace Web.Dal
                         var outputs = data.Values.Select(ret => ret.Outputs);
                         user.NRID = eid.RNN;
                         user.Datas = outputs.SelectMany(d => d)
-                                            .ToDictionary(t => t.Key, t => new PSDData()
-                                            {
-                                                Value = t.Value,
-                                                AccessInfos = new List<PSDAccessInfo>()
-                                            });
+                                            .ToDictionary(t => t.Key, t => t.Value);
                     }
                 }
                 catch (Exception ex)
