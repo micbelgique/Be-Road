@@ -1,10 +1,10 @@
-﻿using MessageLog.Dal;
+﻿using Contracts.Models;
+using MessageLog.Dal;
 using MessageLog.Helpers;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
 using PagedList;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -17,7 +17,14 @@ namespace MessageLog.Controllers
     [RoutePrefix("api/Contract")]
     public class ContractController : ApiController
     {
-        private LogContext db = new LogContext(ConfigHelper.GetAppSetting("LogContext"));
+        private LogContext db;
+        private AccessInfoService accessInfoService;
+
+        public ContractController()
+        {
+            db = new LogContext(ConfigHelper.GetAppSetting("LogContext"));
+            accessInfoService = new AccessInfoService(db);
+        }
 
         //GET: api/Contract/Get
         [HttpGet]
@@ -142,8 +149,22 @@ namespace MessageLog.Controllers
             }
 
             db.Logs.Add(log);
-            await db.SaveChangesAsync();
+            
+            //If the call has a justification, Store it 
+            if((logDto.Inputs?.ContainsKey("Justification") ?? false)
+                && (logDto.Inputs?.ContainsKey("NRID") ?? false))
+            {
+                await accessInfoService.LogAccessInfo(new AccessInfo()
+                {
+                    Date = log.CreationDate,
+                    ContractId = log.ContractId,
+                    NRID = logDto.Inputs["NRID"],
+                    Name = log.UserName,
+                    Justification = logDto.Inputs["Justification"]
+                });
+            }
 
+            await db.SaveChangesAsync();
             return StatusCode(HttpStatusCode.OK);
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessageLog.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace MessageLog.Dal
 
         }
 
-        public System.Data.Entity.DbSet<MessageLog.Models.AccessInfo> AccessLogs { get; set; }
-        public System.Data.Entity.DbSet<MessageLog.Models.Log> Logs { get; set; }
+        public DbSet<AccessInfo> AccessLogs { get; set; }
+        public DbSet<AccessInfoHash> AccessLogHashs { get; set; }
+        public DbSet<Log> Logs { get; set; }
     }
 }

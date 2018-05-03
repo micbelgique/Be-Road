@@ -1,4 +1,5 @@
-﻿using MessageLog.Models.Dto;
+﻿using MessageLog.Models;
+using MessageLog.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace MessageLog.Utils
         }
         #endregion
 
-        public string HashAccessLogDtoToString(AccessInfoDto access)
+        public string HashAccessLogDtoToString(AccessInfo access)
         {
             var result = HashAccessLogDto(access);
             StringBuilder sb = new StringBuilder();
@@ -48,14 +49,16 @@ namespace MessageLog.Utils
             return sb.ToString();
         }
 
-        public byte[] HashAccessLogDto(AccessInfoDto access)
+        public byte[] HashAccessLogDto(AccessInfo access)
         {
             var hash = Encoding.UTF8.GetBytes("SomePrefixBeforeHashSecure++");
             using (var sha = new SHA512Managed())
             {
                 hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Id.ToString())).ToArray());
                 hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Name)).ToArray());
-                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Reason)).ToArray());
+                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Justification)).ToArray());
+                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.ContractId)).ToArray());
+                hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.NRID)).ToArray());
                 hash = Hash(sha, hash.Concat(Encoding.UTF8.GetBytes(access.Date.ToString())).ToArray());
             }
             return hash;

@@ -127,10 +127,10 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccessLogController.cs" />
     <Compile Include="Controllers\AdapterServerController.cs" />
     <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\ExceptionController.cs" />
+    <Compile Include="Dal\AccessInfoService.cs" />
     <Compile Include="Dal\LogContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,15 +156,17 @@
     <Compile Include="Migrations\201804300941076_Log-Model-Message.Designer.cs">
       <DependentUpon>201804300941076_Log-Model-Message.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805030900163_Refactor-AccessInfos.cs" />
+    <Compile Include="Migrations\201805030900163_Refactor-AccessInfos.Designer.cs">
+      <DependentUpon>201805030900163_Refactor-AccessInfos.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccessInfoHash.cs" />
     <Compile Include="Models\AccessInfo.cs" />
-    <Compile Include="Models\Dto\AccessInfoDto.cs" />
     <Compile Include="Models\Dto\AdsDtoDelete.cs" />
     <Compile Include="Models\Dto\AdsDtoGeneric.cs" />
-    <Compile Include="Models\Dto\ApplicationUserDto.cs" />
     <Compile Include="Models\Dto\ContractDtoCall.cs" />
     <Compile Include="Models\Dto\ContractDtoGeneric.cs" />
-    <Compile Include="Models\Dto\DataDto.cs" />
     <Compile Include="Models\Dto\ExceptionDto.cs" />
     <Compile Include="Models\Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -211,6 +213,15 @@
     <EmbeddedResource Include="Migrations\201804300941076_Log-Model-Message.resx">
       <DependentUpon>201804300941076_Log-Model-Message.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805030900163_Refactor-AccessInfos.resx">
+      <DependentUpon>201805030900163_Refactor-AccessInfos.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{440674AC-0914-4A84-9D61-A59AC3EF4F5A}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

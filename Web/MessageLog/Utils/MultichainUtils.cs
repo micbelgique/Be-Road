@@ -45,7 +45,7 @@ namespace MessageLog.Utils
                 Password = ConfigHelper.GetAppSetting("Password"),
                 ChainName = ConfigHelper.GetAppSetting("ChainName"),
                 BurnAddress = ConfigHelper.GetAppSetting("BurnAddress"),
-                RootNodeAddress = ConfigHelper.GetAppSetting("RootNoodAddress")
+                RootNodeAddress = ConfigHelper.GetAppSetting("RootNodeAddress")
             };
         }
 

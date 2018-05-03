@@ -120,6 +120,8 @@ They work like functions that can call other contracts. Their inputs are paramet
 
 The contracts are created in Be-Road with recommandations asked to services.
 
+If a contract contains a input with key **Justification** and **Justification**, every call to this contract will be stored in a database and in a blockchain.
+
 #### Example
 ##### Without queries
 
