@@ -218,3 +218,7 @@ ul {
     display: inline-block;
     float: right;
 }
+
+#ps-data-title{
+    margin-left: 25px;
+}

@@ -94,7 +94,7 @@ function displayAccessInfoPopup(accessInfo) {
     console.log(accessInfo);
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('#exampleModalLabel').text('Is viewed ' + accessInfo.length);
+    modal.find('#exampleModalLabel').text('A été accédée ' + accessInfo.length + ' fois');
     var access = "<ul>";
     if (accessInfo.length == 0)
         access += "<li>" + Resources.Accessed_Empty + "</li>";
