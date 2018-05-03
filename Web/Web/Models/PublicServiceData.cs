@@ -10,5 +10,6 @@ namespace Web.Models
     {
         public string NRID { get; set; }
         public Dictionary<string, dynamic> Datas { get; set; }
+        public List<AccessInfoDto> AccessInfos { get; set; }
     }
 }

@@ -91,6 +91,7 @@ function formatDate(date) {
 }
 
 function displayAccessInfoPopup(accessInfo) {
+    console.log(accessInfo);
     var modal = $('#accessInfoModal');
     modal.modal();
     modal.find('#exampleModalLabel').text(accessInfo.Value);

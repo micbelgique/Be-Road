@@ -48,7 +48,7 @@ namespace Proxy.Controllers
 
         [HttpGet]
         [Route("justification")]
-        public async Task<HttpResponseMessage> GetJustificationAboutContract([FromUri]string contractId, [FromUri]string nrid)
+        public async Task<List<dynamic>> GetJustificationAboutContract([FromUri]string contractId, [FromUri]string nrid)
         {
             using (var client = new HttpClient())
             {
@@ -61,16 +61,17 @@ namespace Proxy.Controllers
                     HttpResponseMessage response = await client.GetAsync($"api/contract/justification?contractId={contractId}&nrid={nrid}");
                     if(response.IsSuccessStatusCode)
                     {
-                        var res = response.Content.ReadAsAsync<dynamic>();
-                        return Request.CreateResponse(HttpStatusCode.OK, res);
+                        var res = await response.Content.ReadAsAsync<List<dynamic>>();
+                        return res;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+                    return new List<dynamic>();
                 }
             }
-            return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Cannot open httpclient");
+
+            return new List<dynamic>();
         }
 
         private async Task CallToMLAsync(dynamic args, string route)

@@ -24,10 +24,9 @@
             {
                 continue;
             }
-            <a class="nolink" href="#" onclick="displayAccessInfoPopup(null)">
+            <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.AccessInfos))">
                 <li class="collection-item">
                     <div>
-                        @*@Newtonsoft.Json.JsonConvert.SerializeObject(element.Value)*@
                         <strong>@element.Key :</strong> @Html.DisplayFor(model => element.Value)
                         <i class="fas fa-arrow-alt-circle-right secondary-content"></i>
                     </div>
