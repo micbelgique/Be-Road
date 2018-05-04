@@ -6,7 +6,7 @@
 <style>
     #bg-handle {
         background: none;
-        background-color: #c9c9c9;
+        background-color: #E6E6E6;
     }
 </style>
 <div class="m5 details-content">
@@ -15,7 +15,7 @@
         <h2 id="ps-data-title" class="grey-text text-darken-3">Population Service</h2>
     }
 
-    <ul class="collection with-header detailCollect z-depth-3">
+    <ul id="data-card" class="collection with-header detailCollect z-depth-3">
         <li class="collection-header"><h4>Vos données</h4></li>
 
         @foreach (var element in Model?.Datas ?? new Dictionary<string, dynamic>())
@@ -25,10 +25,10 @@
                 continue;
             }
             <a class="nolink" href="#" onclick="displayAccessInfoPopup(@Newtonsoft.Json.JsonConvert.SerializeObject(Model.AccessInfos))">
-                <li class="collection-item">
+                <li class="collection-item data-link">
                     <div>
                         <strong>@element.Key :</strong> @Html.DisplayFor(model => element.Value)
-                        <i class="fas fa-arrow-alt-circle-right secondary-content"></i>
+                        <i class="data-item fas fa-arrow-alt-circle-right secondary-content"></i>
                     </div>
                 </li>
             </a>
