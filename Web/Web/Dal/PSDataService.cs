@@ -14,9 +14,21 @@ namespace Web.Dal
 {
     public class PSDataService
     {
-        public async Task<PublicServiceData> GetDataOfAsync(PublicService ps, EidCard eid)
+        public async Task<List<PublicServiceData>> GetDataOfAsync(PublicService ps, EidCard eid)
         {
-            var user = new PublicServiceData();
+            var lst = new List<PublicServiceData>();
+            ps.ContractNames = await GetContractNames(ps);
+            foreach(var contractName in ps.ContractNames)
+            {
+                lst.Add(await GetPSDOfContract(eid.RNN, contractName));
+            }
+            return lst;
+        }
+
+        private async Task<PublicServiceData> GetPSDOfContract(string nrid, string contractId)
+        {
+            var data = new PublicServiceData();
+
             using (var client = new HttpClient())
             {
                 try
@@ -27,24 +39,24 @@ namespace Web.Dal
 
                     var call = new BeContractCall
                     {
-                        Id = ps.ContractId,
+                        Id = contractId,
                         ISName = "Privacy Passport",
                         Inputs = new Dictionary<string, dynamic>()
                         {
-                            { "NRID", eid.RNN },
+                            { "NRID", nrid },
                             { "Justification", "Reading my own data"}
                         }
                     };
                     var httpContent = new StringContent(JsonConvert.SerializeObject(call), Encoding.UTF8, "application/json");
                     HttpResponseMessage response = await client.PostAsync("api/contract/call", httpContent);
-                    if(response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
-                        var data = await response.Content.ReadAsAsync<Dictionary<int, BeContractReturn>>();
-                        var outputs = data.Values.Select(ret => ret.Outputs);
-                        user.NRID = eid.RNN;
-                        user.Datas = outputs.SelectMany(d => d)
+                        var resp = await response.Content.ReadAsAsync<Dictionary<int, BeContractReturn>>();
+                        var outputs = resp.Values.Select(ret => ret.Outputs);
+                        data.NRID = nrid;
+                        data.Datas = outputs.SelectMany(d => d)
                                             .ToDictionary(t => t.Key, t => t.Value);
-                        user.AccessInfos = await GetAccessInfosOf(ps.ContractId, eid.RNN);
+                        data.AccessInfos = await GetAccessInfosOf(contractId, nrid);
                     }
                 }
                 catch (Exception ex)
@@ -52,20 +64,45 @@ namespace Web.Dal
                     Console.WriteLine(ex.Message);
                 }
             }
-            return user;
+            return data;
         }
 
-        private async Task<List<AccessInfoDto>> GetAccessInfosOf(string contractId, string nrid)
+        private async Task<List<String>> GetContractNames(PublicService ps)
         {
-            var lst = new List<AccessInfoDto>();
             using (var client = new HttpClient())
             {
+                var lst = new List<String>();
                 try
                 {
                     client.BaseAddress = new Uri("http://proxy/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-    
+
+                    HttpResponseMessage response = await client.GetAsync($"api/contract/ads?isName={ps.Name}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        lst = await response.Content.ReadAsAsync<List<String>>();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                return lst;
+            }
+        }
+
+        private async Task<List<AccessInfoDto>> GetAccessInfosOf(string contractId, string nrid)
+        {
+            using (var client = new HttpClient())
+            {
+                var lst = new List<AccessInfoDto>();
+                try
+                {
+                    client.BaseAddress = new Uri("http://proxy/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
                     HttpResponseMessage response = await client.GetAsync($"api/contract/justification?contractId={contractId}&nrid={nrid}");
                     if (response.IsSuccessStatusCode)
                     {
@@ -76,8 +113,8 @@ namespace Web.Dal
                 {
                     Console.WriteLine(ex.Message);
                 }
+                return lst;
             }
-            return lst;
         }
     }
 }
