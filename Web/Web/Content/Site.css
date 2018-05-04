@@ -25,7 +25,6 @@ li.active {
 
 body {
     min-height: 100vh;
-    height: 100%;
 }
 
 #bg-handle {
@@ -56,17 +55,29 @@ body {
 }
 
 #eid-connect {
-    color: white;
-    background-color: rgb(52, 153, 165);
+    color: white !important;
+    background-color: rgb(1, 144, 161);
 }
 
 #logo{
     width: 120px;
 }
 
+#footer-txt {
+    margin-left: 10px;
+}
+
 #app-title {
     margin-top: 10px;
     margin-left: 10px;
+}
+
+.home-title {
+    color: #ffffff !important;
+}
+
+.home-color {
+    color: #ffffff !important;
 }
 
 /* PS sections */
@@ -107,6 +118,10 @@ body {
 #ps-container {
     margin-left: auto;
     margin-right: auto;
+}
+
+.card-modified {
+    display: inline-table !important;
 }
 
 #homecontent {
@@ -216,9 +231,33 @@ ul {
 
 #modal-close {
     display: inline-block;
-    float: right;
 }
 
 #ps-data-title{
     margin-left: 25px;
+}
+
+.data-item {
+    transition: color 0.3s ease;
+    color: #D5D5D5 !important;
+}
+
+.data-item:hover {
+    color: #b1b1b1 !important;
+}
+
+.data-link:hover .data-item {
+    color: #b1b1b1 !important;
+}
+
+#data-card{
+    margin-top: 25px;
+}
+
+.data-link {
+    transition: background-color 0.3s ease;
+}
+
+.data-link:hover {
+    background-color: #ececec !important;
 }
