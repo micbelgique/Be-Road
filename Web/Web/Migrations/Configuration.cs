@@ -21,7 +21,6 @@ namespace Web.Migrations
                    {
                        Name = "Population Service",
                        Description = "Belgium administration for the population",
-                       ContractId = "GetPopulationContract",
                        ImageURI = "/Content/img/ps.jpg"
                    },
                    new PublicService
@@ -29,7 +28,6 @@ namespace Web.Migrations
                        ID = 2,
                        Name = "Div Service",
                        Description = "Direction Immatriculation des Véhicules",
-                       ContractId = "GetDivContract",
                        ImageURI = "/Content/img/immatriculation.jpg"
                    },
                    new PublicService
@@ -37,7 +35,6 @@ namespace Web.Migrations
                        ID = 3,
                        Name = "Bank Service",
                        Description = "Contains information about your bankaccount",
-                       ContractId = "GetBankContract",
                        ImageURI = "/Content/img/bank.png"
                    },
                    new PublicService
@@ -45,7 +42,6 @@ namespace Web.Migrations
                        ID = 4,
                        Name = "Funny Service",
                        Description = "This public service contains funny data about you",
-                       ContractId = "GetFunnyContract",
                        ImageURI = "/Content/img/funny.png"
                    }
            );
