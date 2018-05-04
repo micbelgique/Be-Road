@@ -27,7 +27,7 @@ namespace Web.Dal
 
         private async Task<PublicServiceData> GetPSDOfContract(string nrid, string contractId)
         {
-            var data = new PublicServiceData();
+            var data = new PublicServiceData() { ContractName = contractId };
 
             using (var client = new HttpClient())
             {

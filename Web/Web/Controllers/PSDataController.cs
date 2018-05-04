@@ -26,7 +26,7 @@ namespace Web.Controllers
 
             ViewBag.PS = ps;
             var psd = await service.GetDataOfAsync(ps, eid);
-            return View("Index", psd.FirstOrDefault());
+            return View("Index", psd);
         }
     }
 }
