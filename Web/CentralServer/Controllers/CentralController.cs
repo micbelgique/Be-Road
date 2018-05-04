@@ -2,6 +2,8 @@
 using CentralServer.Helpers;
 using Contracts.Models;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
@@ -17,6 +19,17 @@ namespace CentralServer.Controllers
         public BeContract Contracts(string id)
         {
             return ctx.Contracts.FirstOrDefault(c => c.Id.Equals(id));
+        }
+
+        [HttpGet]
+        [Route("contract/ads")]
+        public List<String> GetContractByISName(string isName)
+        {
+            return ctx.AdapterServers
+                .Where(ads => ads.ISName.Equals(isName))
+                .SelectMany(ads => ads.ContractNames)
+                .Select(contract => contract.Id)
+                .ToList();
         }
 
         [HttpGet]

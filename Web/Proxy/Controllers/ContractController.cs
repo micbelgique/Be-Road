@@ -47,6 +47,46 @@ namespace Proxy.Controllers
         }
 
         [HttpGet]
+        [Route("ads")]
+        public async Task<List<String>> GetContractNamesByIsName([FromUri]string isName)
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    client.BaseAddress = new Uri("http://centralserver/");
+                    client.DefaultRequestHeaders.Accept.Clear();
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                    HttpResponseMessage response = await client.GetAsync($"api/central/contract/ads?isName={isName}");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var res = await response.Content.ReadAsAsync<List<String>>();
+                        return res;
+                    } 
+                    else
+                    {
+                        var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                        {
+                            Content = new StringContent(response.ReasonPhrase),
+                            ReasonPhrase = "Error in CentralServer"
+                        };
+                        throw new HttpResponseException(resp);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(ex.Message),
+                        ReasonPhrase = "Error in CentralServer"
+                    };
+                    throw new HttpResponseException(resp);
+                }
+            }
+        }
+
+        [HttpGet]
         [Route("justification")]
         public async Task<List<dynamic>> GetJustificationAboutContract([FromUri]string contractId, [FromUri]string nrid)
         {
@@ -57,21 +97,33 @@ namespace Proxy.Controllers
                     client.BaseAddress = new Uri("http://messagelog/");
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    
+
                     HttpResponseMessage response = await client.GetAsync($"api/contract/justification?contractId={contractId}&nrid={nrid}");
-                    if(response.IsSuccessStatusCode)
+                    if (response.IsSuccessStatusCode)
                     {
                         var res = await response.Content.ReadAsAsync<List<dynamic>>();
                         return res;
                     }
+                    else
+                    {
+                        var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                        {
+                            Content = new StringContent(response.ReasonPhrase),
+                            ReasonPhrase = "Error in MessageLog"
+                        };
+                        throw new HttpResponseException(resp);
+                    }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    return new List<dynamic>();
+                    var resp = new HttpResponseMessage(HttpStatusCode.BadRequest)
+                    {
+                        Content = new StringContent(ex.Message),
+                        ReasonPhrase = "Error in MessageLog"
+                    };
+                    throw new HttpResponseException(resp);
                 }
             }
-
-            return new List<dynamic>();
         }
 
         private async Task CallToMLAsync(dynamic args, string route)
