@@ -142,7 +142,7 @@ JSON :
     "Queries": [],
     "Outputs": [
         {
-            "Contract": "GetOwnerIdByDogId",
+            "LookupInputId": "0",
             "Type": "String",
             "Description": "The ID of the owner of the dog",
             "Key": "OwnerIDOfTheDog"
@@ -173,7 +173,7 @@ GetDogOwnerContract.Outputs = new List<Output>()
 {
     new Output()
     {
-        Contract = GetDogOwnerContract,
+        LookupInputId = 0,
         Key = "OwnerIDOfTheDog",
         Description = "The ID of the owner of the dog",
         Type = typeof(string)
@@ -202,8 +202,8 @@ GetDogOwnerContract.Outputs = new List<Output>()
             "Mappings": [
                 {
                     "InputKey": "DogID",
-                    "Contract": "GetAddressByDogId",
-                    "ContractKey": "MyDogID"
+                    "LookupInputId": "0",
+                    "LookupInputKey": "MyDogID"
                 }
             ]
         },
@@ -212,27 +212,27 @@ GetDogOwnerContract.Outputs = new List<Output>()
             "Mappings": [
                 {
                     "InputKey": "OwnerID",
-                    "Contract": "GetOwnerIdByDogId",
-                    "ContractKey": "OwnerIDOfTheDog"
+                    "LookupInputId": "1",
+                    "LookupInputKey": "OwnerIDOfTheDog"
                 }
             ]
         }
     ],
     "Outputs": [
         {
-            "Contract": "GetAddressByOwnerId",
+            "LookupInputId": "1",
              "Type": "String",
              "Description": "Street name",
              "Key": "Street"
         },
         {
-             "Contract": "GetAddressByOwnerId",
+             "LookupInputId": "1",
              "Type": "Int32",
              "Description": "Street number",
              "Key": "StreetNumber"
        },
        {
-             "Contract": "GetAddressByOwnerId",
+             "LookupInputId": "1",
              "Type": "String",
              "Description": "Country of the address",
              "Key": "Country"
@@ -272,8 +272,8 @@ GetAddressByDogContract.Queries = new List<Query>()
             new Mapping()
             {
                 InputKey = "DogID",
-                Contract = GetAddressByDogContract,
-                ContractKey = "MyDogID"
+                LookupInputId = 0,
+                LookupInputKey = "MyDogID"
             }
         }
     },
@@ -285,8 +285,8 @@ GetAddressByDogContract.Queries = new List<Query>()
             new Mapping()
             {
                 InputKey = "OwnerID",
-                Contract = GetOwnerIdByDogContract,
-                ContractKey = "OwnerIDOfTheDog"
+                LookupInputId = 1,
+                LookupInputKey = "OwnerIDOfTheDog"
             }
         }
     }
@@ -296,21 +296,21 @@ GetAddressByDogContract.Outputs = new List<Output>()
 {
     new Output()
     {
-        Contract = GetAddressByOwnerContract,
+        LookupInputId = 1,
         Key = "Street",
         Description = "Street name",
         Type = typeof(string)
     },
     new Output()
     {
-        Contract = GetAddressByOwnerContract,
+        LookupInputId = 1,
         Key = "StreetNumber",
         Description = "Street number",
         Type = typeof(int)
     },
     new Output()
     {
-        Contract = GetAddressByOwnerContract,
+        LookupInputId = 1,
         Key = "Country",
         Description = "Country of the address",
         Type = typeof(string)
