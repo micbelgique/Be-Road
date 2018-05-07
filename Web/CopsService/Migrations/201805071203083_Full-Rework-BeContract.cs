@@ -31,8 +31,6 @@ namespace PublicService.Migrations
             DropIndex("dbo.AspNetUsers", new[] { "Nationality_Id" });
             DropIndex("dbo.AspNetUsers", new[] { "PhotoUrl_Id" });
             AddColumn("dbo.AspNetUsers", "PhotoUrl", c => c.String());
-            AlterColumn("dbo.Cars", "Owner_Id", c => c.String(maxLength: 128));
-            CreateIndex("dbo.Cars", "Owner_Id");
             DropColumn("dbo.Cars", "Brand_Id");
             DropColumn("dbo.Cars", "NumberPlate_Id");
             DropColumn("dbo.AspNetUsers", "NRID");
@@ -44,8 +42,19 @@ namespace PublicService.Migrations
             DropColumn("dbo.AspNetUsers", "Locality_Id");
             DropColumn("dbo.AspNetUsers", "Nationality_Id");
             DropColumn("dbo.AspNetUsers", "PhotoUrl_Id");
+            DropTable("dbo.Cars");
+            CreateTable(
+                "dbo.Cars",
+                c => new
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Owner_Id = c.String(maxLength: 128),
+                })
+                .PrimaryKey(t => t.Id);
+            
             DropTable("dbo.Data");
             DropTable("dbo.AccessInfoes");
+
         }
         
         public override void Down()
