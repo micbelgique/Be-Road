@@ -8,8 +8,8 @@ namespace PublicService.Models
     public class Car
     {
         public int Id { get; set; }
-        public virtual Data Owner { get; set; }
-        public virtual Data NumberPlate { get; set; }
-        public virtual Data Brand { get; set; }
+        public virtual string Owner { get; set; }
+        public virtual string NumberPlate { get; set; }
+        public virtual string Brand { get; set; }
     }
 }

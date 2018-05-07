@@ -1,5 +1,6 @@
 namespace PublicService.Migrations
 {
+    using Contracts.Models;
     using CsvHelper;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,14 +15,15 @@ namespace PublicService.Migrations
     using System.Data.Entity.Migrations;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Hosting;
 
     internal sealed class Configuration : DbMigrationsConfiguration<PSContext>
     {
-        private Random rand = new Random();
-        private string[] names = { "Arlen", "Artie", "Gray", "Guard", "Ladden", "Mace", "Mark", "Seno", "Jana", "Kim", "Lydia" };
-        private string[] reasons = { "Speeding", "Alcohol test", "Crazy driving", "Fun", "Abuse of power" };
 
         public Configuration()
         {
@@ -38,7 +40,6 @@ namespace PublicService.Migrations
         private void InitializeIdentityForEF(PSContext db)
         {
             InitializeIdentityAdmin(db);
-            InitializeIdentityUsers(db);
             DeleteDevs(db);
         }
 
@@ -53,78 +54,6 @@ namespace PublicService.Migrations
             {
                 userManager.Delete(mic);
                 userManager.Delete(wil);
-            }
-        }
-
-        private void InitializeIdentityUsers(PSContext db)
-        {
-            var userStore = new UserStore<ApplicationUser>(db);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
-            {
-                AllowOnlyAlphanumericUserNames = false
-            };
-            // Configure validation logic for passwords
-            userManager.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
-            };
-
-            string homeFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", @"App_Data\stagiaires.csv");
-            using (StreamReader reader = File.OpenText(homeFile))
-            {
-                var csv = new CsvReader(reader);
-                csv.Configuration.Delimiter = ";";
-                csv.Configuration.MissingFieldFound = null;
-                csv.Read();
-                csv.ReadHeader();
-                while (csv.Read())
-                {
-                    var fn = csv.GetField("Prenom");
-                    var ln = csv.GetField("Nom");
-                    var school = csv.GetField("Ecole");
-                    var stage = csv.GetField("Ville de stage");
-                    var mail = csv.GetField("Email MIC");
-                    var loc = csv.GetField("Ville domicile");
-                    var url = csv.GetField("URL photo");
-                    var info = csv.GetField("Extra Info");
-
-                    var userName = $"{fn.Replace(' ', '.')}.{ln.Replace(' ', '.')}@{stage}";
-                    var password = "Admin@123456";
-
-                    var user = userManager.FindByName(userName);
-                    //Delete the current user because we maybe want to update them
-                    if (user != null)
-                    {
-                        userManager.Delete(user);
-                        user = null;
-                    }
-                    if (user == null)
-                    {
-                        user = new ApplicationUser
-                        {
-                            //Set an ID, else we create duplicate data
-                            //Id = userName,
-                            UserName = userName,
-                            FirstName = new Data { Value = fn },
-                            LastName = new Data { Value = ln },
-                            Locality = new Data { Value = loc },
-                            //Nationality is empty
-                            //School stage isn't in the model
-                            PhotoUrl = new Data { Value = url },
-                            ExtraInfo = new Data { Value = info },
-                            EmailAddress = new Data { Value = mail }
-                        };
-
-                        //throw new Exception(user.UserName);
-                        var result = userManager.Create(user, password);
-                        result = userManager.SetLockoutEnabled(user.Id, false);
-                    }
-                }
             }
         }
 
@@ -172,8 +101,6 @@ namespace PublicService.Migrations
             {
                 user = new ApplicationUser {
                     UserName = name,
-                    FirstName = new Data { Value = "Administrator" },
-                    LastName = new Data { Value = "Kernel" },
                 };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
@@ -203,40 +130,10 @@ namespace PublicService.Migrations
             return new Car()
             {  
                 Id = id,
-                Owner = new Data()
-                {
-                    Value = owner,
-                    AccessInfos = GenerateRandomAccessInfo(20)
-                },
-                Brand = new Data()
-                {
-                    Value = brand,
-                    AccessInfos = GenerateRandomAccessInfo(50)
-                },
-                NumberPlate = new Data()
-                {
-                    Value = numberPlate,
-                    AccessInfos = GenerateRandomAccessInfo(80)
-                }
+                Owner = owner,
+                Brand = brand,
+                NumberPlate = numberPlate
             };
-        }
-
-        private List<AccessInfo> GenerateRandomAccessInfo(int probability)
-        {
-            var infos = new List<AccessInfo>();
-            for (int i = 0; i < 3; i++)
-            {
-                if (rand.Next(100) < probability)
-                {
-                    infos.Add(new AccessInfo()
-                    {
-                        Name = names[rand.Next(names.Length)],
-                        Date = new DateTime(rand.Next(2000, 2018), rand.Next(1, 12), rand.Next(1, 28)),
-                        Reason = reasons[rand.Next(reasons.Length)]
-                    });
-                }
-            }
-            return infos;
         }
     }
 }

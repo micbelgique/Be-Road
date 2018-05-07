@@ -25,7 +25,6 @@ namespace PublicService.Controllers
 
         #region Properties
         private PSContext db = new PSContext();
-        private AzureUpload au = new AzureUpload();
 
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
@@ -79,36 +78,8 @@ namespace PublicService.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(String name)
-        {
-            throw new NotImplementedException("Search users by name is not yet implemented");
-        }
-
-        [HttpPost]
-        public ActionResult AddAccessInfo(int? dataId, string reason, string ip)
-        {
-            var data = db.Datas.Find(dataId);
-            if (data == null || String.IsNullOrWhiteSpace(reason))
-            {
-                return HttpNotFound();
-            }
-
-            var name = GetFirstAndLastName();
-            data.AccessInfos.Add(new Models.AccessInfo()
-            {
-                Date = DateTime.Now,
-                Name = $"{name};{ip}",
-                Reason = reason
-            });
-            db.SaveChanges();
-            return Content(JsonConvert.SerializeObject(data));
-        }
-
-        [HttpPost]
         public async Task<ActionResult> Details(string id, int? dataId, string reason, string ip)
         {
-            AddAccessInfo(dataId, reason, ip);
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -164,13 +135,6 @@ namespace PublicService.Controllers
         {
             var connectedUser = UserManager.FindById(User.Identity.GetUserId());
             return connectedUser.FirstName?.Value + " " + connectedUser.LastName?.Value;
-        }
-
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UploadToAzure()
-        {
-            await au.UploadToAzureAsync(db);
-            return View();
         }
     }
 }

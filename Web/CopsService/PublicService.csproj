@@ -323,8 +323,8 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Dal\ADSCallService.cs" />
     <Compile Include="Dal\PSContext.cs" />
-    <Compile Include="Dal\PSDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -352,13 +352,8 @@
       <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Dal\AzureUpload.cs" />
     <Compile Include="Models\Car.cs" />
-    <Compile Include="Models\Data.cs" />
-    <Compile Include="Models\Dto\ApplicationUserDto.cs" />
-    <Compile Include="Models\Dto\DataDto.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
@@ -462,6 +457,12 @@
     <EmbeddedResource Include="Migrations\201803140941353_Delete-Exsisting-Users.resx">
       <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -26,26 +26,6 @@ namespace PublicService.Controllers
             return View(db.Cars.ToList());
         }
 
-        public ActionResult Azure()
-        {
-            var json = JsonConvert.SerializeObject(db.Cars.ToList());
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
-            CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
-            CloudFileShare share = fileClient.GetShareReference("dataexchange");
-            if (share.Exists())
-            {
-                CloudFileDirectory rootDir = share.GetRootDirectoryReference();
-
-                if (rootDir.Exists())
-                {
-                    CloudFile file = rootDir.GetFileReference("cops.json");
-                    file.UploadTextAsync(json);
-                }
-            }
-            ViewBag.copsdata = json;
-            return View();
-        }
-
         // GET: Cars/Details/5
         public ActionResult Details(int? id)
         {
