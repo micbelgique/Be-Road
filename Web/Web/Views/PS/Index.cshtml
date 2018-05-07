@@ -23,11 +23,11 @@
     </section>
     <section id="ps-sections">
         <div class="container" id="ps-container">
-            <div class="row">
+            <div id="card-row" class="row">
                 @foreach (var ps in Model)
                 {
                     <div class="col s3 card-modified" data-action="@Url.Action("Select", "PS", new { id = ps.ID })">
-                        <div class="card grey lighten-5 small public-service">
+                        <div class="card grey lighten-5 small public-service hvr-shadow">
                             <div class="card-image">
                                 <img src="@ps.ImageURI" width="220" height="150" />
                             </div>

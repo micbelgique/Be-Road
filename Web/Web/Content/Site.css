@@ -64,12 +64,12 @@ body {
 }
 
 #footer-txt {
-    margin-left: 10px;
+    margin-left: 25px;
 }
 
 #app-title {
     margin-top: 10px;
-    margin-left: 10px;
+    margin-left: 25px;
 }
 
 .home-title {
@@ -93,12 +93,10 @@ body {
 }
 
 .public-service {
-    border: 1px solid lightgray;
     width: 220px;
 }
 
 .public-service:hover {
-    box-shadow: 3px 3px 3px grey;
     cursor: pointer;
 }
 

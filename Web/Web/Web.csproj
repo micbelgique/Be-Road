@@ -315,6 +315,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="BeRoadSchema.png" />
+    <Content Include="Content\hover-min.css" />
+    <Content Include="Content\hover.css" />
     <Content Include="Content\img\bank.png" />
     <Content Include="Content\img\CarouselBG.png" />
     <Content Include="Content\img\crowd.png" />
@@ -386,6 +388,7 @@
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.woff" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.eot" />
+    <Content Include="Content\hover.css.map" />
     <None Include="Dockerfile" />
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>

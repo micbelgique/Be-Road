@@ -45,6 +45,7 @@ namespace Web.Dal
                         user.Datas = outputs.SelectMany(d => d)
                                             .ToDictionary(t => t.Key, t => t.Value);
                         user.AccessInfos = await GetAccessInfosOf(ps.ContractId, eid.RNN);
+                        user.AccessInfos = user.AccessInfos.Where(a => !a.Name.Equals("Privacy Passport")).ToList();
                     }
                 }
                 catch (Exception ex)
