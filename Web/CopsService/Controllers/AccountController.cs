@@ -24,7 +24,7 @@ namespace PublicService.Controllers
         #region Properties
         private ApplicationUserManager _userManager;
         private PSContext db = new PSContext();
-        private AzureUpload au = new AzureUpload();
+        private ADSCallService acs = new ADSCallService();
 
         public ApplicationUserManager UserManager
         {
@@ -216,17 +216,13 @@ namespace PublicService.Controllers
 
                     var user = new ApplicationUser
                     {
-                        NRID = eid.RNN,
-                        UserName = model.Username,
-                        FirstName = new Data() { Value = eid.FirstName },
-                        LastName = new Data() { Value = eid.LastName }
+                        UserName = eid.RNN
                     };
 
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
-                        await au.UploadToAzureAsync(db);
-                        return await Login(new LoginViewModel() { Username = model.Username, Password = model.Password }, "/Account/Manage");
+                        return await Login(new LoginViewModel() { Username = eid.RNN, Password = model.Password }, "/Account/Manage");
                     }
                     AddErrors(result);
                 }
@@ -240,28 +236,7 @@ namespace PublicService.Controllers
         public async Task<ActionResult> Manage()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            string day = "";
-            string month = "";
-            string year = "";
-            if (user.BirthDate?.Value?.ToString() != "")
-            {
-                day = user.BirthDate?.Value?.ToString()?.Substring(0, 2);
-                month = user.BirthDate?.Value?.ToString()?.Substring(3, 2);
-                year = user.BirthDate?.Value?.ToString()?.Substring(6, 4);
-            }
-            var userVM = new ManageViewModel
-            {
-                FirstName = user.FirstName?.Value,
-                LastName = user.LastName?.Value,
-                BirthDateD = day,
-                BirthDateM = month,
-                BirthDateY = year,
-                EmailAddress = user.EmailAddress?.Value,
-                Locality = user.Locality?.Value,
-                Nationality = user.Nationality?.Value,
-                PhotoUrl = user.PhotoUrl?.Value,
-                ExtraInfo = user.ExtraInfo?.Value
-            };
+            var userVM = acs.GetUser(user.UserName);
             return View(userVM);
         }
 
@@ -270,18 +245,10 @@ namespace PublicService.Controllers
         public async Task<ActionResult> ApplyChanges(ManageViewModel postUser)
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            if (postUser.BirthDateD != null && postUser.BirthDateM != null && postUser.BirthDateY != null)
-                user.BirthDate = new Data() { Value = postUser.BirthDateD + "/" + postUser.BirthDateM + "/" + postUser.BirthDateY };
-            else
-                user.BirthDate = new Data() { Value = null };
-            user.EmailAddress = new Data() { Value = postUser.EmailAddress };
-            user.Locality = new Data() { Value = postUser.Locality };
-            user.Nationality = new Data() { Value = postUser.Nationality };
-            user.PhotoUrl = new Data() { Value = postUser.PhotoUrl };
-            user.ExtraInfo = new Data() { Value = postUser.ExtraInfo };
+            
+            user.PhotoUrl = postUser.PhotoUrl;
             await UserManager.UpdateAsync(user);
             db.SaveChanges();
-            await au.UploadToAzureAsync(db);
             return RedirectToAction("Index", "Home");
         }
 
@@ -291,7 +258,6 @@ namespace PublicService.Controllers
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
             await UserManager.DeleteAsync(user);
             db.SaveChanges();
-            await au.UploadToAzureAsync(db);
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }

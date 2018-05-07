@@ -354,6 +354,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\CarViewModel.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
@@ -410,7 +411,6 @@
     <Content Include="Views\Cars\Delete.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
-    <Content Include="Views\Cars\Azure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -420,7 +420,6 @@
     <Content Include="Views\Service\Details.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Home\AboutGDPR.cshtml" />
-    <Content Include="Views\Service\UploadToAzure.cshtml" />
     <None Include="Web.Public-Service - Web Deploy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

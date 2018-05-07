@@ -5,9 +5,10 @@ using System.Web;
 
 namespace PublicService.Models
 {
-    public class Car
+    public class CarViewModel
     {
-        public int Id { get; set; }
         public virtual ApplicationUser Owner { get; set; }
+        public virtual string NumberPlate { get; set; }
+        public virtual string Brand { get; set; }
     }
 }
