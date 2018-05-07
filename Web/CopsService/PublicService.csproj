@@ -351,6 +351,10 @@
     <Compile Include="Migrations\201803140941353_Delete-Exsisting-Users.Designer.cs">
       <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805071203083_Full-Rework-BeContract.cs" />
+    <Compile Include="Migrations\201805071203083_Full-Rework-BeContract.Designer.cs">
+      <DependentUpon>201805071203083_Full-Rework-BeContract.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Car.cs" />
@@ -455,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803140941353_Delete-Exsisting-Users.resx">
       <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071203083_Full-Rework-BeContract.resx">
+      <DependentUpon>201805071203083_Full-Rework-BeContract.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

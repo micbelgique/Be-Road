@@ -116,23 +116,22 @@ namespace PublicService.Migrations
 
         private void InitializeCars(PSContext context)
         {
-            context.Cars.AddOrUpdate(GenerateNewCar(1, "Michaël", "Fiat", "1-KGG-695"));
-            context.Cars.AddOrUpdate(GenerateNewCar(2, "Wilson", "Nissan", "1-EBD-684"));
-            context.Cars.AddOrUpdate(GenerateNewCar(3, "Pierre", "Porche", "1-OZA-014"));
-            context.Cars.AddOrUpdate(GenerateNewCar(4, "Raph", "Citroën", "1-VNK-646"));
-            context.Cars.AddOrUpdate(GenerateNewCar(5, "Fred", "Mercedes", "1-ZAR-755"));
-            context.Cars.AddOrUpdate(GenerateNewCar(6, "Thomas", "BMW", "1-PER-124"));
-            context.Cars.AddOrUpdate(GenerateNewCar(7, "Martine", "Audi", "1-DFV-862"));
+            context.Cars.AddOrUpdate(GenerateNewCar(1, "93011150162"));
+            context.Cars.AddOrUpdate(GenerateNewCar(2, "97081817718"));
+            context.Cars.AddOrUpdate(GenerateNewCar(3, "95052316256"));
+            context.Cars.AddOrUpdate(GenerateNewCar(4, "97010215411"));
+            context.Cars.AddOrUpdate(GenerateNewCar(5, "96122400226"));
+            context.Cars.AddOrUpdate(GenerateNewCar(6, "93020623433"));
+            context.Cars.AddOrUpdate(GenerateNewCar(7, "95071956583"));
         }
 
-        private Car GenerateNewCar(int id, string owner, string brand, string numberPlate)
+        private Car GenerateNewCar(int id, string owner)
         {
+            PSContext db = new PSContext();
             return new Car()
             {  
                 Id = id,
-                Owner = owner,
-                Brand = brand,
-                NumberPlate = numberPlate
+                Owner = db.Users.FirstOrDefault(u => u.UserName.Equals(owner))
             };
         }
     }

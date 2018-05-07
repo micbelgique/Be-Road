@@ -1,6 +1,5 @@
 ﻿using PublicService.Dal;
 using PublicService.Models;
-using PublicService.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Data;
