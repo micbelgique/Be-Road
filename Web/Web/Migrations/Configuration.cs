@@ -21,31 +21,27 @@ namespace Web.Migrations
                    {
                        Name = "Population Service",
                        Description = "Belgium administration for the population",
-                       ContractId = "GetPopulationContract",
                        ImageURI = "/Content/img/ps.jpg"
                    },
                    new PublicService
                    {
                        ID = 2,
-                       Name = "DIV",
+                       Name = "Div Service",
                        Description = "Direction Immatriculation des Véhicules",
-                       ContractId = "GetDivContract",
                        ImageURI = "/Content/img/immatriculation.jpg"
                    },
                    new PublicService
                    {
                        ID = 3,
-                       Name = "Bank",
+                       Name = "Bank Service",
                        Description = "Contains information about your bankaccount",
-                       ContractId = "GetBankContract",
                        ImageURI = "/Content/img/bank.png"
                    },
                    new PublicService
                    {
                        ID = 4,
-                       Name = "Funny",
+                       Name = "Funny Service",
                        Description = "This public service contains funny data about you",
-                       ContractId = "GetFunnyContract",
                        ImageURI = "/Content/img/funny.png"
                    }
            );

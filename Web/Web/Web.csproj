@@ -306,6 +306,10 @@
     <Compile Include="Migrations\201805021201200_Refactor-Ps-Contracts.Designer.cs">
       <DependentUpon>201805021201200_Refactor-Ps-Contracts.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805041310496_Removed-ContractId.cs" />
+    <Compile Include="Migrations\201805041310496_Removed-ContractId.Designer.cs">
+      <DependentUpon>201805041310496_Removed-ContractId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Dto\AccessInfoDto.cs" />
     <Compile Include="Models\EidCard.cs" />
@@ -489,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805021201200_Refactor-Ps-Contracts.resx">
       <DependentUpon>201805021201200_Refactor-Ps-Contracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805041310496_Removed-ContractId.resx">
+      <DependentUpon>201805041310496_Removed-ContractId.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
