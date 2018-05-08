@@ -154,6 +154,7 @@ namespace PublicService.Controllers
             OpenIdRelyingParty openid = new OpenIdRelyingParty();
             openid.SecuritySettings.AllowDualPurposeIdentifiers = true;
             var response = openid.GetResponse();
+            bool alreadyIn = false;
             //Get back the response of the open id provider
             if (response != null)
             {
@@ -193,6 +194,15 @@ namespace PublicService.Controllers
                         //Save the eid in the session
                         Session["eid"] = eid;
                         ViewBag.FirstTry = true;
+                        db.Users.ToList().ForEach(u =>
+                        {
+                            if (u.UserName.Equals(eid.RNN))
+                                alreadyIn = true;
+                        });
+
+                        if (alreadyIn)
+                            return RedirectToAction("Error", "Home");
+
                         return View(model);
                     case AuthenticationStatus.Canceled:
                         ViewBag.Extra = "Log in cancel";
@@ -236,7 +246,7 @@ namespace PublicService.Controllers
         public async Task<ActionResult> Manage()
         {
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
-            var userVM = acs.GetUser(user.UserName);
+            var userVM = acs.GetUser(user.UserName, "User account manager");
             return View(userVM);
         }
 

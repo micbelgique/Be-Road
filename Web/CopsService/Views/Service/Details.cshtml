@@ -10,79 +10,58 @@
         <div class="col-md-6">
             <h2 class="text-center">Details of @Model.FirstName @Model.LastName</h2>
             
-            @if((Model.BirthDateD != null && !String.IsNullOrEmpty(Model.BirthDateD)) &&
-                (Model.BirthDateM != null && !String.IsNullOrEmpty(Model.BirthDateM)) &&
-                (Model.BirthDateY != null && !String.IsNullOrEmpty(Model.BirthDateY)))
+            @if ((Model.BirthDateD != null && !String.IsNullOrEmpty(Model.BirthDateD)) &&
+    (Model.BirthDateM != null && !String.IsNullOrEmpty(Model.BirthDateM)) &&
+    (Model.BirthDateY != null && !String.IsNullOrEmpty(Model.BirthDateY)))
             {
             <div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('Age')">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-                @Html.DisplayNameFor(model => Model.BirthDateD)
-                @Html.DisplayNameFor(model => Model.BirthDateM)
-                @Html.DisplayNameFor(model => Model.BirthDateY)
-                <span class="Age"></span>
+                @Html.LabelFor(model => Model.BirthDateD, new { @class = "control-label" })
+                @Html.LabelFor(model => Model.BirthDateM, new { @class = "control-label" })
+                @Html.LabelFor(model => Model.BirthDateY, new { @class = "control-label" })
+                @{
+                    string date = Model.BirthDateD + " " + Model.BirthDateM + " " + Model.BirthDateY;
+                }
+                <span class="Age form-control">@date</span>
             </div>
             }
             
             @if(Model.Nationality != null && !String.IsNullOrEmpty(Model.Nationality))
             {
                 <div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('Nationality')">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-                @Html.DisplayNameFor(model => Model.Nationality)
-                <span class="Nationality"></span>
+                @Html.LabelFor(model => Model.Nationality, new { @class = "control-label" })
+                <span class="Nationality form-control">@Model.Nationality</span>
             </div>
             }
             
             @if(Model.Locality != null && !String.IsNullOrEmpty(Model.Locality))
             {
                 <div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('Locality')">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-                @Html.DisplayNameFor(model => Model.Locality)
-                <span class="Locality"></span>
+                @Html.LabelFor(model => Model.Locality, new { @class = "control-label" })
+                <span class="Locality form-control">@Model.Locality</span>
             </div>
             }
 
             @if(Model.PhotoUrl != null && !String.IsNullOrEmpty(Model.PhotoUrl))
             {
                 <div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('PhotoUrl')">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-                @Html.DisplayNameFor(model => Model.PhotoUrl)
-                <span class="PhotoUrl"></span>
-            </div>
+                    <label class="control-label">Photo</label>
+                    <img src="@Model.PhotoUrl" alt="Photo" style="width: 25%; height: 25%;" />
+                </div>
             }
 
             @if(Model.ExtraInfo != null && !String.IsNullOrEmpty(Model.ExtraInfo))
             {
                 <div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('ExtraInfo')">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-                @Html.DisplayNameFor(model => Model.ExtraInfo)
-                <span class="ExtraInfo"></span>
+                @Html.LabelFor(model => Model.ExtraInfo, new { @class = "control-label" })
+                <span class="ExtraInfo form-control">@Model.ExtraInfo</span>
             </div>
             }
 
             @if(Model.EmailAddress != null && !String.IsNullOrEmpty(Model.EmailAddress))
             {
                 <div>
-                <button type="button" class="btn btn-primary btn-sm"
-                        onclick="displayAccessInfoPopup('EmailAddress')">
-                    <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-                @Html.DisplayNameFor(model => Model.EmailAddress)
-                <span class="EmailAddress"></span>
+                @Html.LabelFor(model => Model.EmailAddress, new { @class = "control-label" })
+                <span class="EmailAddress form-control">@Model.EmailAddress</span>
             </div>
             }
         </div>

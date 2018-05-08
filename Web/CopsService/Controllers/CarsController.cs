@@ -36,7 +36,7 @@ namespace PublicService.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Car carDB = db.Cars.FirstOrDefault(c => c.Id.Equals(id));
-            CarViewModel car = await acs.GetCar(carDB.Owner.UserName);
+            CarViewModel car = await acs.GetCar(carDB.Owner.UserName, "I want to see your car data !");
             if (car == null)
             {
                 return HttpNotFound();

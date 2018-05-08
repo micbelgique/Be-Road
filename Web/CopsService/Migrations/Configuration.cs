@@ -102,18 +102,27 @@ namespace PublicService.Migrations
 
         private void InitializeUsers(PSContext context)
         {
-            context.Users.ToList().Clear();
-            context.Users.AddOrUpdate(GenerateUser("1", "93011150162", "https://yt3.ggpht.com/a-/AJLlDp3l-ppFv3xLR_dg0jSFoWSbF-94mjQxob8XvQ=s900-mo-c-c0xffffffff-rj-k-no"));
-            context.Users.AddOrUpdate(GenerateUser("2", "97081817718", "https://cdn.shopify.com/s/files/1/0597/9769/products/wilson-castaway_film_1024x1024.jpg?v=1421681966"));
-            context.Users.AddOrUpdate(GenerateUser("3", "95052316256", "https://i.pinimg.com/originals/7e/54/cd/7e54cd815991d954c82ff191c88f157c.jpg"));
-            context.Users.AddOrUpdate(GenerateUser("4", "97010215411", "https://www.lieux-insolites.fr/hsavoie/martin/pierre%20martin-2.jpg"));
-            context.Users.AddOrUpdate(GenerateUser("5", "96122400226", "https://images.joueclub.fr/produits/S/06041106_2.jpg"));
-            context.Users.AddOrUpdate(GenerateUser("6", "93020623433", "https://www.rollingstone.fr/RS-WP-magazine/wp-content/uploads/2016/06/mohammed-ali-400x330.jpeg"));
-            context.Users.AddOrUpdate(GenerateUser("7", "95071956583", "https://consequenceofsound.files.wordpress.com/2018/03/nicolas-cage-superman-teen-titans-animated.png?w=807"));
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            userManager.Create(GenerateUser("1", "93011150162", "https://yt3.ggpht.com/a-/AJLlDp3l-ppFv3xLR_dg0jSFoWSbF-94mjQxob8XvQ=s900-mo-c-c0xffffffff-rj-k-no", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("2", "97081817718", "https://cdn.shopify.com/s/files/1/0597/9769/products/wilson-castaway_film_1024x1024.jpg?v=1421681966", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("3", "95052316256", "https://i.pinimg.com/originals/7e/54/cd/7e54cd815991d954c82ff191c88f157c.jpg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("4", "97010215411", "https://www.lieux-insolites.fr/hsavoie/martin/pierre%20martin-2.jpg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("5", "96122400226", "https://images.joueclub.fr/produits/S/06041106_2.jpg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("6", "93020623433", "https://www.rollingstone.fr/RS-WP-magazine/wp-content/uploads/2016/06/mohammed-ali-400x330.jpeg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("7", "95071956583", "https://consequenceofsound.files.wordpress.com/2018/03/nicolas-cage-superman-teen-titans-animated.png?w=807", userManager), "Admin@123456");
         }
 
-        private ApplicationUser GenerateUser(string id, string userName, string url)
+        private ApplicationUser GenerateUser(string id, string userName, string url, UserManager<ApplicationUser> userManager)
         {
+            var user = userManager.FindByName(userName);
+            if (user != null)
+            {
+                userManager.Delete(user);
+                user = null;
+            }
+
             return new ApplicationUser()
             {
                 Id = id,

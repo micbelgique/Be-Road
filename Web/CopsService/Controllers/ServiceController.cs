@@ -80,14 +80,14 @@ namespace PublicService.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Details(string nrid, string reason)
+        public async Task<ActionResult> Details(string id, string reason)
         {
-            if (nrid == null)
+            if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var user = await acs.GetUser(nrid);
+            var user = await acs.GetUser(id, reason);
             if (user == null)
             {
                 return HttpNotFound();
@@ -100,7 +100,7 @@ namespace PublicService.Controllers
         public async Task<ActionResult> SearchAsync(string searchString)
         {
             var strings = searchString.Split(' ');
-            var users = await acs.GetAllUsers();
+            var users = await acs.GetAllUsers($"Searching for {searchString}");
             var foundUsers = new List<ManageViewModel>();
             List<ManageViewModel> all;
             if (strings.Length > 1)
@@ -136,7 +136,7 @@ namespace PublicService.Controllers
         public async Task<string> GetFirstAndLastNameAsync()
         {
             var connectedUserMin = UserManager.FindById(User.Identity.GetUserId());
-            var connectedUser = await acs.GetUser(connectedUserMin.UserName);
+            var connectedUser = await acs.GetUser(connectedUserMin.UserName, "User first and last name display");
             return connectedUser.FirstName + " " + connectedUser.LastName;
         }
     }

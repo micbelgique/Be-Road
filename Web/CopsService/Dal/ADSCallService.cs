@@ -16,21 +16,21 @@ namespace PublicService.Dal
     {
         PSContext db = new PSContext();
 
-        public async Task<List<ManageViewModel>> GetAllUsers()
+        public async Task<List<ManageViewModel>> GetAllUsers(string justification)
         {
             var users = new List<ManageViewModel>();
             foreach(var user in db.Users.ToList())
             {
-                users.Add(await GetUser(user.UserName));
+                users.Add(await GetUser(user.UserName, justification));
             }
 
             return users;
         }
 
-        public async Task<ManageViewModel> GetUser(string nrid)
+        public async Task<ManageViewModel> GetUser(string nrid, string justification)
         {
-            var userPop = await GetUserPop(nrid);
-            var userFunny = await GetUserFunny(nrid);
+            var userPop = await GetUserPop(nrid, justification);
+            var userFunny = await GetUserFunny(nrid, justification);
             var user = new ManageViewModel()
             {
                 UserName = nrid,
@@ -49,7 +49,7 @@ namespace PublicService.Dal
             return user;
         }
 
-        public async Task<CarViewModel> GetCar(string nrid)
+        public async Task<CarViewModel> GetCar(string nrid, string justification)
         {
             using (var client = new HttpClient())
             {
@@ -68,7 +68,7 @@ namespace PublicService.Dal
                         Inputs = new Dictionary<string, dynamic>()
                         {
                             { "NRID", nrid },
-                            { "Justification", "Displaying car info"}
+                            { "Justification", justification}
                         }
                     };
 
@@ -77,12 +77,12 @@ namespace PublicService.Dal
                     if (response.IsSuccessStatusCode)
                     {
                         var resp = await response.Content.ReadAsAsync<Dictionary<int, BeContractReturn>>();
-                        var outputs = resp.Values.Select(ret => ret.Outputs);
+                        var outputs = resp.Values.Select(ret => ret.Outputs).ToList();
                         var carValues = outputs.SelectMany(d => d)
-                                            .ToDictionary(t => t.Key, t => t.Value).FirstOrDefault(o => o.Key.Equals(nrid)).Value;
+                                            .ToDictionary(t => t.Key, t => t.Value);
                         car.Owner = db.Users.FirstOrDefault(u => u.UserName.Equals(nrid));
-                        car.Brand = carValues.Brand;
-                        car.NumberPlate = carValues.NumberPlate;
+                        car.Brand = carValues["Brand"];
+                        car.NumberPlate = carValues["NumberPlate"];
                     }
                 }
                 catch (Exception ex)
@@ -94,7 +94,7 @@ namespace PublicService.Dal
             }
         }
 
-        private async Task<ManageViewModel> GetUserPop(string nrid)
+        private async Task<ManageViewModel> GetUserPop(string nrid, string justification)
         {
             using (var client = new HttpClient())
             {
@@ -113,7 +113,7 @@ namespace PublicService.Dal
                         Inputs = new Dictionary<string, dynamic>()
                         {
                             { "NRID", nrid },
-                            { "Justification", "Displaying user info"}
+                            { "Justification", justification}
                         }
                     };
 
@@ -122,17 +122,17 @@ namespace PublicService.Dal
                     if (response.IsSuccessStatusCode)
                     {
                         var resp = await response.Content.ReadAsAsync<Dictionary<int, BeContractReturn>>();
-                        var outputs = resp.Values.Select(ret => ret.Outputs);
+                        var outputs = resp.Values.Select(ret => ret.Outputs).ToList();
                         var userValues = outputs.SelectMany(d => d)
-                                            .ToDictionary(t => t.Key, t => t.Value).FirstOrDefault(o => o.Key.Equals(nrid)).Value;
-                        user.FirstName = userValues.FirstName;
-                        user.LastName = userValues.LastName;
-                        user.Locality = userValues.Locality;
-                        user.Nationality = userValues.Nationality;
-                        user.BirthDateD = userValues.Birthday.Subtring(0, 2);
-                        var spaceIndex = userValues.Birthday.IndexOf(" ");
-                        user.BirthDateM = userValues.Birthday.Subtring(3, spaceIndex - 2);
-                        user.BirthDateY = userValues.Birthday.Substring(spaceIndex + 1);
+                                            .ToDictionary(t => t.Key, t => t.Value);
+                        user.FirstName = userValues["FirstName"];
+                        user.LastName = userValues["LastName"];
+                        user.Locality = userValues["Locality"];
+                        user.Nationality = userValues["Nationality"];
+                        var birthDate = userValues["Birthday"].Split(' ');
+                        user.BirthDateD = birthDate[0];
+                        user.BirthDateM = birthDate[1];
+                        user.BirthDateY = birthDate[2];
                     }
                 }
                 catch (Exception ex)
@@ -144,7 +144,7 @@ namespace PublicService.Dal
             }
         }
 
-        private async Task<ManageViewModel> GetUserFunny(string nrid)
+        private async Task<ManageViewModel> GetUserFunny(string nrid, string justification)
         {
             using (var client = new HttpClient())
             {
@@ -163,7 +163,7 @@ namespace PublicService.Dal
                         Inputs = new Dictionary<string, dynamic>()
                         {
                             { "NRID", nrid },
-                            { "Justification", "Displaying user info"}
+                            { "Justification", justification}
                         }
                     };
 
@@ -172,11 +172,11 @@ namespace PublicService.Dal
                     if (response.IsSuccessStatusCode)
                     {
                         var resp = await response.Content.ReadAsAsync<Dictionary<int, BeContractReturn>>();
-                        var outputs = resp.Values.Select(ret => ret.Outputs);
+                        var outputs = resp.Values.Select(ret => ret.Outputs).ToList();
                         var userValues = outputs.SelectMany(d => d)
-                                            .ToDictionary(t => t.Key, t => t.Value).FirstOrDefault(o => o.Key.Equals(nrid)).Value;
-                        user.ExtraInfo = userValues.ExtraInfo;
-                        user.EmailAddress = userValues.Email;
+                                            .ToDictionary(t => t.Key, t => t.Value);
+                        user.ExtraInfo = userValues["ExtraInfo"];
+                        user.EmailAddress = userValues["Email"];
                     }
                 }
                 catch (Exception ex)

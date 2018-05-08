@@ -15,6 +15,12 @@ namespace PublicService.Controllers
             return View();
         }
 
+        public ActionResult Error()
+        {
+            ViewBag.Error = "You are already registered !";
+            return View("Index");
+        }
+
         [AllowAnonymous]
         public ActionResult AboutGDPR()
         {
