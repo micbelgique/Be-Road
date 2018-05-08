@@ -57,11 +57,55 @@ Ip addresses
 - **ADSMock**: 172.16.42.12
 - **MessageLog**: 172.16.42.1
 
+This project requires 2 extra docker-compose files, docker-compose.override.yml and docker-compose.prod.yml.
+Add theses 2 files on the root folder and then unload and reload the docker-compose project, after this the 2 files will be loaded.
+
 Compose files
 - docker-compose.override.yml
   - Is used for development
 - docker-compose.prod.yml
-  - Is used for production (not implemented yet)
+  - Is used for production 
+
+These files look like this.
+```
+version: '3'
+
+services:
+  proxy:
+    ports:
+      - "3000"
+
+  centralserver:
+    environment:
+      - ContractContext= <InsertYourConnectionStringHere>
+    ports:
+      - "3001"
+
+  adsmock:
+    ports:
+      - "3002"
+  
+  messagelog:
+    environment:
+      - LogContext= <InsertYourConnectionStringHere>
+      - Hostname=<...>
+      - Port=<...>
+      - Username=<...>
+      - Password=<...>
+      - ChainName=<...>
+      - BurnAddress=<...>
+      - RootNodeAddress=<...>
+    ports:
+      - "3003"
+
+  web:
+    environment:
+      - PSContext= <InsertYourConnectionStringHere>
+    ports:
+      - "3004"
+
+
+```
 
 
 To build on command line use this: 
