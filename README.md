@@ -28,6 +28,7 @@ The public services are able to communicate through Be-Road using contracts. Fin
 4.  [Call to MessageLog API](#call-to-messagelog-api)
 5.	[Packages included](#packages-included)
 6.	[Latest releases](#latest-releases)
+7.	[Contributers](#contributers)
 
 ### Clone the code
 To get the websites and the central part on your machine, you just have to clone the project in your git.
@@ -601,3 +602,7 @@ We used different packages in these projects. Here is a list of them and their u
 * Home page : Public services data sources
 * Data page : Data possessed by a the selected public service
 * Details modal : Accesses on the selected piece of data
+
+### Contributers
+* Michaël Van Meerbeek
+* Wilson Weets 
