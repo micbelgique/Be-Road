@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Privacy Passport</title>
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/hover-min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
@@ -24,12 +25,16 @@
                     @{
                     if (Session["connected"] != null && (bool)Session["connected"])
                     {
-                        @Html.ActionLink("Privacy Passport", "Index", "PS", new { area = "" }, new { @class = "brand-logo left blue-grey-text text-darken-1", id = "app-title" })
-                }
+                    <a href="@Url.Action("Index", "PS")" class="brand-logo left blue-grey-text text-darken-1" id="app-title">
+                        <img id="logo" src="~/Content/img/Privacy_Passport.svg" />
+                    </a>
+                    }
                 else
                 {
-                    @Html.ActionLink("Privacy Passport", "Index", "Home", new { area = "" }, new { @class = "brand-logo left blue-grey-text text-darken-1", id = "app -title" })
-            }
+                    <a href="@Url.Action("Index", "Home")" class="brand-logo left blue-grey-text text-darken-1" id="app-title">
+                        <img id="logo" src="~/Content/img/Privacy_Passport.svg" />
+                    </a>
+                }
             string lang = Request.Cookies["Language"]?.Value;
                     }
                     <ul id="nav-mobile" class="right">
@@ -49,7 +54,7 @@
         </div>
     </div>
     <footer>
-        <p class="color-company-black">&copy; @DateTime.Now.Year - TestPrivacyPassport</p>
+        <p id="footer-txt" class="color-company-black">&copy; @DateTime.Now.Year - TestPrivacyPassport</p>
     </footer>
     <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 </body>

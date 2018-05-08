@@ -28,6 +28,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TypeScriptToolsVersion>2.5</TypeScriptToolsVersion>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -148,8 +149,8 @@
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=9.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAzure.Storage.9.0.0\lib\net45\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
@@ -162,6 +163,9 @@
     </Reference>
     <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest">
       <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
@@ -269,17 +273,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PSDataController.cs" />
     <Compile Include="Controllers\PSController.cs" />
-    <Compile Include="Dal\Services\CopsService.cs" />
-    <Compile Include="Dal\Services\IService.cs" />
     <Compile Include="Dal\PSContext.cs" />
     <Compile Include="Dal\PSDataService.cs" />
-    <Compile Include="Dal\Services\MicService.cs" />
-    <Compile Include="Dal\Services\MockAzureService.cs" />
-    <Compile Include="Dal\Services\MockFirstNamesService.cs" />
-    <Compile Include="Dal\Services\MockItunesService.cs" />
-    <Compile Include="Dal\Services\MockZippopotamService.cs" />
-    <Compile Include="Dal\Services\MockGeoipService.cs" />
-    <Compile Include="Dal\Services\PSService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -298,41 +293,44 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Global.nl-BE.resx</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803061136242_InitialCreate.cs" />
-    <Compile Include="Migrations\201803061136242_InitialCreate.Designer.cs">
-      <DependentUpon>201803061136242_InitialCreate.cs</DependentUpon>
+    <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Migrations\201803200853305_Initial.cs" />
+    <Compile Include="Migrations\201803200853305_Initial.Designer.cs">
+      <DependentUpon>201803200853305_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803061140227_AddImageURI.cs" />
-    <Compile Include="Migrations\201803061140227_AddImageURI.Designer.cs">
-      <DependentUpon>201803061140227_AddImageURI.cs</DependentUpon>
+    <Compile Include="Migrations\201803200854280_Add-PS.cs" />
+    <Compile Include="Migrations\201803200854280_Add-PS.Designer.cs">
+      <DependentUpon>201803200854280_Add-PS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805021201200_Refactor-Ps-Contracts.cs" />
+    <Compile Include="Migrations\201805021201200_Refactor-Ps-Contracts.Designer.cs">
+      <DependentUpon>201805021201200_Refactor-Ps-Contracts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805041310496_Removed-ContractId.cs" />
+    <Compile Include="Migrations\201805041310496_Removed-ContractId.Designer.cs">
+      <DependentUpon>201805041310496_Removed-ContractId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Dto\AccessInfoDto.cs" />
+    <Compile Include="Models\ViewModel\PublicServiceDataViewModel.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\PublicService.cs" />
-    <Compile Include="Models\PublicServiceData\PSDAccessInfo.cs" />
-    <Compile Include="Models\PublicServiceData\PSDCar.cs" />
-    <Compile Include="Models\PublicServiceData\PSDData.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDAzure.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDFirstNames.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDGeoip.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDItunes.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDZippopotam.cs" />
-    <Compile Include="Models\PublicServiceData\PSDMic.cs" />
-    <Compile Include="Models\PublicServiceData\PSDUser.cs" />
-    <Compile Include="Models\PublicServiceData\PublicServiceData.cs" />
-    <Compile Include="Models\PublicServiceData\MockPSDPlace.cs" />
+    <Compile Include="Models\PublicServiceData.cs" />
+    <Compile Include="Models\ViewModel\AccessInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\img\azure.png" />
+    <Content Include="BeRoadSchema.png" />
+    <Content Include="Content\hover-min.css" />
+    <Content Include="Content\hover.css" />
+    <Content Include="Content\img\bank.png" />
     <Content Include="Content\img\CarouselBG.png" />
-    <Content Include="Content\img\firstnames.png" />
-    <Content Include="Content\img\freegoip.png" />
-    <Content Include="Content\img\itunes.png" />
-    <Content Include="Content\img\mic.jpg" />
+    <Content Include="Content\img\crowd.png" />
+    <Content Include="Content\img\funny.png" />
+    <Content Include="Content\img\immatriculation.jpg" />
     <Content Include="Content\img\police.jpg" />
+    <Content Include="Content\img\Privacy_Passport.svg" />
     <Content Include="Content\img\ps.jpg" />
-    <Content Include="Content\img\zippopotam.png" />
     <Content Include="Content\materialize\css\materialize.css" />
     <Content Include="Content\materialize\css\materialize.min.css" />
     <Content Include="Content\materialize\font\material-design-icons\LICENSE.txt" />
@@ -396,6 +394,11 @@
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.woff" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.ttf" />
     <Content Include="Content\materialize\fonts\roboto\Roboto-Bold.eot" />
+    <Content Include="Content\hover.css.map" />
+    <None Include="Dockerfile" />
+    <None Include=".dockerignore">
+      <DependentUpon>Dockerfile</DependentUpon>
+    </None>
     <None Include="Properties\PublishProfiles\Privacy-Passport - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
@@ -448,17 +451,13 @@
     <Content Include="Views\PS\Index.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\PSData\Index.cshtml" />
-    <Content Include="Views\PSData\Zippo.cshtml" />
-    <Content Include="Views\PSData\Itunes.cshtml" />
-    <Content Include="Views\PSData\Geoip.cshtml" />
-    <Content Include="Views\PSData\Firstnames.cshtml" />
-    <Content Include="Views\PSData\Azure.cshtml" />
-    <Content Include="Views\PSData\Cops.cshtml" />
     <Content Include="Views\PSData\AccessInfo.cshtml" />
     <Content Include="Views\Eid\Details.cshtml" />
-    <Content Include="Views\PSData\Mic.cshtml" />
     <Content Include="Views\PSData\ResourcesIncluding.cshtml" />
-    <Content Include="Views\PSData\PublicService.cshtml" />
+    <Content Include="Views\PSData\GenericView.cshtml" />
+    <None Include="Web.Privacy-Passport - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -488,12 +487,24 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Global.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803061136242_InitialCreate.resx">
-      <DependentUpon>201803061136242_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803200853305_Initial.resx">
+      <DependentUpon>201803200853305_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803061140227_AddImageURI.resx">
-      <DependentUpon>201803061140227_AddImageURI.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201803200854280_Add-PS.resx">
+      <DependentUpon>201803200854280_Add-PS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805021201200_Refactor-Ps-Contracts.resx">
+      <DependentUpon>201805021201200_Refactor-Ps-Contracts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805041310496_Removed-ContractId.resx">
+      <DependentUpon>201805041310496_Removed-ContractId.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

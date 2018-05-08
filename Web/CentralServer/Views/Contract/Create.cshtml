@@ -1,0 +1,94 @@
+﻿@model Contracts.Models.BeContract
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create a BeContract</h2>
+
+
+@using (Html.BeginForm("Create", "Contract", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>BeContract</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label class="control-label col-md-2">Name</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", placeholder = "Identifies the contract" } })
+                @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group contract-descr">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Describes the contract" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Version, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Version, new { htmlAttributes = new { @class = "form-control", placeholder = "Defines the version of the contract" } })
+                @Html.ValidationMessageFor(model => model.Version, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="col-md-12">Inputs</h4>
+            <div class="col-md-12" id="inputs">
+            </div>
+            <div class="col-md-10">
+                <button type="button" class="input-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="col-md-6">Queries</h4>
+            <div class="col-md-12">
+                <button type="button" class="query-rem-btn btn btn-danger col-md-6">Delete all queries</button>
+            </div>
+            <div class="col-md-12" id="queries">
+            </div>
+            <div class="col-md-10">
+                <button type="button" class="query-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="col-md-12">Outputs</h4>
+            <div class="col-md-12" id="outputs">
+            </div>
+            <div class="col-md-10">
+                <button type="button" class="output-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="create-btn" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<p id="error-message" class="alert-danger"></p>
+<p id="success-message" class="alert-success"></p>
+
+<p>
+    @Html.ActionLink("Return to BeContract list", "GoToList")
+</p>
+
+@Html.Partial("Input")
+@Html.Partial("Query")
+@Html.Partial("Mapping")
+@Html.Partial("Output")
+
+<script src="~/Scripts/ContractsCreator/AjaxCalls.js"></script>
+<script src="~/Scripts/ContractsCreator/UpdateSelect.js"></script>
+<script src="~/Scripts/ContractsCreator/Script.js"></script>

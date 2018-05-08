@@ -71,12 +71,12 @@
     $("#ps-identity").hover(
         function (event) {
             if ($(event.target).is('section')) {
-                $(this).css("background-color", "#4fc3f7");
+                $(this).css("background-color", "#FFFFFF");
             }
         },
         function (event) {
             if ($(event.target).is('section')) {
-                $(this).css("background-color", "#29b6f6");
+                $(this).css("background-color", "#FAFAFA");
             }
         });
 });
@@ -91,15 +91,16 @@ function formatDate(date) {
 }
 
 function displayAccessInfoPopup(accessInfo) {
+    console.log(accessInfo);
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('#exampleModalLabel').text(accessInfo.Value);
+    modal.find('#exampleModalLabel').text('A été accédée ' + accessInfo.length + ' fois');
     var access = "<ul>";
-    if (accessInfo.AccessInfos.length == 0)
+    if (accessInfo.length === 0)
         access += "<li>" + Resources.Accessed_Empty + "</li>";
-    $.each(accessInfo.AccessInfos, function (i, v) {
+    $.each(accessInfo, function (i, v) {
         access += "<li>";
-        access += "<strong>" + v.Name + "</strong> " + Resources.Accessed + " <strong>" + formatDate(v.Date) + "</strong> " + Resources.For + " <strong>" + v.Reason + "</strong>";
+        access += "<strong>" + v.Name + "</strong> " + Resources.Accessed + " <strong>" + formatDate(v.Date) + "</strong> " + Resources.For + " <strong>" + v.Justification + " * " + v.Total + "</strong>";
         access += "</li>";
     });
     access += "</ul>"

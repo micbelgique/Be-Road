@@ -1,0 +1,28 @@
+﻿@model Contracts.Models.Query
+@{
+    ViewBag.Title = "Query";
+}
+
+<div class="query" id="query">
+    <div class="form-group">
+        <label class="control-label col-md-2">Name</label>
+        <div class="col-md-10">
+            <select class="form-control dropdown qcontractname-select" id="Id" name="Id">
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-12 col-md-offset-1">
+            <h4 class="col-md-12">Mappings</h4>
+            <div class="col-md-10" id="mappings">
+            </div>
+            <div class="col-md-10">
+                <button type="button" class="mapping-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <hr />
+</div>
+
+

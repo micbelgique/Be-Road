@@ -196,9 +196,8 @@
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.40306.1554, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.4.403061554\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Net.Http, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.3\lib\net46\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -208,6 +207,18 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.0\lib\net461\System.Security.Cryptography.Algorithms.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.0\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -312,8 +323,8 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Dal\ADSCallService.cs" />
     <Compile Include="Dal\PSContext.cs" />
-    <Compile Include="Dal\PSDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -328,14 +339,26 @@
     <Compile Include="Migrations\201803021316110_ApplicationUsers.Designer.cs">
       <DependentUpon>201803021316110_ApplicationUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803131037526_Accounts-Without-Devs.cs" />
+    <Compile Include="Migrations\201803131037526_Accounts-Without-Devs.Designer.cs">
+      <DependentUpon>201803131037526_Accounts-Without-Devs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803140935168_Admin-Data.cs" />
+    <Compile Include="Migrations\201803140935168_Admin-Data.Designer.cs">
+      <DependentUpon>201803140935168_Admin-Data.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803140941353_Delete-Exsisting-Users.cs" />
+    <Compile Include="Migrations\201803140941353_Delete-Exsisting-Users.Designer.cs">
+      <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805071203083_Full-Rework-BeContract.cs" />
+    <Compile Include="Migrations\201805071203083_Full-Rework-BeContract.Designer.cs">
+      <DependentUpon>201805071203083_Full-Rework-BeContract.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Dal\AzureUpload.cs" />
     <Compile Include="Models\Car.cs" />
-    <Compile Include="Models\Data.cs" />
-    <Compile Include="Models\Dto\ApplicationUserDto.cs" />
-    <Compile Include="Models\Dto\DataDto.cs" />
+    <Compile Include="Models\CarViewModel.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
@@ -360,6 +383,7 @@
     <Content Include="App_Data\stagiaires.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\Public-Service - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\Public-Service - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -391,7 +415,6 @@
     <Content Include="Views\Cars\Delete.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
-    <Content Include="Views\Cars\Azure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -401,7 +424,9 @@
     <Content Include="Views\Service\Details.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Home\AboutGDPR.cshtml" />
-    <Content Include="Views\Service\UploadToAzure.cshtml" />
+    <None Include="Web.Public-Service - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Helpers\" />
@@ -426,6 +451,24 @@
     <EmbeddedResource Include="Migrations\201803021316110_ApplicationUsers.resx">
       <DependentUpon>201803021316110_ApplicationUsers.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131037526_Accounts-Without-Devs.resx">
+      <DependentUpon>201803131037526_Accounts-Without-Devs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803140935168_Admin-Data.resx">
+      <DependentUpon>201803140935168_Admin-Data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803140941353_Delete-Exsisting-Users.resx">
+      <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071203083_Full-Rework-BeContract.resx">
+      <DependentUpon>201805071203083_Full-Rework-BeContract.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

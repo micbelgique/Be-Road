@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PublicService.Models.ApplicationUser>
+﻿@model IEnumerable<PublicService.Models.ManageViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -8,11 +8,10 @@
 <div class="jumbotron">
     <h1>Users</h1>
     <p class="lead">This a service where you can see information about users</p>
-    @Html.ActionLink("Upload the users information to privacy passport", "UploadToAzure", "Service")
 </div>
 
 <section id="users">
-    @using (Html.BeginForm("Search", "Service", FormMethod.Post, new { @class = "SearchForm" }))
+    @using (Html.BeginForm("SearchAsync", "Service", FormMethod.Post, new { @class = "SearchForm" }))
     {
         <div class="container">
             <div class="row">
@@ -40,8 +39,8 @@
             {
             <li>
                 <button type="button" class="btn btn-default btn-sm userItem"
-                        onclick="askUserDetails('@item.Id', @Newtonsoft.Json.JsonConvert.SerializeObject(item.FirstName))">
-                    <span class="lead">@(item?.FirstName?.Value?.Replace(".", "")) @(item?.LastName?.Value?.Replace(".", " "))</span>
+                        onclick="askUserDetails('@item.UserName', '@item.FirstName')">
+                    <span class="lead">@(item?.FirstName?.Replace(".", "")) @(item?.LastName?.Replace(".", " "))</span>
                 </button>
             </li>
             }

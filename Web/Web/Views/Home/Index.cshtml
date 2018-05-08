@@ -2,11 +2,12 @@
     ViewBag.Title = Resources.Global.Connection;
 }
 <section id="home-page">
-    <h1 class="text-center font-weight-bold">@Resources.Global.Log_in_page_title</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices augue metus, at tempus sem rhoncus porta. Praesent eu neque semper, viverra purus vitae, posuere quam. Sed vel tristique eros. Nulla facilisi.</p>
-    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam a imperdiet eros. </p>
+    <h1 class="home-title text-center font-weight-bold">@Resources.Global.Log_in_page_title</h1>
+    <p class="home-color">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices augue metus, at tempus sem rhoncus porta. Praesent eu neque semper, viverra purus vitae, posuere quam. Sed vel tristique eros. Nulla facilisi.</p>
+    <p class="home-color">Interdum et malesuada fames ac ante ipsum primis in faucibus. Etiam a imperdiet eros. </p>
     @using (Html.BeginForm("LogIn", "Home"))
     {
         <input type="submit" class="btn" value="@Resources.Global.Log_in" id="eid-connect" />
     }
+    <img id="crowd" src="~/Content/img/crowd.png" />
 </section>

@@ -1,0 +1,33 @@
+﻿@model Contracts.Models.Mapping
+
+@{
+    ViewBag.Title = "Mapping";
+}
+
+<div class="mapping" id="mapping">
+    <br />
+    <div class="form-group">
+        <label class="control-label col-md-2">InputKey</label>
+        <div class="col-md-4">
+            <select class="form-control dropdown key-select" id="InputKey" name="InputKey"></select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class = "control-label col-md-2">Lookup input ID</label>
+        <div class="col-md-10">
+            <select class="form-control dropdown lookupid-select" id="LookupInputId" name="LookupInputId">
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Lookup input key</label>
+        <div class="col-md-10">
+            <select class="form-control dropdown lookupkey-select" id="LookupInputKey" name="LookupInputKey">
+            </select>
+        </div>
+    </div>
+    <hr />
+</div>
+

@@ -27,16 +27,12 @@ if (document.getElementById('home') != null) {
 function askUserDetails(userId, data) {
     var modal = $('#accessInfoModal');
     modal.modal();
-    modal.find('.modal-title').text("Access data of " + data.Value);
+    modal.find('.modal-title').text("Access data of " + data);
     modal.find('#id').attr("value", userId);
-    modal.find('#dataId').attr("value", data.Id);
-    getPrivateIP(function cb(ip) {
-        modal.find('#ip').attr("value", ip);
-    });
 }
 
 //Info
-function displayAccessInfoPopup(dataName, dataId) {
+function displayAccessInfoPopup(dataName) {
     var modal = $('#accessInfoModal');
     modal.modal();
 
@@ -44,11 +40,11 @@ function displayAccessInfoPopup(dataName, dataId) {
         getPrivateIP(function cb(ip) {
             //int? dataId, string name, string reason, string ip
             const reason = modal.find('#reason').val();
-            $.post('/Service/AddAccessInfo', { dataId: dataId, reason: reason, ip: ip },
+            $.post('/Service/AddAccessInfo', { reason: reason},
                 function (json) {
                     var data = JSON.parse(json);
                     console.log(data);
-                    $('#user span.' + dataName).text(":" + data.Value);
+                    $('#user span.' + dataName).text(":" + data);
                 });
             modal.find('#reason').val("");
             modal.modal('toggle');

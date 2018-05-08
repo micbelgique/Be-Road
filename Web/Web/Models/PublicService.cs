@@ -11,10 +11,7 @@ namespace Web.Models
         public int ID { get; set; }
         [Required]
         public string Name { get; set; }
-        [Required]
-        public string DalMethod { get; set; }
-        [Required]
-        public string Url { get; set; }
+        public List<String> ContractNames { get; set; }
         public string Description { get; set; }
         public string ImageURI { get; set; }
     }

@@ -9,7 +9,12 @@ namespace Web.Dal
 {
     public class PSContext : DbContext
     {
-        public PSContext() : base("PSContext")
+        public PSContext() : base()
+        {
+
+        }
+
+        public PSContext(string connectionString) : base(connectionString)
         {
 
         }

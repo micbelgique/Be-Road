@@ -1,0 +1,94 @@
+﻿@model Contracts.Models.AdapterServer
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<script>
+    var contracts = @Html.Raw(Json.Encode(ViewBag.contracts));
+</script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>AdapterServer</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <label class="control-label col-md-2">Information System</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ISName, new { htmlAttributes = new { @class = "form-control", disabled = "disabled" } })
+                @Html.ValidationMessageFor(model => model.ISName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">URL</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">API Root</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Root, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Root, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <h4 class="col-md-12">Contracts</h4>
+            <div class="col-md-12" id="contracts">
+                @for (int i = 0; i < Model.ContractNames.Count; i++)
+                {
+                    <div class="added-contract" id="contract-old-@i">
+                        <select class="form-control dropdown contract-select" id="contractName" name="contractName">
+                            @for (int j = 0; j < Model.ContractNames.Count; j++)
+                            {
+                                <option value="@Model.ContractNames[j].Id" @if (i == j) { <text> selected="selected" </text> }>
+                                    @Model.ContractNames[j].Id
+                                </option>
+                            }
+                        </select>
+                        <button type="button" class="contract-rem-btn btn btn-danger"><i class="fas fa-times"></i></button>
+                        <br />
+                    </div>
+                }
+            </div>
+            <div class="col-md-10">
+                <button type="button" class="contract-add-btn btn btn-success form-control"><i class="fas fa-plus"></i></button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="save" type="button" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert-danger" id="error">@ViewBag.Error</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<div class="contract" id="contract">
+    <select class="form-control dropdown contract-select" id="contractName" name="contractName"></select>
+    <button type="button" class="contract-rem-btn btn btn-danger"><i class="fas fa-times"></i></button>
+    <br />
+</div>
+
+<script src="~/Scripts/ADSEdit/EditManager.js"></script>

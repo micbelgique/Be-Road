@@ -8,6 +8,13 @@
     <p class="lead">All this information will be stored in the blockchain forever, so be carefull !</p>
 </div>
 
+@if(ViewBag.Error != null)
+{
+    <div class="alert-danger">
+        @ViewBag.Error
+    </div>
+}
+
 <section id="home">
     <h3 id="title">I know who you are...</h3>
     <div id="identity"style="display: none;">

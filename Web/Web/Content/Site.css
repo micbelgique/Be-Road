@@ -25,7 +25,6 @@ li.active {
 
 body {
     min-height: 100vh;
-    height: 100%;
 }
 
 #bg-handle {
@@ -33,7 +32,17 @@ body {
 }
 
 /* Home page */
+#crowd {
+    position: absolute;
+    bottom: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 90%;
+}
+
 #home-page {
+    position: relative;
     margin: 0 auto;
     /*padding-top: 100px;*/
     width: 660px;
@@ -46,8 +55,29 @@ body {
 }
 
 #eid-connect {
-    color: white;
-    background-color: rgb(52, 153, 165);
+    color: white !important;
+    background-color: rgb(1, 144, 161);
+}
+
+#logo{
+    width: 120px;
+}
+
+#footer-txt {
+    margin-left: 25px;
+}
+
+#app-title {
+    margin-top: 10px;
+    margin-left: 25px;
+}
+
+.home-title {
+    color: #ffffff !important;
+}
+
+.home-color {
+    color: #ffffff !important;
 }
 
 /* PS sections */
@@ -63,19 +93,17 @@ body {
 }
 
 .public-service {
-    border: 1px solid lightgray;
     width: 220px;
 }
 
 .public-service:hover {
-    box-shadow: 3px 3px 3px grey;
     cursor: pointer;
 }
 
 #ps-identity {
     min-height: 90vh;
     width: 3%;
-    background-color: #29b6f6;
+    background-color: rgb(250, 250, 250);
 }
 
 #ps-sections {
@@ -90,12 +118,17 @@ body {
     margin-right: auto;
 }
 
+.card-modified {
+    display: inline-table !important;
+}
+
 #homecontent {
     width: 100%;
     display: flex;
 }
 
 #chkid {
+    text-align: center;
     vertical-align: middle;
     display: none;
     width: 100%;
@@ -104,12 +137,14 @@ body {
 #opener {
     float: right;
     margin-right: 10px;
+    color: lightgray;
 }
 
-#closer{
+#closer {
     display: none;
     float: right;
     margin-right: 10px;
+    color: lightgray;
 }
 
 
@@ -194,5 +229,33 @@ ul {
 
 #modal-close {
     display: inline-block;
-    float: right;
+}
+
+#ps-data-title{
+    margin-left: 25px;
+}
+
+.data-item {
+    transition: color 0.3s ease;
+    color: #D5D5D5 !important;
+}
+
+.data-item:hover {
+    color: #b1b1b1 !important;
+}
+
+.data-link:hover .data-item {
+    color: #b1b1b1 !important;
+}
+
+#data-card{
+    margin-top: 25px;
+}
+
+.data-link {
+    transition: background-color 0.3s ease;
+}
+
+.data-link:hover {
+    background-color: #ececec !important;
 }

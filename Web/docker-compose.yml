@@ -1,0 +1,75 @@
+version: '3'
+
+services:
+  proxy:
+    container_name: proxy
+    hostname: proxy
+    image: proxy
+    build:
+      context: .\Proxy
+      dockerfile: Dockerfile
+    networks:
+      beroad:
+       ipv4_address: 172.16.42.10
+    depends_on:
+      - adsmock
+      - messagelog
+      - centralserver
+
+  centralserver:
+    container_name: centralserver
+    hostname: centralserver
+    image: centralserver
+    build:
+      context: .\CentralServer
+      dockerfile: Dockerfile
+    networks:
+      beroad:
+       ipv4_address: 172.16.42.11
+
+  adsmock:
+    container_name: adsmock
+    hostname: adsmock
+    image: adsmock
+    build:
+      context: .\ADSMock
+      dockerfile: Dockerfile
+    networks:
+      beroad:
+       ipv4_address: 172.16.42.12
+
+      
+  messagelog:
+    container_name: messagelog
+    hostname: messagelog
+    image: messagelog
+    build:
+      context: .\MessageLog
+      dockerfile: Dockerfile
+    networks:
+      beroad:
+       ipv4_address: 172.16.42.13
+
+  web:
+    image: web
+    container_name: web
+    hostname: web
+    build:
+      context: .\Web
+      dockerfile: Dockerfile
+    networks:
+      beroad:
+       ipv4_address: 172.16.42.14
+
+networks:
+  default:
+    external:
+      name: nat
+  beroad:
+    driver: nat
+    ipam:
+      config:
+        - subnet: 172.16.42.0/24
+
+
+

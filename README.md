@@ -25,27 +25,113 @@ The public services are able to communicate through Be-Road using contracts. Fin
 1.	[Clone the code](#clone-the-code)
 2.  [Blockchain implementation](#blockchain-implementation)
 3.  [How to create and use contracts](#how-to-create-and-use-contracts)
-3.	[Packages included](#packages-included)
-4.	[Latest releases](#latest-releases)
+4.  [Call to MessageLog API](#call-to-messagelog-api)
+5.	[Packages included](#packages-included)
+6.	[Latest releases](#latest-releases)
 
 ### Clone the code
 To get the websites and the central part on your machine, you just have to clone the project in your git.
-The solution contains 3 projects :
-* Web (the main portal)
+The solution contains 9 projects :
+* ADSMock (Mock of the Adapter Servers)
+* BeRoadTest (Unit test project)
+* CenterServer (Handle Contracts ands ADS)
+* ConsoleTesting (A console project for quickly test some features)
+* Contracts (A class library that contains the logic for contracts)
+* MessageLog (Logging API with blockchain implementation)
+* Proxy (Proxy that handle inputs to BeRoad)
 * PublicService (the public service mock)
-* MessageLog (the central part)
+* Web (The privacy passport portal)
 
-You will have to change the connection strings in the Web.config files in the 3 projects
-```xml
-<!-- Local connection string (Web.Debug.Config) -->
-<connectionStrings>
-    <add name="{ContextName}" connectionString="Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=LogContext-20180313142602; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|{ContextFileName}.mdf" providerName="System.Data.SqlClient" />
-</connectionStrings>
+#### How to build
+There's a docker-compose file that will be used to build the project.
+First you need to install Docker on your PC.
+After this you need to enable the container feature on.  
+https://dotnetthoughts.net/dockerize-an-existing-aspnet-mvc5-application/
+To build & run every component, set the docker-compose as startup project and hit run.
+The first time you run the project, docker will download all the images and this will take some time.
 
-<!-- Remote connection string (Web.Release.Config) -->
-<connectionStrings>
-    <add name="{ContextName}" connectionString="Server=tcp:{ServerName},1433;Initial Catalog={DatabaseName};Persist Security Info=False;User ID={Username};Password={Password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.SqlClient"/>
-</connectionStrings>
+##### Docker
+Ip addresses
+- **Proxy**: 172.16.42.10
+- **CentralServer**: 172.16.42.11
+- **ADSMock**: 172.16.42.12
+- **MessageLog**: 172.16.42.1
+
+This project requires 2 extra docker-compose files, docker-compose.override.yml and docker-compose.prod.yml.
+Add theses 2 files on the root folder and then unload and reload the docker-compose project, after this the 2 files will be loaded.
+
+Compose files
+- docker-compose.override.yml
+  - Is used for development
+- docker-compose.prod.yml
+  - Is used for production 
+
+These files look like this.
+```
+version: '3'
+
+services:
+  proxy:
+    ports:
+      - "3000"
+
+  centralserver:
+    environment:
+      - ContractContext= <InsertYourConnectionStringHere>
+    ports:
+      - "3001"
+
+  adsmock:
+    ports:
+      - "3002"
+  
+  messagelog:
+    environment:
+      - LogContext= <InsertYourConnectionStringHere>
+      - Hostname=<...>
+      - Port=<...>
+      - Username=<...>
+      - Password=<...>
+      - ChainName=<...>
+      - BurnAddress=<...>
+      - RootNodeAddress=<...>
+    ports:
+      - "3003"
+
+  web:
+    environment:
+      - PSContext= <InsertYourConnectionStringHere>
+    ports:
+      - "3004"
+
+
+```
+
+
+To build on command line use this: 
+```
+docker-compose 
+    -f "...\docker-compose.yml" 
+    -f "...\docker-compose.override.yml" 
+    -p prodcompose up 
+```
+
+
+##### Entity Framework
+In BeRoad there are currently 2 DbContexts that need a connectionstring
+- Central Server
+- Message Log
+
+The connection strings need to be defined in the docker-compose.yml
+To add a migration or update a database, you need to to set the **project as startup** and as **default project** in the package manager console.
+After this you need to specify the connectionstring as well as the dataprovider when running the migrations commands.
+
+Example: 
+```
+Add-Migration MigrationName -Verbose -ConnectionString "..." -ConnectionProviderName "System.Data.SqlClient"
+```
+```
+Update-Database -Verbose -ConnectionString "..." -ConnectionProviderName "System.Data.SqlClient"
 ```
 
 ### Blockchain implementation
@@ -78,6 +164,8 @@ They work like functions that can call other contracts. Their inputs are paramet
 
 The contracts are created in Be-Road with recommandations asked to services.
 
+If a contract contains a input with key **Justification** and **Justification**, every call to this contract will be stored in a database and in a blockchain.
+
 #### Example
 ##### Without queries
 
@@ -98,7 +186,7 @@ JSON :
     "Queries": [],
     "Outputs": [
         {
-            "Contract": "GetOwnerIdByDogId",
+            "LookupInputId": "0",
             "Type": "String",
             "Description": "The ID of the owner of the dog",
             "Key": "OwnerIDOfTheDog"
@@ -129,7 +217,7 @@ GetDogOwnerContract.Outputs = new List<Output>()
 {
     new Output()
     {
-        Contract = GetDogOwnerContract,
+        LookupInputId = 0,
         Key = "OwnerIDOfTheDog",
         Description = "The ID of the owner of the dog",
         Type = typeof(string)
@@ -158,8 +246,8 @@ GetDogOwnerContract.Outputs = new List<Output>()
             "Mappings": [
                 {
                     "InputKey": "DogID",
-                    "Contract": "GetAddressByDogId",
-                    "ContractKey": "MyDogID"
+                    "LookupInputId": "0",
+                    "LookupInputKey": "MyDogID"
                 }
             ]
         },
@@ -168,27 +256,27 @@ GetDogOwnerContract.Outputs = new List<Output>()
             "Mappings": [
                 {
                     "InputKey": "OwnerID",
-                    "Contract": "GetOwnerIdByDogId",
-                    "ContractKey": "OwnerIDOfTheDog"
+                    "LookupInputId": "1",
+                    "LookupInputKey": "OwnerIDOfTheDog"
                 }
             ]
         }
     ],
     "Outputs": [
         {
-            "Contract": "GetAddressByOwnerId",
+            "LookupInputId": "1",
              "Type": "String",
              "Description": "Street name",
              "Key": "Street"
         },
         {
-             "Contract": "GetAddressByOwnerId",
+             "LookupInputId": "1",
              "Type": "Int32",
              "Description": "Street number",
              "Key": "StreetNumber"
        },
        {
-             "Contract": "GetAddressByOwnerId",
+             "LookupInputId": "1",
              "Type": "String",
              "Description": "Country of the address",
              "Key": "Country"
@@ -228,8 +316,8 @@ GetAddressByDogContract.Queries = new List<Query>()
             new Mapping()
             {
                 InputKey = "DogID",
-                Contract = GetAddressByDogContract,
-                ContractKey = "MyDogID"
+                LookupInputId = 0,
+                LookupInputKey = "MyDogID"
             }
         }
     },
@@ -241,8 +329,8 @@ GetAddressByDogContract.Queries = new List<Query>()
             new Mapping()
             {
                 InputKey = "OwnerID",
-                Contract = GetOwnerIdByDogContract,
-                ContractKey = "OwnerIDOfTheDog"
+                LookupInputId = 1,
+                LookupInputKey = "OwnerIDOfTheDog"
             }
         }
     }
@@ -252,21 +340,21 @@ GetAddressByDogContract.Outputs = new List<Output>()
 {
     new Output()
     {
-        Contract = GetAddressByOwnerContract,
+        LookupInputId = 1,
         Key = "Street",
         Description = "Street name",
         Type = typeof(string)
     },
     new Output()
     {
-        Contract = GetAddressByOwnerContract,
+        LookupInputId = 1,
         Key = "StreetNumber",
         Description = "Street number",
         Type = typeof(int)
     },
     new Output()
     {
-        Contract = GetAddressByOwnerContract,
+        LookupInputId = 1,
         Key = "Country",
         Description = "Country of the address",
         Type = typeof(string)
@@ -276,15 +364,108 @@ GetAddressByDogContract.Outputs = new List<Output>()
 
 Contracts are added in a database so that they can be used either directly or via queries.
 
+### Call to MessageLog API
+The log feature of Be-Road is handle by the MessageLog project. It uses an API to be accessed. Here are the different routes to call in the API and their purpose : 
+<table>
+    <tr>
+        <th>Root</th>
+        <th>Controller</th>
+        <th>Action</th>
+        <th>Parameters</th>
+    </tr>
+    <tr>
+        <td rowspan="15">/api</td>
+        <td rowspan="4">/Contract</td>
+        <td><strong>/Get/{page}</strong> : Returns a number of contract logs</td>
+        <td>
+            <strong>Page</strong> : Number of the page to return. One page is 50 logs.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Add</strong> : Logs a contract creation</td>
+        <td>
+            <strong>ContractId</strong> : Id of the contract
+            <br />
+            <strong>UserName</strong> : Name of the system user (IS)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Delete</strong> : Logs a contract removal</td>
+        <td>
+            <strong>ContractId</strong> : Id of the contract
+            <br />
+            <strong>UserName</strong> : Name of the system user (IS)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Call</strong> : Logs a contract call</td>
+        <td>
+            <strong>ContractId</strong> : Id of the contract
+            <br />
+            <strong>UserName</strong> : Name of the system user (IS)
+            <br />
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+            <br />            
+            <strong>Response</strong> : Is a response to another call (boolean)
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="4">/AdapterServer</td>
+        <td><strong>/Get/{page}</strong> : Returns a number of adapater server logs</td>
+        <td>
+            <strong>Page</strong> : Number of the page to return. One page is 50 logs.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Add</strong> : Logs an adapter server creation</td>
+        <td>
+            <strong>UserName</strong> : Name of the system user (IS)
+            <br />
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Update</strong> : Logs a contract update</td>
+        <td>
+            <strong>UserName</strong> : Id of the contract
+            <br />
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Delete</strong> : Logs a contract removal</td>
+        <td>
+            <strong>UserName</strong> : Name of the system user (IS)
+        </td>
+    </tr>
+    <tr>
+        <td rowspan="2">/Exception</td>
+        <td><strong>/Get/{page}</strong> : Returns a number of exception logs</td>
+        <td>
+            <strong>Page</strong> : Number of the page to return. One page is 50 logs.
+        </td>
+    </tr>
+    <tr>
+        <td><strong>/Call</strong> : Logs an exception call</td>
+        <td>
+            <strong>UserName</strong> : Name of the system user (IS)
+            <br />
+            <strong>UserType</strong> : Type of the system user (Passive user, data provider, ...)
+            <br />
+            <strong>Message</strong> : Message contained in the exception 
+        </td>
+    </tr>
+</table>
+
 ### Packages included
 We used different packages in these projects. Here is a list of them and their utility in each project :
 
 <table>
   <tr>
-    <td>Project</td>
-    <td>Package</td>
-    <td>Version</td>
-    <td>Description</td>
+    <th>Project</th>
+    <th>Package</th>
+    <th>Version</th>
+    <th>Description</th>
   </tr>
   <tr>
     <td rowspan="7">Web</td>
