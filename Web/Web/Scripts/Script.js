@@ -100,7 +100,7 @@ function displayAccessInfoPopup(accessInfo) {
         access += "<li>" + Resources.Accessed_Empty + "</li>";
     $.each(accessInfo, function (i, v) {
         access += "<li>";
-        access += "<strong>" + v.Name + "</strong> " + Resources.Accessed + " <strong>" + formatDate(v.Date) + "</strong> " + Resources.For + " <strong>" + v.Justification + "</strong>";
+        access += "<strong>" + v.Name + "</strong> " + Resources.Accessed + " <strong>" + formatDate(v.Date) + "</strong> " + Resources.For + " <strong>" + v.Justification + " * " + v.Total + "</strong>";
         access += "</li>";
     });
     access += "</ul>"

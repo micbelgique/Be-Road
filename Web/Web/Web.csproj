@@ -312,9 +312,11 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Dto\AccessInfoDto.cs" />
+    <Compile Include="Models\ViewModel\PublicServiceDataViewModel.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\PublicService.cs" />
     <Compile Include="Models\PublicServiceData.cs" />
+    <Compile Include="Models\ViewModel\AccessInfoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
