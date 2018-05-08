@@ -7,7 +7,7 @@ services:
 
   centralserver:
     environment:
-      - ContractContext= Server=tcp:be-road.database.windows.net,1433;Initial Catalog=Central-Server-DB;Persist Security Info=False;User ID=Stage2018PrivacyPassport;Password=MIC2018PssPrt;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+      - ContractContext= <InsertYourConnectionStringHere>
     ports:
       - "3001"
 
@@ -17,20 +17,20 @@ services:
   
   messagelog:
     environment:
-      - LogContext= Server=tcp:be-road.database.windows.net,1433;Initial Catalog=message-log-db;Persist Security Info=False;User ID=Stage2018PrivacyPassport;Password=MIC2018PssPrt;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
-      - Hostname= 13.95.121.237
-      - Port= 9228
-      - Username= multichainrpc
-      - Password= 4d6BEHfTDwa8Jt9ERpJ8o7okhvkszzrWnPTEJKQHW4NV
-      - ChainName= chain1
-      - BurnAddress= 1XXXXXXWVPXXXXXXDBXXXXXXbZXXXXXXWmzKkn
-      - RootNodeAddress= 1FwpSkGLE3BL5tPqrCF2kEXxDiaZGpduP6nmS9
+      - LogContext= <InsertYourConnectionStringHere>
+      - Hostname=<...>
+      - Port=<...>
+      - Username=<...>
+      - Password=<...>
+      - ChainName=<...>
+      - BurnAddress=<...>
+      - RootNodeAddress=<...>
     ports:
       - "3003"
 
   web:
     environment:
-      - PSContext= Data Source=pp-db.database.windows.net;Initial Catalog=Privacy-Passport-DB;User ID=Stage2018PrivacyPassport;Password=MIC2018PssPrt
+      - PSContext= <InsertYourConnectionStringHere>
     ports:
       - "3004"
 
