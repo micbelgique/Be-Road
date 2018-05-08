@@ -10,9 +10,10 @@ namespace Contracts.Logic
     public class ContractManager
     {
         private Validators validators;
-
+        
         public IAdapterServerService AsService { get; set; }
         public IBeContractService BcService { get; set; }
+        public IAuthorisationServerService AuthService { get; set; }
 
 
         public ContractManager()
@@ -28,8 +29,21 @@ namespace Contracts.Logic
         /// <returns>Returns the outputs for that specific contract</returns>
         private async Task<BeContractReturn> CallServiceAsync(BeContract contract, BeContractCall call)
         {
-            //Forward the call to the good service
-            BeContractReturn returns = await AsService.CallAsync(call);
+            //Get the ads for this call
+            var ads = await AsService.FindASAsync(call.Id);
+            if (ads == null)
+                throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
+
+            //Check if the caller has the permission
+            if (!(await AuthService.CanInformationSystemUseContract(call.ISName, contract)))
+                throw new BeContractException($"The caller {call.ISName} does not have the permission to use {call.Id}")
+                {
+                    BeContractCall = call,
+                    BeContract = contract
+                };
+
+            //If everything is fine, call the service
+            BeContractReturn returns = await AsService.CallAsync(ads, call);
 
             //TODO:
             //  -Send error to the service

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Contracts.Dal
 {
-    public interface IAdapterServerService
+    public interface IAuthorisationServerService
     {
-        Task<AdapterServer> FindASAsync(string name);
-        Task<BeContractReturn> CallAsync(AdapterServer ads, BeContractCall call);
+        Task<Boolean> CanInformationSystemUseContract(string isName, BeContract contract);
     }
 }

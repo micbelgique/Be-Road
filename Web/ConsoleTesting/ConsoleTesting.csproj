@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="AdapterServerServiceImpl.cs" />
     <Compile Include="ASSMock.cs" />
+    <Compile Include="AuthorisationServerServiceImpl.cs" />
     <Compile Include="BeContractServiceImpl.cs" />
     <Compile Include="BeContractsMock.cs" />
     <Compile Include="Mock\AddressMock.cs" />

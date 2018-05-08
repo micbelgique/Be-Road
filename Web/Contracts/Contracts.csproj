@@ -65,6 +65,7 @@
     <Compile Include="Converters\BeContractOutputConverter.cs" />
     <Compile Include="Converters\BeContractQueryConverter.cs" />
     <Compile Include="Dal\IAdapterServerService.cs" />
+    <Compile Include="Dal\IAuthorisationServerService.cs" />
     <Compile Include="Dal\IBeContractService.cs" />
     <Compile Include="Logic\ContractManager.cs" />
     <Compile Include="Logic\Generators.cs" />

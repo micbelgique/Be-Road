@@ -25,7 +25,8 @@ namespace Proxy.Controllers
             cm = new ContractManager()
             {
                 AsService = new AdapterServerServiceImpl(),
-                BcService = new BeContractServiceImpl()
+                BcService = new BeContractServiceImpl(),
+                AuthService = new AuthorisationServerServiceImpl()
             };
         }
 

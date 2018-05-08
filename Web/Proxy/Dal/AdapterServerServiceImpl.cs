@@ -43,21 +43,7 @@ namespace Proxy.Dal
             return ret;
         }
 
-        /// <summary>
-        /// Calls the api of the Information System
-        /// </summary>
-        public async Task<BeContractReturn> CallAsync(BeContractCall call)
-        {
-            var ads = await FindASAsync(call.Id);
-            if (ads != null)
-            {
-                return await FindAsync(ads, call);
-            }
-            else
-                throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
-        }
-
-        public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+        public async Task<BeContractReturn> CallAsync(AdapterServer ads, BeContractCall call)
         {
             BeContractReturn res = null;
             using (var client = new HttpClient())
