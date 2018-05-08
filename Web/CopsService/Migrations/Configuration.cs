@@ -33,6 +33,7 @@ namespace PublicService.Migrations
 
         protected override void Seed(PSContext context)
         {
+            InitializeUsers(context);
             InitializeCars(context);
             InitializeIdentityForEF(context);
         }
@@ -40,21 +41,6 @@ namespace PublicService.Migrations
         private void InitializeIdentityForEF(PSContext db)
         {
             InitializeIdentityAdmin(db);
-            DeleteDevs(db);
-        }
-
-        private void DeleteDevs(PSContext context)
-        {
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-            var mic = userManager.FindByName("Michael..Van.Meerbeek@Mons");
-            var wil = userManager.FindByName("Wilson.Weets@Mons");
-
-            if (mic != null && wil != null)
-            {
-                userManager.Delete(mic);
-                userManager.Delete(wil);
-            }
         }
 
         private void InitializeIdentityAdmin(PSContext db)
@@ -114,25 +100,48 @@ namespace PublicService.Migrations
             }
         }
 
-        private void InitializeCars(PSContext context)
+        private void InitializeUsers(PSContext context)
         {
-            context.Cars.AddOrUpdate(GenerateNewCar(1, "93011150162"));
-            context.Cars.AddOrUpdate(GenerateNewCar(2, "97081817718"));
-            context.Cars.AddOrUpdate(GenerateNewCar(3, "95052316256"));
-            context.Cars.AddOrUpdate(GenerateNewCar(4, "97010215411"));
-            context.Cars.AddOrUpdate(GenerateNewCar(5, "96122400226"));
-            context.Cars.AddOrUpdate(GenerateNewCar(6, "93020623433"));
-            context.Cars.AddOrUpdate(GenerateNewCar(7, "95071956583"));
+            context.Users.ToList().Clear();
+            context.Users.AddOrUpdate(GenerateUser("1", "93011150162", "https://yt3.ggpht.com/a-/AJLlDp3l-ppFv3xLR_dg0jSFoWSbF-94mjQxob8XvQ=s900-mo-c-c0xffffffff-rj-k-no"));
+            context.Users.AddOrUpdate(GenerateUser("2", "97081817718", "https://cdn.shopify.com/s/files/1/0597/9769/products/wilson-castaway_film_1024x1024.jpg?v=1421681966"));
+            context.Users.AddOrUpdate(GenerateUser("3", "95052316256", "https://i.pinimg.com/originals/7e/54/cd/7e54cd815991d954c82ff191c88f157c.jpg"));
+            context.Users.AddOrUpdate(GenerateUser("4", "97010215411", "https://www.lieux-insolites.fr/hsavoie/martin/pierre%20martin-2.jpg"));
+            context.Users.AddOrUpdate(GenerateUser("5", "96122400226", "https://images.joueclub.fr/produits/S/06041106_2.jpg"));
+            context.Users.AddOrUpdate(GenerateUser("6", "93020623433", "https://www.rollingstone.fr/RS-WP-magazine/wp-content/uploads/2016/06/mohammed-ali-400x330.jpeg"));
+            context.Users.AddOrUpdate(GenerateUser("7", "95071956583", "https://consequenceofsound.files.wordpress.com/2018/03/nicolas-cage-superman-teen-titans-animated.png?w=807"));
         }
 
-        private Car GenerateNewCar(int id, string owner)
+        private ApplicationUser GenerateUser(string id, string userName, string url)
         {
-            PSContext db = new PSContext();
-            return new Car()
-            {  
+            return new ApplicationUser()
+            {
                 Id = id,
-                Owner = db.Users.FirstOrDefault(u => u.UserName.Equals(owner))
+                UserName = userName,
+                PhotoUrl = url
             };
+        }
+
+        private void InitializeCars(PSContext context)
+        {
+            context.Cars.RemoveRange(context.Cars);
+            context.Cars.Add(GenerateNewCar(1, "93011150162", context));
+            context.Cars.Add(GenerateNewCar(2, "97081817718", context));
+            context.Cars.Add(GenerateNewCar(3, "95052316256", context));
+            context.Cars.Add(GenerateNewCar(4, "97010215411", context));
+            context.Cars.Add(GenerateNewCar(5, "96122400226", context));
+            context.Cars.Add(GenerateNewCar(6, "93020623433", context));
+            context.Cars.Add(GenerateNewCar(7, "95071956583", context));
+        }
+
+        private Car GenerateNewCar(int id, string owner, PSContext db)
+        {
+            var car = new Car()
+            {  
+                Id = id
+            };
+            car.Owner = db.Users.First(u => u.UserName.Equals(owner));
+            return car;
         }
     }
 }
