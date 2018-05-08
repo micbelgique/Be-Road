@@ -23,38 +23,38 @@
         <div class="row">
             <div class="form-group col-sm-1 col-md-offset-2">
                 @Html.LabelFor(model => model.BirthDateD)
-                <input type="text" class="form-control" name="BirthDateD" id="BirthDateD" value="@(Model?.BirthDateD)" placeholder="01" />
+                <input type="text" class="form-control" name="BirthDateD" id="BirthDateD" value="@(Model?.BirthDateD)" placeholder="01" disabled="disabled" />
                 @Html.ValidationMessageFor(model => model.BirthDateD, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-sm-1">
                 @Html.LabelFor(model => model.BirthDateM)
-                <input type="text" class="form-control" name="BirthDateM" id="BirthDateM" value="@(Model?.BirthDateM)" placeholder="01" />
+                <input type="text" class="form-control" name="BirthDateM" id="BirthDateM" value="@(Model?.BirthDateM)" placeholder="01" disabled="disabled" />
                 @Html.ValidationMessageFor(model => model.BirthDateM, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-sm-1">
                 @Html.LabelFor(model => model.BirthDateY)
-                <input type="text" class="form-control" name="BirthDateY" id="BirthDateY" value="@(Model?.BirthDateY)" placeholder="2000" />
+                <input type="text" class="form-control" name="BirthDateY" id="BirthDateY" value="@(Model?.BirthDateY)" placeholder="2000" disabled="disabled" />
                 @Html.ValidationMessageFor(model => model.BirthDateY, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-sm-1">
                 <label>Age</label>
-                <input type="text" class="form-control" name="Age" id="Age" value="" placeholder="01" />
+                <input type="text" class="form-control" name="Age" id="Age" value="" disabled="disabled" placeholder="01" />
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-8 col-md-offset-2">
                 @Html.LabelFor(model => model.EmailAddress)
-                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", placeholder = "Example : example@domain.xyz" })
+                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @disabled = "disabled", placeholder = "Example : example@domain.xyz" })
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4 col-md-offset-2">
                 @Html.LabelFor(model => model.Locality)
-                @Html.TextBoxFor(model => model.Locality, new { @class = "form-control", placeholder = "Example : New York" })
+                @Html.TextBoxFor(model => model.Locality, new { @class = "form-control", @disabled = "disabled", placeholder = "Example : New York" })
             </div>
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.Nationality)
-                @Html.TextBoxFor(model => model.Locality, new { @class = "form-control", placeholder = "Example : Uzbek" })
+                @Html.TextBoxFor(model => model.Locality, new { @class = "form-control", @disabled = "disabled", placeholder = "Example : Uzbek" })
             </div>
         </div>
         <div class="row">
@@ -66,7 +66,7 @@
         <div class="row">
             <div class="form-group col-md-8 col-md-offset-2">
                 @Html.LabelFor(model => model.ExtraInfo)
-                @Html.TextBoxFor(model => model.ExtraInfo, new { @class = "form-control", placeholder = "Example : I like blue" })
+                @Html.TextBoxFor(model => model.ExtraInfo, new { @class = "form-control", @disabled = "disabled", placeholder = "Example : I like blue" })
             </div>
         </div>
         <div class="row">

@@ -18,16 +18,22 @@ namespace ADSMock.Controllers
         {
             { "93011150162", "BE08 1234 2315 9012"},
             { "97081817718", "BE08 3575 5678 5972"},
-            { "93.02.06-234.33", "BE08 1234 5475 4626"},
-            { "95.07.19-565.83", "BE08 9873 5678 9012"},
+            { "95052316256", "BE08 4567 5275 9752"},
+            { "97010215411", "BE67 5678 2937 1456"},
+            { "96122400226", "BE24 5623 1028 1003"},
+            { "93020623433", "BE08 1234 5475 4626"},
+            { "95071956583", "BE08 9873 5678 9012"},
         };
 
         private Dictionary<string, dynamic> funny = new Dictionary<string, dynamic>
         {
             { "93011150162", new { ExtraInfo = "Programmer", Email = "michael@mic.be"} },
             { "97081817718", new { ExtraInfo = "Rien.", Email = "wilson@mic.be"}},
-            { "93.02.06-234.33", new { ExtraInfo = "", Email = "mo@mic.be"}},
-            { "95.07.19-565.83", new { ExtraInfo = "Designer !", Email = "nico@mic.be"}},
+            { "95052316256", new { ExtraInfo = "Patate", Email = "raph@mic.be"}},
+            { "97010215411", new { ExtraInfo = "Pepito", Email = "pierre@mic.be"}},
+            { "96122400226", new { ExtraInfo = "Hypetrain", Email = "fred@mic.be"}},
+            { "93020623433", new { ExtraInfo = "", Email = "mo@mic.be"}},
+            { "95071956583", new { ExtraInfo = "Designer !", Email = "nico@mic.be"}},
             { "", new { ExtraInfo = "No info", Email = "No Info"} }
         };
 
@@ -35,17 +41,23 @@ namespace ADSMock.Controllers
         {
             { "93011150162", new { NumberPlate = "1-EBD-684", Brand = "Nissan"} },
             { "97081817718", new { NumberPlate = "1-OZA-014", Brand = "Porsche"}},
-            { "93.02.06-234.33", new { NumberPlate = "1-VNK-646", Brand = "Citroën"}},
-            { "95.07.19-565.83", new { NumberPlate = "1-ZAR-755", Brand = "Mercedes"}},
+            { "95052316256", new { NumberPlate = "1-PAT-427", Brand = "Mercedes"}},
+            { "97010215411", new { NumberPlate = "1-PEP-983", Brand = "Fiat"}},
+            { "96122400226", new { NumberPlate = "1-HPT-918", Brand = "Audi"}},
+            { "93020623433", new { NumberPlate = "1-VNK-646", Brand = "Citroën"}},
+            { "95071956583", new { NumberPlate = "1-ZAR-755", Brand = "Mercedes"}},
             { "", new { NumberPlate = "No info", Brand = "No Info"} }
         };
 
         private Dictionary<string, dynamic> population = new Dictionary<string, dynamic>
         {
             { "93011150162", new { FirstName = "Mika", LastName = "VM", Birthday = "11 Jan 93", Locality = "Bxl", Nationality = "Belge"} },
-            { "97081817718", new { FirstName = "Wilson", LastName = "Weets", Birthday = "20 Jan 93", Locality = "Charleroi", Nationality = "Belge"}},
-            { "93.02.06-234.33", new { FirstName = "Mo", LastName = "Lou", Birthday = "10 April 95", Locality = "Charleroi", Nationality = "Maroc"}},
-            { "95.07.19-565.83", new { FirstName = "Nico", LastName = "Vervloe", Birthday = "30 Dec 91", Locality = "Louvain", Nationality = "Suisse"}},
+            { "97081817718", new { FirstName = "Wilson", LastName = "Wiwi", Birthday = "20 Jan 93", Locality = "Charleroi", Nationality = "Belge"}},
+            { "95052316256", new { FirstName = "Raph", LastName = "Disp", Birthday = "23 May 95", Locality = "Bxl", Nationality = "Belge"}},
+            { "97010215411", new { FirstName = "Pierre", LastName = "Stal", Birthday = "02 Jan 97", Locality = "Bxl", Nationality = "Belge"}},
+            { "96122400226", new { FirstName = "Fred", LastName = "Carb", Birthday = "24 Dec 96", Locality = "Bxl", Nationality = "Belge"}},
+            { "93020623433", new { FirstName = "Mo", LastName = "Lou", Birthday = "10 April 95", Locality = "Charleroi", Nationality = "Maroc"}},
+            { "95071956583", new { FirstName = "Nico", LastName = "Vervloe", Birthday = "30 Dec 91", Locality = "Louvain", Nationality = "Suisse"}},
             { "", new { FirstName = "No info", LastName = "No Info", Birthday = "No Info", Locality = "No Info", Nationality = "No Info"} }
         };
 

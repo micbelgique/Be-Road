@@ -323,8 +323,8 @@
     <Compile Include="Controllers\CarsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ServiceController.cs" />
+    <Compile Include="Dal\ADSCallService.cs" />
     <Compile Include="Dal\PSContext.cs" />
-    <Compile Include="Dal\PSDbInitializer.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -351,14 +351,14 @@
     <Compile Include="Migrations\201803140941353_Delete-Exsisting-Users.Designer.cs">
       <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805071203083_Full-Rework-BeContract.cs" />
+    <Compile Include="Migrations\201805071203083_Full-Rework-BeContract.Designer.cs">
+      <DependentUpon>201805071203083_Full-Rework-BeContract.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccessInfo.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
-    <Compile Include="Dal\AzureUpload.cs" />
     <Compile Include="Models\Car.cs" />
-    <Compile Include="Models\Data.cs" />
-    <Compile Include="Models\Dto\ApplicationUserDto.cs" />
-    <Compile Include="Models\Dto\DataDto.cs" />
+    <Compile Include="Models\CarViewModel.cs" />
     <Compile Include="Models\EidCard.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\ManageViewModel.cs" />
@@ -415,7 +415,6 @@
     <Content Include="Views\Cars\Delete.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
     <Content Include="Views\Cars\Index.cshtml" />
-    <Content Include="Views\Cars\Azure.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
@@ -425,7 +424,6 @@
     <Content Include="Views\Service\Details.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Home\AboutGDPR.cshtml" />
-    <Content Include="Views\Service\UploadToAzure.cshtml" />
     <None Include="Web.Public-Service - Web Deploy.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -462,6 +460,15 @@
     <EmbeddedResource Include="Migrations\201803140941353_Delete-Exsisting-Users.resx">
       <DependentUpon>201803140941353_Delete-Exsisting-Users.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805071203083_Full-Rework-BeContract.resx">
+      <DependentUpon>201805071203083_Full-Rework-BeContract.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Contracts\Contracts.csproj">
+      <Project>{440674ac-0914-4a84-9d61-a59ac3ef4f5a}</Project>
+      <Name>Contracts</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

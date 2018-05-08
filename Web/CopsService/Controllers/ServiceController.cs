@@ -25,7 +25,8 @@ namespace PublicService.Controllers
 
         #region Properties
         private PSContext db = new PSContext();
-        private AzureUpload au = new AzureUpload();
+
+        private ADSCallService acs = new ADSCallService();
 
         private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
@@ -74,61 +75,34 @@ namespace PublicService.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.FirstAndLastNames = GetFirstAndLastName();
+            ViewBag.FirstAndLastNames = GetFirstAndLastNameAsync();
             return View();
         }
 
         [HttpPost]
-        public ActionResult Index(String name)
+        public async Task<ActionResult> Details(string id, string reason)
         {
-            throw new NotImplementedException("Search users by name is not yet implemented");
-        }
-
-        [HttpPost]
-        public ActionResult AddAccessInfo(int? dataId, string reason, string ip)
-        {
-            var data = db.Datas.Find(dataId);
-            if (data == null || String.IsNullOrWhiteSpace(reason))
-            {
-                return HttpNotFound();
-            }
-
-            var name = GetFirstAndLastName();
-            data.AccessInfos.Add(new Models.AccessInfo()
-            {
-                Date = DateTime.Now,
-                Name = $"{name};{ip}",
-                Reason = reason
-            });
-            db.SaveChanges();
-            return Content(JsonConvert.SerializeObject(data));
-        }
-
-        [HttpPost]
-        public async Task<ActionResult> Details(string id, int? dataId, string reason, string ip)
-        {
-            AddAccessInfo(dataId, reason, ip);
-
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var user = await UserManager.FindByIdAsync(id);
+            var user = await acs.GetUser(id, reason);
             if (user == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.FirstAndLastNames = GetFirstAndLastName();
+            ViewBag.FirstAndLastNames = await GetFirstAndLastNameAsync();
             return View(user);
         }
 
         [HttpPost]
-        public ActionResult Search(string searchString)
+        public async Task<ActionResult> SearchAsync(string searchString)
         {
             var strings = searchString.Split(' ');
-            var foundUsers = new List<ApplicationUser>();
-            List<ApplicationUser> all;
+            var users = await acs.GetAllUsers($"Searching for {searchString}");
+            var foundUsers = new List<ManageViewModel>();
+            List<ManageViewModel> all;
             if (strings.Length > 1)
             {
                 var firstName = strings[0];
@@ -138,10 +112,9 @@ namespace PublicService.Controllers
                     if(i != strings.Length-1)
                         concat += strings[i] + " ";
                 }
+                all = users.Where(u => u.FirstName.ToLower() == firstName.ToLower() || u.LastName.ToLower() == concat.ToLower()).ToList();
 
-                all = db.Users.Where(u => u.FirstName.Value.ToLower() == firstName.ToLower() || u.LastName.Value.ToLower() == concat.ToLower()).ToList();
-
-                foreach (ApplicationUser user in all)
+                foreach (ManageViewModel user in all)
                 {
                     foundUsers.Add(user);
                 }
@@ -149,28 +122,22 @@ namespace PublicService.Controllers
             else
             {
                 var name = strings[0];
-                all = db.Users.Where(u => u.FirstName.Value == name || u.LastName.Value == name).ToList();
+                all = users.Where(u => u.FirstName == name || u.LastName == name).ToList();
 
-                foreach (ApplicationUser user in all)
+                foreach (ManageViewModel user in all)
                 {
                     foundUsers.Add(user);
                 }
             }
-            ViewBag.FirstAndLastNames = GetFirstAndLastName();
+            ViewBag.FirstAndLastNames = await GetFirstAndLastNameAsync();
             return View("Index", foundUsers);
         }
 
-        public String GetFirstAndLastName()
+        public async Task<string> GetFirstAndLastNameAsync()
         {
-            var connectedUser = UserManager.FindById(User.Identity.GetUserId());
-            return connectedUser.FirstName?.Value + " " + connectedUser.LastName?.Value;
-        }
-
-        [Authorize(Roles = "Admin")]
-        public async Task<ActionResult> UploadToAzure()
-        {
-            await au.UploadToAzureAsync(db);
-            return View();
+            var connectedUserMin = UserManager.FindById(User.Identity.GetUserId());
+            var connectedUser = await acs.GetUser(connectedUserMin.UserName, "User first and last name display");
+            return connectedUser.FirstName + " " + connectedUser.LastName;
         }
     }
 }

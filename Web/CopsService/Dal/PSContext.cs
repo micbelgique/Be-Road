@@ -21,18 +21,12 @@ namespace PublicService.Dal
 
         }
 
-        static PSContext()
-        {
-            Database.SetInitializer(new PSDbInitializer());
-        }
-
         public static PSContext Create()
         {
             return new PSContext();
         }
 
         public DbSet<Car> Cars { get; set; }
-        public DbSet<Data> Datas { get; set; }
     }
 
 }

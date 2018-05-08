@@ -12,6 +12,7 @@ using Microsoft.Azure;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.File;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace PublicService.Controllers
 {
@@ -19,6 +20,7 @@ namespace PublicService.Controllers
     public class CarsController : Controller
     {
         private PSContext db = new PSContext();
+        private ADSCallService acs = new ADSCallService();
 
         // GET: Cars
         public ActionResult Index()
@@ -26,34 +28,15 @@ namespace PublicService.Controllers
             return View(db.Cars.ToList());
         }
 
-        public ActionResult Azure()
-        {
-            var json = JsonConvert.SerializeObject(db.Cars.ToList());
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnectionString"));
-            CloudFileClient fileClient = storageAccount.CreateCloudFileClient();
-            CloudFileShare share = fileClient.GetShareReference("dataexchange");
-            if (share.Exists())
-            {
-                CloudFileDirectory rootDir = share.GetRootDirectoryReference();
-
-                if (rootDir.Exists())
-                {
-                    CloudFile file = rootDir.GetFileReference("cops.json");
-                    file.UploadTextAsync(json);
-                }
-            }
-            ViewBag.copsdata = json;
-            return View();
-        }
-
         // GET: Cars/Details/5
-        public ActionResult Details(int? id)
+        public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Car car = db.Cars.Find(id);
+            Car carDB = db.Cars.FirstOrDefault(c => c.Id.Equals(id));
+            CarViewModel car = await acs.GetCar(carDB.Owner.UserName, "I want to see your car data !");
             if (car == null)
             {
                 return HttpNotFound();

@@ -1,5 +1,6 @@
 namespace PublicService.Migrations
 {
+    using Contracts.Models;
     using CsvHelper;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -14,14 +15,15 @@ namespace PublicService.Migrations
     using System.Data.Entity.Migrations;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
+    using System.Net.Http.Headers;
+    using System.Text;
+    using System.Threading.Tasks;
     using System.Web;
     using System.Web.Hosting;
 
     internal sealed class Configuration : DbMigrationsConfiguration<PSContext>
     {
-        private Random rand = new Random();
-        private string[] names = { "Arlen", "Artie", "Gray", "Guard", "Ladden", "Mace", "Mark", "Seno", "Jana", "Kim", "Lydia" };
-        private string[] reasons = { "Speeding", "Alcohol test", "Crazy driving", "Fun", "Abuse of power" };
 
         public Configuration()
         {
@@ -31,6 +33,7 @@ namespace PublicService.Migrations
 
         protected override void Seed(PSContext context)
         {
+            InitializeUsers(context);
             InitializeCars(context);
             InitializeIdentityForEF(context);
         }
@@ -38,94 +41,6 @@ namespace PublicService.Migrations
         private void InitializeIdentityForEF(PSContext db)
         {
             InitializeIdentityAdmin(db);
-            InitializeIdentityUsers(db);
-            DeleteDevs(db);
-        }
-
-        private void DeleteDevs(PSContext context)
-        {
-            var userStore = new UserStore<ApplicationUser>(context);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-            var mic = userManager.FindByName("Michael..Van.Meerbeek@Mons");
-            var wil = userManager.FindByName("Wilson.Weets@Mons");
-
-            if (mic != null && wil != null)
-            {
-                userManager.Delete(mic);
-                userManager.Delete(wil);
-            }
-        }
-
-        private void InitializeIdentityUsers(PSContext db)
-        {
-            var userStore = new UserStore<ApplicationUser>(db);
-            var userManager = new UserManager<ApplicationUser>(userStore);
-            userManager.UserValidator = new UserValidator<ApplicationUser>(userManager)
-            {
-                AllowOnlyAlphanumericUserNames = false
-            };
-            // Configure validation logic for passwords
-            userManager.PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 6,
-                RequireNonLetterOrDigit = true,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true,
-            };
-
-            string homeFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", @"App_Data\stagiaires.csv");
-            using (StreamReader reader = File.OpenText(homeFile))
-            {
-                var csv = new CsvReader(reader);
-                csv.Configuration.Delimiter = ";";
-                csv.Configuration.MissingFieldFound = null;
-                csv.Read();
-                csv.ReadHeader();
-                while (csv.Read())
-                {
-                    var fn = csv.GetField("Prenom");
-                    var ln = csv.GetField("Nom");
-                    var school = csv.GetField("Ecole");
-                    var stage = csv.GetField("Ville de stage");
-                    var mail = csv.GetField("Email MIC");
-                    var loc = csv.GetField("Ville domicile");
-                    var url = csv.GetField("URL photo");
-                    var info = csv.GetField("Extra Info");
-
-                    var userName = $"{fn.Replace(' ', '.')}.{ln.Replace(' ', '.')}@{stage}";
-                    var password = "Admin@123456";
-
-                    var user = userManager.FindByName(userName);
-                    //Delete the current user because we maybe want to update them
-                    if (user != null)
-                    {
-                        userManager.Delete(user);
-                        user = null;
-                    }
-                    if (user == null)
-                    {
-                        user = new ApplicationUser
-                        {
-                            //Set an ID, else we create duplicate data
-                            //Id = userName,
-                            UserName = userName,
-                            FirstName = new Data { Value = fn },
-                            LastName = new Data { Value = ln },
-                            Locality = new Data { Value = loc },
-                            //Nationality is empty
-                            //School stage isn't in the model
-                            PhotoUrl = new Data { Value = url },
-                            ExtraInfo = new Data { Value = info },
-                            EmailAddress = new Data { Value = mail }
-                        };
-
-                        //throw new Exception(user.UserName);
-                        var result = userManager.Create(user, password);
-                        result = userManager.SetLockoutEnabled(user.Id, false);
-                    }
-                }
-            }
         }
 
         private void InitializeIdentityAdmin(PSContext db)
@@ -172,8 +87,6 @@ namespace PublicService.Migrations
             {
                 user = new ApplicationUser {
                     UserName = name,
-                    FirstName = new Data { Value = "Administrator" },
-                    LastName = new Data { Value = "Kernel" },
                 };
                 var result = userManager.Create(user, password);
                 result = userManager.SetLockoutEnabled(user.Id, false);
@@ -187,56 +100,57 @@ namespace PublicService.Migrations
             }
         }
 
-        private void InitializeCars(PSContext context)
+        private void InitializeUsers(PSContext context)
         {
-            context.Cars.AddOrUpdate(GenerateNewCar(1, "Michaël", "Fiat", "1-KGG-695"));
-            context.Cars.AddOrUpdate(GenerateNewCar(2, "Wilson", "Nissan", "1-EBD-684"));
-            context.Cars.AddOrUpdate(GenerateNewCar(3, "Pierre", "Porche", "1-OZA-014"));
-            context.Cars.AddOrUpdate(GenerateNewCar(4, "Raph", "Citroën", "1-VNK-646"));
-            context.Cars.AddOrUpdate(GenerateNewCar(5, "Fred", "Mercedes", "1-ZAR-755"));
-            context.Cars.AddOrUpdate(GenerateNewCar(6, "Thomas", "BMW", "1-PER-124"));
-            context.Cars.AddOrUpdate(GenerateNewCar(7, "Martine", "Audi", "1-DFV-862"));
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            userManager.Create(GenerateUser("1", "93011150162", "https://yt3.ggpht.com/a-/AJLlDp3l-ppFv3xLR_dg0jSFoWSbF-94mjQxob8XvQ=s900-mo-c-c0xffffffff-rj-k-no", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("2", "97081817718", "https://cdn.shopify.com/s/files/1/0597/9769/products/wilson-castaway_film_1024x1024.jpg?v=1421681966", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("3", "95052316256", "https://i.pinimg.com/originals/7e/54/cd/7e54cd815991d954c82ff191c88f157c.jpg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("4", "97010215411", "https://www.lieux-insolites.fr/hsavoie/martin/pierre%20martin-2.jpg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("5", "96122400226", "https://images.joueclub.fr/produits/S/06041106_2.jpg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("6", "93020623433", "https://www.rollingstone.fr/RS-WP-magazine/wp-content/uploads/2016/06/mohammed-ali-400x330.jpeg", userManager), "Admin@123456");
+            userManager.Create(GenerateUser("7", "95071956583", "https://consequenceofsound.files.wordpress.com/2018/03/nicolas-cage-superman-teen-titans-animated.png?w=807", userManager), "Admin@123456");
         }
 
-        private Car GenerateNewCar(int id, string owner, string brand, string numberPlate)
+        private ApplicationUser GenerateUser(string id, string userName, string url, UserManager<ApplicationUser> userManager)
         {
-            return new Car()
-            {  
+            var user = userManager.FindByName(userName);
+            if (user != null)
+            {
+                userManager.Delete(user);
+                user = null;
+            }
+
+            return new ApplicationUser()
+            {
                 Id = id,
-                Owner = new Data()
-                {
-                    Value = owner,
-                    AccessInfos = GenerateRandomAccessInfo(20)
-                },
-                Brand = new Data()
-                {
-                    Value = brand,
-                    AccessInfos = GenerateRandomAccessInfo(50)
-                },
-                NumberPlate = new Data()
-                {
-                    Value = numberPlate,
-                    AccessInfos = GenerateRandomAccessInfo(80)
-                }
+                UserName = userName,
+                PhotoUrl = url
             };
         }
 
-        private List<AccessInfo> GenerateRandomAccessInfo(int probability)
+        private void InitializeCars(PSContext context)
         {
-            var infos = new List<AccessInfo>();
-            for (int i = 0; i < 3; i++)
-            {
-                if (rand.Next(100) < probability)
-                {
-                    infos.Add(new AccessInfo()
-                    {
-                        Name = names[rand.Next(names.Length)],
-                        Date = new DateTime(rand.Next(2000, 2018), rand.Next(1, 12), rand.Next(1, 28)),
-                        Reason = reasons[rand.Next(reasons.Length)]
-                    });
-                }
-            }
-            return infos;
+            context.Cars.RemoveRange(context.Cars);
+            context.Cars.Add(GenerateNewCar(1, "93011150162", context));
+            context.Cars.Add(GenerateNewCar(2, "97081817718", context));
+            context.Cars.Add(GenerateNewCar(3, "95052316256", context));
+            context.Cars.Add(GenerateNewCar(4, "97010215411", context));
+            context.Cars.Add(GenerateNewCar(5, "96122400226", context));
+            context.Cars.Add(GenerateNewCar(6, "93020623433", context));
+            context.Cars.Add(GenerateNewCar(7, "95071956583", context));
+        }
+
+        private Car GenerateNewCar(int id, string owner, PSContext db)
+        {
+            var car = new Car()
+            {  
+                Id = id
+            };
+            car.Owner = db.Users.First(u => u.UserName.Equals(owner));
+            return car;
         }
     }
 }
