@@ -68,23 +68,9 @@ namespace BeRoadTest.ADSMock
             await Task.Run(() => ads = ADSList.FirstOrDefault(s => s.ContractNames.Any(cn => cn.Id.Equals(name))));
             return ads;
         }
+        
 
-        /// <summary>
-        /// Calls the api of the Information System
-        /// </summary>
-        public async Task<BeContractReturn> CallAsync(BeContractCall call)
-        {
-            var ads = await FindASAsync(call.Id);
-            if (ads != null)
-            {
-                Console.WriteLine($"Calling {ads.ISName} at {ads.Url}");
-                return await FindAsync(ads, call);
-            }
-            else
-                throw new BeContractException($"No service found for {call.Id}") { BeContractCall = call };
-        }
-
-        public async Task<BeContractReturn> FindAsync(AdapterServer ads, BeContractCall call)
+        public async Task<BeContractReturn> CallAsync(AdapterServer ads, BeContractCall call)
         {
             //Empty await for the method
             await Task.Run(() => { });

@@ -39,7 +39,8 @@ namespace BeRoadTest.ADSMock
         [TestMethod]
         public async Task TestCallPassAsync()
         {
-            var returnsActual = await asService.CallAsync(call);
+            var ads = await asService.FindASAsync(call.ISName);
+            var returnsActual = await asService.CallAsync(ads, call);
             var returnsExpected = new BeContractReturn()
             {
                 Id = "GetOwnerIdByDogId",
@@ -51,13 +52,7 @@ namespace BeRoadTest.ADSMock
             CollectionAssert.AreEqual(returnsExpected.Outputs, returnsActual.Outputs);
             Assert.AreEqual(returnsExpected.Id, returnsActual.Id);
         }
-
-        [TestMethod]
-        public async Task TestCallFail()
-        {
-            call.Id = "Fail";
-            await Assert.ThrowsExceptionAsync<BeContractException>(() => asService.CallAsync(call), "No service found for Fail");
-        }
+        
 
     }
 }
