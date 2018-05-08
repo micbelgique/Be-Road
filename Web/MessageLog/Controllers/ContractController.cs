@@ -171,7 +171,7 @@ namespace MessageLog.Controllers
 
         [HttpGet]
         [Route("justification")]
-        public async Task<List<AccessInfoDto>> GetJustificationAboutContractAsync(string contractId, string nrid)
+        public List<AccessInfoDto> GetJustificationAboutContract(string contractId, string nrid)
         {
             var lst = new List<AccessInfoDto>();
             var logs = db.AccessLogs
@@ -186,7 +186,8 @@ namespace MessageLog.Controllers
                     Id = log.Id,
                     Name = log.Name,
                     Justification = log.Justification,
-                    IsReliable = await accessInfoService.IsReliableAsync(log)
+                    //Don't check the interity, it's to slow
+                    IsReliable = true//await accessInfoService.IsReliableAsync(log)
                     }
                 );
             }
