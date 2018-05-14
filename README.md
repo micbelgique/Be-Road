@@ -43,10 +43,10 @@ The solution contains 9 projects :
 * Web (The privacy passport portal)
 
 #### How to build
-There's a docker-compose file that will be used to build the project.
-First you need to install Docker on your PC.
-After this you need to enable the container feature on.  
-https://dotnetthoughts.net/dockerize-an-existing-aspnet-mvc5-application/
+The projetc contains a docker-compose file that will be used to build the project.
+First you need to install Docker on your PC from the [Docker website](https://docs.docker.com/docker-for-windows/install/).
+After this you need to enable the container feature.  
+[Here](https://dotnetthoughts.net/dockerize-an-existing-aspnet-mvc5-application/) is a tutorial explaining some things that are great to know about Docker.
 To build & run every component, set the docker-compose as startup project and hit run.
 The first time you run the project, docker will download all the images and this will take some time.
 
