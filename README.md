@@ -26,8 +26,7 @@ The public services are able to communicate through Be-Road using contracts. Fin
 2.  [Blockchain implementation](#blockchain-implementation)
 3.  [How to create and use contracts](#how-to-create-and-use-contracts)
 4.  [Call to MessageLog API](#call-to-messagelog-api)
-5.	[Packages included](#packages-included)
-6.	[Latest releases](#latest-releases)
+5.	[Latest releases](#latest-releases)
 
 ### Clone the code
 To get the websites and the central part on your machine, you just have to clone the project in your git.
@@ -45,26 +44,34 @@ The solution contains 9 projects :
 #### How to build
 The projetc contains a docker-compose file that will be used to build the project.
 First you need to install Docker on your PC from the [Docker website](https://docs.docker.com/docker-for-windows/install/).
-After this you need to enable the container feature.  
+After this you need to enable the container feature like the following.
+
+Search the windows features as done below :
+<img src="Web/Web/WindowsFeaturesSearch.png" alt="Windows Features Search" width="300">
+
+Check the "Containers" feature then click "OK" : 
+<img src="Web/Web/WindowsFeatures.png" alt="Windows Features" width="400">
+
 [Here](https://dotnetthoughts.net/dockerize-an-existing-aspnet-mvc5-application/) is a tutorial explaining some things that are great to know about Docker.
-To build & run every component, set the docker-compose as startup project and hit run.
-The first time you run the project, docker will download all the images and this will take some time.
+To build and run every component, set the docker-compose as startup project and hit run.
+The first time you run the project, Docker will download all the images needed. This may take some time.
 
 ##### Docker
 Ip addresses
 - **Proxy**: 172.16.42.10
 - **CentralServer**: 172.16.42.11
 - **ADSMock**: 172.16.42.12
-- **MessageLog**: 172.16.42.1
+- **MessageLog**: 172.16.42.13
+- **Web**: 172.16.42.14
 
-This project requires 2 extra docker-compose files, docker-compose.override.yml and docker-compose.prod.yml.
-Add theses 2 files on the root folder and then unload and reload the docker-compose project, after this the 2 files will be loaded.
+This project requires two extra docker-compose files, docker-compose.override.yml and docker-compose.prod.yml.
+Add theses two files on the root folder and then unload and reload the docker-compose project in order to load these files.
 
 Compose files
 - docker-compose.override.yml
-  - Is used for development
+  - Used for development
 - docker-compose.prod.yml
-  - Is used for production 
+  - Used for production 
 
 These files look like this.
 ```
@@ -118,13 +125,13 @@ docker-compose
 
 
 ##### Entity Framework
-In BeRoad there are currently 2 DbContexts that need a connectionstring
+Be-Road currently contains two Database Contexts that need a connection string
 - Central Server
 - Message Log
 
 The connection strings need to be defined in the docker-compose.yml
 To add a migration or update a database, you need to to set the **project as startup** and as **default project** in the package manager console.
-After this you need to specify the connectionstring as well as the dataprovider when running the migrations commands.
+After this you need to specify the connection string as well as the data provider when running the migrations commands.
 
 Example: 
 ```
@@ -135,27 +142,28 @@ Update-Database -Verbose -ConnectionString "..." -ConnectionProviderName "System
 ```
 
 ### Blockchain implementation
-The blockchain is a prototype too. In the final project, that will be done later by more advanced developers, it will certainly be created from scratch.
+The blockchain is a prototype too. In the final project, it will be done later by more advanced developers, it will certainly be created from scratch.
 
 Currently, we used Multichain to create our private blockchain. For advanced knowledge on how to create your own blockchain with multichain, check their [website](https://www.multichain.com/).
 
 To implement a multichain blockchain in the project, we used a NuGet package called LucidOcean.Multichain ([GitHub](https://github.com/LucidOcean/multichain)) that gathers a set of class to call the RPC API of your blockchain, and so controlling it from the outside.
 
-Then you just have to change the data in the MessageLog\Web.Config file : 
+Then you just have to change the data in the docker-compose.override.yml file : 
 
-```xml
-<appSettings>
-    <add key="Hostname" value="{IP address}" />
-    <add key="Port" value="{port}" />
-    <add key="Username" value="{rpc username (usually multichainrpc)}" />
-    <add key="Password" value="{rpc password}" />
-    <add key="ChainName" value="{blockchain name}" />
-    <add key="BurnAddress" value="{burn address}" />
-    <add key="RootNodeAddress" value="{any wallet address on your genesis}" />
-</appSettings>
+```
+messagelog:
+    environment:
+      - Hostname={IP address}
+      - Port={port}
+      - Username={rpc username (usually multichainrpc)}
+      - Password={rpc password}
+      - ChainName={blockchain name}
+      - BurnAddress={burn address}
+      - RootNodeAddress={any wallet address on your genesis}
 ```
 
-If you have problems understanding these, check [multichain documentation](https://www.multichain.com/developers/). We have set these in all the Web.config files in order to have access to a developement and a staging blockchains.
+If you have problems understanding these, check [multichain documentation](https://www.multichain.com/developers/).
+You have to create yout focker files as said in the [Docker](#docker) section.
 
 ### How to create and use contracts
 Contracts are JSON bits of code serialized and deserialized in C#. They have inputs, outputs, and a body made of queries.
@@ -457,118 +465,34 @@ The log feature of Be-Road is handle by the MessageLog project. It uses an API t
     </tr>
 </table>
 
-### Packages included
-We used different packages in these projects. Here is a list of them and their utility in each project :
-
-<table>
-  <tr>
-    <th>Project</th>
-    <th>Package</th>
-    <th>Version</th>
-    <th>Description</th>
-  </tr>
-  <tr>
-    <td rowspan="7">Web</td>
-    <td>DotNetOpenAuth</td>
-    <td>4.3.4.13329</td>
-    <td>Add OpenID 1.1/2.0, OAuth 1.0(a), & InfoCard authentication and authorization functionality for client and server applications. This allows your application to issue identities or accept issued identites from other web applications, and even access your users' data on other services.</td>
-  </tr>
-  <tr>
-    <td>EntityFramework</td>
-    <td>6.2.0</td>
-    <td>Another Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, interpreters, compilers, and translators from grammatical descriptions containing actions in a variety of target languages.</td>
-  </tr>
-  <tr>
-    <td>materialize</td>
-    <td>0.97.6</td>
-    <td>Materialize, a CSS Framework based on Material Design <a href="http://materializecss.com">http://materializecss.com<a/></td>
-  </tr>
-  <tr>
-    <td>Owin</td>
-    <td>1.0.0</td>
-    <td>OWIN IAppBuilder startup interface</td>
-  </tr>
-  <tr>
-    <td>Modernizr</td>
-    <td>2.8.2</td>
-    <td>Modernizr adds classes to the <html> element which allow you to target specific browser functionality in your stylesheet. You don't actually need to write any Javascript to use it. Modernizr is a small and simple JavaScript library that helps you take advantage of emerging web technologies (CSS3, HTML5) while still maintaining a fine level of control over older browsers that may not yet support these new technologies.</td>
-  </tr>
-  <tr>
-    <td>Newtonsoft.Json</td>
-    <td>10.0.2</td>
-    <td>Json.NET is a popular high-performance JSON framework for .NET.</td>
-  </tr>
-    <tr>
-    <td>System.Net.Http</td>
-    <td>4.3.3</td>
-    <td>Provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.</td>
-  </tr>
-  <tr>
-    <td rowspan="7">PublicService</td>
-    <td>DotNetOpenAuth</td>
-    <td>4.3.4.13329</td>
-    <td>Add OpenID 1.1/2.0, OAuth 1.0(a), & InfoCard authentication and authorization functionality for client and server applications. This allows your application to issue identities or accept issued identites from other web applications, and even access your users' data on other services.</td>
-  </tr>
-  <tr>
-    <td>EntityFramework</td>
-    <td>6.2.0</td>
-    <td>Another Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, interpreters, compilers, and translators from grammatical descriptions containing actions in a variety of target languages.</td>
-  </tr>
-  <tr>
-    <td>bootstrap</td>
-    <td>3.0.0</td>
-    <td>The most popular front-end framework for developing responsive, mobile first projects on the web.</td>
-  </tr>
-  <tr>
-    <td>Owin</td>
-    <td>1.0.0</td>
-    <td>OWIN IAppBuilder startup interface</td>
-  </tr>
-  <tr>
-    <td>Modernizr</td>
-    <td>2.8.2</td>
-    <td>Modernizr adds classes to the <html> element which allow you to target specific browser functionality in your stylesheet. You don't actually need to write any Javascript to use it. Modernizr is a small and simple JavaScript library that helps you take advantage of emerging web technologies (CSS3, HTML5) while still maintaining a fine level of control over older browsers that may not yet support these new technologies.</td>
-  </tr>
-  <tr>
-    <td>Microsoft.AspNet.Identity.Core</td>
-    <td>2.2.1</td>
-    <td>Core interfaces for ASP.NET Identity.</td>
-  </tr>
-    <tr>
-    <td>System.Net.Http</td>
-    <td>4.3.3</td>
-    <td>Provides a programming interface for modern HTTP applications, including HTTP client components that allow applications to consume web services over HTTP and HTTP components that can be used by both clients and servers for parsing HTTP headers.</td>
-  </tr>
-  <tr>
-    <td rowspan="3">MessageLog</td>
-    <td>LucidOcean.Multichain</td>
-    <td>0.0.0.10</td>
-    <td>This library attempts to wrap the JSON-RPC calls provided by MultiChain. Where applicable, some initial design for ease of use and separation of calls has been made.</td>
-  </tr>
-  <tr>
-    <td>Newtonsoft.Json</td>
-    <td>10.0.2</td>
-    <td>Json.NET is a popular high-performance JSON framework for .NET.</td>
-  </tr>
-    <tr>
-    <td>EntityFramework</td>
-    <td>6.2.0</td>
-    <td>Another Tool for Language Recognition, is a language tool that provides a framework for constructing recognizers, interpreters, compilers, and translators from grammatical descriptions containing actions in a variety of target languages.</td>
-  </tr>
-  <tr>
-    <td rowspan="2">Contracts</td>
-    <td>Newtonsoft.Json</td>
-    <td>10.0.2</td>
-    <td>Json.NET is a popular high-performance JSON framework for .NET.</td>
-  </tr>
-  <tr>
-    <td>NJsonSchema</td>
-    <td>9.10.41</td>
-    <td>JSON Schema reader, generator and validator for .NET</td>
-  </tr>
-</table>
-
 ### Last releases
+#### 0.6.0 - 24th April 2018
+##### Privacy Passport
+* Plug to Be-Road : using BeContracts
+* Design upgrade
+
+##### Public Service
+* Plug to Be-Road : using BeContracts
+* Contract restriction : each IS can only access some BeContract
+
+##### Message Log
+* Log every request to and from the system
+
+#### 0.5.0 - 24th April 2018
+##### All
+* Add Docker and adpat the project to it
+
+##### Central Server
+* BeContract Creator
+* Adapter Server Creator
+
+#### 0.4.0 - 10th April 2018
+##### Contracts
+* BeContract System
+
+##### ADS Mock
+* Communication through be-Road : With BeContracts
+* Call other Information System contracts
 
 #### 0.3.0 - 20th March 2018
 ##### All
