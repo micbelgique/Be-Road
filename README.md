@@ -47,9 +47,11 @@ First you need to install Docker on your PC from the [Docker website](https://do
 After this you need to enable the container feature like the following.
 
 Search the windows features as done below :
+
 <img src="Web/Web/WindowsFeaturesSearch.png" alt="Windows Features Search" width="300">
 
 Check the "Containers" feature then click "OK" : 
+
 <img src="Web/Web/WindowsFeatures.png" alt="Windows Features" width="400">
 
 [Here](https://dotnetthoughts.net/dockerize-an-existing-aspnet-mvc5-application/) is a tutorial explaining some things that are great to know about Docker.
