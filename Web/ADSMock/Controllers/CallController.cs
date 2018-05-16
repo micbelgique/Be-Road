@@ -1,4 +1,5 @@
-﻿using Contracts.Models;
+﻿using ADSMock.Helpers;
+using Contracts.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -60,7 +61,7 @@ namespace ADSMock.Controllers
             Dictionary<int, BeContractReturn> ret = null;
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://proxy/");
+                client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("proxy"));
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
