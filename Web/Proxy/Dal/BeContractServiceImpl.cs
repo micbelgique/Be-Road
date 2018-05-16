@@ -6,6 +6,7 @@ using System;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Contracts;
+using Proxy.Helpers;
 
 namespace Proxy.Dal
 {
@@ -17,7 +18,6 @@ namespace Proxy.Dal
 
             //Because we only get the contracts id's from the queries
             //We need to get the queries contracts objects from here
-            //Does it works for recursive contracts ?
             if (ret?.Queries != null)
             {
                 foreach (var q in ret?.Queries)
@@ -36,11 +36,11 @@ namespace Proxy.Dal
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://centralserver/api/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("centralserver"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    HttpResponseMessage response = await client.GetAsync($"central/contracts?id={id}");
+                    HttpResponseMessage response = await client.GetAsync($"api/central/contracts?id={id}");
                     if (response.IsSuccessStatusCode)
                     {
                         ret = await response.Content.ReadAsAsync<BeContract>();

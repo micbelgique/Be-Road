@@ -2,6 +2,7 @@
 using Contracts.Dal;
 using Contracts.Models;
 using Newtonsoft.Json;
+using Proxy.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,11 +25,11 @@ namespace Proxy.Dal
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://centralserver/api/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("centralserver"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                    HttpResponseMessage response = await client.GetAsync($"central/adapterserver?name={name}");
+                    HttpResponseMessage response = await client.GetAsync($"api/central/adapterserver?name={name}");
                     if (response.IsSuccessStatusCode)
                     {
                         ret = await response.Content.ReadAsAsync<AdapterServer>();
@@ -48,9 +49,9 @@ namespace Proxy.Dal
             BeContractReturn res = null;
             using (var client = new HttpClient())
             {
-                //Use the ads.Url as baseaddress, don't send this to Be-Road !
                 try
                 {
+                    //Use the ads.Url as baseaddress, don't send this to Be-Road !
                     client.BaseAddress = new Uri(ads.Url);
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

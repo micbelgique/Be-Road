@@ -4,6 +4,7 @@ using Contracts.Logic;
 using Contracts.Models;
 using Newtonsoft.Json;
 using Proxy.Dal;
+using Proxy.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -55,7 +56,7 @@ namespace Proxy.Controllers
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://centralserver/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("centralserver"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -95,7 +96,7 @@ namespace Proxy.Controllers
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://messagelog/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("messagelog"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -133,7 +134,7 @@ namespace Proxy.Controllers
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://messagelog/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("messagelog"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
