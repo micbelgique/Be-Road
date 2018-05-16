@@ -16,7 +16,10 @@ namespace Proxy.Helpers
         /// <returns></returns>
         public static string GetServiceUrl(string service)
         {
-            return GetAppSetting(service) ?? $"http://{service}/";
+            var url = GetAppSetting(service);
+            if (string.IsNullOrWhiteSpace(url))
+                return $"http://{service}/";
+            return url;
         }
 
         public static string GetAppSetting(string appSettingName)

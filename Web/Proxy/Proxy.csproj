@@ -137,6 +137,11 @@
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\be-proxy - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\be-proxy - Web Deploy.pubxml" />
+    <None Include="Web.be-proxy - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
