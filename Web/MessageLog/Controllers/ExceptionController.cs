@@ -17,7 +17,7 @@ namespace MessageLog.Controllers
     [RoutePrefix("api/Exception")]
     public class ExceptionController : ApiController
     {
-        private LogContext db = new LogContext(ConfigHelper.GetAppSetting("LogContext"));
+        private LogContext db = new LogContext(ConfigHelper.GetConnectionString("LogContext"));
 
         //GET: api/AdapterServer/Get
         [HttpGet]

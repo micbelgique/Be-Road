@@ -18,7 +18,7 @@ namespace MessageLog.Helpers
         public static string GetConnectionString(string connectionStringName)
         {
             return GetSettingFromEnvironmentVariable(connectionStringName) ??
-                ConfigurationManager.ConnectionStrings[connectionStringName].ConnectionString;
+                ConfigurationManager.ConnectionStrings[connectionStringName]?.ConnectionString;
         }
 
         public static string GetSettingFromEnvironmentVariable(string configKey)

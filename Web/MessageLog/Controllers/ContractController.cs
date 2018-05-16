@@ -23,7 +23,7 @@ namespace MessageLog.Controllers
 
         public ContractController()
         {
-            db = new LogContext(ConfigHelper.GetAppSetting("LogContext"));
+            db = new LogContext(ConfigHelper.GetConnectionString("LogContext"));
             accessInfoService = new AccessInfoService(db);
         }
 
