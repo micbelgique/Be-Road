@@ -4,10 +4,16 @@ using System.Configuration;
 using System.Linq;
 using System.Web;
 
-namespace Web.Helpers
+namespace PublicService.Helpers
 {
     public class ConfigHelper
     {
+        /// <summary>
+        /// Get the url of a service
+        /// If there's no data in the config, is will use the docker hostname
+        /// </summary>
+        /// <param name="service"></param>
+        /// <returns></returns>
         public static string GetServiceUrl(string service)
         {
             var url = GetAppSetting(service);
