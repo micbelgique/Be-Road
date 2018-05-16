@@ -12,7 +12,7 @@ namespace CentralServer.Controllers
     [RoutePrefix("api/central")]
     public class CentralController : ApiController
     {
-        ContractContext ctx = new ContractContext(ConfigHelper.GetAppSetting("ContractContext"));
+        ContractContext ctx = new ContractContext(ConfigHelper.GetAppSetting("GetConnectionString"));
 
         [HttpGet]
         [Route("contracts")]

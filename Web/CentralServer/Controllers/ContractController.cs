@@ -18,7 +18,7 @@ namespace CentralServer.Controllers
 {
     public class ContractController : Controller
     {
-        ContractContext ctx = new ContractContext(ConfigHelper.GetAppSetting("ContractContext"));
+        ContractContext ctx = new ContractContext(ConfigHelper.GetConnectionString("ContractContext"));
         Validators validators = new Validators();
         
         // GET: Contract
@@ -177,7 +177,7 @@ namespace CentralServer.Controllers
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://messagelog/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("messagelog"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

@@ -123,6 +123,8 @@
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
+    <None Include="Properties\PublishProfiles\be-central-server - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\be-central-server - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\ADSEdit\EditManager.js" />
     <Content Include="Scripts\ADSEdit\ListManager.js" />
@@ -185,6 +187,9 @@
     <Content Include="Views\ADS\Details.cshtml" />
     <Content Include="Views\ADS\Edit.cshtml" />
     <Content Include="Views\ADS\DeleteADSModal.cshtml" />
+    <None Include="Web.be-central-server - Web Deploy.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -8,6 +8,14 @@ namespace CentralServer.Helpers
 {
     public class ConfigHelper
     {
+        public static string GetServiceUrl(string service)
+        {
+            var url = GetAppSetting(service);
+            if (string.IsNullOrWhiteSpace(url))
+                return $"http://{service}/";
+            return url;
+        }
+
         public static string GetAppSetting(string appSettingName)
         {
             var cs = GetSettingFromEnvironmentVariable(appSettingName) ??

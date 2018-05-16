@@ -17,7 +17,7 @@ namespace CentralServer.Controllers
 {
     public class ADSController : Controller
     {
-        private ContractContext ctx = new ContractContext(ConfigHelper.GetAppSetting("ContractContext"));
+        private ContractContext ctx = new ContractContext(ConfigHelper.GetConnectionString("ContractContext"));
 
         // GET: ADS
         public ActionResult Index()
@@ -133,7 +133,7 @@ namespace CentralServer.Controllers
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://messagelog/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("messagelog"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
