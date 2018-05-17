@@ -7,13 +7,13 @@ namespace MessageLog.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class RefactorAccessInfos : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(RefactorAccessInfos));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201805030900163_Refactor-AccessInfos"; }
+            get { return "201805170836119_Initial-Create"; }
         }
         
         string IMigrationMetadata.Source

@@ -150,29 +150,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\ConfigHelper.cs" />
-    <Compile Include="Migrations\201804300819221_Initial-Create.cs" />
-    <Compile Include="Migrations\201804300819221_Initial-Create.Designer.cs">
-      <DependentUpon>201804300819221_Initial-Create.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804300820313_log-Model-Creation.cs" />
-    <Compile Include="Migrations\201804300820313_log-Model-Creation.Designer.cs">
-      <DependentUpon>201804300820313_log-Model-Creation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804300835475_Log-Model-UseType.cs" />
-    <Compile Include="Migrations\201804300835475_Log-Model-UseType.Designer.cs">
-      <DependentUpon>201804300835475_Log-Model-UseType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.cs" />
-    <Compile Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.Designer.cs">
-      <DependentUpon>201804300839270_Log-Model-AccessInfo-Rem.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804300941076_Log-Model-Message.cs" />
-    <Compile Include="Migrations\201804300941076_Log-Model-Message.Designer.cs">
-      <DependentUpon>201804300941076_Log-Model-Message.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201805030900163_Refactor-AccessInfos.cs" />
-    <Compile Include="Migrations\201805030900163_Refactor-AccessInfos.Designer.cs">
-      <DependentUpon>201805030900163_Refactor-AccessInfos.cs</DependentUpon>
+    <Compile Include="Migrations\201805170836119_Initial-Create.cs" />
+    <Compile Include="Migrations\201805170836119_Initial-Create.Designer.cs">
+      <DependentUpon>201805170836119_Initial-Create.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccessInfoHash.cs" />
@@ -218,30 +198,15 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804300819221_Initial-Create.resx">
-      <DependentUpon>201804300819221_Initial-Create.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804300820313_log-Model-Creation.resx">
-      <DependentUpon>201804300820313_log-Model-Creation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804300835475_Log-Model-UseType.resx">
-      <DependentUpon>201804300835475_Log-Model-UseType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804300839270_Log-Model-AccessInfo-Rem.resx">
-      <DependentUpon>201804300839270_Log-Model-AccessInfo-Rem.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804300941076_Log-Model-Message.resx">
-      <DependentUpon>201804300941076_Log-Model-Message.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201805030900163_Refactor-AccessInfos.resx">
-      <DependentUpon>201805030900163_Refactor-AccessInfos.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Contracts\Contracts.csproj">
       <Project>{440674AC-0914-4A84-9D61-A59AC3EF4F5A}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805170836119_Initial-Create.resx">
+      <DependentUpon>201805170836119_Initial-Create.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
