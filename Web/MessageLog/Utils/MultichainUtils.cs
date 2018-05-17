@@ -35,13 +35,13 @@ namespace MessageLog.Utils
         }
         #endregion
 
-        private MultiChainConnection GetConnection()
+        public MultiChainConnection GetConnection()
         {
             return new MultiChainConnection()
             {
                 Hostname = ConfigHelper.GetAppSetting("Hostname"),
                 Port = Convert.ToInt32(ConfigHelper.GetAppSetting("Port")),
-                Username = ConfigHelper.GetAppSetting("Username"),
+                Username = ConfigHelper.GetAppSetting("BC-Username"),
                 Password = ConfigHelper.GetAppSetting("Password"),
                 ChainName = ConfigHelper.GetAppSetting("ChainName"),
                 BurnAddress = ConfigHelper.GetAppSetting("BurnAddress"),

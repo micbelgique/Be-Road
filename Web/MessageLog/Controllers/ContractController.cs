@@ -1,8 +1,10 @@
 ﻿using Contracts.Models;
+using LucidOcean.MultiChain;
 using MessageLog.Dal;
 using MessageLog.Helpers;
 using MessageLog.Models;
 using MessageLog.Models.Dto;
+using MessageLog.Utils;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,13 @@ namespace MessageLog.Controllers
         {
             db = new LogContext(ConfigHelper.GetConnectionString("LogContext"));
             accessInfoService = new AccessInfoService(db);
+        }
+
+        [HttpGet]
+        [Route("multichain")]
+        public MultiChainConnection Get()
+        {
+            return MultichainUtils.Instance.GetConnection();
         }
 
         //GET: api/Contract/Get

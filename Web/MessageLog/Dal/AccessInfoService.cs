@@ -12,7 +12,7 @@ namespace MessageLog.Dal
 {
     public class AccessInfoService
     {
-        const string BC_KEY = "Dev-Demo-3";
+        const string BC_KEY = "Production";
         private LogContext db;
 
         public AccessInfoService(LogContext db)
