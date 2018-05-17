@@ -14,7 +14,7 @@ namespace Web.Controllers
 {
     public class PSDataController : Controller
     {
-        private PSContext context = new PSContext(ConfigHelper.GetAppSetting("PSContext"));
+        private PSContext context = new PSContext(ConfigHelper.GetConnectionString("PSContext"));
         private PSDataService service = new PSDataService();
 
         [AuthorizationFilter]

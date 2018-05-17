@@ -9,7 +9,7 @@ namespace Web.Controllers
 {
     public class PSController : Controller
     {
-        private PSContext context = new PSContext(ConfigHelper.GetAppSetting("PSContext"));
+        private PSContext context = new PSContext(ConfigHelper.GetConnectionString("PSContext"));
 
         [AuthorizationFilter]
         public ActionResult Index()

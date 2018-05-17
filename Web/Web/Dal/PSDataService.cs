@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Web.Helpers;
 using Web.Models;
 using Web.Models.Dto;
 
@@ -33,7 +34,7 @@ namespace Web.Dal
             {
                 try
                 {
-                    client.BaseAddress = new Uri("http://proxy/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("proxy"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -74,7 +75,7 @@ namespace Web.Dal
                 var lst = new List<String>();
                 try
                 {
-                    client.BaseAddress = new Uri("http://proxy/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("proxy"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -99,7 +100,7 @@ namespace Web.Dal
                 var lst = new List<AccessInfoDto>();
                 try
                 {
-                    client.BaseAddress = new Uri("http://proxy/");
+                    client.BaseAddress = new Uri(ConfigHelper.GetServiceUrl("proxy"));
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
