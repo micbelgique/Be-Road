@@ -143,6 +143,10 @@ Add-Migration MigrationName -Verbose -ConnectionString "..." -ConnectionProvider
 Update-Database -Verbose -ConnectionString "..." -ConnectionProviderName "System.Data.SqlClient"
 ```
 
+#### Production
+To build on production, add a new publish profile with the needed data(keys, connectionstrings, ...).
+Thanks to the ConfigHelper, the good data will be used.
+
 ### Blockchain implementation
 The blockchain is a prototype too. In the final project, it will be done later by more advanced developers, it will certainly be created from scratch.
 
