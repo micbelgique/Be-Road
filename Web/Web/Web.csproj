@@ -456,9 +456,6 @@
     <Content Include="Views\Eid\Details.cshtml" />
     <Content Include="Views\PSData\ResourcesIncluding.cshtml" />
     <Content Include="Views\PSData\GenericView.cshtml" />
-    <None Include="Web.Privacy-Passport - Web Deploy.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

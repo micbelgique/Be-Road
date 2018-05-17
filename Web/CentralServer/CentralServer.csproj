@@ -187,9 +187,6 @@
     <Content Include="Views\ADS\Details.cshtml" />
     <Content Include="Views\ADS\Edit.cshtml" />
     <Content Include="Views\ADS\DeleteADSModal.cshtml" />
-    <None Include="Web.be-central-server - Web Deploy.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

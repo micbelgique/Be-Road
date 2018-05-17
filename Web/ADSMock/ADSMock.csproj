@@ -127,9 +127,6 @@
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\be-ads-mock - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\be-ads-mock - Web Deploy.pubxml" />
-    <None Include="Web.be-ads-mock - Web Deploy.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
